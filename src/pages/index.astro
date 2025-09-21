@@ -24,23 +24,31 @@ import AvailableForWork from "../components/available.astro";
 			</div>
 
 			<div class="p-4 sm:p-8 absolute w-full h-dvh flex flex-col justify-between z-10">
-				<div>
-					<H1 size="large"> Nikola <br /> Tesla </H1>
+
+				<div class="flex justify-end">
+					<Navigation client:load>
+						<Link href="/blog" variant="secondary">Blog</Link>
+						<Link href="/about" variant="secondary">About</Link>
+						<Link href="/contact" variant="secondary">Contact</Link>
+					</Navigation>
+				</div>
+
+				<div class="flex flex-col items-center gap-4">
+					<!-- Logo 位置 -->
+					<div class="w-400 h-70 sm:w-400 sm:h-70">
+						<img src="/sinthome-2.jpg" alt="Sinthome Logo" class="w-full h-full object-contain" />
+					</div>
+					<h2 class="text-2xl sm:text-3xl font-semibold text-center text-white">A placeholder for subtitle</h2>
 				</div>
 
 				<div>
-					<AvailableForWork className="py-4" />
-					<div class="mb-2 sm:mb-4 flex items-center justify-between">
-						<div class="flex items-center gap-4">
-							<Link href="#">Book a call</Link>
-							<Link href="/projects" variant="secondary">View recent work</Link>
+					<!-- <AvailableForWork className="py-4" /> -->
+					<div class="mb-2 sm:mb-4 flex flex-col items-center gap-4">
+						<div class="flex items-center gap-6 text-lg sm:text-xl">
+							<Link href="/about">Who we are</Link>
+							<Link href="/projects">What we do</Link>
+							<Link href="/contact">Join us</Link>
 						</div>
-
-						<Navigation client:load>
-							<Link href="/blog" variant="secondary">Blog</Link>
-							<Link href="/about" variant="secondary">About</Link>
-							<Link href="/contact" variant="secondary">Contact</Link>
-						</Navigation>
 					</div>
 				</div>
 			</div>
