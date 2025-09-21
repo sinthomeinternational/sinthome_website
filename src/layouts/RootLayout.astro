@@ -39,7 +39,14 @@ const defaultDescription = "Nikola Tesla was a Serbian-American inventor, electr
 		<LoadingIndicator color="#f4f4f5" height="2px" />
 
 	</head>
-	<body class="font-sans min-h-screen bg-zinc-900">
+	<body class="font-sans min-h-screen bg-white">
+		<!-- 右上角Logo -->
+		<div class="fixed top-4 right-4 sm:top-8 sm:right-8 z-50">
+			<a href="/" class="block">
+				<img src="/sinthome.png" alt="Logo" class="h-12 sm:h-16 object-contain hover:opacity-80 transition-opacity" />
+			</a>
+		</div>
+		
 		<slot />
 	</body>
 </html>
