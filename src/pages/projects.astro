@@ -2,25 +2,23 @@
 import { Image } from 'astro:assets';
 import H1 from "../components/h1.astro";
 import InfoLayout from "../layouts/InfoLayout.astro";
-import ACGenerator from "../assets/ac-generator.jpg";
-import FluidPropulsion from "../assets/fluid-propulsion.jpg";
-import ElectricMotor from "../assets/electro-magnetic-motor.jpg";
+import { assets } from "../lib/assets";
 
 const projects = [
      {
           title: "AC Generator",
           description: "Transform mechanical energy into alternating current, powering the modern electric grid",
-          image: ACGenerator
+          image: assets.projects.acGenerator
      },
      {
           title: "Fluid Propulsion",
           description: "Bladeless turbine using fluid dynamics for efficient, low-friction propulsion.",
-          image: FluidPropulsion
+          image: assets.projects.fluidPropulsion
      },
      {
           title: "Electro-Magnetic Motor",
           description: "Harness alternating current to produce smooth, efficient rotary motion.",
-          image: ElectricMotor
+          image: assets.projects.electroMagneticMotor
      }];
 ---
 

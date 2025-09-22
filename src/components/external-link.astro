@@ -8,10 +8,14 @@ type Props =  {
 
 const { href, openNewTab = true } = Astro.props
 
+// 自动处理base路径 - 只对内部链接处理
+const finalHref = href.startsWith('/') && !href.startsWith('http') ? 
+    `${import.meta.env.BASE_URL}${href.slice(1)}` : href;
+
 const pathname = Astro.url.pathname;
 ---
 
-<a href={href} target={openNewTab ? "_blank" : "_self"} 
+<a href={finalHref} target={openNewTab ? "_blank" : "_self"} 
     class={clsx(
         "w-fit group flex items-center gap-1 text-base hover:text-red-700 cursor-pointer",
         pathname === href ? "text-red-600 font-semibold" : "text-red-600"

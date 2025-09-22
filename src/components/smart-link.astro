@@ -1,0 +1,44 @@
+---
+import clsx from "clsx/lite";
+import { getInternalHref } from "../lib/utils";
+
+type Props = {
+    href: string;
+    className?: string;
+    variant?: "primary" | "secondary" | "red" | "external";
+    openNewTab?: boolean;
+    children?: any;
+}
+
+const { href, variant = "primary", className, openNewTab, ...rest } = Astro.props;
+
+// 自动判断是否为外部链接
+const isExternal = href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:');
+const finalHref = isExternal ? href : getInternalHref(href);
+const shouldOpenNewTab = openNewTab ?? isExternal;
+
+// 根据链接类型选择样式
+const finalVariant = isExternal && variant === "primary" ? "external" : variant;
+---
+
+<a 
+    href={finalHref} 
+    target={shouldOpenNewTab ? "_blank" : "_self"}
+    rel={shouldOpenNewTab ? "noopener noreferrer" : undefined}
+    class={clsx(
+        "w-fit text-base sm:text-2xl px-5 py-2 rounded-full transition-all duration-300 ease-in-out whitespace-nowrap",
+        finalVariant === "primary" && "text-zinc-900 bg-zinc-100 hover:outline-2 outline-offset-2 outline-zinc-100",
+        finalVariant === "secondary" && "text-zinc-100 hover:text-white bg-transparent hover:bg-zinc-100/20 hover:outline-2 outline-offset-2 outline-zinc-100/20",
+        finalVariant === "red" && "text-red-600 bg-white hover:bg-gray-100 hover:outline-2 outline-offset-2 outline-red-500",
+        finalVariant === "external" && "text-blue-600 hover:text-blue-800 underline underline-offset-2",
+        className
+    )}
+    {...rest}
+>
+    <slot />
+    {isExternal && shouldOpenNewTab && (
+        <svg xmlns="http://www.w3.org/2000/svg" class="inline-block ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+    )}
+</a>

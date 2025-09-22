@@ -97,9 +97,12 @@ type MobileLinkProps = {
 };
 
 function MobileLink({ href, className, children }: MobileLinkProps) {
+    // 自动处理base路径
+    const finalHref = href.startsWith('/') ? `${import.meta.env.BASE_URL}${href.slice(1)}` : href;
+    
     return (
         <motion.a
-            href={href}
+            href={finalHref}
             initial={{ transform: "translateY(100px)", filter: "blur(20px)", opacity: 0 }}
             transition={{ type: "spring", stiffness: 25, damping: 2, mass: 0.1 }}
             animate={{ transform: "translateY(0px)", filter: "blur(0px)", opacity: 1 }}
