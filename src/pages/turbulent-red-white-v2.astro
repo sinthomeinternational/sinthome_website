@@ -1,5 +1,7 @@
 ---
 import H1 from "../components/h1.astro";
+import Link from "../components/link.astro";
+import Navigation from "../components/navigation";
 import RootLayout from "../layouts/RootLayout.astro";
 import WarpBackground from "../components/warp-background";
 ---
@@ -8,13 +10,13 @@ import WarpBackground from "../components/warp-background";
 	<main>
 		<div class="group relative w-full min-h-dvh flex items-center justify-center overflow-auto">
 			<div class="absolute w-full h-dvh -z-10">
-				{/* Red + Bright White - Blood in milk */}
+				{/* Red + Bright White - Blood in milk - SLOWED DOWN */}
 				<WarpBackground
 					color1="#1a1a1a"
 					color2="#cccccc"
 					color3="#ff0000"
-					speed={0.92}
-					swirl={0.95}
+					speed={0.45}
+					swirl={0.65}
 					swirlIterations={18}
 					shapeScale={0.14}
 					rotation={0.8}
@@ -22,15 +24,78 @@ import WarpBackground from "../components/warp-background";
 				/>
 			</div>
 
-			<div class="p-4 sm:p-8 absolute w-full h-dvh flex flex-col justify-center items-center">
-				<H1 size="large" className="mb-6">Red + Bright White</H1>
-				<p class="text-xl text-white mb-4">Blood in Milk</p>
-				<p class="text-zinc-300 text-sm">
-					Dark Gray → Bright White → Pure Red
-				</p>
-				<p class="text-gray-400 mt-4">
-					High contrast, ideas spreading through clean space
-				</p>
+			<div class="p-4 sm:p-8 absolute w-full h-dvh flex flex-col justify-between z-10">
+				<!-- Hero Section with Title and Tagline -->
+				<div class="flex-1 flex flex-col justify-center items-center text-center">
+					<h1 class="text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] xl:text-[13rem] text-white mb-6 uppercase font-black"
+						style="font-weight: 900; letter-spacing: -0.02em; text-rendering: optimizeLegibility;">
+						SINTHOME
+					</h1>
+
+					<!-- Enhanced Tagline Presentation -->
+					<div class="mb-8 max-w-4xl">
+						<p class="text-2xl sm:text-3xl text-white font-semibold mb-6" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6);">
+							Knowledge — Critique — Praxis
+						</p>
+						<p class="text-base text-gray-100 max-w-2xl mx-auto leading-relaxed" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.7);">
+							A public-interest community reconstructing new relations of production through the integration of knowledge learning, theoretical critique, and social praxis
+						</p>
+					</div>
+
+					<!-- Our Practices -->
+					<div class="flex flex-wrap justify-center gap-3 mb-10 max-w-3xl">
+						<span class="px-4 py-2 text-white rounded-full text-sm border border-white/50">
+							Public Lectures
+						</span>
+						<span class="px-4 py-2 text-white rounded-full text-sm border border-white/50">
+							Psychoanalysis
+						</span>
+						<span class="px-4 py-2 text-white rounded-full text-sm border border-white/50">
+							Workers Assist
+						</span>
+						<span class="px-4 py-2 text-white rounded-full text-sm border border-white/50">
+							AI for Public Goods
+						</span>
+						<span class="px-4 py-2 text-white rounded-full text-sm border border-white/50">
+							Factory AI Solution
+						</span>
+					</div>
+
+					<!-- Three Main CTAs with Improved Text -->
+					<div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
+						<a
+							href="/sinthome_website/who-we-are"
+							class="px-8 py-4 bg-black text-white rounded-lg hover:bg-zinc-900 transition-all transform hover:scale-105 text-lg font-semibold" style="box-shadow: 0 4px 12px rgba(0,0,0,0.5);"
+						>
+							Our Mission
+						</a>
+						<a
+							href="/sinthome_website/what-we-do"
+							class="px-8 py-4 bg-red-700 text-white rounded-lg hover:bg-red-800 transition-all transform hover:scale-105 text-lg font-semibold" style="box-shadow: 0 4px 12px rgba(220,38,38,0.4);"
+						>
+							Our Impact
+						</a>
+						<a
+							href="/sinthome_website/contact"
+							class="px-8 py-4 text-gray-800 rounded-lg hover:bg-white/100 transition-all transform hover:scale-105 text-lg font-semibold border-2 border-gray-600 backdrop-blur" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(4px);"
+						>
+							Get Involved
+						</a>
+					</div>
+				</div>
+
+				<!-- Bottom Navigation -->
+				<div>
+					<div class="mb-2 sm:mb-4 flex items-center justify-end">
+						<Navigation client:load>
+							<Link href="/sinthome_website/who-we-are" variant="secondary">Who We Are</Link>
+							<Link href="/sinthome_website/what-we-do" variant="secondary">What We Do</Link>
+							<Link href="/sinthome_website/events" variant="secondary">Events</Link>
+							<Link href="/sinthome_website/contact" variant="secondary">Contact</Link>
+							<Link href="/sinthome_website/donate" variant="secondary">Donate</Link>
+						</Navigation>
+					</div>
+				</div>
 			</div>
 		</div>
 	</main>
