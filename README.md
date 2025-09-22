@@ -51,10 +51,10 @@ Inside of your Astro project, you'll see the following folders and files:
 │   │   └── blog/
 │   │   │   └── index.astro
 │   │   │   └── [...slug].astro
-│   │   └── about.astro
+│   │   └── who-we-are.astro
 │   │   └── contact.astro
 │   │   └── index.astro
-│   │   └── projects.astro
+│   │   └── what-we-do/
 │   └── styles/
 │   │   └── global.css
 └── .gitignore
