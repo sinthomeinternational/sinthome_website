@@ -54,7 +54,7 @@ Inside of your Astro project, you'll see the following folders and files:
 │   │   └── who-we-are.astro
 │   │   └── contact.astro
 │   │   └── index.astro
-│   │   └── projects.astro
+│   │   └── what-we-do/
 │   └── styles/
 │   │   └── global.css
 └── .gitignore

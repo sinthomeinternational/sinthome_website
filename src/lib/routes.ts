@@ -3,7 +3,6 @@ export const routes = {
   home: "/",
   blog: "/blog", 
   contact: "/contact",
-  projects: "/projects",
   donate: "/donate",
   events: "/events",
   whoWeAre: "/who-we-are",
