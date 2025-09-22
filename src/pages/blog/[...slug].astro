@@ -1,6 +1,5 @@
 ---
 import { formatDate } from "../../lib/utils";
-import Prose from "../../components/prose.astro";
 import { getCollection, render } from "astro:content";
 import PageLayout from "../../layouts/PageLayout.astro";
 
@@ -36,9 +35,9 @@ const relatedArticles = allArticles.filter(
 
 <PageLayout title={article.data.title} useInfoLayout={true}>
     <section class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh">
-        <Prose>
+        <div class="prose prose-lg max-w-none">
             <Content />
-        </Prose>
+        </div>
 
         <p class="my-4 text-sm italic text-zinc-300">
             This is an excerpt from {`${article.data.author}'s`}
