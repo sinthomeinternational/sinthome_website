@@ -4,9 +4,10 @@ import clsx from "clsx/lite";
 type Props =  {
     href: string
     openNewTab?: boolean
+    class?: string
 }
 
-const { href, openNewTab = true } = Astro.props
+const { href, openNewTab = true, class: className = "" } = Astro.props
 
 // 自动处理base路径 - 只对内部链接处理
 const finalHref = href.startsWith('/') && !href.startsWith('http') ? 
@@ -18,7 +19,8 @@ const pathname = Astro.url.pathname;
 <a href={finalHref} target={openNewTab ? "_blank" : "_self"} 
     class={clsx(
         "w-fit group flex items-center gap-1 text-base hover:text-red-700 cursor-pointer",
-        pathname === href ? "text-red-600 font-semibold" : "text-red-600"
+        pathname === href ? "text-red-600 font-semibold" : "text-red-600",
+        className
     )}>
     <slot />
    {openNewTab &&  

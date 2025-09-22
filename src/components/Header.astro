@@ -1,0 +1,34 @@
+---
+import Logo from "./Logo.astro";
+import ExternalLink from "./external-link.astro";
+
+const pathname = Astro.url.pathname;
+---
+
+<header class="w-full bg-white border-b border-gray-200 px-4 sm:px-8 py-4">
+  <div class="flex items-center justify-between">
+    <!-- 导航栏 -->
+    <nav class="flex items-center gap-6">
+      <ExternalLink href="/" openNewTab={false} class="text-gray-700 hover:text-red-600 transition-colors">
+        Home
+      </ExternalLink>
+      <ExternalLink href="/who-we-are" openNewTab={false} class="text-gray-700 hover:text-red-600 transition-colors">
+        Who we are
+      </ExternalLink>
+      <ExternalLink href="/what-we-do" openNewTab={false} class="text-gray-700 hover:text-red-600 transition-colors">
+        What we do
+      </ExternalLink>
+      <ExternalLink href="/contact" openNewTab={false} class="text-gray-700 hover:text-red-600 transition-colors">
+        Contact
+      </ExternalLink>
+      <ExternalLink href="/blog" openNewTab={false} class="text-gray-700 hover:text-red-600 transition-colors">
+        Blog
+      </ExternalLink>
+    </nav>
+    
+    <!-- Logo在右边 -->
+    <div>
+      <Logo />
+    </div>
+  </div>
+</header>

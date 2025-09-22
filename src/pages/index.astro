@@ -2,6 +2,7 @@
 import H1 from "../components/h1.astro";
 import Link from "../components/link.astro";
 import Navigation from "../components/navigation";
+import Logo from "../components/Logo.astro";
 import RootLayout from "../layouts/RootLayout.astro";
 import WarpBackground from "../components/warp-background";
 import AvailableForWork from "../components/available.astro";
@@ -23,11 +24,16 @@ import AvailableForWork from "../components/available.astro";
 				/>
 			</div>
 
+			<!-- Logo固定在右上角 -->
+			<div class="absolute top-4 right-4 sm:top-8 sm:right-8 z-50">
+				<Logo />
+			</div>
+
 			<!-- 导航栏固定在左上角 -->
 			<div class="absolute top-4 left-4 sm:top-8 sm:left-8 z-50">
 				<Navigation client:load>
 					<Link href="/who-we-are" variant="secondary">Who we are</Link>
-					<Link href="/blog" variant="secondary">Blog</Link>
+					<Link href="/what-we-do" variant="secondary">What we do</Link>
 					<Link href="/contact" variant="secondary">Contact</Link>
 				</Navigation>
 			</div>
