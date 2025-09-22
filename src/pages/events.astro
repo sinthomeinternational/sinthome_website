@@ -1,12 +1,10 @@
 ---
-import RootLayout from "../layouts/RootLayout.astro";
-import InfoLayout from "../layouts/InfoLayout.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import H1 from "../components/h1.astro";
 import EventCard from "../components/shared/EventCard.astro";
 ---
 
-<RootLayout>
-  <InfoLayout>
+<PageLayout title="Events - Sinthome" useInfoLayout={true}>
     <H1>Upcoming Events</H1>
 
     <div class="space-y-8 max-w-4xl">
@@ -19,7 +17,7 @@ import EventCard from "../components/shared/EventCard.astro";
       </section>
 
       <!-- Upcoming Events -->
-      <section>
+      <section id="upcoming">
         <h2 class="text-2xl font-bold text-white mb-6">Upcoming Events</h2>
         <div class="space-y-6">
           <EventCard
@@ -57,7 +55,7 @@ import EventCard from "../components/shared/EventCard.astro";
       </section>
 
       <!-- Past Events -->
-      <section>
+      <section id="past">
         <h2 class="text-2xl font-bold text-white mb-6">Past Events</h2>
         <div class="grid md:grid-cols-2 gap-4">
           <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
@@ -108,5 +106,4 @@ import EventCard from "../components/shared/EventCard.astro";
         </a>
       </section>
     </div>
-  </InfoLayout>
-</RootLayout>
+</PageLayout>

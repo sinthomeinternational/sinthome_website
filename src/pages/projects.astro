@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import H1 from "../components/h1.astro";
-import InfoLayout from "../layouts/InfoLayout.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import { assets } from "../lib/assets";
 
 const projects = [
@@ -22,7 +22,7 @@ const projects = [
      }];
 ---
 
-<InfoLayout>
+<PageLayout title="Projects - Sinthome" useInfoLayout={true}>
      <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh">
           <H1 className="text-red-600"> Projects </H1>
 
@@ -38,4 +38,4 @@ const projects = [
                ))}
           </ul>
      </div>
-</InfoLayout>
+</PageLayout>

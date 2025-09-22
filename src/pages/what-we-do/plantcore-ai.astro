@@ -1,0 +1,129 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import H1 from "../../components/h1.astro";
+---
+
+<PageLayout title="Plantcore AI - Sinthome" useInfoLayout={true}>
+    <H1>Plantcore AI</H1>
+
+    <div class="space-y-8 text-zinc-300 max-w-4xl">
+      <!-- Overview Section -->
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-4">Industrial Vertical LLMs for Public Good</h2>
+        <p class="leading-relaxed mb-4">
+          Plantcore AI represents our commitment to democratizing artificial intelligence technology. We develop specialized Large Language Models (LLMs) tailored for industrial applications, with a focus on serving public interests rather than profit maximization.
+        </p>
+        <p class="leading-relaxed">
+          Our research explores how AI can be deployed to solve real-world problems in manufacturing, logistics, and public services, ensuring that advanced technology serves community needs.
+        </p>
+      </section>
+
+      <!-- Research Areas -->
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-4">Research Focus Areas</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start">
+            <span class="text-red-500 mr-2">•</span>
+            <div>
+              <strong class="text-white">Factory Automation:</strong> AI solutions for improving worker safety and production efficiency
+            </div>
+          </li>
+          <li class="flex items-start">
+            <span class="text-red-500 mr-2">•</span>
+            <div>
+              <strong class="text-white">Supply Chain Optimization:</strong> Transparent and sustainable logistics management
+            </div>
+          </li>
+          <li class="flex items-start">
+            <span class="text-red-500 mr-2">•</span>
+            <div>
+              <strong class="text-white">Quality Control:</strong> AI-powered inspection systems accessible to small manufacturers
+            </div>
+          </li>
+          <li class="flex items-start">
+            <span class="text-red-500 mr-2">•</span>
+            <div>
+              <strong class="text-white">Predictive Maintenance:</strong> Reducing downtime and resource waste
+            </div>
+          </li>
+          <li class="flex items-start">
+            <span class="text-red-500 mr-2">•</span>
+            <div>
+              <strong class="text-white">Worker Assistance:</strong> AI tools that augment rather than replace human labor
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Open Source Commitment -->
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-4">Open Source Philosophy</h2>
+        <p class="leading-relaxed mb-4">
+          All our AI models and research findings are released under open-source licenses. We believe that AI technology should be a public good, not a private monopoly.
+        </p>
+        <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-white mb-3">Available Resources</h3>
+          <ul class="space-y-2 text-zinc-400">
+            <li>• Pre-trained models for industrial applications</li>
+            <li>• Training datasets and documentation</li>
+            <li>• Implementation guides and best practices</li>
+            <li>• Community support and collaboration forums</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Current Projects -->
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-4">Active Projects</h2>
+        <div class="space-y-4">
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-white mb-2">Manufacturing Assistant LLM</h3>
+            <p class="text-zinc-400 mb-3">
+              A specialized language model trained on manufacturing processes, safety protocols, and technical documentation.
+            </p>
+            <span class="inline-block px-3 py-1 bg-green-900/50 text-green-400 text-sm rounded-full">In Development</span>
+          </div>
+
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-white mb-2">Supply Chain Transparency Tool</h3>
+            <p class="text-zinc-400 mb-3">
+              AI-powered system for tracking and verifying ethical sourcing and labor practices.
+            </p>
+            <span class="inline-block px-3 py-1 bg-yellow-900/50 text-yellow-400 text-sm rounded-full">Beta Testing</span>
+          </div>
+
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-white mb-2">Worker Safety Monitor</h3>
+            <p class="text-zinc-400 mb-3">
+              Computer vision system for identifying workplace hazards and preventing accidents.
+            </p>
+            <span class="inline-block px-3 py-1 bg-blue-900/50 text-blue-400 text-sm rounded-full">Research Phase</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="mt-12 p-8 bg-zinc-900/50 border border-zinc-800 rounded-lg text-center">
+        <h2 class="text-2xl font-bold text-white mb-4">Collaborate With Us</h2>
+        <p class="text-zinc-300 mb-6">
+          Join our research community or implement our solutions in your organization.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="/contact"
+            class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+          >
+            Get Started
+          </a>
+          <a
+            href="https://github.com/sinthome"
+            class="px-6 py-3 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on GitHub
+          </a>
+        </div>
+      </section>
+    </div>
+</PageLayout>

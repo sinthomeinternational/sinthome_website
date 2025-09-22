@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { getCollection } from "astro:content";
 import H1 from "../../components/h1.astro";
 import { formatDate, getInternalHref } from "../../lib/utils";
-import InfoLayout from "../../layouts/InfoLayout.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
 
 // Get all articles
 const allArticles = await getCollection("articles");
@@ -26,7 +26,7 @@ if (selectedCategory === "all") {
 }
 ---
 
-<InfoLayout>
+<PageLayout title="Blog - Sinthome" useInfoLayout={true}>
     <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh">
         <H1> Blog </H1>
 
@@ -79,4 +79,4 @@ if (selectedCategory === "all") {
             }
         </ul>
     </div>
-</InfoLayout>
+</PageLayout>
