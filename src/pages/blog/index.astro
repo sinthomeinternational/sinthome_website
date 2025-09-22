@@ -2,7 +2,7 @@
 import clsx from "clsx";
 import { getCollection } from "astro:content";
 import H1 from "../../components/h1.astro";
-import { formatDate } from "../../lib/utils";
+import { formatDate, getInternalHref } from "../../lib/utils";
 import InfoLayout from "../../layouts/InfoLayout.astro";
 
 // Get all articles
@@ -32,7 +32,7 @@ if (selectedCategory === "all") {
 
         <ul class="mt-4 flex items-center gap-4">
             <li>
-                <a href="/blog" class={clsx("w-fit px-4 py-1 text-sm bg-transparent rounded-full transition-all duration-300 ease-in-out",
+                <a href={getInternalHref("/blog")} class={clsx("w-fit px-4 py-1 text-sm bg-transparent rounded-full transition-all duration-300 ease-in-out",
                     selectedCategory === "all" ? "text-white bg-zinc-100/20 outline-2 outline-offset-2 outline-zinc-100/20" : "text-zinc-400 hover:text-zinc-300"
                 )}>
                     All
