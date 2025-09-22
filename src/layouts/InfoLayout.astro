@@ -26,7 +26,9 @@ const pathname = Astro.url.pathname;
 		</nav>
 
 		<main class="relative bg-white">
-			<slot />
+			<div class="[&_h1]:text-red-600 pt-8">
+				<slot />
+			</div>
 			<Footer />
 		</main>
 
