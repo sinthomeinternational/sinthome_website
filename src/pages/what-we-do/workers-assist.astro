@@ -1,0 +1,116 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import H1 from "../../components/h1.astro";
+---
+
+<PageLayout title="Workers Assist - Sinthome" useInfoLayout={true}>
+    <H1>Workers Assist</H1>
+
+    <div class="space-y-8 text-zinc-300 max-w-4xl">
+      <!-- Overview Section -->
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-4">Mutual Aid for Asian Migrant Workers</h2>
+        <p class="leading-relaxed mb-4">
+          Workers Assist is our direct solidarity initiative providing support and resources for Asian migrant workers. We believe in practical solidarity that addresses immediate needs while building long-term community power.
+        </p>
+        <p class="leading-relaxed">
+          Through this program, we offer legal assistance, language support, community organizing resources, and emergency aid to workers facing exploitation or crisis situations.
+        </p>
+      </section>
+
+      <!-- Key Services -->
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-4">Our Services</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start">
+            <span class="text-red-500 mr-2">•</span>
+            <div>
+              <strong class="text-white">Legal Support:</strong> Free consultation and advocacy for workplace rights and immigration issues
+            </div>
+          </li>
+          <li class="flex items-start">
+            <span class="text-red-500 mr-2">•</span>
+            <div>
+              <strong class="text-white">Language Assistance:</strong> Translation services and language learning resources
+            </div>
+          </li>
+          <li class="flex items-start">
+            <span class="text-red-500 mr-2">•</span>
+            <div>
+              <strong class="text-white">Emergency Aid:</strong> Direct financial assistance for workers in crisis
+            </div>
+          </li>
+          <li class="flex items-start">
+            <span class="text-red-500 mr-2">•</span>
+            <div>
+              <strong class="text-white">Community Building:</strong> Organizing spaces for workers to connect and build solidarity
+            </div>
+          </li>
+          <li class="flex items-start">
+            <span class="text-red-500 mr-2">•</span>
+            <div>
+              <strong class="text-white">Skills Development:</strong> Workshops and training for professional advancement
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Impact Section -->
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-4">Our Impact</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-3xl font-bold text-red-500 mb-2">500+</h3>
+            <p class="text-zinc-400">Workers supported directly</p>
+          </div>
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-3xl font-bold text-red-500 mb-2">24/7</h3>
+            <p class="text-zinc-400">Emergency hotline availability</p>
+          </div>
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-3xl font-bold text-red-500 mb-2">15+</h3>
+            <p class="text-zinc-400">Languages supported</p>
+          </div>
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-3xl font-bold text-red-500 mb-2">100%</h3>
+            <p class="text-zinc-400">Free services</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Get Help Section -->
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-4">Need Assistance?</h2>
+        <p class="leading-relaxed mb-4">
+          If you or someone you know needs support, don't hesitate to reach out. All services are confidential and free of charge.
+        </p>
+        <div class="bg-red-900/20 border border-red-800 rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-white mb-2">Emergency Hotline</h3>
+          <p class="text-2xl font-bold text-red-500 mb-4">[Phone Number]</p>
+          <p class="text-zinc-400 text-sm">Available 24/7 in multiple languages</p>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="mt-12 p-8 bg-zinc-900/50 border border-zinc-800 rounded-lg text-center">
+        <h2 class="text-2xl font-bold text-white mb-4">Support Our Work</h2>
+        <p class="text-zinc-300 mb-6">
+          Help us continue providing vital services to migrant workers in need.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="/donate"
+            class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+          >
+            Donate
+          </a>
+          <a
+            href="/contact"
+            class="px-6 py-3 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-colors"
+          >
+            Volunteer
+          </a>
+        </div>
+      </section>
+    </div>
+</PageLayout>

@@ -1,12 +1,10 @@
 ---
-import RootLayout from "../../layouts/RootLayout.astro";
-import InfoLayout from "../../layouts/InfoLayout.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/h1.astro";
 import ProjectCard from "../../components/shared/ProjectCard.astro";
 ---
 
-<RootLayout>
-  <InfoLayout>
+<PageLayout title="What We Do - Sinthome" useInfoLayout={true}>
     <H1>What We Do</H1>
 
     <div class="space-y-8 max-w-6xl">
@@ -89,5 +87,4 @@ import ProjectCard from "../../components/shared/ProjectCard.astro";
         </a>
       </section>
     </div>
-  </InfoLayout>
-</RootLayout>
+</PageLayout>

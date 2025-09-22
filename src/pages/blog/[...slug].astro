@@ -2,7 +2,7 @@
 import { formatDate } from "../../lib/utils";
 import Prose from "../../components/prose.astro";
 import { getCollection, render } from "astro:content";
-import InfoLayout from "../../layouts/InfoLayout.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
 
 export const prerender = true;
 
@@ -34,7 +34,7 @@ const relatedArticles = allArticles.filter(
 );
 ---
 
-<InfoLayout title={article.data.title} frontmatter={article.data}>
+<PageLayout title={article.data.title} useInfoLayout={true}>
     <section class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh">
         <Prose>
             <Content />
@@ -74,4 +74,4 @@ const relatedArticles = allArticles.filter(
             )
         }
     </section>
-</InfoLayout>
+</PageLayout>
