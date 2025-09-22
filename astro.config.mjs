@@ -11,7 +11,7 @@ export default defineConfig({
 
   // GitHub Pages URL configuration
   site: 'https://yiluo-photon.github.io',
-  base: '/sinthome_website',
+  base: '/sinthome_website/',
 
   vite: {
     plugins: [tailwindcss()]

@@ -1,24 +1,29 @@
 ---
 import clsx from "clsx";
-import { actions } from "astro:actions";
+import { getCollection } from "astro:content";
 import H1 from "../../components/h1.astro";
-import { formatDate } from "../../lib/utils";
+import { formatDate, getInternalHref } from "../../lib/utils";
 import InfoLayout from "../../layouts/InfoLayout.astro";
 
-const categoriesResult = await Astro.callAction(actions.categories.getCategories, null);
-const categories = categoriesResult?.data?.categories || [];
+// Get all articles
+const allArticles = await getCollection("articles");
+
+// Get unique categories
+const categories = [
+    ...new Set(allArticles.map((article) => article.data.category)),
+];
 
 const selectedCategory = Astro.url.searchParams.get("category") || "all";
 
-const articlesResult = await Astro.callAction(actions.categories.filterByCategory, {
-    category: selectedCategory,
-});
-
-if (articlesResult?.error) {
-    console.log("error", articlesResult.error);
+// Filter articles by category
+let articles = [];
+if (selectedCategory === "all") {
+    articles = allArticles;
+} else {
+    articles = allArticles.filter((article) => 
+        article.data.category.toLowerCase() === selectedCategory.toLowerCase()
+    );
 }
-
-const articles = articlesResult?.data?.articles || [];
 ---
 
 <InfoLayout>
@@ -27,7 +32,7 @@ const articles = articlesResult?.data?.articles || [];
 
         <ul class="mt-4 flex items-center gap-4">
             <li>
-                <a href="/blog" class={clsx("w-fit px-4 py-1 text-sm bg-transparent rounded-full transition-all duration-300 ease-in-out",
+                <a href={getInternalHref("/blog")} class={clsx("w-fit px-4 py-1 text-sm bg-transparent rounded-full transition-all duration-300 ease-in-out",
                     selectedCategory === "all" ? "text-white bg-zinc-100/20 outline-2 outline-offset-2 outline-zinc-100/20" : "text-zinc-400 hover:text-zinc-300"
                 )}>
                     All

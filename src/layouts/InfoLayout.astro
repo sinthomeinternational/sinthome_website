@@ -1,5 +1,6 @@
 ---
 import RootLayout from "./RootLayout.astro";
+import Header from "../components/Header.astro";
 import Footer from "../components/footer.astro";
 import WarpBackground from "../components/warp-background";
 
@@ -13,9 +14,9 @@ const pathname = Astro.url.pathname;
 		<nav class="relative w-4 md:min-w-2xs xl:min-w-sm sm:min-h-screen sm:ml-4 sm:pb-4">
 			<div class="w-full h-full max-sm:w-4 md:max-w-2xs xl:max-w-sm fixed -z-10 sm:bottom-4 sm:rounded-b-full overflow-hidden">
 				<WarpBackground
-					color1="#0a0a0a"
-					color2="#7f1d1d"
-					color3="#dc2626"
+					color1="#fca5a5"
+					color2="#ef4444"
+					color3="#b91c1c"
 					speed={0.15}
 					swirl={1.5}
 					swirlIterations={10}
@@ -25,8 +26,11 @@ const pathname = Astro.url.pathname;
 			</div>
 		</nav>
 
-		<main class="relative"  >
-			<slot />
+		<main class="relative bg-white flex-1">
+			<Header />
+			<div class="[&_h1]:text-red-600 pt-8 pb-20">
+				<slot />
+			</div>
 			<Footer />
 		</main>
 
