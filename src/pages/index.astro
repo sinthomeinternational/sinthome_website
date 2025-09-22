@@ -23,37 +23,32 @@ import AvailableForWork from "../components/available.astro";
 				/>
 			</div>
 
-			<div class="p-4 sm:p-8 absolute w-full h-dvh flex flex-col justify-between z-10">
+			<!-- 导航栏固定在左上角 -->
+			<div class="absolute top-4 left-4 sm:top-8 sm:left-8 z-50">
+				<Navigation client:load>
+					<Link href="/about" variant="secondary">About</Link>
+					<Link href="/blog" variant="secondary">Projects</Link>
+					<Link href="/contact" variant="secondary">Contact</Link>
+				</Navigation>
+			</div>
 
-				<div class="flex justify-end">
-					<Navigation client:load>
-						<Link href="/blog" variant="secondary">Blog</Link>
-						<Link href="/about" variant="secondary">About</Link>
-						<Link href="/contact" variant="secondary">Contact</Link>
-					</Navigation>
-				</div>
-
+			<!-- 主内容居中 -->
+			<div class="absolute w-full h-dvh flex flex-col items-center justify-center z-10">
 				<div class="flex flex-col items-center gap-4">
-					<!-- Logo 位置 -->
-					<!-- <div class="w-400 h-70 sm:w-400 sm:h-70">
-						<img src="/sinthome-2.jpg" alt="Sinthome Logo" class="w-full h-full object-contain" />
-					</div> -->
 					<h1 class="font-bold text-center text-white" style="font-size: 8rem; line-height: 1;">
 						<span class="block sm:hidden" style="font-size: 8rem;">圣状 SINTHOME</span>
 						<span class="hidden sm:block" style="font-size: 12rem;">圣状 SINTHOME</span>
 					</h1>
 					<h2 class="text-2xl sm:text-3xl font-semibold text-center text-white">A placeholder for subtitle</h2>
 				</div>
+			</div>
 
-				<div class="mb-16 sm:mb-20">
-					<!-- <AvailableForWork className="py-4" /> -->
-					<div class="flex flex-col items-center gap-4">
-						<div class="flex items-center gap-10 text-2xl sm:text-3xl">
-							<Link href="/about" variant="red">Who we are</Link>
-							<Link href="/projects" variant="red">What we do</Link>
-							<Link href="/contact" variant="red">Join us</Link>
-						</div>
-					</div>
+			<!-- 底部按钮 -->
+			<div class="absolute bottom-16 sm:bottom-20 w-full flex justify-center z-10">
+				<div class="flex items-center gap-10 text-2xl sm:text-3xl">
+					<Link href="/about" variant="red">Who we are</Link>
+					<Link href="/projects" variant="red">What we do</Link>
+					<Link href="/contact" variant="red">Join us</Link>
 				</div>
 			</div>
 		</div>
