@@ -1,0 +1,89 @@
+---
+import RootLayout from "../../layouts/RootLayout.astro";
+import InfoLayout from "../../layouts/InfoLayout.astro";
+import H1 from "../../components/h1.astro";
+import GoogleForm from "../../components/forms/GoogleForm";
+import { FORMS } from "../../config/forms";
+
+// 导入项目图片
+import hackathonImage from "./images/凡事都有开端.png";
+---
+
+<RootLayout>
+  <InfoLayout>
+    <H1>AI Hackathon</H1>
+
+    <div class="space-y-8 max-w-4xl">
+      <!-- Overview -->
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-4">AI NGO & Hackathon</h2>
+        <p class="text-zinc-300 leading-relaxed mb-4">
+          Sinthome Hackathon starts with a simple question: how can current AI tools be tailored to address real-world challenges in the practice of social good? We believe the answer does not lie in lofty ideals, but in grounding our work in the lived experiences of Boston's NGOs and local communities. By bringing together students, young professionals, and nonprofit workers, the hackathon fosters mutual learning across diverse perspectives and creates a shared space to reimagine how technology can be practiced in the service of public good. This year's subthemes highlight diverse challenges, from supporting Asian workers in Boston with language access, to providing peer counseling for youth mental health, to empowering small and medium-sized manufacturers through industry-specific AI agents.
+        </p>
+        
+        <!-- Hackathon Image -->
+        <div class="flex justify-center mt-8">
+          <div class="relative overflow-hidden rounded-xl shadow-lg max-w-2xl">
+            <img src={hackathonImage} alt="AI Hackathon - Everything Has a Beginning" class="w-full h-auto object-cover" />
+            <div class="absolute bottom-4 left-4 bg-white/90 px-3 py-1 rounded-full">
+              <span class="text-sm font-semibold text-gray-800">Everything Has a Beginning</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Objectives -->
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-4">Objectives</h2>
+        <div class="space-y-4">
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Giving voice to nonprofits and vulnerable groups</h3>
+            <p class="text-zinc-400">
+              Helping practitioners and beneficiaries clearly articulate their needs, and turning these needs into actionable solutions through AI tools.
+            </p>
+          </div>
+          
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Cultivating social awareness among technologists</h3>
+            <p class="text-zinc-400">
+              Building bridges between students, young professionals, and nonprofit workers, enabling mutual learning in hackathons on how AI can be transformed into social impact.
+            </p>
+          </div>
+          
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Driving solutions to concrete social issues</h3>
+            <p class="text-zinc-400">
+              Developing practical and sustainable approaches to challenges such as language barriers, employment skills, youth mental health, and maternal and infant health.
+            </p>
+          </div>
+          
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Integrating the humanities with technology</h3>
+            <p class="text-zinc-400">
+              Encouraging participants to explore the humanistic value of AI through real-world social issues, fostering dialogue between technology and the humanities.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+
+
+      <!-- Registration -->
+      <section class="mt-12">
+        <h2 class="text-2xl font-bold text-white mb-4">Register for Next Hackathon</h2>
+        <p class="text-zinc-300 mb-6">
+          Join us for the next AI Hackathon! Registration is free but spaces are limited.
+        </p>
+        <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+          <GoogleForm
+            formId={FORMS.projects.aiHackathon.id}
+            title={FORMS.projects.aiHackathon.title}
+            height={FORMS.projects.aiHackathon.height}
+            client:visible
+          />
+        </div>
+      </section>
+    </div>
+  </InfoLayout>
+</RootLayout>

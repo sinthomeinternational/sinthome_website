@@ -1,0 +1,83 @@
+---
+import RootLayout from "../../layouts/RootLayout.astro";
+import InfoLayout from "../../layouts/InfoLayout.astro";
+import H1 from "../../components/h1.astro";
+import GoogleForm from "../../components/forms/GoogleForm";
+import { FORMS } from "../../config/forms";
+---
+
+<RootLayout>
+  <InfoLayout>
+    <H1>SRTP</H1>
+
+    <div class="space-y-8 max-w-4xl">
+      <!-- Overview -->
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-4">Interrogating praxis, until it unviles the future.</h2>
+        <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 mb-6">
+          <p class="text-zinc-300 italic text-center mb-2">
+            "Die Philosophen haben die Welt nur verschieden interpretiert; es kommt aber darauf an, sie zu verändern."
+          </p>
+          <p class="text-zinc-400 text-center">
+            —— Karl Marx
+          </p>
+        </div>
+        <p class="text-zinc-300 leading-relaxed mb-4">
+          There is no clear path that leads theoretical critique to social praxis. Born from this rupture between theory and praxis, Sinthome Revolutionary Theory Practice (S.R.T.P.) is such a special yet indispensable program that formulates the guidelines for Sinthome's social praxis.
+        </p>
+        <p class="text-zinc-300 leading-relaxed mb-4">
+          By hosting weekly lectures and seminars, S.R.T.P. harbors a self-reflexive intellectual community that facilitates the necessary circulation between theoretical critique and social praxis.
+        </p>
+        <p class="text-zinc-300 leading-relaxed mb-4">
+          Departing from knowledge learning and theoretical critique, we interrogate every possible dimension of our own praxis:
+        </p>
+        <ul class="text-zinc-300 space-y-2 mb-6">
+          <li>• What is the meaning of our praxis?</li>
+          <li>• How can it be theorized?</li>
+          <li>• How can it lead to new revolutionary thinking?</li>
+        </ul>
+        <p class="text-zinc-300 leading-relaxed mb-4">
+          Marx once said, "Philosophers have only interpreted the world in various ways; the point, however, is to change it." Yet, who is changing the world? Which world needs to be changed? On this point, Marx remained silent. It is precisely this silence that constitutes our origin (ἀρχή) of departure: not the elements of classical Greek philosophy—water, fire, earth, air—nor the ideas of German classical philosophy or the "unmoved mover," but a concrete call—a call that must be answered.
+        </p>
+        <p class="text-zinc-300 leading-relaxed mb-4">
+          The task of S.R.T.P. is established within this call. We are not here to interpret the world in order to understand it, nor do we interpret first and only "then (dann)" go on to change it. Marx's "aber" precedes all interpretation, precedes all theory. Changing the world is the sole a priori, the absolute principle.
+        </p>
+        <p class="text-zinc-300 leading-relaxed mb-4">
+          For us, the world is not a pre-given totality; it is the world-to-be-changed, the future (zu-Kunft, a-venir). We do not confront a world waiting to be interpreted; we create the world through change.
+        </p>
+        <p class="text-zinc-300 leading-relaxed mb-4">
+          We refuse to let praxis remain at the level of mere experience. S.R.T.P. compels practitioners to transmute their actions into theory, thereby generating new revolutionary concepts, new critique, new weapons. S.R.T.P. is both the rupture-point of theory and practice, and their intersection. It does not produce "ready-made" theory; rather, through repeated interrogation and forging of praxis, it generates thought capable of opening the future.
+        </p>
+        <p class="text-zinc-300 leading-relaxed mb-4">
+          Without the "aber" that is not derived from anything, the fate of all possible worlds hangs undecided.
+        </p>
+        <p class="text-zinc-300 leading-relaxed mb-4">
+          In this sense, S.R.T.P. is both a machine of reflection and an apparatus of interrogation:
+        </p>
+        <p class="text-zinc-300 leading-relaxed mb-4">
+          Its very existence is a reminder—
+        </p>
+        <p class="text-zinc-300 leading-relaxed font-semibold">
+          The world must be changed, and all theory and praxis must assume this mission.
+        </p>
+      </section>
+
+
+      <!-- Application -->
+      <section class="mt-12">
+        <h2 class="text-2xl font-bold text-white mb-4">Apply to SRTP</h2>
+        <p class="text-zinc-300 mb-6">
+          Ready to start your research journey? Apply to our Student Research and Training Program today.
+        </p>
+        <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+          <GoogleForm
+            formId={FORMS.projects.srtp.id}
+            title={FORMS.projects.srtp.title}
+            height={FORMS.projects.srtp.height}
+            client:visible
+          />
+        </div>
+      </section>
+    </div>
+  </InfoLayout>
+</RootLayout>
