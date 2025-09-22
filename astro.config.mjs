@@ -10,8 +10,8 @@ export default defineConfig({
   output: 'static',
 
   // GitHub Pages URL configuration
-  site: 'https://yiluo-photon.github.io',
-  base: '/sinthome_website',
+  site: 'https://yiluo-photon.github.io/sinthome_website',
+  base: '/',
 
   vite: {
     plugins: [tailwindcss()]
