@@ -35,7 +35,7 @@ const navItems: NavItem[] = [
 export default function TopNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const dropdownTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const dropdownTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Handle base path for GitHub Pages
   const getFullPath = (path: string) => {
