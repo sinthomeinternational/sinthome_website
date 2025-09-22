@@ -13,8 +13,8 @@ const pathname = Astro.url.pathname;
 
 <a href={href} target={openNewTab ? "_blank" : "_self"} 
     class={clsx(
-        "w-fit group flex items-center gap-1 text-base hover:text-zinc-100 cursor-pointer",
-        pathname === href ? "text-zinc-100" : "text-zinc-500"
+        "w-fit group flex items-center gap-1 text-base hover:text-red-700 cursor-pointer",
+        pathname === href ? "text-red-600 font-semibold" : "text-red-600"
     )}>
     <slot />
    {openNewTab &&  
