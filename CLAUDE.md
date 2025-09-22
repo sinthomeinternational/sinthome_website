@@ -14,44 +14,25 @@ A modern non-profit website built with Astro 5.7.5, featuring React components, 
 - **Forms**: Google Forms (embedded)
 - **Repository**: https://github.com/Yiluo-pHoton/sinthome_website
 
-## Multi-Developer Workflow
+## Simplified Workflow
 
 ### Branch Strategy
 
-We use a feature branch workflow to enable parallel development:
+We now use a simplified branch workflow directly from main:
 
 ```
 main (production - deployed to GitHub Pages)
-  └── development (integration)
-       ├── feature/navigation-dropdown
-       ├── feature/homepage-redesign
-       ├── feature/who-we-are-page
-       ├── feature/what-we-do-pages
-       ├── feature/ai-hackathon-page
-       ├── feature/workers-assist-page
-       ├── feature/plantcore-ai-page
-       ├── feature/srtp-page
-       ├── feature/events-page
-       ├── feature/contact-page
-       ├── feature/donate-page
-       └── feature/shared-components
+  ├── feature/[feature-name] (active development)
+  ├── feature/font-fix-and-cleanup (current)
+  └── feature/homepage-theme-alternatives (theme experiments)
 ```
-
-### Team Assignments
-
-| Developer | Branches | Responsibilities |
-|-----------|----------|------------------|
-| **Dev 1** | `feature/navigation-dropdown`, `feature/shared-components` | Navigation with dropdown, reusable components |
-| **Dev 2** | `feature/homepage-redesign`, `feature/who-we-are-page` | Homepage with CTAs, Who We Are page |
-| **Dev 3** | `feature/what-we-do-pages`, all project pages | What We Do section and individual project pages |
-| **Dev 4** | `feature/events-page`, `feature/contact-page`, `feature/donate-page` | Community and engagement pages |
 
 ### Git Workflow Commands
 
 ```bash
 # Start new feature
-git checkout development
-git pull origin development
+git checkout main
+git pull origin main
 git checkout -b feature/[feature-name]
 
 # Work on feature
@@ -59,18 +40,16 @@ git add .
 git commit -m "feat: [description]"
 git push origin feature/[feature-name]
 
-# Create Pull Request to development branch via GitHub
+# Create Pull Request to main branch via GitHub
 
 # After PR approval and merge
-git checkout development
-git pull origin development
-
-# Deploy to production (team lead only)
 git checkout main
-git merge development
-git push origin main
+git pull origin main
+
 # GitHub Actions will automatically deploy to GitHub Pages
 ```
+
+**Note:** The development branch is no longer used. All feature branches are created directly from main and PRs are submitted to main. This simplifies the workflow since GitHub Pages deploys from the main branch.
 
 ### Commit Message Convention
 
