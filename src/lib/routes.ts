@@ -1,7 +1,6 @@
 // 统一管理所有路由
 export const routes = {
   home: "/",
-  about: "/about",
   blog: "/blog", 
   contact: "/contact",
   projects: "/projects",
