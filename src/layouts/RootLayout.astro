@@ -15,7 +15,7 @@ const defaultDescription = "Nikola Tesla was a Serbian-American inventor, electr
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title ?? defaultTitle}</title>
 		<meta name="description" content={description ?? defaultDescription} />
@@ -42,7 +42,7 @@ const defaultDescription = "Nikola Tesla was a Serbian-American inventor, electr
 	<body class="font-sans min-h-screen bg-white">
 		<!-- 右上角Logo -->
 		<div class="fixed top-4 right-4 sm:top-8 sm:right-8 z-50">
-			<img src="/sinthome.png" alt="Logo" class="h-8 sm:h-8" />
+			<img src={`${import.meta.env.BASE_URL}sinthome.png`} alt="Logo" class="h-8 sm:h-8" />
 		</div>
 		
 		<slot />
