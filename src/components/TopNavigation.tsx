@@ -53,7 +53,7 @@ export default function TopNavigation() {
   const handleMouseLeave = () => {
     dropdownTimerRef.current = setTimeout(() => {
       setOpenDropdown(null);
-    }, 200);
+    }, 300); // Increased delay for better UX
   };
 
   useEffect(() => {
@@ -71,7 +71,14 @@ export default function TopNavigation() {
           {/* Logo/Home Link */}
           <a
             href={getFullPath("/")}
-            className="text-white font-black text-xl tracking-tight hover:text-red-500 transition-colors"
+            className="text-white hover:text-red-500 transition-colors"
+            style={{
+              fontFamily: "'League Spartan', sans-serif",
+              fontWeight: 700,
+              fontSize: "1.5rem",
+              letterSpacing: "-0.06em",
+              transform: "scaleX(1)"
+            }}
           >
             SINTHOME
           </a>
@@ -120,20 +127,22 @@ export default function TopNavigation() {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-1 w-48 bg-zinc-900 rounded-lg shadow-xl border border-white/10 overflow-hidden"
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full left-0 pt-1 w-48"
                       onMouseEnter={() => handleMouseEnter(item.label)}
                       onMouseLeave={handleMouseLeave}
                     >
-                      {item.children.map((child) => (
-                        <a
-                          key={child.label}
-                          href={getFullPath(child.href || "#")}
-                          className="block px-4 py-3 text-sm text-white hover:bg-red-600 hover:text-white transition-colors"
-                        >
-                          {child.label}
-                        </a>
-                      ))}
+                      <div className="bg-zinc-900 rounded-lg shadow-xl border border-white/10 overflow-hidden">
+                        {item.children.map((child) => (
+                          <a
+                            key={child.label}
+                            href={getFullPath(child.href || "#")}
+                            className="block px-4 py-3 text-sm text-white hover:bg-red-600 hover:text-white transition-colors"
+                          >
+                            {child.label}
+                          </a>
+                        ))}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
