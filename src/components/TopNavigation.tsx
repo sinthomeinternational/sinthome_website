@@ -175,7 +175,7 @@ export default function TopNavigation({ variant = 'fixed' }: TopNavigationProps)
                   fontFamily: "'League Spartan', sans-serif",
                   fontWeight: 700,
                   fontSize: "1.5rem",
-                  letterSpacing: "-0.06em",
+                  letterSpacing: "0.01em",
                   transform: "scaleX(1)"
                 }}
               >
@@ -262,7 +262,7 @@ export default function TopNavigation({ variant = 'fixed' }: TopNavigationProps)
                 fontFamily: "'League Spartan', sans-serif",
                 fontWeight: 700,
                 fontSize: "1.5rem",
-                letterSpacing: "-0.06em",
+                letterSpacing: "0.01em",
                 transform: "scaleX(1)"
               }}
             >
