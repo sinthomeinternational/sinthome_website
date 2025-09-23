@@ -13,7 +13,7 @@ const {
 ---
 
 <RootLayout title={title} description={description}>
-  {showNavigation && (
+  {showNavigation && !useInfoLayout && (
     <TopNavigation client:load />
     <div class="h-16"></div> <!-- Spacer for fixed nav -->
   )}
@@ -35,8 +35,11 @@ const {
         </div>
       </nav>
 
-      <main class="relative bg-white flex-1">
-        <div class="[&_h1]:text-red-600 pt-8 pb-20">
+      <main class="relative bg-black flex-1">
+        {showNavigation && (
+          <TopNavigation variant="static" client:load />
+        )}
+        <div class="[&_h1]:text-red-600 pt-8 pb-20 text-white">
           <slot />
         </div>
         <Footer />
