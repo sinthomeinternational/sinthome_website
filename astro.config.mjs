@@ -34,7 +34,7 @@ export default defineConfig({
   base: config.base,
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: /** @type {any} */ ([...tailwindcss()])
   },
 
   integrations: [react()]
