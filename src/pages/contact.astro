@@ -1,10 +1,10 @@
 ---
 import H1 from "../components/h1.astro";
-import InfoLayout from "../layouts/InfoLayout.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import ExternalLink from "../components/external-link.astro";
 ---
 
-<InfoLayout>
+<PageLayout title="Contact - Sinthome" useInfoLayout={true}>
      <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh flex flex-col justify-between">
           
           <div>
@@ -37,4 +37,4 @@ import ExternalLink from "../components/external-link.astro";
                <p class="text-base text-gray-800">United States</p>
           </div>
      </div>
-</InfoLayout>
+</PageLayout>
