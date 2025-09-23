@@ -4,14 +4,34 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 
+// Configuration for different deployment environments
+const DEPLOYMENT_CONFIG = {
+  // GitHub Pages deployment
+  github: {
+    site: 'https://yiluo-photon.github.io',
+    base: '/sinthome_website/',
+  },
+  // Custom domain deployment
+  custom: {
+    site: process.env.CUSTOM_DOMAIN || 'https://example.com',
+    base: '/',
+  }
+};
+
+// Determine deployment target from environment variable or default to GitHub Pages
+const deploymentTarget = process.env.DEPLOYMENT_TARGET || 'github';
+const config = DEPLOYMENT_CONFIG[deploymentTarget] || DEPLOYMENT_CONFIG.github;
+
+console.log(`Building for ${deploymentTarget} deployment:`, config);
+
 // https://astro.build/config
 export default defineConfig({
-  // Static generation for GitHub Pages
+  // Static generation for both GitHub Pages and custom domain
   output: 'static',
 
-  // GitHub Pages URL configuration
-  site: 'https://yiluo-photon.github.io',
-  base: '/sinthome_website/',
+  // URL configuration based on deployment target
+  site: config.site,
+  base: config.base,
 
   vite: {
     plugins: [tailwindcss()]
