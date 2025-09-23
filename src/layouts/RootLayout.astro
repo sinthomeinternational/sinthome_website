@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import { Font } from "astro:assets";
 import { ClientRouter } from 'astro:transitions';
 import LoadingIndicator from "astro-loading-indicator/component";
 
@@ -23,6 +22,11 @@ const defaultDescription = "A public-interest community reconstructing new relat
 		<title>{title ?? defaultTitle}</title>
 		<meta name="description" content={description ?? defaultDescription} />
 
+		<!-- Google Fonts - League Spartan for sharp geometric look -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&display=swap" rel="stylesheet">
+
 		<meta property="og:url" content="https://yiluo-photon.github.io/sinthome_website/" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={defaultTitle} />
@@ -37,7 +41,6 @@ const defaultDescription = "A public-interest community reconstructing new relat
 		<meta name="twitter:description" content={defaultDescription} />
 		<meta name="twitter:image" content={assets.socialImage} />
 
-		<Font cssVariable="--font-geist" preload />
 		<ClientRouter />
 		<LoadingIndicator color="#f4f4f5" height="2px" />
 
