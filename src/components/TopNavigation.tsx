@@ -14,7 +14,7 @@ const navItems: NavItem[] = [
     label: "What We Do",
     href: "/what-we-do",
     children: [
-      { label: "AI Hackathon", href: "/what-we-do/ai-hackathon" },
+      { label: "AI Hackathon", href: "/what-we-do/ai-hackathon/" },
       { label: "Workers Assist", href: "/what-we-do/workers-assist" },
       { label: "Plantcore AI", href: "/what-we-do/plantcore-ai" },
       { label: "SRTP", href: "/what-we-do/srtp" },
