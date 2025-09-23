@@ -1,6 +1,6 @@
 ---
 import RootLayout from "./RootLayout.astro";
-import Header from "../components/Header.astro";
+import TopNavigation from "../components/TopNavigation";
 import Footer from "../components/footer.astro";
 import WarpBackground from "../components/warp-background";
 
@@ -24,9 +24,9 @@ const { title, description } = Astro.props;
 			</div>
 		</nav>
 
-		<main class="relative bg-zinc-950 flex-1">
-			<Header />
-			<div class="[&_h1]:text-red-600 pt-8 pb-20">
+		<main class="relative bg-black flex-1">
+			<TopNavigation variant="static" client:load />
+			<div class="[&_h1]:text-red-600 pt-8 pb-20 text-white">
 				<slot />
 			</div>
 			<Footer />
