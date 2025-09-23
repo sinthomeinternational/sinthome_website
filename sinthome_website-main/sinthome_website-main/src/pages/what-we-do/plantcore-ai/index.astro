@@ -4,10 +4,11 @@ import InfoLayout from "../../layouts/InfoLayout.astro";
 import H1 from "../../components/h1.astro";
 import GoogleForm from "../../components/forms/GoogleForm";
 import { FORMS } from "../../config/forms";
-import { Image } from 'astro:assets';
 
-// 导入工厂图片
-import factoryImage from "../../assets/plantcore-ai/factory.png";
+// 导入项目图片
+import factoryImg from "./images/factory-floor.jpg";
+import aiAgentsImg from "./images/ai-agents.jpg";
+import cdoPlatformImg from "./images/cdo-platform.jpg";
 ---
 
 <RootLayout>
@@ -21,25 +22,6 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
         <p class="text-zinc-300 leading-relaxed mb-4">
           Plantcore.AI is committed to building the world's first Industrial Vertical Large Language Model (LLM) to drive a fundamental transformation in manufacturing. We believe the future of industry is not limited to automated execution but lies in the intelligent and collective structuring of decision-making. Every act of production is shaped by countless judgments and choices—decisions that are the true drivers of industry. Plantcore.AI begins from this reality, aiming to construct a new industrial intelligence system grounded in real-world decision data.
         </p>
-
-        <!-- Factory Image -->
-        <div class="flex justify-center my-8">
-          <div class="relative overflow-hidden rounded-xl max-w-3xl w-full">
-            <Image
-              src={factoryImage}
-              alt="Factory floor showing industrial AI implementation"
-              width={1000}
-              height={600}
-              loading="lazy"
-              format="webp"
-              quality={85}
-              class="w-full h-auto object-cover"
-            />
-            <div class="absolute bottom-4 left-4 bg-zinc-900/90 backdrop-blur-sm px-3 py-1 rounded-full">
-              <span class="text-sm font-semibold text-white">凡事都有开端 - Everything Has a Beginning</span>
-            </div>
-          </div>
-        </div>
       </section>
 
       <!-- Method -->

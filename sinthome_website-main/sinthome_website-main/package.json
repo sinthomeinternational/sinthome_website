@@ -2,11 +2,6 @@
   "name": "sinthome-nonprofit",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "pnpm@10.0.0",
-  "engines": {
-    "node": ">=18.0.0",
-    "pnpm": ">=9.0.0"
-  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
@@ -17,12 +12,7 @@
     "lint:fix": "eslint src --ext .astro,.tsx,.ts --fix",
     "format": "prettier --write 'src/**/*.{astro,tsx,ts,css}'",
     "type-check": "tsc --noEmit",
-    "pre-commit": "pnpm run check && pnpm run type-check",
-    "clean": "rm -rf dist .astro node_modules/.vite",
-    "reset": "pnpm run clean && pnpm install",
-    "dev:debug": "astro dev --verbose",
-    "build:analyze": "astro build --verbose",
-    "test": "echo \"No tests specified\" && exit 0"
+    "pre-commit": "npm run check && npm run type-check"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.5",

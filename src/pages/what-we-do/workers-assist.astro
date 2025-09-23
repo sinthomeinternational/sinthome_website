@@ -1,116 +1,237 @@
 ---
-import PageLayout from "../../layouts/PageLayout.astro";
+import RootLayout from "../../layouts/RootLayout.astro";
+import InfoLayout from "../../layouts/InfoLayout.astro";
 import H1 from "../../components/h1.astro";
+import GoogleForm from "../../components/forms/GoogleForm";
+import { FORMS } from "../../config/forms";
+import { Image } from 'astro:assets';
+
+// 导入项目图片
+import communityPhoto from "../../assets/workers-assist/合影.jpg";
+import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
 ---
 
-<PageLayout title="Workers Assist - Sinthome" useInfoLayout={true}>
+<RootLayout>
+  <InfoLayout>
     <H1>Workers Assist</H1>
 
-    <div class="space-y-8 text-zinc-300 max-w-4xl">
-      <!-- Overview Section -->
-      <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Mutual Aid for Asian Migrant Workers</h2>
-        <p class="leading-relaxed mb-4">
-          Workers Assist is our direct solidarity initiative providing support and resources for Asian migrant workers. We believe in practical solidarity that addresses immediate needs while building long-term community power.
+    <div class="space-y-8 max-w-4xl">
+      <!-- Hero Section -->
+      <section class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-white mb-2">
+          <span class="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">Mutual Support Community</span> for Asian Labor Workers
+        </h2>
+        <p class="text-red-400 font-black text-xl uppercase tracking-wider mb-4">
+          SOLIDARITY • EMPOWERMENT • COLLECTIVE ACTION
         </p>
-        <p class="leading-relaxed">
-          Through this program, we offer legal assistance, language support, community organizing resources, and emergency aid to workers facing exploitation or crisis situations.
+        <p class="text-lg text-zinc-300 max-w-3xl mx-auto">
+          Workers Assist is a nonprofit organization dedicated to fostering a mutual-support community for Asian labor workers in the Boston area. Since its founding in 2023, WA has grown into a vibrant community platform of more than 400 active members. Together, we provide a wide range of supportive services, including free language learning, everyday life skills training, and youth education programs.
         </p>
+        <p class="text-lg text-zinc-300 max-w-3xl mx-auto mt-4">
+          At WA, we believe in more than just offering help—we choose to live alongside our community. By addressing real problems in daily life and fostering connections of trust and care, we work toward a future where mutual support strengthens every member of our community.
+        </p>
+        
+        <!-- Community Photos - Hero Treatment -->
+        <div class="mt-12 -mx-4 sm:-mx-8 lg:-mx-12">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="relative h-96 overflow-hidden">
+              <Image
+                src={communityPhoto}
+                alt="Workers Assist community members gathering together"
+                width={800}
+                height={600}
+                loading="lazy"
+                format="webp"
+                quality={85}
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent">
+                <div class="absolute bottom-6 left-6 right-6">
+                  <h3 class="text-white text-2xl font-bold mb-2 uppercase">
+                    400+ WORKERS UNITED
+                  </h3>
+                  <p class="text-zinc-300">
+                    Building solidarity through mutual support
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="relative h-96 overflow-hidden">
+              <Image
+                src={picnicPhoto}
+                alt="Workers Assist community picnic event"
+                width={800}
+                height={600}
+                loading="lazy"
+                format="webp"
+                quality={85}
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent">
+                <div class="absolute bottom-6 left-6 right-6">
+                  <h3 class="text-white text-2xl font-bold mb-2 uppercase">
+                    COMMUNITY IN ACTION
+                  </h3>
+                  <p class="text-zinc-300">
+                    From language learning to collective celebration
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- Key Services -->
+      <!-- Services -->
       <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Our Services</h2>
-        <ul class="space-y-3">
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Legal Support:</strong> Free consultation and advocacy for workplace rights and immigration issues
-            </div>
-          </li>
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Language Assistance:</strong> Translation services and language learning resources
-            </div>
-          </li>
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Emergency Aid:</strong> Direct financial assistance for workers in crisis
-            </div>
-          </li>
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Community Building:</strong> Organizing spaces for workers to connect and build solidarity
-            </div>
-          </li>
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Skills Development:</strong> Workshops and training for professional advancement
-            </div>
-          </li>
-        </ul>
-      </section>
+        <div class="text-center mb-6">
+          <h2 class="text-3xl font-black text-white border-l-4 border-red-600 pl-4 inline-block">WHAT WE DO</h2>
+        </div>
+        <p class="text-zinc-400 text-center mb-8 max-w-2xl mx-auto">
+          We provide a wide range of supportive services, including free language learning, everyday life skills training, and youth education programs.
+        </p>
 
-      <!-- Impact Section -->
-      <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Our Impact</h2>
+        <!-- Primary Service - Language Learning -->
+        <div class="mb-8">
+          <div class="bg-gradient-to-r from-red-600/20 to-red-700/10 rounded-xl p-8 border border-red-600/30 hover:border-red-600/50 transition-all duration-300">
+            <div class="inline-flex items-center gap-2 bg-red-600/20 px-4 py-2 rounded-full mb-4">
+              <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+              <span class="text-sm font-bold text-red-400 uppercase tracking-wider">Most Critical Service</span>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-4">Free Language Learning</h3>
+            <p class="text-zinc-300 text-lg mb-4">Community conversation corners, hospital/school scenario phrase cards, job interview practice, and translation support.</p>
+            <p class="text-red-400 font-semibold">Serving 400+ workers with essential communication skills for workplace and daily life</p>
+          </div>
+        </div>
+
+        <!-- Secondary Services -->
         <div class="grid md:grid-cols-2 gap-6">
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-3xl font-bold text-red-500 mb-2">500+</h3>
-            <p class="text-zinc-400">Workers supported directly</p>
+          <div class="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800 hover:bg-zinc-800/50 transition-all duration-300">
+            <div class="inline-flex items-center gap-2 bg-red-600/10 px-3 py-1 rounded-full mb-4">
+              <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+              <span class="text-xs font-semibold text-red-400">Youth Education</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Youth Education Programs</h3>
+            <p class="text-zinc-400">Homework support, interest groups, city exploration; safe and fun learning environments for young people.</p>
           </div>
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-3xl font-bold text-red-500 mb-2">24/7</h3>
-            <p class="text-zinc-400">Emergency hotline availability</p>
-          </div>
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-3xl font-bold text-red-500 mb-2">15+</h3>
-            <p class="text-zinc-400">Languages supported</p>
-          </div>
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-3xl font-bold text-red-500 mb-2">100%</h3>
-            <p class="text-zinc-400">Free services</p>
+
+          <div class="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800 hover:bg-zinc-800/50 transition-all duration-300">
+            <div class="inline-flex items-center gap-2 bg-red-600/10 px-3 py-1 rounded-full mb-4">
+              <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+              <span class="text-xs font-semibold text-red-400">Life Skills</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Everyday Life Skills Training</h3>
+            <p class="text-zinc-400">Community shop partnerships, medical process guides, housing and commute experience sharing—real problems solved on-site.</p>
           </div>
         </div>
       </section>
 
-      <!-- Get Help Section -->
+      <!-- Vision -->
       <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Need Assistance?</h2>
-        <p class="leading-relaxed mb-4">
-          If you or someone you know needs support, don't hesitate to reach out. All services are confidential and free of charge.
+        <div class="text-center mb-6">
+          <h2 class="text-3xl font-black text-white border-l-4 border-red-600 pl-4 inline-block">OUR VISION</h2>
+        </div>
+        <p class="text-zinc-400 text-center mb-8 max-w-2xl mx-auto">
+          In the near future, WA's next step is to grow into a closer-knit mutual support community. We hope to achieve this by working closely with local small vendors, restaurants, service providers, and building stronger connections through collaboration. Guided by this vision, we aim to:
         </p>
-        <div class="bg-red-900/20 border border-red-800 rounded-lg p-6">
-          <h3 class="text-lg font-semibold text-white mb-2">Emergency Hotline</h3>
-          <p class="text-2xl font-bold text-red-500 mb-4">[Phone Number]</p>
-          <p class="text-zinc-400 text-sm">Available 24/7 in multiple languages</p>
+        
+        <div class="space-y-6">
+          <div class="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800">
+            <h3 class="text-lg font-semibold text-white mb-3">Collaborate with Local Small Businesses to Create Shared Services</h3>
+            <p class="text-zinc-400">
+              WA invites small businesses in Chinatown to include their services in the community service directory. Workers and community members can access these services while also benefiting from services offered by other participating businesses, creating a mutually supportive community ecosystem.
+            </p>
+          </div>
+          
+          <div class="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800">
+            <h3 class="text-lg font-semibold text-white mb-3">Continuously Expand Community Services</h3>
+            <p class="text-zinc-400">
+              As more businesses and community members join, the service directory grows to cover a wider range of daily life and work scenarios, providing comprehensive and diverse support and opportunities for all participants.
+            </p>
+          </div>
+          
+          <div class="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800">
+            <h3 class="text-lg font-semibold text-white mb-3">Build an Inclusive Mutual Support Platform</h3>
+            <p class="text-zinc-400">
+              Regardless of members' circumstances—whether at home, at work, or in daily life—everyone can find services suited to their needs, facilitating resource sharing and mutual support so that every community member can benefit.
+            </p>
+          </div>
         </div>
       </section>
 
-      <!-- Call to Action -->
-      <section class="mt-12 p-8 bg-zinc-900/50 border border-zinc-800 rounded-lg text-center">
-        <h2 class="text-2xl font-bold text-white mb-4">Support Our Work</h2>
-        <p class="text-zinc-300 mb-6">
-          Help us continue providing vital services to migrant workers in need.
-        </p>
-        <div class="flex flex-wrap gap-4 justify-center">
-          <a
-            href="/donate"
-            class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-          >
-            Donate
-          </a>
-          <a
-            href="/contact"
-            class="px-6 py-3 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-colors"
-          >
-            Volunteer
-          </a>
+      <!-- Join Us -->
+      <section class="mt-12 p-8 bg-gradient-to-r from-red-600/10 to-red-700/10 rounded-xl border border-red-600/20">
+        <h2 class="text-3xl font-black text-white mb-4 text-center">JOIN US</h2>
+        <div class="text-center">
+          <p class="text-zinc-300 mb-6">
+            We are currently recruiting:
+          </p>
+          <div class="space-y-3 mb-6">
+            <p class="text-white font-semibold">• Volunteer Teachers</p>
+            <p class="text-white font-semibold">• Business Development Volunteers</p>
+            <p class="text-white font-semibold">• Community Partners: local vendors, restaurants, service providers, and peer NGOs who are interested in collaboration</p>
+          </div>
+          <p class="text-zinc-300 mb-6">
+            Join English class and youth program participation as student, please contact:
+          </p>
+          <div class="flex flex-wrap gap-4 justify-center">
+            <a 
+              href="tel:+18578331708" 
+              class="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors font-semibold"
+            >
+              +1 857-833-1708
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section>
+        <div class="text-center mb-6">
+          <h2 class="text-3xl font-black text-white border-l-4 border-red-600 pl-4 inline-block">FREQUENTLY ASKED QUESTIONS</h2>
+        </div>
+        <div class="space-y-4 max-w-3xl mx-auto">
+          <details class="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 hover:bg-zinc-800/50 transition-all duration-300 group">
+            <summary class="font-semibold text-white cursor-pointer flex items-center justify-between">
+              <span>Who can join Workers Assist?</span>
+              <span class="text-zinc-500 group-open:rotate-180 transition-transform duration-200">▼</span>
+            </summary>
+            <p class="text-zinc-400 mt-3 pt-3 border-t border-zinc-800">
+              WA is open to all Asian labor workers in the Boston area, and we welcome anyone interested in supporting our community through volunteer service or collaboration.
+            </p>
+          </details>
+          
+          <details class="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 hover:bg-zinc-800/50 transition-all duration-300 group">
+            <summary class="font-semibold text-white cursor-pointer flex items-center justify-between">
+              <span>Are services really free?</span>
+              <span class="text-zinc-500 group-open:rotate-180 transition-transform duration-200">▼</span>
+            </summary>
+            <p class="text-zinc-400 mt-3 pt-3 border-t border-zinc-800">
+              Yes! All our core services, including language learning, life skills training, and youth education programs, are completely free for community members.
+            </p>
+          </details>
+          
+          <details class="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 hover:bg-zinc-800/50 transition-all duration-300 group">
+            <summary class="font-semibold text-white cursor-pointer flex items-center justify-between">
+              <span>How can businesses participate?</span>
+              <span class="text-zinc-500 group-open:rotate-180 transition-transform duration-200">▼</span>
+            </summary>
+            <p class="text-zinc-400 mt-3 pt-3 border-t border-zinc-800">
+              Local businesses can join our service directory, offer special discounts to community members, or provide in-kind support for our programs.
+            </p>
+          </details>
+          
+          <details class="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 hover:bg-zinc-800/50 transition-all duration-300 group">
+            <summary class="font-semibold text-white cursor-pointer flex items-center justify-between">
+              <span>What volunteer opportunities are available?</span>
+              <span class="text-zinc-500 group-open:rotate-180 transition-transform duration-200">▼</span>
+            </summary>
+            <p class="text-zinc-400 mt-3 pt-3 border-t border-zinc-800">
+              We need volunteer teachers for English classes, business development volunteers to help expand our network, and general volunteers for community events and programs.
+            </p>
+          </details>
         </div>
       </section>
     </div>
-</PageLayout>
+  </InfoLayout>
+</RootLayout>
