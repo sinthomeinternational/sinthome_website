@@ -74,36 +74,90 @@ git checkout -b feature/[feature-name]
 - `test:` Test additions or changes
 - `chore:` Build process or auxiliary tool changes
 
-## GitHub Pages Deployment Setup
+## Deployment Configuration (GitHub Pages vs Custom Domain)
 
-### Configuration Changes Required
+### IMPORTANT: Base URL Configuration
 
-1. **Update astro.config.mjs** for static generation:
-```javascript
-import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import tailwindcss from '@tailwindcss/vite';
+The site supports two deployment modes to handle the base URL correctly:
 
-export default defineConfig({
-  // Change from 'server' to 'static' for GitHub Pages
-  output: 'static',
+1. **GitHub Pages** (default): Uses `/sinthome_website/` as base path
+2. **Custom Domain**: Uses `/` as base path (no subdirectory)
 
-  // Set your GitHub Pages URL
-  site: 'https://yiluo-photon.github.io',
-  base: '/sinthome_website',
+### Configuration Setup
 
-  vite: {
-    plugins: [tailwindcss()]
-  },
+1. **Environment Variables** (.env file):
+```bash
+# For GitHub Pages (default)
+DEPLOYMENT_TARGET=github
 
-  integrations: [react()],
-
-  // Remove Vercel adapter
-  // adapter: vercel() <- Remove this
-});
+# For custom domain deployment
+DEPLOYMENT_TARGET=custom
+CUSTOM_DOMAIN=https://sinthome.org  # Your actual domain
 ```
 
-2. **Create GitHub Actions Workflow** (.github/workflows/deploy.yml):
+2. **astro.config.mjs** automatically handles the configuration:
+```javascript
+// Configuration for different deployment environments
+const DEPLOYMENT_CONFIG = {
+  github: {
+    site: 'https://yiluo-photon.github.io',
+    base: '/sinthome_website/',
+  },
+  custom: {
+    site: process.env.CUSTOM_DOMAIN || 'https://example.com',
+    base: '/',
+  }
+};
+
+// Automatically selects config based on DEPLOYMENT_TARGET
+const deploymentTarget = process.env.DEPLOYMENT_TARGET || 'github';
+```
+
+### Switching Between Deployments
+
+#### Deploy to GitHub Pages:
+```bash
+# No .env file needed (defaults to GitHub Pages)
+pnpm run build
+# Pushes to main trigger automatic deployment
+```
+
+#### Deploy to Custom Domain:
+```bash
+# Create .env file
+echo "DEPLOYMENT_TARGET=custom" > .env
+echo "CUSTOM_DOMAIN=https://sinthome.org" >> .env
+
+# Build with custom domain config
+pnpm run build
+
+# Deploy dist/ folder to your hosting service
+```
+
+### URL Handling in Code
+
+The project uses utility functions to handle base URLs correctly:
+
+```typescript
+// src/lib/utils.ts
+export function getInternalHref(href: string): string {
+    if (href.startsWith('/') && !href.startsWith('http')) {
+        return `${import.meta.env.BASE_URL}${href.slice(1)}`;
+    }
+    return href;
+}
+
+// src/lib/assets.ts
+function getPublicAsset(path: string): string {
+  return `${import.meta.env.BASE_URL}${path.startsWith('/') ? path.slice(1) : path}`;
+}
+```
+
+**Important**: Always use these utility functions or `import.meta.env.BASE_URL` when linking to internal resources to ensure URLs work correctly in both deployment modes.
+
+### GitHub Actions Workflow
+
+The workflow (.github/workflows/deploy.yml) is configured to:
 ```yaml
 name: Deploy to GitHub Pages
 
@@ -133,11 +187,16 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build with Astro
-        run: npm run build
+        run: pnpm run build
+        env:
+          DEPLOYMENT_TARGET: github
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -39,6 +39,8 @@ jobs:
 
       - name: Build with Astro
         run: pnpm run build
+        env:
+          DEPLOYMENT_TARGET: github
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
