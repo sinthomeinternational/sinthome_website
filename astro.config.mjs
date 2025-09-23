@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
 import react from '@astrojs/react';
+import tailwindcss from '@tailwindcss/vite';
 
 // Configuration for different deployment environments
 const DEPLOYMENT_CONFIG = {
@@ -32,6 +32,10 @@ export default defineConfig({
   // URL configuration based on deployment target
   site: config.site,
   base: config.base,
+
+  vite: {
+    plugins: [tailwindcss()]
+  },
 
   integrations: [react()]
 });
