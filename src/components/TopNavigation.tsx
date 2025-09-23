@@ -36,6 +36,115 @@ interface TopNavigationProps {
   variant?: 'fixed' | 'static';
 }
 
+// Shared styles
+const logoStyle = {
+  fontFamily: "'League Spartan', sans-serif",
+  fontWeight: 700,
+  fontSize: "1.5rem",
+  letterSpacing: "0.01em",
+  transform: "scaleX(1)"
+};
+
+// Logo component
+const Logo = ({ href, className }: { href: string; className: string }) => (
+  <a href={href} className={className} style={logoStyle}>
+    SINTHOME
+  </a>
+);
+
+// Navigation items component
+interface NavItemsProps {
+  items: NavItem[];
+  getFullPath: (path: string) => string;
+  linkClasses: string;
+  dropdownBgClasses: string;
+  dropdownLinkClasses: string;
+  openDropdown: string | null;
+  handleMouseEnter: (label: string) => void;
+  handleMouseLeave: () => void;
+}
+
+const NavItems = ({
+  items,
+  getFullPath,
+  linkClasses,
+  dropdownBgClasses,
+  dropdownLinkClasses,
+  openDropdown,
+  handleMouseEnter,
+  handleMouseLeave
+}: NavItemsProps) => (
+  <>
+    {items.map((item) => (
+      <div
+        key={item.label}
+        className="relative"
+        onMouseEnter={() => item.children && handleMouseEnter(item.label)}
+        onMouseLeave={handleMouseLeave}
+      >
+        <a
+          href={getFullPath(item.href || "#")}
+          className={clsx(
+            linkClasses,
+            "py-4 text-sm font-medium",
+            item.children && "flex items-center gap-1"
+          )}
+        >
+          {item.label}
+          {item.children && (
+            <svg
+              className={clsx(
+                "w-4 h-4 transition-transform",
+                openDropdown === item.label && "rotate-180"
+              )}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          )}
+        </a>
+
+        {/* Dropdown Menu */}
+        <AnimatePresence>
+          {item.children && openDropdown === item.label && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.15 }}
+              className="absolute top-full left-0 w-48 z-50"
+            >
+              {/* Invisible bridge to prevent gap */}
+              <div className="h-2 bg-transparent" />
+              <div className={clsx(
+                "rounded-lg shadow-xl border overflow-hidden",
+                dropdownBgClasses
+              )}>
+                {item.children.map((child) => (
+                  <a
+                    key={child.label}
+                    href={getFullPath(child.href || "#")}
+                    className={dropdownLinkClasses}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    ))}
+  </>
+);
+
 export default function TopNavigation({ variant = 'fixed' }: TopNavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -74,200 +183,64 @@ export default function TopNavigation({ variant = 'fixed' }: TopNavigationProps)
     ? "fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10"
     : "w-full bg-black border-b border-white/10 sticky top-0 z-50";
 
+  const containerClasses = variant === 'static'
+    ? "px-4 sm:px-8"
+    : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
+
   const linkClasses = "text-white hover:text-red-500 transition-colors";
-
   const dropdownBgClasses = "bg-zinc-900 border-white/10";
-
   const dropdownLinkClasses = "block px-4 py-3 text-sm text-white hover:bg-red-600 hover:text-white transition-colors";
-
   const mobileBgClasses = "bg-zinc-900 border-white/10";
-
   const mobileLinkClasses = "text-white hover:text-red-500";
-
   const mobileSubLinkClasses = "text-zinc-400 hover:text-red-500";
-
   const buttonClasses = "text-white hover:bg-white/10";
 
   return (
     <nav className={navClasses}>
-      <div className={variant === 'static' ? "px-4 sm:px-8" : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}>
+      <div className={containerClasses}>
         <div className="flex items-center justify-between h-16">
-          {/* Desktop Navigation on the left for static variant */}
-          {variant === 'static' && (
-            <div className="hidden lg:flex items-center gap-6">
-              {navItems.map((item) => (
-                <div
-                  key={item.label}
-                  className="relative"
-                  onMouseEnter={() => item.children && handleMouseEnter(item.label)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <a
-                    href={getFullPath(item.href || "#")}
-                    className={clsx(
-                      linkClasses,
-                      "py-4 text-sm font-medium",
-                      item.children && "flex items-center gap-1"
-                    )}
-                  >
-                    {item.label}
-                    {item.children && (
-                      <svg
-                        className={clsx(
-                          "w-4 h-4 transition-transform",
-                          openDropdown === item.label && "rotate-180"
-                        )}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    )}
-                  </a>
-
-                  {/* Dropdown Menu */}
-                  <AnimatePresence>
-                    {item.children && openDropdown === item.label && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute top-full left-0 w-48 z-50"
-                      >
-                        {/* Invisible bridge to prevent gap */}
-                        <div className="h-2 bg-transparent" />
-                        <div className={clsx(
-                          "rounded-lg shadow-xl border overflow-hidden",
-                          dropdownBgClasses
-                        )}>
-                          {item.children.map((child) => (
-                            <a
-                              key={child.label}
-                              href={getFullPath(child.href || "#")}
-                              className={dropdownLinkClasses}
-                            >
-                              {child.label}
-                            </a>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Logo/Home Link - left for fixed, right for static */}
           {variant === 'fixed' ? (
             <>
-              <a
+              {/* Fixed variant: Logo left, nav right */}
+              <Logo
                 href={getFullPath("/")}
                 className={linkClasses}
-                style={{
-                  fontFamily: "'League Spartan', sans-serif",
-                  fontWeight: 700,
-                  fontSize: "1.5rem",
-                  letterSpacing: "0.01em",
-                  transform: "scaleX(1)"
-                }}
-              >
-                SINTHOME
-              </a>
+              />
 
-              {/* Desktop Navigation on the right for fixed variant */}
               <div className="hidden lg:flex items-center space-x-8">
-                {navItems.map((item) => (
-                  <div
-                    key={item.label}
-                    className="relative"
-                    onMouseEnter={() => item.children && handleMouseEnter(item.label)}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <a
-                      href={getFullPath(item.href || "#")}
-                      className={clsx(
-                        linkClasses,
-                        "py-4 text-sm font-medium",
-                        item.children && "flex items-center gap-1"
-                      )}
-                    >
-                      {item.label}
-                      {item.children && (
-                        <svg
-                          className={clsx(
-                            "w-4 h-4 transition-transform",
-                            openDropdown === item.label && "rotate-180"
-                          )}
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </svg>
-                      )}
-                    </a>
-
-                    {/* Dropdown Menu */}
-                    <AnimatePresence>
-                      {item.children && openDropdown === item.label && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.15 }}
-                          className="absolute top-full left-0 w-48"
-                        >
-                          {/* Invisible bridge to prevent gap */}
-                          <div className="h-2 bg-transparent" />
-                          <div className={clsx(
-                            "rounded-lg shadow-xl border overflow-hidden",
-                            dropdownBgClasses
-                          )}>
-                            {item.children.map((child) => (
-                              <a
-                                key={child.label}
-                                href={getFullPath(child.href || "#")}
-                                className={dropdownLinkClasses}
-                              >
-                                {child.label}
-                              </a>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ))}
+                <NavItems
+                  items={navItems}
+                  getFullPath={getFullPath}
+                  linkClasses={linkClasses}
+                  dropdownBgClasses={dropdownBgClasses}
+                  dropdownLinkClasses={dropdownLinkClasses}
+                  openDropdown={openDropdown}
+                  handleMouseEnter={handleMouseEnter}
+                  handleMouseLeave={handleMouseLeave}
+                />
               </div>
             </>
           ) : (
-            /* Logo on the right for static variant */
-            <a
-              href={getFullPath("/")}
-              className="text-white hover:text-red-500 transition-colors"
-              style={{
-                fontFamily: "'League Spartan', sans-serif",
-                fontWeight: 700,
-                fontSize: "1.5rem",
-                letterSpacing: "0.01em",
-                transform: "scaleX(1)"
-              }}
-            >
-              SINTHOME
-            </a>
+            <>
+              {/* Static variant: Nav left, logo right */}
+              <div className="hidden lg:flex items-center gap-6">
+                <NavItems
+                  items={navItems}
+                  getFullPath={getFullPath}
+                  linkClasses={linkClasses}
+                  dropdownBgClasses={dropdownBgClasses}
+                  dropdownLinkClasses={dropdownLinkClasses}
+                  openDropdown={openDropdown}
+                  handleMouseEnter={handleMouseEnter}
+                  handleMouseLeave={handleMouseLeave}
+                />
+              </div>
+
+              <Logo
+                href={getFullPath("/")}
+                className={linkClasses}
+              />
+            </>
           )}
 
           {/* Mobile Menu Button */}
