@@ -32,7 +32,120 @@ const navItems: NavItem[] = [
   { label: "Donate", href: "/donate" },
 ];
 
-export default function TopNavigation() {
+interface TopNavigationProps {
+  variant?: 'fixed' | 'static';
+}
+
+// Shared styles
+const logoStyle = {
+  fontFamily: "'League Spartan', sans-serif",
+  fontWeight: 700,
+  fontSize: "1.5rem",
+  letterSpacing: "0.01em",
+  transform: "scaleX(1)"
+};
+
+// Logo component
+const Logo = ({ href, className }: { href: string; className: string }) => (
+  <a href={href} className={className} style={logoStyle}>
+    SINTHOME
+  </a>
+);
+
+// Navigation items component
+interface NavItemsProps {
+  items: NavItem[];
+  getFullPath: (path: string) => string;
+  linkClasses: string;
+  dropdownBgClasses: string;
+  dropdownLinkClasses: string;
+  openDropdown: string | null;
+  handleMouseEnter: (label: string) => void;
+  handleMouseLeave: () => void;
+}
+
+const NavItems = ({
+  items,
+  getFullPath,
+  linkClasses,
+  dropdownBgClasses,
+  dropdownLinkClasses,
+  openDropdown,
+  handleMouseEnter,
+  handleMouseLeave
+}: NavItemsProps) => (
+  <>
+    {items.map((item) => (
+      <div
+        key={item.label}
+        className="relative"
+        onMouseEnter={() => item.children && handleMouseEnter(item.label)}
+        onMouseLeave={handleMouseLeave}
+      >
+        <a
+          href={getFullPath(item.href || "#")}
+          className={clsx(
+            linkClasses,
+            "py-4 text-sm font-medium",
+            item.children && "flex items-center gap-1"
+          )}
+        >
+          {item.label}
+          {item.children && (
+            <svg
+              className={clsx(
+                "w-4 h-4 transition-transform",
+                openDropdown === item.label && "rotate-180"
+              )}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          )}
+        </a>
+
+        {/* Dropdown Menu */}
+        <AnimatePresence>
+          {item.children && openDropdown === item.label && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.15 }}
+              className="absolute top-full left-0 w-48 z-50"
+            >
+              {/* Invisible bridge to prevent gap */}
+              <div className="h-2 bg-transparent" />
+              <div className={clsx(
+                "rounded-lg shadow-xl border overflow-hidden",
+                dropdownBgClasses
+              )}>
+                {item.children.map((child) => (
+                  <a
+                    key={child.label}
+                    href={getFullPath(child.href || "#")}
+                    className={dropdownLinkClasses}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    ))}
+  </>
+);
+
+export default function TopNavigation({ variant = 'fixed' }: TopNavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -46,6 +159,7 @@ export default function TopNavigation() {
   const handleMouseEnter = (label: string) => {
     if (dropdownTimerRef.current) {
       clearTimeout(dropdownTimerRef.current);
+      dropdownTimerRef.current = null;
     }
     setOpenDropdown(label);
   };
@@ -53,7 +167,7 @@ export default function TopNavigation() {
   const handleMouseLeave = () => {
     dropdownTimerRef.current = setTimeout(() => {
       setOpenDropdown(null);
-    }, 200);
+    }, 300); // Increased delay for better UX
   };
 
   useEffect(() => {
@@ -64,87 +178,78 @@ export default function TopNavigation() {
     };
   }, []);
 
+  // Style variations based on variant
+  const navClasses = variant === 'fixed'
+    ? "fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10"
+    : "w-full bg-black border-b border-white/10 sticky top-0 z-50";
+
+  const containerClasses = variant === 'static'
+    ? "px-4 sm:px-8"
+    : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
+
+  const linkClasses = "text-white hover:text-red-500 transition-colors";
+  const dropdownBgClasses = "bg-zinc-900 border-white/10";
+  const dropdownLinkClasses = "block px-4 py-3 text-sm text-white hover:bg-red-600 hover:text-white transition-colors";
+  const mobileBgClasses = "bg-zinc-900 border-white/10";
+  const mobileLinkClasses = "text-white hover:text-red-500";
+  const mobileSubLinkClasses = "text-zinc-400 hover:text-red-500";
+  const buttonClasses = "text-white hover:bg-white/10";
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className={navClasses}>
+      <div className={containerClasses}>
         <div className="flex items-center justify-between h-16">
-          {/* Logo/Home Link */}
-          <a
-            href={getFullPath("/")}
-            className="text-white font-black text-xl tracking-tight hover:text-red-500 transition-colors"
-          >
-            SINTHOME
-          </a>
+          {variant === 'fixed' ? (
+            <>
+              {/* Fixed variant: Logo left, nav right */}
+              <Logo
+                href={getFullPath("/")}
+                className={linkClasses}
+              />
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <div
-                key={item.label}
-                className="relative"
-                onMouseEnter={() => item.children && handleMouseEnter(item.label)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <a
-                  href={getFullPath(item.href || "#")}
-                  className={clsx(
-                    "text-white hover:text-red-500 transition-colors py-2 text-sm font-medium",
-                    item.children && "flex items-center gap-1"
-                  )}
-                >
-                  {item.label}
-                  {item.children && (
-                    <svg
-                      className={clsx(
-                        "w-4 h-4 transition-transform",
-                        openDropdown === item.label && "rotate-180"
-                      )}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  )}
-                </a>
-
-                {/* Dropdown Menu */}
-                <AnimatePresence>
-                  {item.children && openDropdown === item.label && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-1 w-48 bg-zinc-900 rounded-lg shadow-xl border border-white/10 overflow-hidden"
-                      onMouseEnter={() => handleMouseEnter(item.label)}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      {item.children.map((child) => (
-                        <a
-                          key={child.label}
-                          href={getFullPath(child.href || "#")}
-                          className="block px-4 py-3 text-sm text-white hover:bg-red-600 hover:text-white transition-colors"
-                        >
-                          {child.label}
-                        </a>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+              <div className="hidden lg:flex items-center space-x-8">
+                <NavItems
+                  items={navItems}
+                  getFullPath={getFullPath}
+                  linkClasses={linkClasses}
+                  dropdownBgClasses={dropdownBgClasses}
+                  dropdownLinkClasses={dropdownLinkClasses}
+                  openDropdown={openDropdown}
+                  handleMouseEnter={handleMouseEnter}
+                  handleMouseLeave={handleMouseLeave}
+                />
               </div>
-            ))}
-          </div>
+            </>
+          ) : (
+            <>
+              {/* Static variant: Nav left, logo right */}
+              <div className="hidden lg:flex items-center gap-6">
+                <NavItems
+                  items={navItems}
+                  getFullPath={getFullPath}
+                  linkClasses={linkClasses}
+                  dropdownBgClasses={dropdownBgClasses}
+                  dropdownLinkClasses={dropdownLinkClasses}
+                  openDropdown={openDropdown}
+                  handleMouseEnter={handleMouseEnter}
+                  handleMouseLeave={handleMouseLeave}
+                />
+              </div>
+
+              <Logo
+                href={getFullPath("/")}
+                className={linkClasses}
+              />
+            </>
+          )}
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+            className={clsx(
+              "lg:hidden p-2 rounded-lg transition-colors",
+              buttonClasses
+            )}
           >
             <svg
               className="w-6 h-6"
@@ -180,14 +285,20 @@ export default function TopNavigation() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-zinc-900 border-t border-white/10"
+            className={clsx(
+              "lg:hidden border-t",
+              mobileBgClasses
+            )}
           >
             <div className="px-4 py-4 space-y-2">
               {navItems.map((item) => (
                 <div key={item.label}>
                   <a
                     href={getFullPath(item.href || "#")}
-                    className="block py-2 text-white hover:text-red-500 transition-colors font-medium"
+                    className={clsx(
+                      "block py-2 transition-colors font-medium",
+                      mobileLinkClasses
+                    )}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.label}
@@ -198,7 +309,10 @@ export default function TopNavigation() {
                         <a
                           key={child.label}
                           href={getFullPath(child.href || "#")}
-                          className="block py-2 text-sm text-zinc-400 hover:text-red-500 transition-colors"
+                          className={clsx(
+                            "block py-2 text-sm transition-colors",
+                            mobileSubLinkClasses
+                          )}
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {child.label}
