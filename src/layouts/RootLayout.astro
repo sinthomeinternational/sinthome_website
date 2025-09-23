@@ -9,8 +9,8 @@ import { assets } from "../lib/assets";
 
 const { title, description } = Astro.props;
 
-const defaultTitle = "Nikola Tesla";
-const defaultDescription = "Nikola Tesla was a Serbian-American inventor, electrical engineer, mechanical engineer, and futurist who is best known for his contributions to the design of the modern alternating current (AC) electricity supply system.";
+const defaultTitle = "Sinthome - Knowledge, Critique, Praxis";
+const defaultDescription = "A public-interest community reconstructing new relations of production through the integration of knowledge learning, theoretical critique, and social praxis.";
 ---
 
 <!doctype html>
@@ -23,7 +23,7 @@ const defaultDescription = "Nikola Tesla was a Serbian-American inventor, electr
 		<title>{title ?? defaultTitle}</title>
 		<meta name="description" content={description ?? defaultDescription} />
 
-		<meta property="og:url" content="https://nikola.fluidinterfaces.com/" />
+		<meta property="og:url" content="https://yiluo-photon.github.io/sinthome_website/" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={defaultTitle} />
 		<meta property="og:description" content={defaultDescription} />
@@ -31,8 +31,8 @@ const defaultDescription = "Nikola Tesla was a Serbian-American inventor, electr
 
 		<!-- Twitter Meta Tags -->
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta property="twitter:domain" content="nikola.fluidinterfaces.com" />
-		<meta property="twitter:url" content="https://nikola.fluidinterfaces.com/" />
+		<meta property="twitter:domain" content="yiluo-photon.github.io" />
+		<meta property="twitter:url" content="https://yiluo-photon.github.io/sinthome_website/" />
 		<meta name="twitter:title" content={defaultTitle} />
 		<meta name="twitter:description" content={defaultDescription} />
 		<meta name="twitter:image" content={assets.socialImage} />
@@ -42,7 +42,7 @@ const defaultDescription = "Nikola Tesla was a Serbian-American inventor, electr
 		<LoadingIndicator color="#f4f4f5" height="2px" />
 
 	</head>
-	<body class="font-sans min-h-screen bg-white">
+	<body class="font-sans min-h-screen bg-black">
 		<slot />
 	</body>
 </html>

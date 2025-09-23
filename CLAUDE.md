@@ -14,63 +14,55 @@ A modern non-profit website built with Astro 5.7.5, featuring React components, 
 - **Forms**: Google Forms (embedded)
 - **Repository**: https://github.com/Yiluo-pHoton/sinthome_website
 
-## Multi-Developer Workflow
+## Development Workflow (Updated September 2025)
 
-### Branch Strategy
+### Current Branch Strategy
 
-We use a feature branch workflow to enable parallel development:
+**IMPORTANT**: The workflow has been simplified since the original documentation:
 
 ```
 main (production - deployed to GitHub Pages)
-  └── development (integration)
-       ├── feature/navigation-dropdown
-       ├── feature/homepage-redesign
-       ├── feature/who-we-are-page
-       ├── feature/what-we-do-pages
-       ├── feature/ai-hackathon-page
-       ├── feature/workers-assist-page
-       ├── feature/plantcore-ai-page
-       ├── feature/srtp-page
-       ├── feature/events-page
-       ├── feature/contact-page
-       ├── feature/donate-page
-       └── feature/shared-components
+  ├── withcontent (current development branch with all content)
+  └── feature/* (feature branches off main)
 ```
 
-### Team Assignments
+**Current Status**:
+- Main development now happens directly on `main` branch
+- `withcontent` branch contains all populated page content
+- The `development` branch workflow is no longer actively used
+- All pages now use unified dark theme (black/zinc backgrounds, red accents)
 
-| Developer | Branches | Responsibilities |
-|-----------|----------|------------------|
-| **Dev 1** | `feature/navigation-dropdown`, `feature/shared-components` | Navigation with dropdown, reusable components |
-| **Dev 2** | `feature/homepage-redesign`, `feature/who-we-are-page` | Homepage with CTAs, Who We Are page |
-| **Dev 3** | `feature/what-we-do-pages`, all project pages | What We Do section and individual project pages |
-| **Dev 4** | `feature/events-page`, `feature/contact-page`, `feature/donate-page` | Community and engagement pages |
-
-### Git Workflow Commands
+### Quick Development Setup
 
 ```bash
-# Start new feature
-git checkout development
-git pull origin development
+# Clone and setup (using pnpm - required)
+git clone https://github.com/Yiluo-pHoton/sinthome_website.git
+cd sinthome_website
+pnpm install
+
+# Start development (multiple options)
+make dev              # Recommended: using Makefile
+pnpm run dev         # Direct command
+make dev-debug       # With verbose logging
+
+# Create feature branch
+make feature name=my-feature  # Creates feature/my-feature
+# OR manually:
 git checkout -b feature/[feature-name]
-
-# Work on feature
-git add .
-git commit -m "feat: [description]"
-git push origin feature/[feature-name]
-
-# Create Pull Request to development branch via GitHub
-
-# After PR approval and merge
-git checkout development
-git pull origin development
-
-# Deploy to production (team lead only)
-git checkout main
-git merge development
-git push origin main
-# GitHub Actions will automatically deploy to GitHub Pages
 ```
+
+### Essential Development Commands
+
+| Command | Description | Usage |
+|---------|-------------|-------|
+| `make dev` | Start development server | Primary development |
+| `make build` | Build for production | Before commits |
+| `make check` | Run all quality checks | Pre-commit verification |
+| `make format` | Format all code | Code cleanup |
+| `make lint` | Check code quality | Error detection |
+| `make deploy-check` | Full deployment verification | Before merging to main |
+| `make clean` | Clean build artifacts | Troubleshooting |
+| `make reset` | Reset project completely | Fix dependency issues |
 
 ### Commit Message Convention
 
