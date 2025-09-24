@@ -1,0 +1,162 @@
+---
+/**
+ * Test page for the universal layout and content system
+ * Demonstrates theme and language switching capabilities
+ */
+
+import UniversalLayout from '../layouts/UniversalLayout.astro';
+import { getPageContent, getProjects } from '../content/loader';
+import type { Language, Theme } from '../content/types';
+
+// Get language and theme from URL params (for testing)
+const url = new URL(Astro.request.url);
+const language = (url.searchParams.get('lang') || 'en') as Language;
+const theme = (url.searchParams.get('theme') || 'dark') as Theme;
+
+// Load content for the current language
+const homeContent = await getPageContent(language, 'home');
+const whoWeAreContent = await getPageContent(language, 'whoWeAre');
+const projects = await getProjects(language);
+
+// Theme-specific classes
+const cardClasses = theme === 'light'
+  ? 'bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow'
+  : 'bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:bg-zinc-800/50 transition-colors';
+
+const headingClasses = theme === 'light'
+  ? 'text-gray-900'
+  : 'text-white';
+
+const textClasses = theme === 'light'
+  ? 'text-gray-600'
+  : 'text-zinc-300';
+
+const buttonClasses = theme === 'light'
+  ? 'bg-red-600 text-white hover:bg-red-700'
+  : 'bg-red-600 text-white hover:bg-red-700';
+---
+
+<UniversalLayout
+  title={homeContent?.title || 'SINTHOME'}
+  description={homeContent?.description}
+  language={language}
+  theme={theme}
+  useInfoLayout={true}
+>
+  <!-- Hero Section -->
+  <section class="text-center py-16">
+    <h1 class={`text-5xl font-bold mb-4 ${headingClasses}`}>
+      {homeContent?.hero?.title || 'SINTHOME'}
+    </h1>
+    <p class={`text-xl mb-8 ${textClasses}`}>
+      {homeContent?.hero?.subtitle || 'Empowering Communities Through Technology'}
+    </p>
+
+    <!-- Language and Theme Switchers -->
+    <div class="flex justify-center gap-4 mb-8">
+      <div class="flex gap-2">
+        <a
+          href={`?lang=en&theme=${theme}`}
+          class={`px-4 py-2 rounded ${language === 'en' ? buttonClasses : 'bg-gray-500 text-white hover:bg-gray-600'} transition-colors`}
+        >
+          English
+        </a>
+        <a
+          href={`?lang=zh&theme=${theme}`}
+          class={`px-4 py-2 rounded ${language === 'zh' ? buttonClasses : 'bg-gray-500 text-white hover:bg-gray-600'} transition-colors`}
+        >
+          中文
+        </a>
+      </div>
+      <div class="flex gap-2">
+        <a
+          href={`?lang=${language}&theme=dark`}
+          class={`px-4 py-2 rounded ${theme === 'dark' ? buttonClasses : 'bg-gray-500 text-white hover:bg-gray-600'} transition-colors`}
+        >
+          Dark 🌙
+        </a>
+        <a
+          href={`?lang=${language}&theme=light`}
+          class={`px-4 py-2 rounded ${theme === 'light' ? buttonClasses : 'bg-gray-500 text-white hover:bg-gray-600'} transition-colors`}
+        >
+          Light ☀️
+        </a>
+      </div>
+    </div>
+
+    <!-- CTA Buttons -->
+    {homeContent?.hero?.cta && (
+      <div class="flex justify-center gap-4">
+        {homeContent.hero.cta.map((cta) => (
+          <a
+            href={cta.href}
+            class={`px-6 py-3 rounded-lg font-medium ${buttonClasses} transition-colors`}
+          >
+            {cta.text}
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <!-- Mission Section -->
+  <section class="py-12">
+    <h2 class={`text-3xl font-bold mb-8 text-center ${headingClasses}`}>
+      {whoWeAreContent?.sections?.[0]?.title || 'Our Mission'}
+    </h2>
+    <div class={cardClasses}>
+      <p class={textClasses}>
+        {whoWeAreContent?.sections?.[0]?.content || 'Loading...'}
+      </p>
+    </div>
+  </section>
+
+  <!-- Projects Grid -->
+  <section class="py-12">
+    <h2 class={`text-3xl font-bold mb-8 text-center ${headingClasses}`}>
+      {language === 'zh' ? '我们的项目' : 'Our Projects'}
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.slice(0, 3).map((project) => (
+        <div class={cardClasses}>
+          <h3 class={`text-xl font-bold mb-2 ${headingClasses}`}>
+            {project.title}
+          </h3>
+          <p class={`mb-4 ${textClasses}`}>
+            {project.description}
+          </p>
+          {project.impact && (
+            <ul class={`list-disc list-inside space-y-1 ${textClasses}`}>
+              {project.impact.slice(0, 2).map((item) => (
+                <li class="text-sm">{item}</li>
+              ))}
+            </ul>
+          )}
+          <a
+            href={project.href}
+            class={`inline-block mt-4 text-sm font-medium ${theme === 'light' ? 'text-red-600 hover:text-red-800' : 'text-red-400 hover:text-red-300'} transition-colors`}
+          >
+            {language === 'zh' ? '了解更多 →' : 'Learn More →'}
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Current Settings Display -->
+  <section class="py-12">
+    <div class={`${cardClasses} text-center`}>
+      <h3 class={`text-xl font-bold mb-4 ${headingClasses}`}>
+        Current Settings
+      </h3>
+      <p class={textClasses}>
+        Language: <strong>{language === 'en' ? 'English' : '中文'}</strong><br />
+        Theme: <strong>{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</strong>
+      </p>
+      <p class={`mt-4 text-sm ${textClasses}`}>
+        This page demonstrates the new universal architecture that supports multiple themes and languages
+        with a single codebase and centralized content management.
+      </p>
+    </div>
+  </section>
+</UniversalLayout>

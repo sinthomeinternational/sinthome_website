@@ -1,0 +1,128 @@
+---
+/**
+ * Universal Layout Component
+ * Supports multiple themes and languages without duplication
+ */
+
+import type { Language, Theme } from '../content/types';
+import { getTheme } from '../config/themes';
+import { loadContent } from '../content/loader';
+import UniversalNavigation from '../components/layout/UniversalNavigation';
+import UniversalFooter from '../components/layout/UniversalFooter.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  language?: Language;
+  theme?: Theme;
+  showNavigation?: boolean;
+  useInfoLayout?: boolean;
+}
+
+const {
+  title,
+  description,
+  language = 'en',
+  theme = 'dark',
+  showNavigation = true,
+  useInfoLayout = false
+} = Astro.props;
+
+// Load content for the current language
+const content = await loadContent(language);
+const themeConfig = getTheme(theme);
+
+// Base URL for assets
+const baseUrl = import.meta.env.BASE_URL;
+
+// Apply theme classes
+const bodyClasses = themeConfig.classes.body;
+---
+
+<!DOCTYPE html>
+<html lang={language} class={`theme-${theme}`}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+
+    <!-- Theme CSS Variables -->
+    <style define:vars={{
+      '--theme-bg-primary': themeConfig.colors.bgPrimary,
+      '--theme-bg-secondary': themeConfig.colors.bgSecondary,
+      '--theme-bg-tertiary': themeConfig.colors.bgTertiary,
+      '--theme-bg-card': themeConfig.colors.bgCard,
+      '--theme-text-primary': themeConfig.colors.textPrimary,
+      '--theme-text-secondary': themeConfig.colors.textSecondary,
+      '--theme-text-muted': themeConfig.colors.textMuted,
+      '--theme-accent': themeConfig.colors.accent,
+      '--theme-accent-hover': themeConfig.colors.accentHover,
+      '--theme-border': themeConfig.colors.border,
+      '--theme-border-hover': themeConfig.colors.borderHover,
+    }}>
+      :root {
+        --theme-bg-primary: var(--theme-bg-primary);
+        --theme-bg-secondary: var(--theme-bg-secondary);
+        --theme-bg-tertiary: var(--theme-bg-tertiary);
+        --theme-bg-card: var(--theme-bg-card);
+        --theme-text-primary: var(--theme-text-primary);
+        --theme-text-secondary: var(--theme-text-secondary);
+        --theme-text-muted: var(--theme-text-muted);
+        --theme-accent: var(--theme-accent);
+        --theme-accent-hover: var(--theme-accent-hover);
+        --theme-border: var(--theme-border);
+        --theme-border-hover: var(--theme-border-hover);
+      }
+    </style>
+  </head>
+
+  <body class={bodyClasses}>
+    {showNavigation && (
+      <UniversalNavigation
+        client:load
+        navigation={content.navigation}
+        language={language}
+        theme={theme}
+      />
+    )}
+
+    <main class={useInfoLayout ? "container mx-auto px-4 py-8 max-w-7xl" : ""}>
+      <slot />
+    </main>
+
+    <UniversalFooter
+      content={content.footer}
+      theme={theme}
+    />
+
+    <!-- Theme and language switcher script -->
+    <script>
+      // Initialize theme on page load
+      import { initializeTheme } from '../config/themes';
+
+      if (typeof window !== 'undefined') {
+        initializeTheme();
+
+        // Listen for theme change events
+        window.addEventListener('theme-change', (event: CustomEvent) => {
+          const newTheme = event.detail.theme;
+          document.documentElement.classList.remove('theme-dark', 'theme-light');
+          document.documentElement.classList.add(`theme-${newTheme}`);
+        });
+
+        // Listen for language change events
+        window.addEventListener('language-change', (event: CustomEvent) => {
+          const newLang = event.detail.language;
+          document.documentElement.lang = newLang;
+          // Optionally reload page with new language
+          // window.location.href = `/${newLang}${window.location.pathname}`;
+        });
+      }
+    </script>
+  </body>
+</html>
