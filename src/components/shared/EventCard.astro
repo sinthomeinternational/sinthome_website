@@ -6,23 +6,45 @@ interface Props {
   description: string;
   registrationUrl?: string;
   className?: string;
+  variant?: "default" | "redwhite";
 }
 
-const { title, date, location, description, registrationUrl, className = "" } = Astro.props;
+const { title, date, location, description, registrationUrl, className = "", variant = "default" } = Astro.props;
+
+// Theme classes based on variant
+const cardClasses = variant === "redwhite"
+  ? "p-6 bg-gray-50 border border-gray-200 rounded-lg"
+  : "p-6 bg-zinc-900/50 border border-zinc-800 rounded-lg";
+
+const titleClasses = variant === "redwhite"
+  ? "text-xl font-bold text-black mb-2"
+  : "text-xl font-bold text-white mb-2";
+
+const textClasses = variant === "redwhite"
+  ? "text-sm text-gray-600 flex items-center gap-2"
+  : "text-sm text-zinc-400 flex items-center gap-2";
+
+const descriptionClasses = variant === "redwhite"
+  ? "text-gray-700 mb-4 line-clamp-3"
+  : "text-zinc-400 mb-4 line-clamp-3";
+
+const buttonClasses = variant === "redwhite"
+  ? "inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+  : "inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors";
 ---
 
-<div class={`p-6 bg-zinc-900/50 border border-zinc-800 rounded-lg ${className}`}>
+<div class={`${cardClasses} ${className}`}>
   <div class="flex justify-between items-start mb-4">
     <div>
-      <h3 class="text-xl font-bold text-white mb-2">{title}</h3>
+      <h3 class={titleClasses}>{title}</h3>
       <div class="space-y-1">
-        <p class="text-sm text-zinc-400 flex items-center gap-2">
+        <p class={textClasses}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
             <path fill="currentColor" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m0 16H5V9h14zM5 7V5h14v2z"/>
           </svg>
           {date}
         </p>
-        <p class="text-sm text-zinc-400 flex items-center gap-2">
+        <p class={textClasses}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
             <path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5"/>
           </svg>
@@ -32,7 +54,7 @@ const { title, date, location, description, registrationUrl, className = "" } = 
     </div>
   </div>
 
-  <p class="text-zinc-400 mb-4 line-clamp-3">
+  <p class={descriptionClasses}>
     {description}
   </p>
 
@@ -41,7 +63,7 @@ const { title, date, location, description, registrationUrl, className = "" } = 
       href={registrationUrl}
       target="_blank"
       rel="noopener noreferrer"
-      class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+      class={buttonClasses}
     >
       Register Now
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">

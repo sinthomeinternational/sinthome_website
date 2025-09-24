@@ -1,13 +1,11 @@
 ---
-import RootLayout from "../../layouts/RootLayout.astro";
-import InfoLayout from "../../layouts/InfoLayout.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
 import GoogleForm from "../../components/forms/GoogleForm";
 import { FORMS } from "../../config/forms";
 ---
 
-<RootLayout>
-  <InfoLayout>
+<PageLayout title="SRTP - Sinthome" useInfoLayout={true}>
     <H1>SRTP</H1>
 
     <div class="space-y-8 max-w-4xl">
@@ -79,5 +77,4 @@ import { FORMS } from "../../config/forms";
         </div>
       </section>
     </div>
-  </InfoLayout>
-</RootLayout>
+</PageLayout>

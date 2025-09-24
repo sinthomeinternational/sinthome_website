@@ -1,0 +1,138 @@
+---
+import RedWhitePageLayout from "../../../layouts/RedWhitePageLayout.astro";
+import H1 from "../../../components/ui/H1.astro";
+import { Image } from 'astro:assets';
+
+// Import project images
+import communityPhoto from "../../../assets/workers-assist/合影.jpg";
+import picnicPhoto from "../../../assets/workers-assist/野餐.jpg";
+---
+
+<RedWhitePageLayout title="Workers Assist - Sinthome" useInfoLayout={true}>
+      <H1 className="text-red-600">Workers Assist</H1>
+
+      <div class="space-y-8 max-w-4xl">
+        <!-- Hero Section -->
+        <section class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-black mb-2">
+            <span class="bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">Mutual Support Community</span> for Asian Labor Workers
+          </h2>
+          <p class="text-red-600 font-black text-xl uppercase tracking-wider mb-4">
+            SOLIDARITY • EMPOWERMENT • COLLECTIVE ACTION
+          </p>
+          <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+            Workers Assist is a nonprofit organization dedicated to fostering a mutual-support community for Asian labor workers in the Boston area. Since its founding in 2023, WA has grown into a vibrant community platform of more than 400 active members. Together, we provide a wide range of supportive services, including free language learning, everyday life skills training, and youth education programs.
+          </p>
+          <p class="text-lg text-gray-700 max-w-3xl mx-auto mt-4">
+            At WA, we believe in more than just offering help—we choose to live alongside our community. By addressing real problems in daily life and fostering connections of trust and care, we work toward a future where mutual support strengthens every member of our community.
+          </p>
+
+          <!-- Community Photos -->
+          <div class="mt-12 -mx-4 sm:-mx-8 lg:-mx-12">
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="relative h-96 overflow-hidden rounded-lg border border-gray-200">
+                <Image
+                  src={communityPhoto}
+                  alt="Workers Assist community members gathering together"
+                  width={800}
+                  height={600}
+                  loading="lazy"
+                  format="webp"
+                  quality={85}
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
+                  <div class="absolute bottom-6 left-6 right-6">
+                    <h3 class="text-white text-2xl font-bold mb-2 uppercase">
+                      400+ WORKERS UNITED
+                    </h3>
+                    <p class="text-white/90 text-sm">
+                      Our growing community of mutual support and solidarity
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="relative h-96 overflow-hidden rounded-lg border border-gray-200">
+                <Image
+                  src={picnicPhoto}
+                  alt="Workers Assist community picnic and social gathering"
+                  width={800}
+                  height={600}
+                  loading="lazy"
+                  format="webp"
+                  quality={85}
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
+                  <div class="absolute bottom-6 left-6 right-6">
+                    <h3 class="text-white text-2xl font-bold mb-2 uppercase">
+                      COMMUNITY BUILDING
+                    </h3>
+                    <p class="text-white/90 text-sm">
+                      Building lasting connections through shared experiences
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Our Services -->
+        <section>
+          <h2 class="text-2xl font-bold text-black mb-6">Our Services</h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+              <h3 class="text-lg font-semibold text-red-600 mb-3">Language Learning Programs</h3>
+              <p class="text-gray-700">
+                Free English language classes tailored for working adults, focusing on practical communication skills needed in daily life and work environments.
+              </p>
+            </div>
+
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+              <h3 class="text-lg font-semibold text-red-600 mb-3">Life Skills Training</h3>
+              <p class="text-gray-700">
+                Workshops covering essential skills like financial literacy, digital literacy, healthcare navigation, and legal rights awareness.
+              </p>
+            </div>
+
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+              <h3 class="text-lg font-semibold text-red-600 mb-3">Youth Education Support</h3>
+              <p class="text-gray-700">
+                After-school programs and tutoring services for children of workers, helping bridge educational gaps and provide academic support.
+              </p>
+            </div>
+
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+              <h3 class="text-lg font-semibold text-red-600 mb-3">Community Advocacy</h3>
+              <p class="text-gray-700">
+                Collective action on workplace rights, housing issues, and community concerns affecting Asian workers in Boston.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Get Involved -->
+        <section class="mt-12 p-8 bg-red-50 border border-red-200 rounded-lg text-center">
+          <h2 class="text-2xl font-bold text-black mb-4">Join Our Community</h2>
+          <p class="text-gray-700 mb-6">
+            Whether you're a worker looking for support or someone wanting to contribute, there's a place for you in our community.
+          </p>
+          <div class="flex flex-wrap gap-4 justify-center">
+            <a
+              href="/sinthome_website/redwhite/contact"
+              class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              Get Support
+            </a>
+            <a
+              href="/sinthome_website/redwhite/contact"
+              class="px-6 py-3 bg-white text-red-600 border border-red-600 rounded-lg hover:bg-red-50 transition-colors"
+            >
+              Volunteer
+            </a>
+          </div>
+        </section>
+      </div>
+</RedWhitePageLayout>

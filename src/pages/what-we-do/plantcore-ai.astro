@@ -1,6 +1,5 @@
 ---
-import RootLayout from "../../layouts/RootLayout.astro";
-import InfoLayout from "../../layouts/InfoLayout.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
 import GoogleForm from "../../components/forms/GoogleForm";
 import { FORMS } from "../../config/forms";
@@ -10,8 +9,7 @@ import { Image } from 'astro:assets';
 import factoryImage from "../../assets/plantcore-ai/factory.png";
 ---
 
-<RootLayout>
-  <InfoLayout>
+<PageLayout title="Plantcore.AI - Sinthome" useInfoLayout={true}>
     <H1>Plantcore.AI</H1>
 
     <div class="space-y-8 max-w-4xl">
@@ -113,5 +111,4 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
         </div>
       </section>
     </div>
-  </InfoLayout>
-</RootLayout>
+</PageLayout>

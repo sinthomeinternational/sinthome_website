@@ -1,0 +1,69 @@
+---
+import RedWhiteRootLayout from "../../layouts/RedWhiteRootLayout.astro";
+import WarpBackground from "../../components/ui/WarpBackground";
+---
+
+<RedWhiteRootLayout>
+	<main>
+		<div class="group relative w-full min-h-dvh flex items-center justify-center overflow-auto">
+			<div class="absolute w-full h-dvh -z-10">
+				{/* Red-white theme from backup branch */}
+				<WarpBackground
+					color1="#fca5a5"
+					color2="#ef4444"
+					color3="#b91c1c"
+					speed={0.6}
+					swirl={0.5}
+					swirlIterations={10}
+					shapeScale={0.3}
+					client:load
+				/>
+			</div>
+
+			<div class="p-4 sm:p-8 absolute w-full h-dvh flex flex-col justify-between z-10">
+				<!-- Hero Section with title matching backup branch style -->
+				<div class="flex-1 flex flex-col justify-center items-center text-center">
+					<!-- SINTHOME title with Chinese and English -->
+					<h1 class="font-bold text-center text-white" style="font-size: 8rem; line-height: 1;">
+						<span class="block sm:hidden" style="font-size: 8rem;">圣状 SINTHOME</span>
+						<span class="hidden sm:block" style="font-size: 12rem;">圣状 SINTHOME</span>
+					</h1>
+
+					<!-- Subtitle/Tagline -->
+					<h2 class="text-2xl sm:text-3xl font-semibold text-center text-white mb-6">
+						Knowledge — Critique — Praxis
+					</h2>
+
+					<!-- Direct Description -->
+					<p class="text-lg text-white/90 max-w-2xl mx-auto mb-10">
+						A public-interest community reconstructing new relations of production through the integration of knowledge learning, theoretical critique, and social praxis
+					</p>
+
+					<!-- Simple, Direct CTAs matching backup branch style -->
+					<div class="flex flex-col sm:flex-row gap-6">
+						<a
+							href="/sinthome_website/redwhite/who-we-are"
+							class="px-8 py-3 bg-white/90 text-red-600 font-bold text-lg rounded-lg hover:bg-white transition-colors"
+						>
+							Who we are
+						</a>
+						<a
+							href="/sinthome_website/redwhite/what-we-do"
+							class="px-8 py-3 bg-white/90 text-red-600 font-bold text-lg rounded-lg hover:bg-white transition-colors"
+						>
+							What we do
+						</a>
+						<a
+							href="/sinthome_website/redwhite/contact"
+							class="px-8 py-3 bg-white/90 text-red-600 font-bold text-lg rounded-lg hover:bg-white transition-colors"
+						>
+							Join us
+						</a>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</main>
+</RedWhiteRootLayout>
