@@ -11,11 +11,23 @@ interface DropdownProps {
   label: string;
   items: DropdownItem[];
   className?: string;
+  theme?: 'default' | 'redwhite';
 }
 
-export default function Dropdown({ label, items, className = "" }: DropdownProps) {
+export default function Dropdown({ label, items, className = "", theme = 'default' }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Handle theme-aware routing
+  const getFullPath = (path: string) => {
+    const basePath = import.meta.env.BASE_URL || "";
+    const themePath = theme === 'redwhite' ? 'redwhite/' : '';
+
+    if (path.startsWith("/")) {
+      return `${basePath}${themePath}${path.slice(1)}`;
+    }
+    return path;
+  };
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -66,7 +78,7 @@ export default function Dropdown({ label, items, className = "" }: DropdownProps
             {items.map((item, index) => (
               <a
                 key={index}
-                href={item.href}
+                href={getFullPath(item.href)}
                 className="block px-4 py-3 hover:bg-zinc-800 transition-colors"
                 onClick={() => setIsOpen(false)}
               >

@@ -6,17 +6,41 @@ interface Props {
   image?: string;
   category?: string;
   className?: string;
+  variant?: "default" | "redwhite";
 }
 
-const { title, description, href, image, category, className = "" } = Astro.props;
+const { title, description, href, image, category, className = "", variant = "default" } = Astro.props;
 
-// Handle base path for GitHub Pages compatibility
-const finalHref = href.startsWith('/') ? `${import.meta.env.BASE_URL}${href.slice(1)}` : href;
+// Handle base path for GitHub Pages compatibility and theme routing
+const basePath = import.meta.env.BASE_URL || "";
+const themePath = variant === 'redwhite' ? 'redwhite/' : '';
+const finalHref = href.startsWith('/') ? `${basePath}${themePath}${href.slice(1)}` : href;
+
+// Theme classes based on variant
+const cardClasses = variant === "redwhite"
+  ? "group block p-6 bg-gray-50 border border-gray-200 rounded-lg hover:border-red-600/50 transition-all"
+  : "group block p-6 bg-zinc-900/50 border border-zinc-800 rounded-lg hover:border-red-600/50 transition-all";
+
+const categoryClasses = variant === "redwhite"
+  ? "inline-block px-3 py-1 mb-3 text-xs font-semibold text-red-600 bg-red-100 rounded-full"
+  : "inline-block px-3 py-1 mb-3 text-xs font-semibold text-red-400 bg-red-900/30 rounded-full";
+
+const titleClasses = variant === "redwhite"
+  ? "text-xl font-bold text-black mb-2 group-hover:text-red-600 transition-colors"
+  : "text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors";
+
+const descriptionClasses = variant === "redwhite"
+  ? "text-gray-700 line-clamp-3"
+  : "text-zinc-400 line-clamp-3";
+
+const linkClasses = variant === "redwhite"
+  ? "mt-4 flex items-center text-red-600 group-hover:text-red-700"
+  : "mt-4 flex items-center text-red-400 group-hover:text-red-300";
 ---
 
 <a
   href={finalHref}
-  class={`group block p-6 bg-zinc-900/50 border border-zinc-800 rounded-lg hover:border-red-600/50 transition-all ${className}`}
+  class={`${cardClasses} ${className}`}
 >
   {image && (
     <div class="mb-4 overflow-hidden rounded-lg">
@@ -29,20 +53,20 @@ const finalHref = href.startsWith('/') ? `${import.meta.env.BASE_URL}${href.slic
   )}
 
   {category && (
-    <span class="inline-block px-3 py-1 mb-3 text-xs font-semibold text-red-400 bg-red-900/30 rounded-full">
+    <span class={categoryClasses}>
       {category}
     </span>
   )}
 
-  <h3 class="text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">
+  <h3 class={titleClasses}>
     {title}
   </h3>
 
-  <p class="text-zinc-400 line-clamp-3">
+  <p class={descriptionClasses}>
     {description}
   </p>
 
-  <div class="mt-4 flex items-center text-red-400 group-hover:text-red-300">
+  <div class={linkClasses}>
     <span class="text-sm font-medium">Learn more</span>
     <svg
       xmlns="http://www.w3.org/2000/svg"

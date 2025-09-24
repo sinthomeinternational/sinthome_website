@@ -1,6 +1,5 @@
 ---
-import RootLayout from "../../layouts/RootLayout.astro";
-import InfoLayout from "../../layouts/InfoLayout.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
 import { Image } from 'astro:assets';
 
@@ -9,8 +8,7 @@ import communityPhoto from "../../assets/workers-assist/合影.jpg";
 import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
 ---
 
-<RootLayout>
-  <InfoLayout>
+<PageLayout title="Workers Assist - Sinthome" useInfoLayout={true}>
     <H1>Workers Assist</H1>
 
     <div class="space-y-8 max-w-4xl">
@@ -231,5 +229,4 @@ import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
         </div>
       </section>
     </div>
-  </InfoLayout>
-</RootLayout>
+</PageLayout>

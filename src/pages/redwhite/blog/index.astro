@@ -1,0 +1,82 @@
+---
+import clsx from "clsx";
+import { getCollection } from "astro:content";
+import H1 from "../../../components/ui/H1.astro";
+import { formatDate, getInternalHref } from "../../../lib/utils";
+import RedWhitePageLayout from "../../../layouts/RedWhitePageLayout.astro";
+
+// Get all articles
+const allArticles = await getCollection("articles");
+
+// Get unique categories
+const categories = [
+    ...new Set(allArticles.map((article) => article.data.category)),
+];
+
+const selectedCategory = Astro.url.searchParams.get("category") || "all";
+
+// Filter articles by category
+let articles = [];
+if (selectedCategory === "all") {
+    articles = allArticles;
+} else {
+    articles = allArticles.filter((article) =>
+        article.data.category.toLowerCase() === selectedCategory.toLowerCase()
+    );
+}
+---
+
+<RedWhitePageLayout title="Blog - Sinthome" useInfoLayout={true}>
+    <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh">
+        <H1> Blog </H1>
+
+        <ul class="mt-4 flex items-center gap-4">
+            <li>
+                <a href="/sinthome_website/redwhite/blog" class={clsx("w-fit px-4 py-1 text-sm bg-transparent rounded-full transition-all duration-300 ease-in-out",
+                    selectedCategory === "all" ? "text-red-600 bg-red-100 outline-2 outline-offset-2 outline-red-200" : "text-gray-600 hover:text-gray-800"
+                )}>
+                    All
+                </a>
+            </li>
+
+            {
+                categories.map((category) => (
+                    <li>
+                        <a
+                            href={`/sinthome_website/redwhite/blog?category=${category.toLowerCase()}`}
+                            class={clsx("w-fit px-4 py-1 text-sm bg-transparent rounded-full transition-all duration-300 ease-in-out",
+                                selectedCategory === category.toLowerCase() ? "text-red-600 bg-red-100 outline-2 outline-offset-2 outline-red-200" : "text-gray-600 hover:text-gray-800"
+                            )}
+                        >
+                            {category}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <ul class="mt-4 space-y-6">
+            {
+                articles.map((article) => (
+                    <li>
+                        <a
+                            class="space-y-1 group"
+                            href={`/sinthome_website/redwhite/blog/${article.data.slug}`}
+                        >
+                            <h2 class="text-xl xl:text-2xl text-gray-700 group-hover:text-black text-balance font-medium underline group-hover:underline-offset-2 decoration-transparent group-hover:decoration-red-500">
+                                {article.data.title}
+                            </h2>
+                            <p class="text-base text-gray-600">
+                                {article.data.snippet}
+                            </p>
+                            <p class="text-sm text-gray-500">
+                                {formatDate(article.data.pubDate)} &middot;{" "}
+                                {article.data.author}
+                            </p>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</RedWhitePageLayout>

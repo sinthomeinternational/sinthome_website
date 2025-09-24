@@ -34,6 +34,7 @@ const navItems: NavItem[] = [
 
 interface TopNavigationProps {
   variant?: 'fixed' | 'static';
+  theme?: 'default' | 'redwhite';
 }
 
 // Shared styles
@@ -145,15 +146,20 @@ const NavItems = ({
   </>
 );
 
-export default function TopNavigation({ variant = 'fixed' }: TopNavigationProps) {
+export default function TopNavigation({ variant = 'fixed', theme = 'default' }: TopNavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Handle base path for GitHub Pages
+  // Handle base path for GitHub Pages and theme routing
   const getFullPath = (path: string) => {
     const basePath = import.meta.env.BASE_URL || "";
-    return path.startsWith("/") ? `${basePath}${path.slice(1)}` : path;
+    const themePath = theme === 'redwhite' ? 'redwhite/' : '';
+
+    if (path.startsWith("/")) {
+      return `${basePath}${themePath}${path.slice(1)}`;
+    }
+    return path;
   };
 
   const handleMouseEnter = (label: string) => {
@@ -178,22 +184,50 @@ export default function TopNavigation({ variant = 'fixed' }: TopNavigationProps)
     };
   }, []);
 
-  // Style variations based on variant
+  // Style variations based on variant and theme
+  const isRedWhite = theme === 'redwhite';
+
   const navClasses = variant === 'fixed'
-    ? "fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10"
-    : "w-full bg-black border-b border-white/10 sticky top-0 z-50";
+    ? clsx(
+        "fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b",
+        isRedWhite ? "bg-white/95 border-gray-200" : "bg-black/90 border-white/10"
+      )
+    : clsx(
+        "w-full border-b sticky top-0 z-50",
+        isRedWhite ? "bg-white border-gray-200" : "bg-black border-white/10"
+      );
 
   const containerClasses = variant === 'static'
     ? "px-4 sm:px-8"
     : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
 
-  const linkClasses = "text-white hover:text-red-500 transition-colors";
-  const dropdownBgClasses = "bg-zinc-900 border-white/10";
-  const dropdownLinkClasses = "block px-4 py-3 text-sm text-white hover:bg-red-600 hover:text-white transition-colors";
-  const mobileBgClasses = "bg-zinc-900 border-white/10";
-  const mobileLinkClasses = "text-white hover:text-red-500";
-  const mobileSubLinkClasses = "text-zinc-400 hover:text-red-500";
-  const buttonClasses = "text-white hover:bg-white/10";
+  const linkClasses = isRedWhite
+    ? "text-red-600 hover:text-red-800 transition-colors"
+    : "text-white hover:text-red-500 transition-colors";
+
+  const dropdownBgClasses = isRedWhite
+    ? "bg-white border-gray-200"
+    : "bg-zinc-900 border-white/10";
+
+  const dropdownLinkClasses = isRedWhite
+    ? "block px-4 py-3 text-sm text-black hover:bg-red-600 hover:text-white transition-colors"
+    : "block px-4 py-3 text-sm text-white hover:bg-red-600 hover:text-white transition-colors";
+
+  const mobileBgClasses = isRedWhite
+    ? "bg-white border-gray-200"
+    : "bg-zinc-900 border-white/10";
+
+  const mobileLinkClasses = isRedWhite
+    ? "text-black hover:text-red-600"
+    : "text-white hover:text-red-500";
+
+  const mobileSubLinkClasses = isRedWhite
+    ? "text-gray-600 hover:text-red-600"
+    : "text-zinc-400 hover:text-red-500";
+
+  const buttonClasses = isRedWhite
+    ? "text-black hover:bg-gray-100"
+    : "text-white hover:bg-white/10";
 
   return (
     <nav className={navClasses}>
