@@ -1,0 +1,104 @@
+---
+/**
+ * BaseLayout - Consolidated layout component that reduces duplication
+ * Handles both standard and info layout variants
+ */
+import RootLayout from "./RootLayout.astro";
+import TopNavigation from "../components/layout/TopNavigation";
+import Footer from "../components/layout/Footer.astro";
+import WarpBackground from "../components/ui/WarpBackground";
+import type { LayoutProps } from "../types";
+
+export interface Props extends LayoutProps {
+  variant?: 'default' | 'info' | 'minimal';
+  showSidebar?: boolean;
+}
+
+const {
+  title,
+  description,
+  showNavigation = true,
+  variant = 'default',
+  showSidebar = false,
+} = Astro.props;
+
+// Determine layout configuration based on variant
+const layoutConfig = {
+  default: {
+    navVariant: 'fixed' as const,
+    showSpacer: true,
+    mainBg: 'bg-transparent',
+    contentClasses: '',
+  },
+  info: {
+    navVariant: 'static' as const,
+    showSpacer: false,
+    mainBg: 'bg-black',
+    contentClasses: '[&_h1]:text-red-600 pt-8 pb-20 text-white',
+  },
+  minimal: {
+    navVariant: 'fixed' as const,
+    showSpacer: false,
+    mainBg: 'bg-transparent',
+    contentClasses: '',
+  },
+};
+
+const config = layoutConfig[variant];
+const shouldShowSidebar = variant === 'info' || showSidebar;
+---
+
+<RootLayout title={title} description={description}>
+  {variant === 'minimal' ? (
+    <slot />
+  ) : (
+    <>
+      {/* Fixed Navigation for default variant */}
+      {variant === 'default' && showNavigation && (
+        <>
+          <TopNavigation client:load />
+          <div class="h-16"></div> <!-- Spacer for fixed nav -->
+        </>
+      )}
+
+      {/* Main Content Area */}
+      {shouldShowSidebar ? (
+        <div class="flex relative gap-4 w-full max-w-screen-xl">
+          {/* Sidebar with WarpBackground */}
+          <nav class="relative w-4 md:min-w-2xs xl:min-w-sm sm:min-h-screen sm:ml-4 sm:pb-4">
+            <div class="w-full h-full max-sm:w-4 md:max-w-2xs xl:max-w-sm fixed -z-10 sm:bottom-4 sm:rounded-b-full overflow-hidden">
+              <WarpBackground
+                color1="#fca5a5"
+                color2="#ef4444"
+                color3="#b91c1c"
+                speed={0.15}
+                swirl={1.5}
+                swirlIterations={10}
+                shapeScale={0.3}
+                client:load
+              />
+            </div>
+          </nav>
+
+          {/* Main Content */}
+          <main class={`relative flex-1 ${config.mainBg}`}>
+            {showNavigation && variant === 'info' && (
+              <TopNavigation variant="static" client:load />
+            )}
+            <div class={config.contentClasses}>
+              <slot />
+            </div>
+            <Footer />
+          </main>
+        </div>
+      ) : (
+        <main class={`relative ${config.mainBg}`}>
+          <div class={config.contentClasses}>
+            <slot />
+          </div>
+          {variant === 'default' && <Footer />}
+        </main>
+      )}
+    </>
+  )}
+</RootLayout>

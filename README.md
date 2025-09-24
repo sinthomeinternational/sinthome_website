@@ -62,19 +62,38 @@ The site will be available at `http://localhost:4321/sinthome_website/`
 
 ```
 src/
-├── assets/           # Images and static assets
-├── components/       # Reusable UI components
-│   ├── forms/       # Google Forms components
-│   ├── shared/      # Shared components (ProjectCard, etc.)
-│   └── ui/          # UI elements
-├── config/          # Configuration files
-│   └── forms.ts     # Google Forms configuration
-├── content/         # Content collections
-├── layouts/         # Page layouts
-├── lib/             # Utilities and helpers
-│   └── assets.ts    # Asset management with base path handling
-├── pages/           # Route pages
-│   ├── index.astro  # Homepage
+├── assets/             # Images and static assets
+├── components/         # Reusable UI components (organized by feature)
+│   ├── forms/         # Form components
+│   │   └── GoogleForm.tsx
+│   ├── layout/        # Layout components
+│   │   ├── Footer.astro
+│   │   └── TopNavigation.tsx
+│   ├── navigation/    # Navigation-specific components
+│   │   └── Dropdown.tsx
+│   ├── shared/        # Shared/domain components
+│   │   ├── EventCard.astro
+│   │   └── ProjectCard.astro
+│   └── ui/            # Generic UI elements
+│       ├── Button.tsx
+│       ├── Card.astro
+│       ├── ExternalLink.astro
+│       ├── H1.astro
+│       ├── LinkButton.astro
+│       └── WarpBackground.tsx
+├── config/            # Configuration files
+│   ├── forms.ts      # Google Forms configuration
+│   └── site.ts       # Site-wide configuration
+├── content/           # Content collections
+├── layouts/           # Page layouts
+│   ├── BaseLayout.astro    # Consolidated base layout
+│   ├── InfoLayout.astro    # Info pages layout
+│   ├── PageLayout.astro    # Standard page layout
+│   └── RootLayout.astro    # Root HTML structure
+├── lib/               # Utilities and helpers
+│   └── assets.ts     # Asset management with base path handling
+├── pages/             # Route pages
+│   ├── index.astro   # Homepage
 │   ├── who-we-are.astro
 │   ├── what-we-do/
 │   │   ├── index.astro
@@ -85,8 +104,10 @@ src/
 │   ├── events.astro
 │   ├── contact.astro
 │   └── donate.astro
-└── styles/          # Global styles
-    └── global.css   # Tailwind imports
+├── styles/            # Global styles
+│   └── global.css    # Tailwind imports
+└── types/             # TypeScript type definitions
+    └── index.ts      # Shared interfaces and types
 ```
 
 ## 🌐 Deployment Configuration
@@ -195,11 +216,27 @@ pnpm run build
 - **Headings**: League Spartan (bold, geometric)
 - **Body**: System font stack
 
-### Components
+### Component Library
+
+#### UI Components
+- **Button** (`Button.tsx`) - 5 variants (primary, secondary, outline, ghost, danger), 3 sizes
+- **LinkButton** (`LinkButton.astro`) - Link styled as button with same variants
+- **Card** (`Card.astro`) - 4 variants (default, elevated, gradient, bordered) with hover effects
+- **H1** - Styled heading component
+- **ExternalLink** - External link with security attributes
+- **WarpBackground** - Animated turbulent background
+
+#### Layout Components
+- **BaseLayout** - Consolidated layout with 3 variants (default, info, minimal)
+- **TopNavigation** - Main navigation with dropdown support
+- **Footer** - Site footer with social links
+
+### Design Patterns
 - Dark theme with red accents
 - Glassmorphism effects on cards
 - Smooth hover transitions
 - Turbulent background animations
+- Component-based architecture with TypeScript
 
 ## 📝 Content Management
 
