@@ -1,0 +1,117 @@
+---
+/**
+ * Dynamic Test page - Uses client-side content and theme switching
+ * This demonstrates the proper way to handle dynamic switching in Astro
+ */
+
+import UniversalLayout from '../layouts/UniversalLayout.astro';
+import DynamicContentManager from '../components/universal/DynamicContentManager';
+import type { Language, Theme } from '../content/types';
+
+// Get initial values from URL params
+const url = new URL(Astro.request.url);
+const initialLanguage = (url.searchParams.get('lang') || 'en') as Language;
+const initialTheme = (url.searchParams.get('theme') || 'dark') as Theme;
+
+// Load initial content server-side for SEO and initial render
+let initialContent = null;
+try {
+  if (initialLanguage === 'en') {
+    const enContent = await import('../content/data/en');
+    initialContent = enContent.default;
+  } else {
+    const zhContent = await import('../content/data/zh');
+    initialContent = zhContent.default;
+  }
+} catch (error) {
+  console.error('Error loading initial content:', error);
+}
+
+const title = initialContent?.pages?.home?.title || 'SINTHOME Dynamic Test';
+const description = initialContent?.pages?.home?.description || 'Testing dynamic theme and language switching';
+---
+
+<UniversalLayout
+  title={title}
+  description={description}
+  language={initialLanguage}
+  theme={initialTheme}
+  useInfoLayout={true}
+>
+  <!-- Client-side dynamic content -->
+  <DynamicContentManager
+    client:load
+    initialLanguage={initialLanguage}
+    initialTheme={initialTheme}
+    initialContent={initialContent}
+  />
+
+  <!-- Instructions Section -->
+  <section class="py-12">
+    <div class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-6">
+      <h3 class="text-xl font-bold mb-4 text-blue-400">
+        🎯 How This Works
+      </h3>
+      <div class="space-y-3 text-sm text-blue-300">
+        <p>
+          <strong>✅ Server-Side Rendering:</strong> Initial content loads server-side for SEO and fast first render
+        </p>
+        <p>
+          <strong>⚡ Client-Side Switching:</strong> Theme and language changes happen instantly without page reload
+        </p>
+        <p>
+          <strong>🔄 URL Updates:</strong> URL parameters update automatically to maintain state
+        </p>
+        <p>
+          <strong>📱 Browser History:</strong> Back/forward buttons work properly with theme and language changes
+        </p>
+        <p>
+          <strong>🚀 Performance:</strong> Content is cached client-side after first load
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison with Static Approach -->
+  <section class="py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-6">
+        <h4 class="text-lg font-bold mb-3 text-red-400">❌ Static Approach (test-universal)</h4>
+        <ul class="space-y-2 text-sm text-red-300">
+          <li>• Content loads server-side only</li>
+          <li>• URL parameter changes require page reload</li>
+          <li>• Theme switching doesn't work</li>
+          <li>• Poor user experience</li>
+        </ul>
+      </div>
+
+      <div class="bg-green-500/10 border border-green-500/20 rounded-lg p-6">
+        <h4 class="text-lg font-bold mb-3 text-green-400">✅ Dynamic Approach (this page)</h4>
+        <ul class="space-y-2 text-sm text-green-300">
+          <li>• Hybrid server/client rendering</li>
+          <li>• Instant theme and language switching</li>
+          <li>• URL updates without reload</li>
+          <li>• Excellent user experience</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Links -->
+  <section class="py-8">
+    <div class="flex justify-center gap-4">
+      <a
+        href="/sinthome_website/test-universal"
+        class="px-4 py-2 bg-red-600/20 border border-red-600/40 text-red-400 rounded hover:bg-red-600/30 transition-colors"
+      >
+        View Static Version
+      </a>
+      <a
+        href="/sinthome_website/test-debug"
+        class="px-4 py-2 bg-blue-600/20 border border-blue-600/40 text-blue-400 rounded hover:bg-blue-600/30 transition-colors"
+      >
+        View Debug Page
+      </a>
+    </div>
+  </section>
+</UniversalLayout>

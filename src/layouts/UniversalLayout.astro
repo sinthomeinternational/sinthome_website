@@ -4,6 +4,7 @@
  * Supports multiple themes and languages without duplication
  */
 
+import "../styles/global.css";
 import type { Language, Theme } from '../content/types';
 import { getTheme } from '../config/themes';
 import { loadContent } from '../content/loader';
@@ -50,6 +51,11 @@ const bodyClasses = themeConfig.classes.body;
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+
+    <!-- Google Fonts - League Spartan for sharp geometric look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&display=swap" rel="stylesheet">
 
     <!-- Theme CSS Variables -->
     <style define:vars={{
@@ -103,26 +109,75 @@ const bodyClasses = themeConfig.classes.body;
     <!-- Theme and language switcher script -->
     <script>
       // Initialize theme on page load
-      import { initializeTheme } from '../config/themes';
+      document.addEventListener('DOMContentLoaded', function() {
+        // Apply initial theme
+        const html = document.documentElement;
+        const currentTheme = html.classList.contains('theme-light') ? 'light' : 'dark';
 
-      if (typeof window !== 'undefined') {
-        initializeTheme();
+        // Set up theme CSS variables dynamically
+        const applyTheme = (theme) => {
+          // Remove existing theme classes
+          html.classList.remove('theme-dark', 'theme-light');
+          html.classList.add(`theme-${theme}`);
+
+          // Apply theme-specific body classes
+          if (theme === 'light') {
+            document.body.className = document.body.className
+              .replace(/bg-\[#0a0a0a\]/g, 'bg-white')
+              .replace(/text-white/g, 'text-gray-900');
+          } else {
+            document.body.className = document.body.className
+              .replace(/bg-white/g, 'bg-[#0a0a0a]')
+              .replace(/text-gray-900/g, 'text-white');
+          }
+
+          // Update CSS variables
+          const root = document.documentElement;
+          if (theme === 'dark') {
+            root.style.setProperty('--theme-bg-primary', '#0a0a0a');
+            root.style.setProperty('--theme-bg-secondary', '#18181b');
+            root.style.setProperty('--theme-bg-tertiary', '#27272a');
+            root.style.setProperty('--theme-bg-card', 'rgba(24, 24, 27, 0.5)');
+            root.style.setProperty('--theme-text-primary', '#ffffff');
+            root.style.setProperty('--theme-text-secondary', '#d4d4d8');
+            root.style.setProperty('--theme-text-muted', '#71717a');
+            root.style.setProperty('--theme-accent', '#dc2626');
+            root.style.setProperty('--theme-accent-hover', '#b91c1c');
+            root.style.setProperty('--theme-border', '#27272a');
+          } else {
+            root.style.setProperty('--theme-bg-primary', '#ffffff');
+            root.style.setProperty('--theme-bg-secondary', '#f9fafb');
+            root.style.setProperty('--theme-bg-tertiary', '#f3f4f6');
+            root.style.setProperty('--theme-bg-card', '#ffffff');
+            root.style.setProperty('--theme-text-primary', '#111827');
+            root.style.setProperty('--theme-text-secondary', '#4b5563');
+            root.style.setProperty('--theme-text-muted', '#9ca3af');
+            root.style.setProperty('--theme-accent', '#dc2626');
+            root.style.setProperty('--theme-accent-hover', '#b91c1c');
+            root.style.setProperty('--theme-border', '#e5e7eb');
+          }
+        };
+
+        // Apply initial theme
+        applyTheme(currentTheme);
+
+        // Make applyTheme globally available
+        window.applyTheme = applyTheme;
 
         // Listen for theme change events
-        window.addEventListener('theme-change', (event: CustomEvent) => {
-          const newTheme = event.detail.theme;
-          document.documentElement.classList.remove('theme-dark', 'theme-light');
-          document.documentElement.classList.add(`theme-${newTheme}`);
+        window.addEventListener('theme-change', (event) => {
+          if (event.detail && event.detail.theme) {
+            applyTheme(event.detail.theme);
+          }
         });
 
         // Listen for language change events
-        window.addEventListener('language-change', (event: CustomEvent) => {
-          const newLang = event.detail.language;
-          document.documentElement.lang = newLang;
-          // Optionally reload page with new language
-          // window.location.href = `/${newLang}${window.location.pathname}`;
+        window.addEventListener('language-change', (event) => {
+          if (event.detail && event.detail.language) {
+            document.documentElement.lang = event.detail.language;
+          }
         });
-      }
+      });
     </script>
   </body>
 </html>

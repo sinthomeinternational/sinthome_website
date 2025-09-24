@@ -5,35 +5,42 @@
  */
 
 import UniversalLayout from '../layouts/UniversalLayout.astro';
-import { getPageContent, getProjects } from '../content/loader';
 import type { Language, Theme } from '../content/types';
 
-// Get language and theme from URL params (for testing)
-const url = new URL(Astro.request.url);
-const language = (url.searchParams.get('lang') || 'en') as Language;
-const theme = (url.searchParams.get('theme') || 'dark') as Theme;
+// For static sites, we can't read URL params server-side in build mode
+// Default to English and Dark theme for initial server render
+const language = 'en' as Language;
+const theme = 'dark' as Theme;
 
-// Load content for the current language
-const homeContent = await getPageContent(language, 'home');
-const whoWeAreContent = await getPageContent(language, 'whoWeAre');
-const projects = await getProjects(language);
+// Debug: Log that this is a static build
+console.log('[TEST-UNIVERSAL] Static build - defaulting to EN/Dark');
+console.log('[TEST-UNIVERSAL] Client-side JavaScript will handle URL params');
 
-// Theme-specific classes
-const cardClasses = theme === 'light'
-  ? 'bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow'
-  : 'bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:bg-zinc-800/50 transition-colors';
+// Load both language contents for client-side switching
+let enContent, zhContent, contentLoadError;
+try {
+  console.log('[TEST-UNIVERSAL] Loading both EN and ZH content for client switching');
+  const enModule = await import('../content/data/en');
+  const zhModule = await import('../content/data/zh');
+  enContent = enModule.default;
+  zhContent = zhModule.default;
+  console.log('[TEST-UNIVERSAL] Both contents loaded successfully');
+} catch (error) {
+  console.error('[TEST-UNIVERSAL] Error loading content:', error);
+  contentLoadError = error.message;
+}
 
-const headingClasses = theme === 'light'
-  ? 'text-gray-900'
-  : 'text-white';
+// Default to English content for server render
+const homeContent = enContent?.pages.home;
+const whoWeAreContent = enContent?.pages.whoWeAre;
+const projects = enContent?.projects || [];
 
-const textClasses = theme === 'light'
-  ? 'text-gray-600'
-  : 'text-zinc-300';
-
-const buttonClasses = theme === 'light'
-  ? 'bg-red-600 text-white hover:bg-red-700'
-  : 'bg-red-600 text-white hover:bg-red-700';
+// Remove server-side theme classes - will be applied client-side
+// These are just defaults for initial render
+const cardClasses = 'rounded-lg p-6 transition-all';
+const headingClasses = '';
+const textClasses = '';
+const buttonClasses = 'bg-red-600 text-white hover:bg-red-700';
 ---
 
 <UniversalLayout
@@ -45,42 +52,42 @@ const buttonClasses = theme === 'light'
 >
   <!-- Hero Section -->
   <section class="text-center py-16">
-    <h1 class={`text-5xl font-bold mb-4 ${headingClasses}`}>
+    <h1 class="text-5xl font-bold mb-4" data-hero-title>
       {homeContent?.hero?.title || 'SINTHOME'}
     </h1>
-    <p class={`text-xl mb-8 ${textClasses}`}>
+    <p class="text-xl mb-8" data-hero-subtitle>
       {homeContent?.hero?.subtitle || 'Empowering Communities Through Technology'}
     </p>
 
     <!-- Language and Theme Switchers -->
     <div class="flex justify-center gap-4 mb-8">
       <div class="flex gap-2">
-        <a
-          href={`?lang=en&theme=${theme}`}
-          class={`px-4 py-2 rounded ${language === 'en' ? buttonClasses : 'bg-gray-500 text-white hover:bg-gray-600'} transition-colors`}
+        <button
+          data-lang-btn="en"
+          class="px-4 py-2 rounded bg-gray-500 text-white hover:bg-gray-600 transition-colors cursor-pointer"
         >
           English
-        </a>
-        <a
-          href={`?lang=zh&theme=${theme}`}
-          class={`px-4 py-2 rounded ${language === 'zh' ? buttonClasses : 'bg-gray-500 text-white hover:bg-gray-600'} transition-colors`}
+        </button>
+        <button
+          data-lang-btn="zh"
+          class="px-4 py-2 rounded bg-gray-500 text-white hover:bg-gray-600 transition-colors cursor-pointer"
         >
           中文
-        </a>
+        </button>
       </div>
       <div class="flex gap-2">
-        <a
-          href={`?lang=${language}&theme=dark`}
-          class={`px-4 py-2 rounded ${theme === 'dark' ? buttonClasses : 'bg-gray-500 text-white hover:bg-gray-600'} transition-colors`}
+        <button
+          data-theme-btn="dark"
+          class="px-4 py-2 rounded bg-gray-500 text-white hover:bg-gray-600 transition-colors cursor-pointer"
         >
           Dark 🌙
-        </a>
-        <a
-          href={`?lang=${language}&theme=light`}
-          class={`px-4 py-2 rounded ${theme === 'light' ? buttonClasses : 'bg-gray-500 text-white hover:bg-gray-600'} transition-colors`}
+        </button>
+        <button
+          data-theme-btn="light"
+          class="px-4 py-2 rounded bg-gray-500 text-white hover:bg-gray-600 transition-colors cursor-pointer"
         >
           Light ☀️
-        </a>
+        </button>
       </div>
     </div>
 
@@ -101,11 +108,11 @@ const buttonClasses = theme === 'light'
 
   <!-- Mission Section -->
   <section class="py-12">
-    <h2 class={`text-3xl font-bold mb-8 text-center ${headingClasses}`}>
+    <h2 class="text-3xl font-bold mb-8 text-center" data-mission-title>
       {whoWeAreContent?.sections?.[0]?.title || 'Our Mission'}
     </h2>
-    <div class={cardClasses}>
-      <p class={textClasses}>
+    <div class={cardClasses} data-theme-card>
+      <p data-mission-content>
         {whoWeAreContent?.sections?.[0]?.content || 'Loading...'}
       </p>
     </div>
@@ -113,20 +120,20 @@ const buttonClasses = theme === 'light'
 
   <!-- Projects Grid -->
   <section class="py-12">
-    <h2 class={`text-3xl font-bold mb-8 text-center ${headingClasses}`}>
+    <h2 class="text-3xl font-bold mb-8 text-center" data-projects-title>
       {language === 'zh' ? '我们的项目' : 'Our Projects'}
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {projects.slice(0, 3).map((project) => (
-        <div class={cardClasses}>
-          <h3 class={`text-xl font-bold mb-2 ${headingClasses}`}>
+      {projects.slice(0, 3).map((project, index) => (
+        <div class={cardClasses} data-project-card data-theme-card>
+          <h3 class="text-xl font-bold mb-2" data-project-title>
             {project.title}
           </h3>
-          <p class={`mb-4 ${textClasses}`}>
+          <p class="mb-4" data-project-desc>
             {project.description}
           </p>
           {project.impact && (
-            <ul class={`list-disc list-inside space-y-1 ${textClasses}`}>
+            <ul class="list-disc list-inside space-y-1" data-project-impact>
               {project.impact.slice(0, 2).map((item) => (
                 <li class="text-sm">{item}</li>
               ))}
@@ -134,7 +141,8 @@ const buttonClasses = theme === 'light'
           )}
           <a
             href={project.href}
-            class={`inline-block mt-4 text-sm font-medium ${theme === 'light' ? 'text-red-600 hover:text-red-800' : 'text-red-400 hover:text-red-300'} transition-colors`}
+            class="inline-block mt-4 text-sm font-medium transition-colors"
+            data-project-link
           >
             {language === 'zh' ? '了解更多 →' : 'Learn More →'}
           </a>
@@ -143,20 +151,268 @@ const buttonClasses = theme === 'light'
     </div>
   </section>
 
+  <!-- Debug Information -->
+  <section class="py-12">
+    <div class={`${cardClasses} text-center`} data-theme-card>
+      <h3 class="text-xl font-bold mb-4">
+        🔍 Debug Information
+      </h3>
+      <div class="text-left space-y-2" data-debug-info>
+        <p><strong>URL:</strong> <span class="font-mono text-sm">Will be updated by client-side JS</span></p>
+        <p><strong>Language:</strong> <span data-current-lang>en (English)</span></p>
+        <p><strong>Theme:</strong> <span data-current-theme>dark (Dark Mode)</span></p>
+        <p><strong>Content Loaded:</strong> {enContent && zhContent ? '✅ Both EN & ZH' : '❌ Error'}</p>
+        {contentLoadError && <p class="text-red-500"><strong>Load Error:</strong> {contentLoadError}</p>}
+        <p><strong>Render Mode:</strong> Static build with client-side switching</p>
+        <p><strong>Available Languages:</strong> EN ({enContent ? '✅' : '❌'}), ZH ({zhContent ? '✅' : '❌'})</p>
+      </div>
+      <p class="mt-4 text-sm border-t pt-4">
+        ⚠️ <strong>Note:</strong> This is a static site with client-side switching.
+        Content changes without page refresh.
+      </p>
+    </div>
+  </section>
+
   <!-- Current Settings Display -->
   <section class="py-12">
-    <div class={`${cardClasses} text-center`}>
-      <h3 class={`text-xl font-bold mb-4 ${headingClasses}`}>
+    <div class={`${cardClasses} text-center`} data-theme-card>
+      <h3 class="text-xl font-bold mb-4">
         Current Settings
       </h3>
-      <p class={textClasses}>
-        Language: <strong>{language === 'en' ? 'English' : '中文'}</strong><br />
-        Theme: <strong>{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</strong>
+      <p>
+        Language: <strong data-current-lang-display>{language === 'en' ? 'English' : '中文'}</strong><br />
+        Theme: <strong data-current-theme-display>{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</strong>
       </p>
-      <p class={`mt-4 text-sm ${textClasses}`}>
+      <p class="mt-4 text-sm">
         This page demonstrates the new universal architecture that supports multiple themes and languages
         with a single codebase and centralized content management.
       </p>
     </div>
   </section>
+
+  <!-- Pass content data to client-side JavaScript -->
+  <script define:vars={{ enContent, zhContent }}>
+    // Content data is now available as JavaScript variables
+    window.CONTENT_DATA = {
+      en: enContent,
+      zh: zhContent
+    };
+  </script>
+
+  <!-- Client-side dynamic content switching script -->
+  <script>
+    // Track current state
+    let currentLang = 'en';
+    let currentTheme = 'dark';
+
+    // Handle dynamic content switching on the client side
+    function getUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        lang: params.get('lang') || 'en',
+        theme: params.get('theme') || 'dark'
+      };
+    }
+
+    function applyThemeStyles(theme) {
+      console.log('[CLIENT] Applying theme styles:', theme);
+
+      // Apply to all elements with data-theme-card
+      const cards = document.querySelectorAll('[data-theme-card]');
+      const headings = document.querySelectorAll('h1, h2, h3');
+      const paragraphs = document.querySelectorAll('p:not([class*="text-"])');
+      const lists = document.querySelectorAll('ul:not([class*="text-"])');
+      const links = document.querySelectorAll('[data-project-link]');
+
+      if (theme === 'light') {
+        // Light theme styles
+        cards.forEach(card => {
+          card.className = card.className.replace(/bg-zinc-900\/50|border-zinc-800|hover:bg-zinc-800\/50/g, '');
+          card.classList.add('bg-white', 'border', 'border-gray-200', 'hover:shadow-lg', 'transition-shadow');
+        });
+
+        headings.forEach(h => {
+          h.classList.remove('text-white');
+          h.classList.add('text-gray-900');
+        });
+
+        paragraphs.forEach(p => {
+          p.classList.remove('text-zinc-300');
+          p.classList.add('text-gray-600');
+        });
+
+        lists.forEach(list => {
+          list.classList.remove('text-zinc-300');
+          list.classList.add('text-gray-600');
+        });
+
+        links.forEach(link => {
+          link.classList.remove('text-red-400', 'hover:text-red-300');
+          link.classList.add('text-red-600', 'hover:text-red-800');
+        });
+      } else {
+        // Dark theme styles
+        cards.forEach(card => {
+          card.className = card.className.replace(/bg-white|border-gray-200|hover:shadow-lg/g, '');
+          card.classList.add('bg-zinc-900/50', 'border', 'border-zinc-800', 'hover:bg-zinc-800/50', 'transition-colors');
+        });
+
+        headings.forEach(h => {
+          h.classList.remove('text-gray-900');
+          h.classList.add('text-white');
+        });
+
+        paragraphs.forEach(p => {
+          p.classList.remove('text-gray-600');
+          p.classList.add('text-zinc-300');
+        });
+
+        lists.forEach(list => {
+          list.classList.remove('text-gray-600');
+          list.classList.add('text-zinc-300');
+        });
+
+        links.forEach(link => {
+          link.classList.remove('text-red-600', 'hover:text-red-800');
+          link.classList.add('text-red-400', 'hover:text-red-300');
+        });
+      }
+    }
+
+    function updateContent(lang, theme) {
+      console.log('[CLIENT] Updating content to:', { lang, theme });
+
+      // Store current state
+      currentLang = lang;
+      currentTheme = theme;
+
+      // Get content for the selected language
+      const content = window.CONTENT_DATA[lang];
+      if (!content) {
+        console.error('[CLIENT] No content found for language:', lang);
+        return;
+      }
+
+      const homeContent = content.pages.home;
+      const projects = content.projects;
+
+      // Update page content
+      const heroTitle = document.querySelector('[data-hero-title]');
+      const heroSubtitle = document.querySelector('[data-hero-subtitle]');
+      const missionTitle = document.querySelector('[data-mission-title]');
+      const missionContent = document.querySelector('[data-mission-content]');
+      const projectsTitle = document.querySelector('[data-projects-title]');
+
+      if (heroTitle) heroTitle.textContent = homeContent.hero.title;
+      if (heroSubtitle) heroSubtitle.textContent = homeContent.hero.subtitle;
+      if (missionTitle) missionTitle.textContent = content.pages.whoWeAre.sections[0].title;
+      if (missionContent) missionContent.textContent = content.pages.whoWeAre.sections[0].content;
+      if (projectsTitle) projectsTitle.textContent = lang === 'zh' ? '我们的项目' : 'Our Projects';
+
+      // Update project cards
+      const projectCards = document.querySelectorAll('[data-project-card]');
+      projectCards.forEach((card, index) => {
+        if (projects[index]) {
+          const project = projects[index];
+          const titleEl = card.querySelector('[data-project-title]');
+          const descEl = card.querySelector('[data-project-desc]');
+          const linkEl = card.querySelector('[data-project-link]');
+
+          if (titleEl) titleEl.textContent = project.title;
+          if (descEl) descEl.textContent = project.description;
+          if (linkEl) linkEl.textContent = lang === 'zh' ? '了解更多 →' : 'Learn More →';
+        }
+      });
+
+      // Update debug display
+      const langSpan = document.querySelector('[data-current-lang]');
+      const themeSpan = document.querySelector('[data-current-theme]');
+      const langDisplay = document.querySelector('[data-current-lang-display]');
+      const themeDisplay = document.querySelector('[data-current-theme-display]');
+      const debugInfo = document.querySelector('[data-debug-info]');
+
+      if (langSpan) langSpan.textContent = `${lang} (${lang === 'en' ? 'English' : '中文'})`;
+      if (themeSpan) themeSpan.textContent = `${theme} (${theme === 'dark' ? 'Dark Mode' : 'Light Mode'})`;
+      if (langDisplay) langDisplay.textContent = lang === 'en' ? 'English' : '中文';
+      if (themeDisplay) themeDisplay.textContent = theme === 'dark' ? 'Dark Mode' : 'Light Mode';
+
+      if (debugInfo) {
+        const urlP = debugInfo.querySelector('p:first-child span');
+        if (urlP) urlP.textContent = window.location.href;
+      }
+
+      // Apply theme
+      if (window.applyTheme) {
+        window.applyTheme(theme);
+      }
+
+      // Apply theme-specific styles
+      applyThemeStyles(theme);
+
+      // Update button states
+      document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-btn');
+        const isActive = btnLang === lang;
+        btn.className = btn.className
+          .replace(/bg-(red|gray)-(600|500)/g, isActive ? 'bg-red-600' : 'bg-gray-500')
+          .replace(/hover:bg-(red|gray)-(700|600)/g, isActive ? 'hover:bg-red-700' : 'hover:bg-gray-600');
+      });
+
+      document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+        const btnTheme = btn.getAttribute('data-theme-btn');
+        const isActive = btnTheme === theme;
+        btn.className = btn.className
+          .replace(/bg-(red|gray)-(600|500)/g, isActive ? 'bg-red-600' : 'bg-gray-500')
+          .replace(/hover:bg-(red|gray)-(700|600)/g, isActive ? 'hover:bg-red-700' : 'hover:bg-gray-600');
+      });
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('[CLIENT] Page loaded, initializing dynamic content...');
+      console.log('[CLIENT] Available content:', Object.keys(window.CONTENT_DATA));
+
+      const { lang, theme } = getUrlParams();
+      currentLang = lang;
+      currentTheme = theme;
+      updateContent(lang, theme);
+
+      // Add click handlers to language buttons
+      document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const newLang = btn.getAttribute('data-lang-btn');
+          switchContent(newLang, currentTheme);
+        });
+      });
+
+      // Add click handlers to theme buttons
+      document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const newTheme = btn.getAttribute('data-theme-btn');
+          switchContent(currentLang, newTheme);
+        });
+      });
+
+      // Listen for URL changes (back/forward browser navigation)
+      window.addEventListener('popstate', () => {
+        console.log('[CLIENT] Browser navigation detected');
+        const { lang, theme } = getUrlParams();
+        updateContent(lang, theme);
+      });
+    });
+
+    // Switch content without reloading page
+    window.switchContent = function(lang, theme) {
+      console.log('[CLIENT] Switching to:', { lang, theme });
+
+      // Update URL without reloading
+      const url = new URL(window.location);
+      url.searchParams.set('lang', lang);
+      url.searchParams.set('theme', theme);
+      window.history.pushState({ lang, theme }, '', url.toString());
+
+      // Update content immediately
+      updateContent(lang, theme);
+    };
+  </script>
 </UniversalLayout>
