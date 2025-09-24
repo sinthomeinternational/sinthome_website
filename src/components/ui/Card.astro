@@ -1,0 +1,55 @@
+---
+/**
+ * Card component with variants and hover effects
+ */
+import clsx from 'clsx';
+
+export interface Props {
+  variant?: 'default' | 'elevated' | 'gradient' | 'bordered';
+  hoverable?: boolean;
+  className?: string;
+  href?: string;
+}
+
+const {
+  variant = 'default',
+  hoverable = false,
+  className = '',
+  href,
+  ...props
+} = Astro.props;
+
+const baseClasses = 'rounded-xl transition-all duration-300';
+
+const variantClasses = {
+  default: 'bg-zinc-900/50 border border-zinc-800 p-6',
+  elevated: 'bg-zinc-900/50 border border-zinc-800 p-6 shadow-xl',
+  gradient: 'bg-gradient-to-r from-red-600/20 to-red-700/10 border border-red-600/30 p-8',
+  bordered: 'bg-transparent border-2 border-zinc-700 p-6'
+};
+
+const hoverClasses = hoverable ? {
+  default: 'hover:bg-zinc-800/50 hover:border-zinc-700',
+  elevated: 'hover:bg-zinc-800/50 hover:shadow-2xl hover:scale-[1.02]',
+  gradient: 'hover:border-red-600/50',
+  bordered: 'hover:border-red-600 hover:bg-zinc-900/30'
+} : {};
+
+const combinedClasses = clsx(
+  baseClasses,
+  variantClasses[variant],
+  hoverClasses[variant],
+  className
+);
+
+const Component = href ? 'a' : 'div';
+const linkProps = href ? { href } : {};
+---
+
+<Component
+  class={combinedClasses}
+  {...linkProps}
+  {...props}
+>
+  <slot />
+</Component>
