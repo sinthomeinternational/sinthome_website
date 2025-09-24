@@ -464,38 +464,60 @@ To set up notifications:
 3. Click three dots menu
 4. Select "Get email notifications for new responses"
 
-## Project Structure
+## Project Structure (Updated December 2024)
 
 ```
 src/
-├── actions/          # Server actions (limited for static site)
-├── assets/           # Images and static resources
-├── components/       # Reusable UI components
-│   ├── navigation/   # Navigation components
-│   ├── forms/        # Google Forms components
-│   ├── shared/       # Shared components
-│   └── ui/          # UI elements
-├── config/          # Configuration files
-│   └── forms.ts     # Google Forms configuration
-├── content/          # Content collections
-│   ├── config.ts    # Collection schemas
-│   ├── projects/    # Project markdown files
-│   └── events/      # Event markdown files
-├── layouts/          # Page layouts
-├── lib/              # Utilities and helpers
-├── pages/            # Route pages
-│   ├── index.astro  # Homepage
+├── actions/            # Server actions (limited for static site)
+├── assets/             # Images and static resources
+├── components/         # Reusable UI components (organized by feature)
+│   ├── forms/         # Form components
+│   │   └── GoogleForm.tsx
+│   ├── layout/        # Layout components
+│   │   ├── Footer.astro
+│   │   └── TopNavigation.tsx
+│   ├── navigation/    # Navigation-specific components
+│   │   └── Dropdown.tsx
+│   ├── shared/        # Shared/domain components
+│   │   ├── EventCard.astro
+│   │   └── ProjectCard.astro
+│   └── ui/            # Generic UI elements
+│       ├── Button.tsx         # Button with variants
+│       ├── Card.astro         # Card with variants
+│       ├── ExternalLink.astro
+│       ├── H1.astro
+│       ├── LinkButton.astro   # Link styled as button
+│       └── WarpBackground.tsx
+├── config/            # Configuration files
+│   ├── forms.ts      # Google Forms configuration
+│   └── site.ts       # Site-wide configuration (nav, metadata)
+├── content/           # Content collections
+│   ├── config.ts     # Collection schemas
+│   ├── projects/     # Project markdown files
+│   └── events/       # Event markdown files
+├── layouts/           # Page layouts
+│   ├── BaseLayout.astro    # Consolidated base layout
+│   ├── InfoLayout.astro    # Info pages layout
+│   ├── PageLayout.astro    # Standard page layout
+│   └── RootLayout.astro    # Root HTML structure
+├── lib/               # Utilities and helpers
+│   └── assets.ts     # Asset management with base path
+├── pages/             # Route pages
+│   ├── index.astro   # Homepage
 │   ├── who-we-are.astro
 │   ├── what-we-do/
 │   │   ├── index.astro
-│   │   ├── ai-hackathon.astro
+│   │   ├── ai-hackathon/
 │   │   ├── workers-assist.astro
 │   │   ├── plantcore-ai.astro
 │   │   └── srtp.astro
 │   ├── events.astro
 │   ├── contact.astro
 │   └── donate.astro
-└── styles/           # Global styles
+├── styles/            # Global styles
+│   └── global.css    # Tailwind imports
+└── types/             # TypeScript type definitions
+    └── index.ts      # Shared interfaces and types
 ```
 
 ## Development Commands
@@ -543,22 +565,68 @@ Donate
 
 ## Component Development
 
-### Priority Components (Dev 1)
+### Component Library (December 2024)
 
-1. **Dropdown.tsx** - Navigation dropdown menu
-2. **GoogleForm.tsx** - Google Forms wrapper
-3. **ProjectCard.astro** - Project showcase cards
-4. **EventCard.astro** - Event listing cards
-5. **Hero.astro** - Page hero sections
-6. **CTAButton.astro** - Call-to-action buttons
+#### UI Components
+1. **Button.tsx** - Flexible button component
+   - 5 variants: primary, secondary, outline, ghost, danger
+   - 3 sizes: sm, md, lg
+   - Full TypeScript support with ButtonProps interface
+
+2. **LinkButton.astro** - Link styled as button
+   - Same variants and sizes as Button
+   - Handles internal/external links
+
+3. **Card.astro** - Versatile card component
+   - 4 variants: default, elevated, gradient, bordered
+   - Optional hover effects
+   - Can be used as link or container
+
+4. **H1.astro** - Styled heading component
+5. **ExternalLink.astro** - External link with security attributes
+6. **WarpBackground.tsx** - Animated turbulent background
+
+#### Layout Components
+1. **BaseLayout.astro** - Consolidated layout component
+   - 3 variants: default, info, minimal
+   - Reduces duplication between layouts
+   - Configurable sidebar and navigation
+
+2. **TopNavigation.tsx** - Main navigation with dropdown
+3. **Footer.astro** - Site footer with social links
+
+#### Shared Components
+1. **ProjectCard.astro** - Project showcase cards
+2. **EventCard.astro** - Event listing cards
+3. **GoogleForm.tsx** - Google Forms wrapper
+
+### TypeScript Support
+
+All TypeScript interfaces are centralized in `src/types/index.ts`:
+
+```typescript
+// Example interfaces
+export interface NavigationItem { ... }
+export interface Event { ... }
+export interface Project { ... }
+export interface Article { ... }
+export interface BaseComponentProps { ... }
+export interface LayoutProps { ... }
+
+// Utility types
+export type Variant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+export type Size = 'sm' | 'md' | 'lg' | 'xl';
+```
 
 ### Component Guidelines
 
 - Use TypeScript for all React components
-- Follow existing naming conventions
+- Follow existing naming conventions (PascalCase for components)
 - Implement responsive design (mobile-first)
 - Ensure accessibility (ARIA labels, keyboard navigation)
 - Use Motion library for animations
+- Import types from `src/types/index.ts`
+- Use the component library (Button, Card, etc.) instead of custom implementations
 
 ## Page Templates
 
