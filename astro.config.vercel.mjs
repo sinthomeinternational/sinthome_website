@@ -1,14 +1,14 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-  // Change to 'hybrid' for SSR with static optimization
-  output: 'hybrid',
+  // Change to 'server' for SSR support
+  output: 'server',
 
-  // No need for base path on Vercel!
-  site: 'https://your-project.vercel.app',
+  // Site URL will be set by Vercel automatically
+  // site: 'https://your-project.vercel.app', // Remove hardcoded URL
 
   // Vercel adapter for SSR support
   adapter: vercel({

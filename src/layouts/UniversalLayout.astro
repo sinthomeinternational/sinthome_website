@@ -114,12 +114,7 @@ const bodyClasses = theme === 'light'
 
     <!-- Theme and language switcher script -->
     <script>
-      // Extend Window interface for our custom function
-      declare global {
-        interface Window {
-          applyTheme: (theme: string) => void;
-        }
-      }
+      // applyTheme is declared in src/types/global.d.ts
 
       // Define custom event types
       interface ThemeChangeEvent extends CustomEvent {
@@ -191,7 +186,7 @@ const bodyClasses = theme === 'light'
         applyTheme(currentTheme);
 
         // Make applyTheme globally available
-        window.applyTheme = applyTheme;
+        (window as any).applyTheme = applyTheme;
 
         // Listen for theme change events
         window.addEventListener('theme-change', (event: Event) => {
