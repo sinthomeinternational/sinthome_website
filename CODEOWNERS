@@ -1,0 +1,18 @@
+# CODEOWNERS file for Sinthome International
+# This creates a review requirement system for the organization
+# Anyone listed here must approve PRs for their owned files
+
+# Global owners (review everything)
+* @Yiluo-pHoton
+
+# Add collaborators as "owners" of specific areas
+# (They need Write access but can't merge without your approval)
+/src/pages/ @collaborator1
+/src/components/ @collaborator2
+/src/api/ @collaborator3
+
+# Critical files need YOUR review
+/astro.config.mjs @Yiluo-pHoton
+/package.json @Yiluo-pHoton
+/vercel.json @Yiluo-pHoton
+/.github/ @Yiluo-pHoton

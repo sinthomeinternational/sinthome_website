@@ -1,0 +1,130 @@
+---
+/**
+ * Universal Homepage with SSR support
+ * This version works properly on Vercel with URL parameters!
+ */
+
+export const prerender = false; // Enable SSR on Vercel
+
+import UniversalLayout from '../layouts/UniversalLayout.astro';
+import WarpBackground from '../components/WarpBackground';
+import type { Language, Theme } from '../content/types';
+import { loadContent } from '../content/loader';
+
+// With Vercel SSR, URL params work properly!
+const language = (Astro.url.searchParams.get('lang') || 'en') as Language;
+const theme = (Astro.url.searchParams.get('theme') || 'dark') as Theme;
+
+// Load content for the selected language
+const content = await loadContent(language);
+const homeContent = content.pages.home;
+
+// Theme-based colors - determined server-side!
+const warpColors = theme === 'light'
+  ? {
+      color1: "#fca5a5",
+      color2: "#ef4444",
+      color3: "#b91c1c"
+    }
+  : {
+      color1: "#000000",
+      color2: "#5a0000",
+      color3: "#ff0000"
+    };
+
+const textColorClass = theme === 'light' ? 'text-gray-900' : 'text-white';
+const subtextColorClass = theme === 'light' ? 'text-gray-700' : 'text-zinc-400';
+const descColorClass = theme === 'light' ? 'text-gray-600' : 'text-zinc-300';
+---
+
+<UniversalLayout
+  title={homeContent.title}
+  description={homeContent.description}
+  language={language}
+  theme={theme}
+  showNavigation={true}
+  showFooter={true}
+>
+  <!-- Warp Background -->
+  <div class="fixed inset-0 z-0">
+    <WarpBackground
+      {...warpColors}
+      speed={0.02}
+      className="w-full h-full"
+    />
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
+    <div class="text-center space-y-12 max-w-5xl">
+      <!-- SINTHOME Title -->
+      <h1 class={`text-[120px] md:text-[180px] font-black tracking-wider ${textColorClass}`}>
+        {homeContent.hero?.title || 'SINTHOME'}
+      </h1>
+
+      <!-- Tagline -->
+      {homeContent.hero?.tagline && (
+        <h2 class={`text-xl md:text-2xl tracking-[0.3em] uppercase ${subtextColorClass} font-bold`}>
+          {homeContent.hero.tagline}
+        </h2>
+      )}
+
+      <!-- Subtitle -->
+      {homeContent.hero?.subtitle && (
+        <p class={`text-lg md:text-xl max-w-4xl mx-auto leading-relaxed ${descColorClass}`}>
+          {homeContent.hero.subtitle}
+        </p>
+      )}
+
+      <!-- CTA Buttons -->
+      {homeContent.hero?.cta && homeContent.hero.cta.length > 0 && (
+        <div class="flex flex-wrap justify-center gap-4">
+          {homeContent.hero.cta.map((cta) => (
+          <a
+            href={cta.href}
+            class={`
+              px-8 py-4 text-sm font-bold uppercase tracking-wider
+              ${cta.style === 'primary'
+                ? 'bg-red-600 text-white hover:bg-red-700'
+                : cta.style === 'secondary'
+                ? theme === 'light'
+                  ? 'bg-gray-900 text-white hover:bg-gray-800'
+                  : 'bg-zinc-800 text-white hover:bg-zinc-700'
+                : theme === 'light'
+                  ? 'border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white'
+                  : 'border-2 border-white text-white hover:bg-white hover:text-black'}
+              transition-all duration-200
+            `}
+          >
+            {cta.text}
+          </a>
+          ))}
+        </div>
+      )}
+
+      <!-- Theme & Language Switchers -->
+      <div class="flex justify-center gap-8 mt-8">
+        <div class="flex gap-2">
+          <a href={`?lang=en&theme=${theme}`}
+             class={`px-4 py-2 rounded ${language === 'en' ? 'bg-red-600 text-white' : 'bg-gray-600 text-white hover:bg-gray-700'}`}>
+            English
+          </a>
+          <a href={`?lang=zh&theme=${theme}`}
+             class={`px-4 py-2 rounded ${language === 'zh' ? 'bg-red-600 text-white' : 'bg-gray-600 text-white hover:bg-gray-700'}`}>
+            中文
+          </a>
+        </div>
+        <div class="flex gap-2">
+          <a href={`?lang=${language}&theme=dark`}
+             class={`px-4 py-2 rounded ${theme === 'dark' ? 'bg-red-600 text-white' : 'bg-gray-600 text-white hover:bg-gray-700'}`}>
+            Dark 🌙
+          </a>
+          <a href={`?lang=${language}&theme=light`}
+             class={`px-4 py-2 rounded ${theme === 'light' ? 'bg-red-600 text-white' : 'bg-gray-600 text-white hover:bg-gray-700'}`}>
+            Light ☀️
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</UniversalLayout>

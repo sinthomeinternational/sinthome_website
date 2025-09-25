@@ -1,0 +1,209 @@
+---
+/**
+ * Universal Layout Component
+ * Supports multiple themes and languages without duplication
+ */
+
+import "../styles/global.css";
+import type { Language, Theme } from '../content/types';
+import { getTheme } from '../config/themes';
+import { loadContent } from '../content/loader';
+import UniversalNavigation from '../components/layout/UniversalNavigation';
+import UniversalFooter from '../components/layout/UniversalFooter.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  language?: Language;
+  theme?: Theme;
+  showNavigation?: boolean;
+  showFooter?: boolean;
+  useInfoLayout?: boolean;
+}
+
+const {
+  title,
+  description,
+  language = 'en',
+  theme = 'dark',
+  showNavigation = true,
+  showFooter = true,
+  useInfoLayout = false
+} = Astro.props;
+
+// Load content for the current language
+const content = await loadContent(language);
+const themeConfig = getTheme(theme);
+
+// Base URL for assets
+const baseUrl = import.meta.env.BASE_URL;
+
+// Apply theme classes with proper overrides for light theme
+const bodyClasses = theme === 'light'
+  ? 'bg-white text-gray-900'
+  : themeConfig.classes.body;
+---
+
+<!DOCTYPE html>
+<html lang={language} class={`theme-${theme}`}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+
+    <!-- Google Fonts - League Spartan for sharp geometric look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Theme CSS Variables -->
+    <style define:vars={{
+      '--theme-bg-primary': themeConfig.colors.bgPrimary,
+      '--theme-bg-secondary': themeConfig.colors.bgSecondary,
+      '--theme-bg-tertiary': themeConfig.colors.bgTertiary,
+      '--theme-bg-card': themeConfig.colors.bgCard,
+      '--theme-text-primary': themeConfig.colors.textPrimary,
+      '--theme-text-secondary': themeConfig.colors.textSecondary,
+      '--theme-text-muted': themeConfig.colors.textMuted,
+      '--theme-accent': themeConfig.colors.accent,
+      '--theme-accent-hover': themeConfig.colors.accentHover,
+      '--theme-border': themeConfig.colors.border,
+      '--theme-border-hover': themeConfig.colors.borderHover,
+    }}>
+      :root {
+        --theme-bg-primary: var(--theme-bg-primary);
+        --theme-bg-secondary: var(--theme-bg-secondary);
+        --theme-bg-tertiary: var(--theme-bg-tertiary);
+        --theme-bg-card: var(--theme-bg-card);
+        --theme-text-primary: var(--theme-text-primary);
+        --theme-text-secondary: var(--theme-text-secondary);
+        --theme-text-muted: var(--theme-text-muted);
+        --theme-accent: var(--theme-accent);
+        --theme-accent-hover: var(--theme-accent-hover);
+        --theme-border: var(--theme-border);
+        --theme-border-hover: var(--theme-border-hover);
+      }
+    </style>
+  </head>
+
+  <body class={`${bodyClasses} theme-${theme}`} style={theme === 'light' ? 'background-color: white !important;' : ''}>
+    {showNavigation && (
+      <UniversalNavigation
+        client:load
+        navigation={content.navigation}
+        language={language}
+        theme={theme}
+      />
+    )}
+
+    <main class={useInfoLayout ? "container mx-auto px-4 py-8 max-w-7xl" : ""}>
+      <slot />
+    </main>
+
+    {showFooter && (
+      <UniversalFooter
+        content={content.footer}
+        theme={theme}
+      />
+    )}
+
+    <!-- Theme and language switcher script -->
+    <script>
+      // applyTheme is declared in src/types/global.d.ts
+
+      // Define custom event types
+      interface ThemeChangeEvent extends CustomEvent {
+        detail: {
+          theme: string;
+        };
+      }
+
+      interface LanguageChangeEvent extends CustomEvent {
+        detail: {
+          language: string;
+        };
+      }
+
+      // Initialize theme on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        // Apply initial theme
+        const html = document.documentElement;
+        const currentTheme = html.classList.contains('theme-light') ? 'light' : 'dark';
+
+        // Set up theme CSS variables dynamically
+        const applyTheme = (theme: string): void => {
+          // Remove existing theme classes
+          html.classList.remove('theme-dark', 'theme-light');
+          html.classList.add(`theme-${theme}`);
+
+          // Apply theme-specific body classes with higher specificity
+          document.body.className = document.body.className
+            .replace(/bg-\[#0a0a0a\]|bg-white/g, '');
+
+          if (theme === 'light') {
+            document.body.className += ' bg-white text-gray-900';
+            document.body.style.backgroundColor = 'white';
+            document.body.style.color = '#111827';
+          } else {
+            document.body.className += ' bg-[#0a0a0a] text-white';
+            document.body.style.backgroundColor = '#0a0a0a';
+            document.body.style.color = 'white';
+          }
+
+          // Update CSS variables
+          const root = document.documentElement;
+          if (theme === 'dark') {
+            root.style.setProperty('--theme-bg-primary', '#0a0a0a');
+            root.style.setProperty('--theme-bg-secondary', '#18181b');
+            root.style.setProperty('--theme-bg-tertiary', '#27272a');
+            root.style.setProperty('--theme-bg-card', 'rgba(24, 24, 27, 0.5)');
+            root.style.setProperty('--theme-text-primary', '#ffffff');
+            root.style.setProperty('--theme-text-secondary', '#d4d4d8');
+            root.style.setProperty('--theme-text-muted', '#71717a');
+            root.style.setProperty('--theme-accent', '#dc2626');
+            root.style.setProperty('--theme-accent-hover', '#b91c1c');
+            root.style.setProperty('--theme-border', '#27272a');
+          } else {
+            root.style.setProperty('--theme-bg-primary', '#ffffff');
+            root.style.setProperty('--theme-bg-secondary', '#f9fafb');
+            root.style.setProperty('--theme-bg-tertiary', '#f3f4f6');
+            root.style.setProperty('--theme-bg-card', '#ffffff');
+            root.style.setProperty('--theme-text-primary', '#111827');
+            root.style.setProperty('--theme-text-secondary', '#4b5563');
+            root.style.setProperty('--theme-text-muted', '#9ca3af');
+            root.style.setProperty('--theme-accent', '#dc2626');
+            root.style.setProperty('--theme-accent-hover', '#b91c1c');
+            root.style.setProperty('--theme-border', '#e5e7eb');
+          }
+        };
+
+        // Apply initial theme
+        applyTheme(currentTheme);
+
+        // Make applyTheme globally available
+        (window as any).applyTheme = applyTheme;
+
+        // Listen for theme change events
+        window.addEventListener('theme-change', (event: Event) => {
+          const themeEvent = event as ThemeChangeEvent;
+          if (themeEvent.detail && themeEvent.detail.theme) {
+            applyTheme(themeEvent.detail.theme);
+          }
+        });
+
+        // Listen for language change events
+        window.addEventListener('language-change', (event: Event) => {
+          const langEvent = event as LanguageChangeEvent;
+          if (langEvent.detail && langEvent.detail.language) {
+            document.documentElement.lang = langEvent.detail.language;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

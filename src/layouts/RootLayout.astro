@@ -27,7 +27,7 @@ const defaultDescription = "A public-interest community reconstructing new relat
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&display=swap" rel="stylesheet">
 
-		<meta property="og:url" content="https://yiluo-photon.github.io/sinthome_website/" />
+		<meta property="og:url" content={Astro.url.href} />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={defaultTitle} />
 		<meta property="og:description" content={defaultDescription} />
@@ -35,8 +35,8 @@ const defaultDescription = "A public-interest community reconstructing new relat
 
 		<!-- Twitter Meta Tags -->
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta property="twitter:domain" content="yiluo-photon.github.io" />
-		<meta property="twitter:url" content="https://yiluo-photon.github.io/sinthome_website/" />
+		<meta property="twitter:domain" content={Astro.url.hostname} />
+		<meta property="twitter:url" content={Astro.url.href} />
 		<meta name="twitter:title" content={defaultTitle} />
 		<meta name="twitter:description" content={defaultDescription} />
 		<meta name="twitter:image" content={assets.socialImage} />
