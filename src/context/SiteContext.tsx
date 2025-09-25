@@ -2,7 +2,7 @@
  * Site context for managing theme and language state
  */
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import type { Language, Theme } from '../content/types';
 import { getStoredTheme, applyTheme, type ThemeId } from '../config/themes';
 
