@@ -181,7 +181,7 @@ console.log('[INDEX-UNIVERSAL SSR] WarpBackground colors being used:', {
 
   <!-- Pass content data to client-side JavaScript -->
   <script define:vars={{ enContent, zhContent }}>
-    window.CONTENT_DATA = {
+    (window as any).CONTENT_DATA = {
       en: enContent,
       zh: zhContent
     };
@@ -234,7 +234,7 @@ console.log('[INDEX-UNIVERSAL SSR] WarpBackground colors being used:', {
           });
 
           // Check React component props if available
-          const reactProps = canvas._reactInternalInstance || canvas.__reactInternalFiber;
+          const reactProps = (canvas as any)._reactInternalInstance || (canvas as any).__reactInternalFiber;
           console.log('[CLIENT DOM] Canvas React props:', reactProps);
         }
 
@@ -254,13 +254,13 @@ console.log('[INDEX-UNIVERSAL SSR] WarpBackground colors being used:', {
       };
     }
 
-    function updateContent(lang, theme) {
+    function updateContent(lang: string, theme: string) {
       console.log('[INDEX] Updating content to:', { lang, theme });
 
       currentLang = lang;
       currentTheme = theme;
 
-      const content = window.CONTENT_DATA[lang];
+      const content = (window as any).CONTENT_DATA[lang];
       if (!content) {
         console.error('[INDEX] No content found for language:', lang);
         return;
@@ -290,7 +290,7 @@ console.log('[INDEX-UNIVERSAL SSR] WarpBackground colors being used:', {
       const practiceTags = document.querySelector('[data-practice-tags]');
       if (practiceTags && homeContent.hero.practices) {
         practiceTags.innerHTML = '';
-        homeContent.hero.practices.forEach(practice => {
+        homeContent.hero.practices.forEach((practice: any) => {
           const span = document.createElement('span');
           span.className = 'px-4 py-2 rounded-full text-sm';
           span.setAttribute('data-practice-tag', '');
@@ -303,7 +303,7 @@ console.log('[INDEX-UNIVERSAL SSR] WarpBackground colors being used:', {
       const ctaContainer = document.querySelector('[data-cta-container]');
       if (ctaContainer && homeContent.hero.cta) {
         ctaContainer.innerHTML = '';
-        homeContent.hero.cta.forEach(cta => {
+        homeContent.hero.cta.forEach((cta: any) => {
           const link = document.createElement('a');
           link.href = cta.href;
           link.setAttribute('data-cta-style', cta.style || 'outline');
@@ -353,7 +353,7 @@ console.log('[INDEX-UNIVERSAL SSR] WarpBackground colors being used:', {
         }
 
         // Reload page with new theme for WarpBackground component
-        const url = new URL(window.location);
+        const url = new URL(window.location.href);
         url.searchParams.set('lang', lang);
         url.searchParams.set('theme', theme);
         window.location.replace(url.toString());
@@ -386,7 +386,7 @@ console.log('[INDEX-UNIVERSAL SSR] WarpBackground colors being used:', {
       if (langSwitch) {
         langSwitch.addEventListener('click', () => {
           const newLang = currentLang === 'en' ? 'zh' : 'en';
-          const url = new URL(window.location);
+          const url = new URL(window.location.href);
           url.searchParams.set('lang', newLang);
           url.searchParams.set('theme', currentTheme);
           // Since we need to reload anyway for language change, just navigate
@@ -397,7 +397,7 @@ console.log('[INDEX-UNIVERSAL SSR] WarpBackground colors being used:', {
       if (themeSwitch) {
         themeSwitch.addEventListener('click', () => {
           const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-          const url = new URL(window.location);
+          const url = new URL(window.location.href);
           url.searchParams.set('lang', currentLang);
           url.searchParams.set('theme', newTheme);
           // Force full page reload to update WarpBackground colors
@@ -406,15 +406,17 @@ console.log('[INDEX-UNIVERSAL SSR] WarpBackground colors being used:', {
       }
 
       // Listen for language/theme change events from navigation
-      window.addEventListener('language-change', (event) => {
-        const newLang = event.detail.language;
+      window.addEventListener('language-change', (event: Event) => {
+        const customEvent = event as CustomEvent<{ language: string }>;
+        const newLang = customEvent.detail.language;
         updateContent(newLang, currentTheme);
       });
 
-      window.addEventListener('theme-change', (event) => {
-        const newTheme = event.detail.theme;
+      window.addEventListener('theme-change', (event: Event) => {
+        const customEvent = event as CustomEvent<{ theme: string }>;
+        const newTheme = customEvent.detail.theme;
         // For theme changes, we need to reload to update WarpBackground
-        const url = new URL(window.location);
+        const url = new URL(window.location.href);
         url.searchParams.set('lang', currentLang);
         url.searchParams.set('theme', newTheme);
         window.location.href = url.toString();

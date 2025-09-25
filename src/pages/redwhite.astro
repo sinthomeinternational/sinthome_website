@@ -47,22 +47,27 @@ const warpColors = {
     <div class="text-center space-y-12 max-w-5xl">
       <!-- SINTHOME Title -->
       <h1 class="text-[120px] md:text-[180px] font-black tracking-wider text-gray-900">
-        {homeContent.hero.title}
+        {homeContent.hero?.title || 'SINTHOME'}
       </h1>
 
       <!-- Tagline -->
-      <h2 class="text-xl md:text-2xl tracking-[0.3em] uppercase text-gray-700 font-bold">
-        {homeContent.hero.tagline}
-      </h2>
+      {homeContent.hero?.tagline && (
+        <h2 class="text-xl md:text-2xl tracking-[0.3em] uppercase text-gray-700 font-bold">
+          {homeContent.hero.tagline}
+        </h2>
+      )}
 
       <!-- Subtitle -->
-      <p class="text-lg md:text-xl max-w-4xl mx-auto leading-relaxed text-gray-600">
-        {homeContent.hero.subtitle}
-      </p>
+      {homeContent.hero?.subtitle && (
+        <p class="text-lg md:text-xl max-w-4xl mx-auto leading-relaxed text-gray-600">
+          {homeContent.hero.subtitle}
+        </p>
+      )}
 
       <!-- CTA Buttons -->
-      <div class="flex flex-wrap justify-center gap-4">
-        {homeContent.hero.cta.map((cta) => (
+      {homeContent.hero?.cta && homeContent.hero.cta.length > 0 && (
+        <div class="flex flex-wrap justify-center gap-4">
+          {homeContent.hero.cta.map((cta) => (
           <a
             href={cta.href}
             class={`
@@ -77,8 +82,9 @@ const warpColors = {
           >
             {cta.text}
           </a>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       <!-- Theme Switcher Link -->
       <div class="mt-8">
