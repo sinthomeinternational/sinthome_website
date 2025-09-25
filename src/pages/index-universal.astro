@@ -181,7 +181,7 @@ console.log('[INDEX-UNIVERSAL SSR] WarpBackground colors being used:', {
 
   <!-- Pass content data to client-side JavaScript -->
   <script define:vars={{ enContent, zhContent }}>
-    (window as any).CONTENT_DATA = {
+    window.CONTENT_DATA = {
       en: enContent,
       zh: zhContent
     };
@@ -260,7 +260,7 @@ console.log('[INDEX-UNIVERSAL SSR] WarpBackground colors being used:', {
       currentLang = lang;
       currentTheme = theme;
 
-      const content = (window as any).CONTENT_DATA[lang];
+      const content = window.CONTENT_DATA[lang];
       if (!content) {
         console.error('[INDEX] No content found for language:', lang);
         return;
