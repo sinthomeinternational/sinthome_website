@@ -109,9 +109,9 @@ const content: SiteContent = {
           '工厂AI解决方案'
         ],
         cta: [
-          { text: '关于我们', href: '/sinthome_website/who-we-are', style: 'primary' },
-          { text: '我们的项目', href: '/sinthome_website/what-we-do', style: 'secondary' },
-          { text: '加入我们', href: '/sinthome_website/contact', style: 'outline' }
+          { text: '关于我们', href: '/who-we-are', style: 'primary' },
+          { text: '我们的项目', href: '/what-we-do', style: 'secondary' },
+          { text: '加入我们', href: '/contact', style: 'outline' }
         ]
       }
     },

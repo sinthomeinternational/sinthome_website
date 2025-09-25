@@ -108,9 +108,9 @@ const content: SiteContent = {
           'Factory AI Solution'
         ],
         cta: [
-          { text: 'ABOUT US', href: '/sinthome_website/who-we-are', style: 'primary' },
-          { text: 'OUR PROJECTS', href: '/sinthome_website/what-we-do', style: 'secondary' },
-          { text: 'JOIN US', href: '/sinthome_website/contact', style: 'outline' }
+          { text: 'ABOUT US', href: '/who-we-are', style: 'primary' },
+          { text: 'OUR PROJECTS', href: '/what-we-do', style: 'secondary' },
+          { text: 'JOIN US', href: '/contact', style: 'outline' }
         ]
       }
     },
