@@ -1,11 +1,12 @@
 /**
  * Site Configuration
  * Centralized configuration for URLs, API endpoints, and site metadata
+ * All URLs and external references should be configured here
  */
 
 export const SITE_CONFIG = {
   // Site metadata
-  name: 'SINTHOME',
+  name: import.meta.env.PUBLIC_SITE_NAME || 'SINTHOME',
   tagline: 'Empowering Communities Through Technology',
   description: 'A non-profit organization dedicated to making technology accessible for everyone',
 
@@ -14,11 +15,35 @@ export const SITE_CONFIG = {
     // Base URL is set by Astro config
     base: import.meta.env.BASE_URL || '/',
 
-    // External links
-    github: 'https://github.com/Yiluo-pHoton/sinthome_website',
-    linkedin: 'https://linkedin.com/company/sinthome',
-    twitter: 'https://twitter.com/sinthome',
-    facebook: 'https://facebook.com/sinthome',
+    // Site URL
+    site: import.meta.env.PUBLIC_SITE_URL || 'https://sinthome.org',
+
+    // External links - Using environment variables with fallbacks
+    github: import.meta.env.PUBLIC_GITHUB_URL || 'https://github.com/sinthomeinternational',
+    linkedin: import.meta.env.PUBLIC_LINKEDIN_URL || 'https://linkedin.com/company/sinthome',
+    twitter: import.meta.env.PUBLIC_TWITTER_URL || 'https://twitter.com/sinthome',
+    facebook: import.meta.env.PUBLIC_FACEBOOK_URL || 'https://facebook.com/sinthome',
+    instagram: import.meta.env.PUBLIC_INSTAGRAM_URL || 'https://instagram.com/sinthome',
+    youtube: import.meta.env.PUBLIC_YOUTUBE_URL || 'https://www.youtube.com/sinthome',
+
+    // Chinese platforms
+    bilibili: import.meta.env.PUBLIC_BILIBILI_URL || 'https://bilibili.com',
+    wechat: import.meta.env.PUBLIC_WECHAT_URL || '#wechat',
+    xiaohongshu: import.meta.env.PUBLIC_XIAOHONGSHU_URL || 'https://xiaohongshu.com',
+  },
+
+  // Payment and donation links
+  payments: {
+    paypal: import.meta.env.PUBLIC_PAYPAL_URL || 'https://paypal.me/sinthome',
+    venmo: import.meta.env.PUBLIC_VENMO_URL || 'https://venmo.com/sinthome',
+  },
+
+  // Google Forms configuration
+  forms: {
+    contact: import.meta.env.PUBLIC_CONTACT_FORM_ID || '',
+    newsletter: import.meta.env.PUBLIC_NEWSLETTER_FORM_ID || '',
+    volunteer: import.meta.env.PUBLIC_VOLUNTEER_FORM_ID || '',
+    donation: import.meta.env.PUBLIC_DONATION_FORM_ID || '',
   },
 
   // API endpoints (when backend is added)
@@ -34,8 +59,8 @@ export const SITE_CONFIG = {
 
   // Contact information
   contact: {
-    email: 'contact@sinthome.org',
-    phone: '+1 (555) 123-4567',
+    email: import.meta.env.PUBLIC_CONTACT_EMAIL || 'contact@sinthome.org',
+    phone: import.meta.env.PUBLIC_CONTACT_PHONE || '+1 (555) 123-4567',
     address: {
       street: '123 Tech Street',
       city: 'San Francisco',
@@ -45,13 +70,13 @@ export const SITE_CONFIG = {
     }
   },
 
-  // Social media handles
+  // Social media handles (without @ or full URLs)
   social: {
-    twitter: '@sinthome',
+    twitter: 'sinthome',
     linkedin: 'sinthome',
-    github: 'sinthome',
+    github: 'sinthomeinternational',
     facebook: 'sinthome',
-    instagram: '@sinthome'
+    instagram: 'sinthome'
   },
 
   // Navigation items

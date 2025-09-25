@@ -3,6 +3,7 @@ import RedWhitePageLayout from "../../layouts/RedWhitePageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
 import GoogleForm from "../../components/forms/GoogleForm";
 import { FORMS } from "../../config/forms";
+import { SITE_CONFIG } from "../../config/site";
 ---
 
 <RedWhitePageLayout title="Donate - Sinthome" useInfoLayout={true}>
@@ -61,7 +62,7 @@ import { FORMS } from "../../config/forms";
             </p>
             <div class="flex flex-wrap gap-3">
               <a
-                href="https://paypal.me/sinthome"
+                href={SITE_CONFIG.payments.paypal}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -69,7 +70,7 @@ import { FORMS } from "../../config/forms";
                 Donate via PayPal
               </a>
               <a
-                href="https://venmo.com/sinthome"
+                href={SITE_CONFIG.payments.venmo}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-block px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors"

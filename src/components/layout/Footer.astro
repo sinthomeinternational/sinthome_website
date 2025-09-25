@@ -1,5 +1,6 @@
 ---
 import ExternalLink from "../ui/ExternalLink.astro";
+import { SITE_CONFIG } from "../../config/site";
 ---
 
 <footer class="bg-zinc-900 border-t border-zinc-800 py-8 px-4 sm:px-12">
@@ -8,7 +9,7 @@ import ExternalLink from "../ui/ExternalLink.astro";
         <div class="flex items-center justify-center gap-8 mb-6">
             <!-- Bilibili -->
             <ExternalLink
-                href="https://bilibili.com"
+                href={SITE_CONFIG.urls.bilibili}
                 openNewTab={true}
                 class="text-zinc-400 hover:text-red-500 transition-colors duration-200"
                 aria-label="Visit our Bilibili page"
@@ -21,7 +22,7 @@ import ExternalLink from "../ui/ExternalLink.astro";
 
             <!-- WeChat -->
             <ExternalLink
-                href="#wechat"
+                href={SITE_CONFIG.urls.wechat}
                 openNewTab={true}
                 class="text-zinc-400 hover:text-red-500 transition-colors duration-200"
                 aria-label="Visit our WeChat page"
@@ -35,7 +36,7 @@ import ExternalLink from "../ui/ExternalLink.astro";
 
             <!-- Xiaohongshu -->
             <ExternalLink
-                href="https://xiaohongshu.com"
+                href={SITE_CONFIG.urls.xiaohongshu}
                 openNewTab={true}
                 class="text-zinc-400 hover:text-red-500 transition-colors duration-200"
                 aria-label="Visit our Xiaohongshu page"
@@ -48,7 +49,7 @@ import ExternalLink from "../ui/ExternalLink.astro";
 
             <!-- Email -->
             <ExternalLink
-                href="mailto:contact@sinthome.org"
+                href={`mailto:${SITE_CONFIG.contact.email}`}
                 openNewTab={false}
                 class="text-zinc-400 hover:text-red-500 transition-colors duration-200"
                 aria-label="Send us an email"

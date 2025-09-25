@@ -2,6 +2,7 @@
 import H1 from "../../components/ui/H1.astro";
 import RedWhitePageLayout from "../../layouts/RedWhitePageLayout.astro";
 import ExternalLink from "../../components/ui/ExternalLink.astro";
+import { SITE_CONFIG } from "../../config/site";
 ---
 
 <RedWhitePageLayout title="Contact - Sinthome" useInfoLayout={true}>
@@ -15,8 +16,8 @@ import ExternalLink from "../../components/ui/ExternalLink.astro";
                </p>
 
                <div class="mt-6 sm:mt-12 flex flex-col gap-1">
-                    <a href="mailto:hello@sinthome.org" class="mb-8 w-fit group flex items-center gap-1 text-base lg:text-xl text-black hover:text-red-600">
-                         hello@sinthome.org
+                    <a href={`mailto:${SITE_CONFIG.contact.email}`} class="mb-8 w-fit group flex items-center gap-1 text-base lg:text-xl text-black hover:text-red-600">
+                         {SITE_CONFIG.contact.email}
                          <svg xmlns="http://www.w3.org/2000/svg" class="-rotate-45 group-hover:rotate-0 transition-all duration-300 ease-in-out" width="24" height="24" viewBox="0 0 24 24">
                               <title>Arrow Icon</title>
                               <path fill="currentColor" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10" opacity=".5"/>
@@ -24,10 +25,10 @@ import ExternalLink from "../../components/ui/ExternalLink.astro";
                          </svg>
                     </a>
 
-                    <ExternalLink href="https://x.com/sinthome_org">Twitter</ExternalLink>
-                    <ExternalLink href="https://instagram.com/sinthome.org">Instagram</ExternalLink>
-                    <ExternalLink href="https://www.youtube.com/sinthome">YouTube</ExternalLink>
-                    <ExternalLink href="https://github.com/sinthome-org">GitHub</ExternalLink>
+                    <ExternalLink href={SITE_CONFIG.urls.twitter}>Twitter</ExternalLink>
+                    <ExternalLink href={SITE_CONFIG.urls.instagram}>Instagram</ExternalLink>
+                    <ExternalLink href={SITE_CONFIG.urls.youtube}>YouTube</ExternalLink>
+                    <ExternalLink href={SITE_CONFIG.urls.github}>GitHub</ExternalLink>
                </div>
           </div>
 

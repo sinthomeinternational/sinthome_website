@@ -3,6 +3,7 @@
  */
 
 import type { SiteContent } from '../types';
+import { SITE_CONFIG } from '../../config/site';
 
 const content: SiteContent = {
   navigation: {
@@ -57,10 +58,10 @@ const content: SiteContent = {
       }
     ],
     social: [
-      { platform: 'github', url: 'https://github.com/sinthome', label: 'GitHub' },
-      { platform: 'linkedin', url: 'https://linkedin.com/company/sinthome', label: 'LinkedIn' },
-      { platform: 'twitter', url: 'https://twitter.com/sinthome', label: 'Twitter' },
-      { platform: 'facebook', url: 'https://facebook.com/sinthome', label: 'Facebook' },
+      { platform: 'github', url: SITE_CONFIG.urls.github, label: 'GitHub' },
+      { platform: 'linkedin', url: SITE_CONFIG.urls.linkedin, label: 'LinkedIn' },
+      { platform: 'twitter', url: SITE_CONFIG.urls.twitter, label: 'Twitter' },
+      { platform: 'facebook', url: SITE_CONFIG.urls.facebook, label: 'Facebook' },
     ]
   },
 
@@ -162,7 +163,7 @@ const content: SiteContent = {
           id: 'info',
           title: 'Contact Information',
           items: [
-            { title: 'Email', description: 'contact@sinthome.org' },
+            { title: 'Email', description: SITE_CONFIG.contact.email },
             { title: 'Phone', description: '+1 (555) 123-4567' },
             { title: 'Address', description: '123 Tech Street, San Francisco, CA 94102' }
           ]
