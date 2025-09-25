@@ -17,6 +17,7 @@ export interface Props {
   language?: Language;
   theme?: Theme;
   showNavigation?: boolean;
+  showFooter?: boolean;
   useInfoLayout?: boolean;
 }
 
@@ -26,6 +27,7 @@ const {
   language = 'en',
   theme = 'dark',
   showNavigation = true,
+  showFooter = true,
   useInfoLayout = false
 } = Astro.props;
 
@@ -36,8 +38,10 @@ const themeConfig = getTheme(theme);
 // Base URL for assets
 const baseUrl = import.meta.env.BASE_URL;
 
-// Apply theme classes
-const bodyClasses = themeConfig.classes.body;
+// Apply theme classes with proper overrides for light theme
+const bodyClasses = theme === 'light'
+  ? 'bg-white text-gray-900'
+  : themeConfig.classes.body;
 ---
 
 <!DOCTYPE html>
@@ -87,7 +91,7 @@ const bodyClasses = themeConfig.classes.body;
     </style>
   </head>
 
-  <body class={bodyClasses}>
+  <body class={`${bodyClasses} theme-${theme}`} style={theme === 'light' ? 'background-color: white !important;' : ''}>
     {showNavigation && (
       <UniversalNavigation
         client:load
@@ -101,13 +105,35 @@ const bodyClasses = themeConfig.classes.body;
       <slot />
     </main>
 
-    <UniversalFooter
-      content={content.footer}
-      theme={theme}
-    />
+    {showFooter && (
+      <UniversalFooter
+        content={content.footer}
+        theme={theme}
+      />
+    )}
 
     <!-- Theme and language switcher script -->
     <script>
+      // Extend Window interface for our custom function
+      declare global {
+        interface Window {
+          applyTheme: (theme: string) => void;
+        }
+      }
+
+      // Define custom event types
+      interface ThemeChangeEvent extends CustomEvent {
+        detail: {
+          theme: string;
+        };
+      }
+
+      interface LanguageChangeEvent extends CustomEvent {
+        detail: {
+          language: string;
+        };
+      }
+
       // Initialize theme on page load
       document.addEventListener('DOMContentLoaded', function() {
         // Apply initial theme
@@ -115,20 +141,23 @@ const bodyClasses = themeConfig.classes.body;
         const currentTheme = html.classList.contains('theme-light') ? 'light' : 'dark';
 
         // Set up theme CSS variables dynamically
-        const applyTheme = (theme) => {
+        const applyTheme = (theme: string): void => {
           // Remove existing theme classes
           html.classList.remove('theme-dark', 'theme-light');
           html.classList.add(`theme-${theme}`);
 
-          // Apply theme-specific body classes
+          // Apply theme-specific body classes with higher specificity
+          document.body.className = document.body.className
+            .replace(/bg-\[#0a0a0a\]|bg-white/g, '');
+
           if (theme === 'light') {
-            document.body.className = document.body.className
-              .replace(/bg-\[#0a0a0a\]/g, 'bg-white')
-              .replace(/text-white/g, 'text-gray-900');
+            document.body.className += ' bg-white text-gray-900';
+            document.body.style.backgroundColor = 'white';
+            document.body.style.color = '#111827';
           } else {
-            document.body.className = document.body.className
-              .replace(/bg-white/g, 'bg-[#0a0a0a]')
-              .replace(/text-gray-900/g, 'text-white');
+            document.body.className += ' bg-[#0a0a0a] text-white';
+            document.body.style.backgroundColor = '#0a0a0a';
+            document.body.style.color = 'white';
           }
 
           // Update CSS variables
@@ -165,16 +194,18 @@ const bodyClasses = themeConfig.classes.body;
         window.applyTheme = applyTheme;
 
         // Listen for theme change events
-        window.addEventListener('theme-change', (event) => {
-          if (event.detail && event.detail.theme) {
-            applyTheme(event.detail.theme);
+        window.addEventListener('theme-change', (event: Event) => {
+          const themeEvent = event as ThemeChangeEvent;
+          if (themeEvent.detail && themeEvent.detail.theme) {
+            applyTheme(themeEvent.detail.theme);
           }
         });
 
         // Listen for language change events
-        window.addEventListener('language-change', (event) => {
-          if (event.detail && event.detail.language) {
-            document.documentElement.lang = event.detail.language;
+        window.addEventListener('language-change', (event: Event) => {
+          const langEvent = event as LanguageChangeEvent;
+          if (langEvent.detail && langEvent.detail.language) {
+            document.documentElement.lang = langEvent.detail.language;
           }
         });
       });

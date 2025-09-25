@@ -1,0 +1,91 @@
+---
+/**
+ * Red/White Theme Homepage
+ * Static page with light theme pre-configured
+ */
+
+import UniversalLayout from '../layouts/UniversalLayout.astro';
+import WarpBackground from '../components/WarpBackground';
+import type { Language } from '../content/types';
+import { loadContent } from '../content/loader';
+
+// Fixed theme for this page
+const theme = 'light';
+const language = 'en' as Language;
+
+// Load content
+const content = await loadContent(language);
+const homeContent = content.pages.home;
+
+// Light theme colors - baked in at build time
+const warpColors = {
+  color1: "#fca5a5",
+  color2: "#ef4444",
+  color3: "#b91c1c"
+};
+---
+
+<UniversalLayout
+  title={homeContent.title}
+  description={homeContent.description}
+  language={language}
+  theme={theme}
+  showNavigation={true}
+  showFooter={true}
+>
+  <!-- Warp Background with light colors -->
+  <div class="fixed inset-0 z-0">
+    <WarpBackground
+      {...warpColors}
+      speed={0.02}
+      className="w-full h-full"
+    />
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
+    <div class="text-center space-y-12 max-w-5xl">
+      <!-- SINTHOME Title -->
+      <h1 class="text-[120px] md:text-[180px] font-black tracking-wider text-gray-900">
+        {homeContent.hero.title}
+      </h1>
+
+      <!-- Tagline -->
+      <h2 class="text-xl md:text-2xl tracking-[0.3em] uppercase text-gray-700 font-bold">
+        {homeContent.hero.tagline}
+      </h2>
+
+      <!-- Subtitle -->
+      <p class="text-lg md:text-xl max-w-4xl mx-auto leading-relaxed text-gray-600">
+        {homeContent.hero.subtitle}
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-wrap justify-center gap-4">
+        {homeContent.hero.cta.map((cta) => (
+          <a
+            href={cta.href}
+            class={`
+              px-8 py-4 text-sm font-bold uppercase tracking-wider
+              ${cta.style === 'primary'
+                ? 'bg-red-600 text-white hover:bg-red-700'
+                : cta.style === 'secondary'
+                ? 'bg-gray-900 text-white hover:bg-gray-800'
+                : 'border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white'}
+              transition-all duration-200
+            `}
+          >
+            {cta.text}
+          </a>
+        ))}
+      </div>
+
+      <!-- Theme Switcher Link -->
+      <div class="mt-8">
+        <a href="/sinthome_website/" class="text-gray-600 hover:text-gray-900 text-sm">
+          Switch to Dark Theme →
+        </a>
+      </div>
+    </div>
+  </div>
+</UniversalLayout>

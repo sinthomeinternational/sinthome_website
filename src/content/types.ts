@@ -8,10 +8,13 @@ export interface PageContent {
   hero?: {
     title: string;
     subtitle?: string;
+    tagline?: string;
     cta?: {
       text: string;
       href?: string;
+      style?: 'primary' | 'secondary' | 'outline';
     }[];
+    practices?: any[];
   };
   sections?: ContentSection[];
   meta?: {

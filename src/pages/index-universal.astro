@@ -1,0 +1,479 @@
+---
+/**
+ * Main homepage with universal architecture
+ * Maintains the original homepage design with full content
+ */
+
+import UniversalLayout from "../layouts/UniversalLayout.astro";
+import WarpBackground from "../components/ui/WarpBackground";
+import type { Language, Theme } from '../content/types';
+
+// Get initial values from URL params (for server-side rendering)
+// Using Astro.url directly which is the recommended approach
+const language = (Astro.url.searchParams.get('lang') || 'en') as Language;
+const theme = (Astro.url.searchParams.get('theme') || 'dark') as Theme;
+
+console.log('[INDEX-UNIVERSAL SSR] Server-side params:', { language, theme });
+console.log('[INDEX-UNIVERSAL SSR] Full URL:', Astro.url.href);
+console.log('[INDEX-UNIVERSAL SSR] URL pathname:', Astro.url.pathname);
+console.log('[INDEX-UNIVERSAL SSR] URL search:', Astro.url.search);
+console.log('[INDEX-UNIVERSAL SSR] All search params:', Array.from(Astro.url.searchParams.entries()));
+console.log('[INDEX-UNIVERSAL SSR] Theme param from URL:', Astro.url.searchParams.get('theme'));
+console.log('[INDEX-UNIVERSAL SSR] Final theme value:', theme);
+console.log('[INDEX-UNIVERSAL SSR] Request URL:', Astro.request.url);
+console.log('[INDEX-UNIVERSAL SSR] Request headers:', Object.fromEntries(Astro.request.headers.entries()));
+
+// Load both language contents for client-side switching
+let enContent, zhContent;
+try {
+  const enModule = await import('../content/data/en');
+  const zhModule = await import('../content/data/zh');
+  enContent = enModule.default;
+  zhContent = zhModule.default;
+} catch (error) {
+  console.error('[INDEX] Error loading content:', error);
+}
+
+// Default to English content for server render
+const content = enContent;
+const homeContent = content?.pages?.home;
+
+// Theme-specific background colors
+const warpColors = {
+  dark: {
+    color1: "#000000",
+    color2: "#5a0000",
+    color3: "#ff0000"
+  },
+  light: {
+    color1: "#fca5a5",
+    color2: "#ef4444",
+    color3: "#b91c1c"
+  }
+};
+
+console.log('[INDEX-UNIVERSAL SSR] Selected theme:', theme);
+console.log('[INDEX-UNIVERSAL SSR] WarpBackground colors being used:', {
+  theme,
+  colors: warpColors[theme],
+  color1: theme === 'dark' ? "#000000" : "#fca5a5",
+  color2: theme === 'dark' ? "#5a0000" : "#ef4444",
+  color3: theme === 'dark' ? "#ff0000" : "#b91c1c"
+});
+---
+
+<UniversalLayout
+  title={homeContent?.title || 'SINTHOME'}
+  description={homeContent?.description}
+  language={language}
+  theme={theme}
+  showNavigation={false}
+  showFooter={false}
+  useInfoLayout={false}
+>
+  <!-- DEBUG INFO -->
+  <div style="position: fixed; top: 0; left: 0; background: yellow; color: black; z-index: 9999; padding: 10px; font-size: 12px;">
+    DEBUG: Server Theme = {theme} | Colors = {JSON.stringify(warpColors[theme])}
+  </div>
+
+  <div class={`group relative w-full min-h-dvh flex items-center justify-center overflow-auto theme-${theme}`}>
+
+    <div class="absolute w-full h-dvh -z-10" data-warp-container data-theme={theme}>
+      <WarpBackground
+        color1={warpColors[theme].color1}
+        color2={warpColors[theme].color2}
+        color3={warpColors[theme].color3}
+        speed={theme === 'dark' ? 0.9 : 0.6}
+        swirl={theme === 'dark' ? 0.98 : 0.5}
+        swirlIterations={theme === 'dark' ? 25 : 10}
+        shapeScale={theme === 'dark' ? 0.12 : 0.3}
+        rotation={theme === 'dark' ? 0.85 : 0.5}
+        client:load
+      />
+    </div>
+
+    <div class="p-4 sm:p-8 absolute w-full h-dvh flex flex-col justify-between z-10">
+      <!-- Language/Theme Switcher in top-right corner -->
+      <div class="flex justify-end">
+        <div class="flex gap-2">
+          <button
+            data-lang-switch
+            class="px-3 py-1 text-xs font-medium text-white/70 border border-white/20 rounded backdrop-blur-sm hover:bg-white/10 transition-colors"
+          >
+            <span data-lang-text>中文</span>
+          </button>
+          <button
+            data-theme-switch
+            class="px-3 py-1 text-xs font-medium text-white/70 border border-white/20 rounded backdrop-blur-sm hover:bg-white/10 transition-colors"
+          >
+            <span data-theme-text>☀️</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Hero Section -->
+      <div class="flex-1 flex flex-col justify-center items-center text-center">
+        <!-- SINTHOME Title -->
+        <h1 class="sinthome-title font-black uppercase mb-0 px-12 sm:px-16 md:px-20 lg:px-24" data-hero-title data-theme-text>
+          {homeContent?.hero?.title || 'SINTHOME'}
+        </h1>
+
+        <!-- Tagline -->
+        <p class="text-xl sm:text-2xl font-semibold mb-6" data-hero-tagline data-theme-text>
+          {homeContent?.hero?.tagline || 'Knowledge — Critique — Praxis'}
+        </p>
+
+        <!-- Description -->
+        <p class="text-base max-w-2xl mx-auto mb-10" data-hero-description data-theme-text>
+          {homeContent?.hero?.subtitle || 'A public-interest community reconstructing new relations of production through the integration of knowledge learning, theoretical critique, and social praxis'}
+        </p>
+
+        <!-- Practice Tags -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10 max-w-3xl" data-practice-tags>
+          {homeContent?.hero?.practices?.map((practice) => (
+            <span class="px-4 py-2 rounded-full text-sm" data-practice-tag>
+              {practice}
+            </span>
+          ))}
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4" data-cta-container>
+          {homeContent?.hero?.cta?.map((cta) => {
+            const getButtonClass = (style: string) => {
+              if (theme === 'light') {
+                // Light theme: white buttons with red text (like redwhite theme)
+                switch(style) {
+                  case 'primary':
+                    return 'px-8 py-4 bg-white/90 text-red-600 font-bold hover:bg-white transition-colors';
+                  case 'secondary':
+                    return 'px-8 py-4 bg-white/90 text-red-600 font-bold hover:bg-white transition-colors';
+                  case 'outline':
+                  default:
+                    return 'px-8 py-4 bg-white/90 text-red-600 font-bold hover:bg-white transition-colors';
+                }
+              } else {
+                switch(style) {
+                  case 'primary':
+                    return 'px-8 py-4 bg-white text-black font-bold hover:bg-gray-200 transition-colors';
+                  case 'secondary':
+                    return 'px-8 py-4 bg-black text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors';
+                  case 'outline':
+                  default:
+                    return 'px-8 py-4 text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors';
+                }
+              }
+            };
+            return (
+              <a
+                href={cta.href}
+                class={getButtonClass(cta.style || 'outline')}
+                data-cta-style={cta.style}
+              >
+                {cta.text}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pass content data to client-side JavaScript -->
+  <script define:vars={{ enContent, zhContent }}>
+    window.CONTENT_DATA = {
+      en: enContent,
+      zh: zhContent
+    };
+  </script>
+
+  <!-- Client-side dynamic content switching script -->
+  <script>
+    // Immediately check URL params before DOM loads for faster theme application
+    const urlParams = new URLSearchParams(window.location.search);
+    const themeFromUrl = urlParams.get('theme') || 'dark';
+    const langFromUrl = urlParams.get('lang') || 'en';
+
+    let currentLang = langFromUrl;
+    let currentTheme = themeFromUrl;
+
+    // Debug WarpBackground
+    console.log('[CLIENT] Script loaded, URL:', window.location.href);
+    console.log('[CLIENT] Initial theme from URL:', themeFromUrl);
+
+    // Apply theme immediately if it's light (before React components load)
+    if (themeFromUrl === 'light') {
+      console.log('[CLIENT] Light theme detected on initial load');
+      // Since Astro strips query params on server with base path,
+      // we need to handle the theme client-side immediately
+
+      // The page will reload with correct theme via the theme switcher logic
+      // which properly preserves the URL params
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const themeFromUrl = urlParams.get('theme');
+      console.log('[CLIENT DOM] Theme from URL:', themeFromUrl);
+
+      const warpContainer = document.querySelector('[data-warp-container]');
+      const currentThemeAttr = warpContainer?.getAttribute('data-theme');
+      console.log('[CLIENT DOM] WarpBackground container data-theme attribute:', currentThemeAttr);
+      console.log('[CLIENT DOM] Full URL params:', urlParams.toString());
+
+      // Check if WarpBackground component is loaded
+      setTimeout(() => {
+        const canvas = warpContainer?.querySelector('canvas');
+        console.log('[CLIENT DOM] WarpBackground canvas found after delay:', !!canvas);
+
+        if (canvas) {
+          console.log('[CLIENT DOM] Canvas styles:', {
+            backgroundColor: window.getComputedStyle(canvas).backgroundColor,
+            width: canvas.style.width,
+            height: canvas.style.height
+          });
+
+          // Check React component props if available
+          const reactProps = canvas._reactInternalInstance || canvas.__reactInternalFiber;
+          console.log('[CLIENT DOM] Canvas React props:', reactProps);
+        }
+
+        // Check container classes
+        const mainContainer = document.querySelector('.theme-light, .theme-dark');
+        console.log('[CLIENT DOM] Main container classes:', mainContainer?.className);
+        console.log('[CLIENT DOM] Body classes:', document.body.className);
+        console.log('[CLIENT DOM] HTML classes:', document.documentElement.className);
+      }, 1000); // Wait for React component to mount
+    });
+
+    function getUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        lang: params.get('lang') || 'en',
+        theme: params.get('theme') || 'dark'
+      };
+    }
+
+    function updateContent(lang, theme) {
+      console.log('[INDEX] Updating content to:', { lang, theme });
+
+      currentLang = lang;
+      currentTheme = theme;
+
+      const content = window.CONTENT_DATA[lang];
+      if (!content) {
+        console.error('[INDEX] No content found for language:', lang);
+        return;
+      }
+
+      const homeContent = content.pages.home;
+
+      // Update hero title
+      const heroTitle = document.querySelector('[data-hero-title]');
+      if (heroTitle) {
+        heroTitle.textContent = homeContent.hero.title;
+      }
+
+      // Update tagline
+      const heroTagline = document.querySelector('[data-hero-tagline]');
+      if (heroTagline) {
+        heroTagline.textContent = homeContent.hero.tagline;
+      }
+
+      // Update description
+      const heroDescription = document.querySelector('[data-hero-description]');
+      if (heroDescription) {
+        heroDescription.textContent = homeContent.hero.subtitle;
+      }
+
+      // Update practice tags
+      const practiceTags = document.querySelector('[data-practice-tags]');
+      if (practiceTags && homeContent.hero.practices) {
+        practiceTags.innerHTML = '';
+        homeContent.hero.practices.forEach(practice => {
+          const span = document.createElement('span');
+          span.className = 'px-4 py-2 rounded-full text-sm';
+          span.setAttribute('data-practice-tag', '');
+          span.textContent = practice;
+          practiceTags.appendChild(span);
+        });
+      }
+
+      // Update CTA buttons
+      const ctaContainer = document.querySelector('[data-cta-container]');
+      if (ctaContainer && homeContent.hero.cta) {
+        ctaContainer.innerHTML = '';
+        homeContent.hero.cta.forEach(cta => {
+          const link = document.createElement('a');
+          link.href = cta.href;
+          link.setAttribute('data-cta-style', cta.style || 'outline');
+
+          // Apply style-specific classes based on theme
+          if (theme === 'light') {
+            // Light theme: white buttons with red text (like redwhite theme)
+            link.className = 'px-8 py-4 bg-white/90 text-red-600 font-bold hover:bg-white transition-colors';
+          } else {
+            switch(cta.style) {
+              case 'primary':
+                link.className = 'px-8 py-4 bg-white text-black font-bold hover:bg-gray-200 transition-colors';
+                break;
+              case 'secondary':
+                link.className = 'px-8 py-4 bg-black text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors';
+                break;
+              case 'outline':
+              default:
+                link.className = 'px-8 py-4 text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors';
+                break;
+            }
+          }
+
+          link.textContent = cta.text;
+          ctaContainer.appendChild(link);
+        });
+      }
+
+      // Apply theme
+      if (window.applyTheme) {
+        window.applyTheme(theme);
+      }
+
+      // Force theme update on current page before potential reload
+      const bodyElement = document.body;
+      const mainContainer = document.querySelector('.theme-' + currentTheme);
+
+      if (theme !== currentTheme && mainContainer) {
+        mainContainer.className = mainContainer.className.replace(/theme-(dark|light)/, `theme-${theme}`);
+
+        if (theme === 'light') {
+          bodyElement.style.backgroundColor = 'white';
+          bodyElement.className = bodyElement.className.replace(/bg-\[#0a0a0a\]/, 'bg-white');
+        } else {
+          bodyElement.style.backgroundColor = '#0a0a0a';
+          bodyElement.className = bodyElement.className.replace(/bg-white/, 'bg-[#0a0a0a]');
+        }
+
+        // Reload page with new theme for WarpBackground component
+        const url = new URL(window.location);
+        url.searchParams.set('lang', lang);
+        url.searchParams.set('theme', theme);
+        window.location.replace(url.toString());
+      }
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('[INDEX] Page loaded, initializing...');
+      const { lang, theme } = getUrlParams();
+      currentLang = lang;
+      currentTheme = theme;
+
+      // Update button text
+      const langBtn = document.querySelector('[data-lang-text]');
+      const themeBtn = document.querySelector('[data-theme-text]');
+      if (langBtn) langBtn.textContent = currentLang === 'en' ? '中文' : 'EN';
+      if (themeBtn) themeBtn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+      // Update content if different from server-rendered default
+      // Since server can't see query params, we always need to check
+      if (lang !== 'en' || theme !== 'dark') {
+        updateContent(lang, theme);
+      }
+
+      // Add click handlers for switcher buttons
+      const langSwitch = document.querySelector('[data-lang-switch]');
+      const themeSwitch = document.querySelector('[data-theme-switch]');
+
+      if (langSwitch) {
+        langSwitch.addEventListener('click', () => {
+          const newLang = currentLang === 'en' ? 'zh' : 'en';
+          const url = new URL(window.location);
+          url.searchParams.set('lang', newLang);
+          url.searchParams.set('theme', currentTheme);
+          // Since we need to reload anyway for language change, just navigate
+          window.location.href = url.toString();
+        });
+      }
+
+      if (themeSwitch) {
+        themeSwitch.addEventListener('click', () => {
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          const url = new URL(window.location);
+          url.searchParams.set('lang', currentLang);
+          url.searchParams.set('theme', newTheme);
+          // Force full page reload to update WarpBackground colors
+          window.location.replace(url.toString());
+        });
+      }
+
+      // Listen for language/theme change events from navigation
+      window.addEventListener('language-change', (event) => {
+        const newLang = event.detail.language;
+        updateContent(newLang, currentTheme);
+      });
+
+      window.addEventListener('theme-change', (event) => {
+        const newTheme = event.detail.theme;
+        // For theme changes, we need to reload to update WarpBackground
+        const url = new URL(window.location);
+        url.searchParams.set('lang', currentLang);
+        url.searchParams.set('theme', newTheme);
+        window.location.href = url.toString();
+      });
+    });
+  </script>
+
+  <style>
+    /* SINTHOME title styling - League Spartan Bold */
+    .sinthome-title {
+      font-family: 'League Spartan', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.06em;
+      font-size: min(18vw, 16rem);
+      line-height: 1;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transform: scaleX(1);
+      transform-origin: center;
+    }
+
+    /* Dark theme styles (default) */
+    [data-theme-text] {
+      color: white;
+    }
+
+    [data-practice-tag] {
+      color: white;
+      border: 1px solid white;
+    }
+
+    /* Light theme styles - Red background with white text like redwhite theme */
+    .theme-light [data-theme-text] {
+      color: white;
+    }
+
+    .theme-light .sinthome-title {
+      color: white;
+    }
+
+    .theme-light [data-practice-tag] {
+      color: white;
+      border: 1px solid white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-light [data-lang-switch],
+    .theme-light [data-theme-switch] {
+      color: red;
+      border-color: white;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+    }
+
+    .theme-light [data-lang-switch]:hover,
+    .theme-light [data-theme-switch]:hover {
+      background: white;
+      color: #dc2626;
+    }
+  </style>
+</UniversalLayout>

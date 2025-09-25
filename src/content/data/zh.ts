@@ -96,14 +96,22 @@ const content: SiteContent = {
   pages: {
     home: {
       title: 'SINTHOME',
-      description: '通过科技赋能社区',
+      description: '一个重建新生产关系的公益社区',
       hero: {
         title: 'SINTHOME',
-        subtitle: '通过科技赋能社区',
+        tagline: '学习 — 批判 — 实践',
+        subtitle: '一个通过知识学习、理论批判和社会实践的整合来重建新生产关系的公益社区',
+        practices: [
+          '公共讲座',
+          '精神分析',
+          '工人援助',
+          '公益人工智能',
+          '工厂AI解决方案'
+        ],
         cta: [
-          { text: '关于我们', href: '/who-we-are' },
-          { text: '我们的工作', href: '/what-we-do' },
-          { text: '加入我们', href: '/contact' }
+          { text: '关于我们', href: '/sinthome_website/who-we-are', style: 'primary' },
+          { text: '我们的项目', href: '/sinthome_website/what-we-do', style: 'secondary' },
+          { text: '加入我们', href: '/sinthome_website/contact', style: 'outline' }
         ]
       }
     },

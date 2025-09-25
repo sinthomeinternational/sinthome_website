@@ -95,14 +95,22 @@ const content: SiteContent = {
   pages: {
     home: {
       title: 'SINTHOME',
-      description: 'Empowering Communities Through Technology',
+      description: 'A public-interest community reconstructing new relations of production',
       hero: {
         title: 'SINTHOME',
-        subtitle: 'Empowering Communities Through Technology',
+        tagline: 'Knowledge — Critique — Praxis',
+        subtitle: 'A public-interest community reconstructing new relations of production through the integration of knowledge learning, theoretical critique, and social praxis',
+        practices: [
+          'Public Lectures',
+          'Psychoanalysis',
+          'Workers Assist',
+          'AI for Public Good',
+          'Factory AI Solution'
+        ],
         cta: [
-          { text: 'WHO WE ARE', href: '/who-we-are' },
-          { text: 'WHAT WE DO', href: '/what-we-do' },
-          { text: 'JOIN US', href: '/contact' }
+          { text: 'ABOUT US', href: '/sinthome_website/who-we-are', style: 'primary' },
+          { text: 'OUR PROJECTS', href: '/sinthome_website/what-we-do', style: 'secondary' },
+          { text: 'JOIN US', href: '/sinthome_website/contact', style: 'outline' }
         ]
       }
     },
