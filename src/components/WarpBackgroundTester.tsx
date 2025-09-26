@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import WarpBackground from './ui/WarpBackground';
+import { useState, useEffect } from 'react';
+import { Warp } from '@paper-design/shaders-react';
 
 export default function WarpBackgroundTester() {
     const [params, setParams] = useState({
@@ -13,6 +13,10 @@ export default function WarpBackgroundTester() {
         rotation: 0.85
     });
 
+    useEffect(() => {
+        console.log('WarpBackgroundTester mounted with params:', params);
+    }, [params]);
+
     const [copied, setCopied] = useState(false);
 
     const updateParam = (key: string, value: string | number) => {
@@ -20,7 +24,7 @@ export default function WarpBackgroundTester() {
     };
 
     const copyConfig = () => {
-        const configString = `<WarpBackground
+        const configString = `<Warp
     color1="${params.color1}"
     color2="${params.color2}"
     color3="${params.color3}"
@@ -29,7 +33,7 @@ export default function WarpBackgroundTester() {
     swirlIterations={${params.swirlIterations}}
     shapeScale={${params.shapeScale}}
     rotation={${params.rotation}}
-    client:load
+    style={{ width: '100%', height: '100%' }}
 />`;
         navigator.clipboard.writeText(configString);
         setCopied(true);
@@ -51,9 +55,18 @@ export default function WarpBackgroundTester() {
 
     return (
         <div className="relative min-h-screen bg-black text-white overflow-hidden">
-            {/* Warp Background Preview - Make sure it's visible */}
+            {/* Warp Background Preview - Using Warp directly */}
             <div className="absolute inset-0" style={{ zIndex: 0 }}>
-                <WarpBackground {...params} />
+                <Warp
+                    {...params}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0
+                    }}
+                />
             </div>
 
             {/* Control Panel - Positioned on top but not blocking entire view */}
@@ -224,7 +237,7 @@ export default function WarpBackgroundTester() {
                     <div className="mt-6 p-3 bg-zinc-800/50 rounded-lg">
                         <h3 className="text-sm font-semibold mb-2 text-zinc-400">Current Configuration:</h3>
                         <pre className="text-xs overflow-x-auto text-zinc-300">
-{`<WarpBackground
+{`<Warp
     color1="${params.color1}"
     color2="${params.color2}"
     color3="${params.color3}"
@@ -233,6 +246,7 @@ export default function WarpBackgroundTester() {
     swirlIterations={${params.swirlIterations}}
     shapeScale={${params.shapeScale}}
     rotation={${params.rotation}}
+    style={{ width: '100%', height: '100%' }}
 />`}
                         </pre>
                     </div>
