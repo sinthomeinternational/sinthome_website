@@ -207,7 +207,7 @@ export default function WarpBackgroundTester() {
     return (
         <div className="relative min-h-screen bg-black text-white flex">
             {/* Left Panel - Controls (Fixed width, scrollable) */}
-            <div className="w-[450px] flex-shrink-0 h-screen overflow-y-auto bg-zinc-900/95 border-r border-zinc-800">
+            <div className="w-[450px] flex-shrink-0 h-screen overflow-y-auto bg-zinc-900/95 border-r border-zinc-800" style={{ position: 'relative', zIndex: 10 }}>
                 <div className="p-6">
                     <h1 className="text-2xl font-bold mb-6">
                         Warp Background Tester
@@ -390,7 +390,7 @@ export default function WarpBackgroundTester() {
             </div>
 
             {/* Right Panel - Warp Animation (Flexible width) */}
-            <div className="flex-1 relative bg-black">
+            <div className="flex-1 relative bg-black" style={{ position: 'relative', zIndex: 1 }}>
                 {/* Warp Background */}
                 {warpStatus === 'loading' && <WarpLoader />}
 
@@ -411,7 +411,7 @@ export default function WarpBackgroundTester() {
                 {warpStatus === 'fallback' && <WarpFallback />}
 
                 {/* Preview Label */}
-                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-3 py-1 rounded text-sm text-zinc-400">
+                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-3 py-1 rounded text-sm text-zinc-400" style={{ zIndex: 20 }}>
                     Animation Preview
                 </div>
 
