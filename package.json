@@ -20,10 +20,14 @@
     "type-check": "tsc --noEmit",
     "pre-commit": "pnpm run check && pnpm run type-check",
     "clean": "rm -rf dist .astro node_modules/.vite",
+    "clean:cache": "rm -rf node_modules/.vite node_modules/.astro .astro",
     "reset": "pnpm run clean && pnpm install",
+    "reset:full": "rm -rf node_modules && pnpm install",
     "dev:debug": "astro dev --verbose",
+    "dev:fresh": "pnpm run clean:cache && pnpm run dev",
     "build:analyze": "astro build --verbose",
-    "test": "echo \"No tests specified\" && exit 0"
+    "test": "echo \"No tests specified\" && exit 0",
+    "fix-shader": "./clear-vite-cache.sh"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.5",
