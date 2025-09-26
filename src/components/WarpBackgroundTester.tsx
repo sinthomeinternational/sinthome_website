@@ -50,15 +50,15 @@ export default function WarpBackgroundTester() {
     };
 
     return (
-        <div className="relative min-h-screen bg-black text-white">
-            {/* Warp Background Preview */}
-            <div className="fixed inset-0 -z-10">
+        <div className="relative min-h-screen bg-black text-white overflow-hidden">
+            {/* Warp Background Preview - Make sure it's visible */}
+            <div className="absolute inset-0" style={{ zIndex: 0 }}>
                 <WarpBackground {...params} />
             </div>
 
-            {/* Control Panel */}
-            <div className="relative z-10 p-8">
-                <div className="max-w-md mx-auto bg-zinc-900/90 backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-zinc-800">
+            {/* Control Panel - Positioned on top but not blocking entire view */}
+            <div className="relative" style={{ zIndex: 10 }}>
+                <div className="max-w-md ml-8 mt-8 bg-zinc-900/80 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-zinc-800">
                     <h1 className="text-3xl font-bold mb-6 text-center">
                         Warp Background Tester
                     </h1>
