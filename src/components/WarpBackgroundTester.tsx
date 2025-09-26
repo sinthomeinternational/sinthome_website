@@ -75,7 +75,18 @@ export default function WarpBackgroundTester() {
 
     // Memoized Warp props
     const warpProps = useMemo(() => ({
-        ...params
+        ...params,
+        style: {
+            width: '100%',
+            height: '100%',
+            position: 'absolute' as const,
+            top: 0,
+            left: 0,
+            zIndex: 1,
+            pointerEvents: 'none' as const,
+            display: 'block',
+            backgroundColor: 'transparent'
+        }
     }), [params, forceRender]);
 
     // WebGL diagnostics handler
@@ -138,17 +149,7 @@ export default function WarpBackgroundTester() {
                             </div>
                         }
                     >
-                        <Warp
-                            {...warpProps}
-                            key={`warp-${forceRender}`}
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                position: 'absolute',
-                                top: 0,
-                                left: 0
-                            }}
-                        />
+                        <Warp {...warpProps} key={`warp-${forceRender}`} />
                     </ShaderErrorBoundary>
                 </div>
             );
@@ -383,15 +384,24 @@ export default function WarpBackgroundTester() {
                     {/* Loading state */}
                     {warpStatus === 'loading' && <WarpLoader />}
 
-                    {/* Main Warp component - simplified rendering */}
-                    {(warpStatus === 'loaded' || warpStatus === 'error') && webglDiagnostics?.supported !== false && (
+                    {/* Main Warp component */}
+                    {warpStatus === 'loaded' && webglDiagnostics?.supported && (
                         <Suspense fallback={<WarpLoader />}>
                             {renderWarpComponent()}
                         </Suspense>
                     )}
 
+                    {/* Error state */}
+                    {warpStatus === 'error' && webglDiagnostics?.supported && (
+                        <div className="absolute inset-0">
+                            <Suspense fallback={<WarpLoader />}>
+                                {renderWarpComponent()}
+                            </Suspense>
+                        </div>
+                    )}
+
                     {/* Fallback animation */}
-                    {(warpStatus === 'fallback' || webglDiagnostics?.supported === false) && <WarpFallback />}
+                    {(warpStatus === 'fallback' || !webglDiagnostics?.supported) && <WarpFallback />}
 
                     {/* Debug overlay */}
                     {debugMode && (
