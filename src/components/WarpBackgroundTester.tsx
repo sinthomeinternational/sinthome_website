@@ -239,7 +239,7 @@ export default function WarpBackgroundTester() {
                 </div>
             </div>
 
-            <style jsx>{`
+            <style>{`
                 .slider {
                     -webkit-appearance: none;
                     appearance: none;
