@@ -2,7 +2,7 @@
 
 A modern, responsive website for Sinthome - a public-interest community focused on reconstructing new relations of production through the integration of knowledge learning, theoretical critique, and social praxis.
 
-**Live Site**: [https://yiluo-photon.github.io/sinthome_website/](https://yiluo-photon.github.io/sinthome_website/)
+**Live Site**: Deployed on Vercel with automatic branch previews
 
 ## 🎯 Mission
 
@@ -110,99 +110,68 @@ src/
     └── index.ts      # Shared interfaces and types
 ```
 
-## 🌐 Deployment Configuration
+## 🌐 Deployment
 
-The site supports flexible deployment to either GitHub Pages or a custom domain with a single environment variable change.
+### Vercel Deployment (Primary)
 
-### GitHub Pages Deployment (Default)
+The site is configured for automatic deployment on Vercel:
 
-No configuration needed - the site defaults to GitHub Pages deployment:
+**Workflow:**
+1. Push changes to GitHub
+2. Vercel automatically builds and deploys
+3. Each branch gets a unique preview URL
+4. Main branch deploys to production
+
+**Build Commands:**
+```bash
+# Local development (static)
+pnpm run dev
+pnpm run build
+
+# Vercel deployment (SSR)
+pnpm run build:vercel
+```
+
+### Configuration Files
+
+**Optional Vercel-specific files (not required for basic deployment):**
+- `astro.config.vercel.mjs` - SSR configuration with Vercel adapter
+- `vercel.json` - Build settings and rewrites
+
+These files are only used when:
+- You need SSR features (API routes, dynamic content)
+- You want custom build settings
+- You're deploying complex routes
+
+### GitHub Pages (Alternative)
+
+For static GitHub Pages deployment:
 
 ```bash
-# Builds with base path: /sinthome_website/
+# Use default config
 pnpm run build
 ```
 
-### Custom Domain Deployment
+The `astro.config.mjs` defaults to static generation suitable for GitHub Pages
 
-To deploy to a custom domain (e.g., sinthome.org):
+## 🔗 Environment-Specific Features
 
-1. Create a `.env` file:
+### Vercel Features
+- Server-side rendering (SSR)
+- Edge functions
+- Image optimization
+- Web analytics
+- Automatic HTTPS
+- Branch previews
+
+### Local Development
+Use standard Astro commands for local testing:
 ```bash
-DEPLOYMENT_TARGET=custom
-CUSTOM_DOMAIN=https://sinthome.org
+pnpm run dev        # Start dev server
+pnpm run build      # Build static site
+pnpm run preview    # Preview build
 ```
 
-2. Build the site:
-```bash
-pnpm run build
-```
-
-### How It Works
-
-The deployment configuration in `astro.config.mjs`:
-
-```javascript
-const DEPLOYMENT_CONFIG = {
-  github: {
-    site: 'https://yiluo-photon.github.io',
-    base: '/sinthome_website/',  // Subpath for GitHub Pages
-  },
-  custom: {
-    site: process.env?.CUSTOM_DOMAIN || 'https://example.com',
-    base: '/',  // Root path for custom domain
-  }
-};
-```
-
-## 🔗 Base Path Handling
-
-All navigation links automatically respect the deployment configuration through `import.meta.env.BASE_URL`:
-
-### Implementation Pattern
-
-```typescript
-// In Astro components
-const finalHref = href.startsWith('/')
-  ? `${import.meta.env.BASE_URL}${href.slice(1)}`
-  : href;
-```
-
-### Files with Base Path Handling
-
-- `src/components/shared/ProjectCard.astro` - Project card links
-- `src/pages/what-we-do/index.astro` - Navigation links
-- `src/components/TopNavigation.tsx` - Dropdown menu navigation
-
-### Automatic Path Resolution
-
-- **GitHub Pages**: `BASE_URL = "/sinthome_website/"`
-  - Links become: `/sinthome_website/what-we-do/ai-hackathon/`
-- **Custom Domain**: `BASE_URL = "/"`
-  - Links become: `/what-we-do/ai-hackathon/`
-
-## 🚢 Deployment
-
-### GitHub Pages (Automatic)
-
-The site automatically deploys to GitHub Pages when changes are pushed to the `main` branch.
-
-GitHub Actions workflow handles:
-1. Building the static site
-2. Deploying to GitHub Pages
-3. Available at: https://yiluo-photon.github.io/sinthome_website/
-
-### Manual Deployment
-
-For other hosting providers:
-
-```bash
-# Build the site
-pnpm run build
-
-# The dist/ folder contains the static site
-# Upload contents to your hosting provider
-```
 
 ## 🎨 Design System
 
@@ -288,7 +257,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Built with [Astro](https://astro.build/)
 - Styled with [Tailwind CSS](https://tailwindcss.com/)
 - Animations by [Motion](https://motion.dev/)
-- Deployed on [GitHub Pages](https://pages.github.com/)
+- Deployed on [Vercel](https://vercel.com/)
 
 ---
 

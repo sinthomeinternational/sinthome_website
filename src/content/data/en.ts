@@ -17,7 +17,7 @@ const content: SiteContent = {
           { label: 'AI Hackathon', href: '/what-we-do/ai-hackathon' },
           { label: 'Workers Assist', href: '/what-we-do/workers-assist' },
           { label: 'Plantcore AI', href: '/what-we-do/plantcore-ai' },
-          { label: 'SRTP', href: '/what-we-do/srtp' },
+          { label: 'S.R.T.P.', href: '/what-we-do/srtp' },
         ]
       },
       { label: 'Upcoming Events', href: '/events' },
@@ -287,7 +287,7 @@ const content: SiteContent = {
     },
     {
       id: 'srtp',
-      title: 'SRTP',
+      title: 'S.R.T.P.',
       description: 'Sinthome Revolutionary Theory Practice - Interrogating praxis, until it unveils the future',
       category: 'Research & Theory',
       featured: true,

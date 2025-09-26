@@ -9,8 +9,8 @@ A modern non-profit website built with Astro 5.7.5, featuring React components, 
 - **Framework**: Astro 5.7.5 with React integration
 - **Styling**: Tailwind CSS 4.1.4 with Typography plugin
 - **Language**: TypeScript (strict mode)
-- **Animations**: Motion (framer-motion successor)
-- **Deployment**: GitHub Pages (static site)
+- **Animations**: Motion (framer-motion successor), @paper-design/shaders-react for WebGL
+- **Deployment**: Vercel (auto-deploy from GitHub)
 - **Forms**: Google Forms (embedded)
 - **Repository**: https://github.com/Yiluo-pHoton/sinthome_website
 
@@ -73,6 +73,54 @@ git checkout -b feature/[feature-name]
 - `refactor:` Code refactoring
 - `test:` Test additions or changes
 - `chore:` Build process or auxiliary tool changes
+
+## Vercel Deployment (Primary)
+
+### Automatic Deployment Workflow
+
+The site is configured for automatic deployment via Vercel:
+
+1. **Push to GitHub** → Vercel automatically builds and deploys
+2. **Branch Previews** → Every branch gets a unique preview URL
+3. **Production** → Main branch deploys to production
+
+### Vercel Configuration Files
+
+#### **astro.config.vercel.mjs** (Optional - for SSR features)
+- Enables Server-Side Rendering for better SEO
+- Adds image optimization with Sharp
+- Configures Vercel Web Analytics
+- Optimized for WebGL/shader components
+
+#### **vercel.json** (Optional - for custom settings)
+- Security headers configuration
+- URL rewrites and redirects
+- Deployment region settings
+
+#### **Build Commands**
+```bash
+# Standard build (uses default config)
+npm run build
+
+# Vercel-optimized build (uses SSR config)
+npm run build:vercel
+
+# Local testing with Vercel config
+npm run build:vercel && npm run preview
+```
+
+### When to Use Vercel Configuration
+
+**Use default (no config needed):**
+- Static site generation
+- Basic deployments
+- Vercel auto-detection works well
+
+**Use vercel config files when:**
+- Need SSR for dynamic content
+- Want Vercel Analytics
+- Custom headers/redirects required
+- WebGL performance optimization needed
 
 ## Deployment Configuration (GitHub Pages vs Custom Domain)
 
