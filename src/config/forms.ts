@@ -58,9 +58,9 @@ export const FORMS = {
       height: "700px"
     },
     srtp: {
-      id: "YOUR_SRTP_FORM_ID",
+      id: "YOUR_S.R.T.P._FORM_ID",
       url: "https://forms.gle/YOUR_FORM_LINK",
-      title: "SRTP Program Application",
+      title: "S.R.T.P. Program Application",
       height: "900px"
     }
   },

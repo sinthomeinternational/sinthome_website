@@ -91,7 +91,7 @@ export const SITE_CONFIG = {
           { label: 'AI Hackathon', href: '/what-we-do/ai-hackathon' },
           { label: 'Workers Assist', href: '/what-we-do/workers-assist' },
           { label: 'Plantcore AI', href: '/what-we-do/plantcore-ai' },
-          { label: 'SRTP', href: '/what-we-do/srtp' },
+          { label: 'S.R.T.P.', href: '/what-we-do/srtp' },
         ]
       },
       { label: 'Upcoming Events', href: '/events' },
