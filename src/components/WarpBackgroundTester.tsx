@@ -204,16 +204,16 @@ export default function WarpBackgroundTester() {
     };
 
     return (
-        <div className="flex min-h-screen bg-black text-white">
+        <div className="flex h-screen bg-black text-white overflow-hidden">
             {/* Left Panel - Controls */}
-            <div className="w-[400px] flex-shrink-0 bg-zinc-900/95 border-r border-zinc-800 overflow-y-auto">
-                <div className="p-6">
-                    <h1 className="text-2xl font-bold mb-4 text-center">
+            <div className="w-[400px] flex-shrink-0 bg-zinc-900/95 border-r border-zinc-800 overflow-y-auto h-screen">
+                <div className="p-4">
+                    <h1 className="text-xl font-bold mb-2 text-center">
                         Warp Background Tester
                     </h1>
 
                     {/* Status Bar */}
-                    <div className={`mb-4 text-center py-2 px-3 rounded text-sm font-medium ${
+                    <div className={`mb-2 text-center py-1 px-2 rounded text-xs font-medium ${
                         warpStatus === 'loaded' ? 'bg-green-900/30 text-green-400' :
                         warpStatus === 'error' ? 'bg-red-900/30 text-red-400' :
                         warpStatus === 'fallback' ? 'bg-yellow-900/30 text-yellow-400' :
@@ -223,7 +223,7 @@ export default function WarpBackgroundTester() {
                     </div>
 
                     {/* WebGL Diagnostics */}
-                    <div className="mb-4">
+                    <div className="mb-2">
                         <WebGLDetector
                             onResult={handleWebGLDiagnostics}
                             showDetails={false}
@@ -231,8 +231,8 @@ export default function WarpBackgroundTester() {
                     </div>
 
                     {/* Color Controls */}
-                    <div className="space-y-3 mb-6">
-                        <h2 className="text-sm font-semibold text-zinc-300">Colors</h2>
+                    <div className="space-y-2 mb-3">
+                        <h2 className="text-xs font-semibold text-zinc-300">Colors</h2>
 
                         {['color1', 'color2', 'color3'].map((colorKey, idx) => (
                             <div key={colorKey} className="flex items-center gap-2">
@@ -241,7 +241,7 @@ export default function WarpBackgroundTester() {
                                     type="color"
                                     value={params[colorKey as keyof typeof params] as string}
                                     onChange={(e) => updateParam(colorKey, e.target.value)}
-                                    className="flex-1 h-8 rounded cursor-pointer"
+                                    className="flex-1 h-6 rounded cursor-pointer"
                                 />
                                 <span className="text-xs font-mono bg-zinc-800 px-2 py-1 rounded w-20 text-center">
                                     {params[colorKey as keyof typeof params] as string}
@@ -251,8 +251,8 @@ export default function WarpBackgroundTester() {
                     </div>
 
                     {/* Parameter Controls */}
-                    <div className="space-y-3 mb-6">
-                        <h2 className="text-sm font-semibold text-zinc-300">Animation Parameters</h2>
+                    <div className="space-y-2 mb-3">
+                        <h2 className="text-xs font-semibold text-zinc-300">Animation Parameters</h2>
 
                         {[
                             { key: 'speed', min: 0, max: 2, step: 0.05 },
@@ -287,17 +287,17 @@ export default function WarpBackgroundTester() {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                         <div className="flex gap-2">
                             <button
                                 onClick={copyConfig}
-                                className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-3 rounded-lg transition font-medium text-sm"
+                                className="flex-1 bg-red-600 hover:bg-red-700 text-white py-1 px-2 rounded-lg transition font-medium text-xs"
                             >
                                 {copied ? '✓ Copied!' : 'Copy Config'}
                             </button>
                             <button
                                 onClick={resetToDefaults}
-                                className="flex-1 bg-zinc-700 hover:bg-zinc-600 text-white py-2 px-3 rounded-lg transition font-medium text-sm"
+                                className="flex-1 bg-zinc-700 hover:bg-zinc-600 text-white py-1 px-2 rounded-lg transition font-medium text-xs"
                             >
                                 Reset
                             </button>
@@ -338,7 +338,7 @@ export default function WarpBackgroundTester() {
 
                     {/* Debug Info */}
                     {debugMode && (
-                        <div className="mt-6 space-y-3">
+                        <div className="mt-3 space-y-2">
                             <CanvasDebugger />
                             <TroubleshootingGuide
                                 webglDiagnostics={webglDiagnostics}
@@ -356,7 +356,7 @@ export default function WarpBackgroundTester() {
                     )}
 
                     {/* Current Configuration */}
-                    <div className="mt-6 p-3 bg-zinc-800/50 rounded-lg">
+                    <div className="mt-3 p-2 bg-zinc-800/50 rounded-lg">
                         <h3 className="text-xs font-semibold mb-2 text-zinc-400">Current Configuration:</h3>
                         <pre className="text-xs overflow-x-auto text-zinc-300">
 {`<Warp
@@ -378,7 +378,7 @@ export default function WarpBackgroundTester() {
             </div>
 
             {/* Right Panel - Warp Animation */}
-            <div className="flex-1 relative bg-black">
+            <div className="flex-1 relative bg-black h-screen">
                 {/* Warp Background Container */}
                 <div className="absolute inset-0">
                     {/* Loading state */}
