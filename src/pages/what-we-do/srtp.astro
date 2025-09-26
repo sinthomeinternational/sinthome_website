@@ -1,8 +1,6 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
-import GoogleForm from "../../components/forms/GoogleForm";
-import { FORMS } from "../../config/forms";
 ---
 
 <style>
@@ -412,25 +410,30 @@ import { FORMS } from "../../config/forms";
           </div>
         </div>
 
-        <!-- Enhanced form container -->
-        <div class="relative group max-w-4xl mx-auto">
+        <!-- Contact CTA -->
+        <div class="relative group max-w-2xl mx-auto">
           <!-- Background glow effect -->
           <div class="absolute -inset-1 bg-gradient-to-r from-red-900/20 via-red-800/10 to-red-900/20 rounded-xl blur opacity-50 group-hover:opacity-75 transition duration-500"></div>
 
-          <!-- Form card -->
-          <div class="relative bg-gradient-to-br from-zinc-900/95 to-zinc-800/80 border border-zinc-700/50 rounded-xl p-8 backdrop-blur-sm">
-            <div class="flex items-center justify-center mb-6">
-              <div class="w-4 h-1 bg-red-600 rounded-full mr-2"></div>
-              <h3 class="text-xl font-semibold text-red-400 text-center">Application Form</h3>
-              <div class="w-4 h-1 bg-red-600 rounded-full ml-2"></div>
-            </div>
+          <!-- CTA card -->
+          <div class="relative bg-gradient-to-br from-zinc-900/95 to-zinc-800/80 border border-zinc-700/50 rounded-xl p-10 backdrop-blur-sm text-center">
+            <h3 class="text-xl font-semibold text-red-400 mb-6">Get Involved</h3>
 
-            <GoogleForm
-              formId={FORMS.projects.srtp.id}
-              title={FORMS.projects.srtp.title}
-              height={FORMS.projects.srtp.height}
-              client:visible
-            />
+            <p class="text-zinc-300 text-lg mb-8 leading-relaxed">
+              To learn more about joining S.R.T.P. and participating in our weekly seminars, please reach out to us.
+            </p>
+
+            <a
+              href="/contact"
+              class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-600/25"
+            >
+              Contact Us
+              <span class="ml-2">→</span>
+            </a>
+
+            <p class="text-zinc-500 text-sm mt-6">
+              Application details will be available soon
+            </p>
           </div>
         </div>
       </section>
