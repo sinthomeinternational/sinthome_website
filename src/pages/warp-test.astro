@@ -1,0 +1,98 @@
+---
+import RootLayout from "../layouts/RootLayout.astro";
+import WarpBackgroundTester from "../components/ui/WarpBackgroundTester";
+---
+
+<RootLayout>
+	<main class="warp-test-main">
+		<div class="group relative w-full h-dvh flex items-center justify-center overflow-hidden">
+			{/* Warp Background Tester with drift animation */}
+			<div class="absolute w-full h-dvh -z-10">
+				<div class="warp-container">
+					<WarpBackgroundTester client:load />
+				</div>
+			</div>
+
+			{/* Optional: Overlay content to test how it looks with SINTHOME text */}
+			<div class="absolute w-full h-dvh flex flex-col justify-center items-center z-10 pointer-events-none">
+				<h1 class="sinthome-title text-white font-black uppercase mb-0 opacity-50">
+					SINTHOME
+				</h1>
+				<p class="text-sm text-white/50 mt-4">
+					(Preview with homepage layout)
+				</p>
+			</div>
+		</div>
+	</main>
+</RootLayout>
+
+<style>
+	/* Prevent scrolling on test page */
+	.warp-test-main {
+		height: 100vh;
+		overflow: hidden;
+	}
+
+	/* SINTHOME title styling - same as homepage */
+	.sinthome-title {
+		font-family: 'League Spartan', sans-serif;
+		font-weight: 700;
+		letter-spacing: -0.06em;
+		font-size: min(18vw, 16rem);
+		line-height: 1;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		color: white;
+		transform: scaleX(1);
+		transform-origin: center;
+	}
+
+	/* Directional animation for Warp background - SAME AS HOMEPAGE */
+	.warp-container {
+		width: 150%;
+		height: 150%;
+		position: absolute;
+		top: -25%;
+		left: -25%;
+		animation: drift 30s ease-in-out infinite;
+	}
+
+	/* Slow drift animation - creates a subtle directional movement */
+	@keyframes drift {
+		0%, 100% {
+			transform: translate(0, 0);
+		}
+		25% {
+			transform: translate(10%, 5%);
+		}
+		50% {
+			transform: translate(5%, 15%);
+		}
+		75% {
+			transform: translate(15%, 10%);
+		}
+	}
+
+	/* Alternative animations (commented out, can be switched) */
+	/* For diagonal: animation: diagonalDrift 20s linear infinite alternate; */
+	/* For horizontal: animation: horizontalSlide 15s ease-in-out infinite alternate; */
+
+	@keyframes diagonalDrift {
+		0% {
+			transform: translate(-10%, -10%);
+		}
+		100% {
+			transform: translate(10%, 10%);
+		}
+	}
+
+	@keyframes horizontalSlide {
+		0% {
+			transform: translateX(-10%);
+		}
+		100% {
+			transform: translateX(10%);
+		}
+	}
+</style>
