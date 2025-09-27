@@ -1,109 +1,170 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import H1 from "../components/ui/H1.astro";
-import EventCard from "../components/shared/EventCard.astro";
 ---
 
-<PageLayout title="Events - Sinthome" useInfoLayout={true}>
-    <H1>Upcoming Events</H1>
+<PageLayout title="Upcoming Events - Sinthome" useInfoLayout={true}>
+  <H1>Upcoming Events</H1>
 
-    <div class="space-y-8 max-w-4xl">
-      <!-- Introduction -->
-      <section>
-        <p class="text-lg text-zinc-300 leading-relaxed">
-          Join us at our upcoming events to learn, network, and make a difference.
-          From hackathons to workshops, there's something for everyone who wants to contribute to positive change.
-        </p>
-      </section>
-
-      <!-- Upcoming Events -->
-      <section id="upcoming">
-        <h2 class="text-2xl font-bold text-white mb-6">Upcoming Events</h2>
-        <div class="space-y-6">
-          <EventCard
-            title="AI Hackathon 2025"
-            date="March 15-17, 2025"
-            location="Innovation Hub, Downtown"
-            description="48-hour hackathon focused on building AI solutions for social good. Open to developers, designers, and innovators of all skill levels."
-            registrationUrl="https://forms.gle/example"
-          />
-
-          <EventCard
-            title="Tech for Good Workshop"
-            date="February 20, 2025"
-            location="Virtual Event"
-            description="Learn how to leverage technology for social impact. This workshop covers project planning, funding opportunities, and implementation strategies."
-            registrationUrl="https://forms.gle/example"
-          />
-
-          <EventCard
-            title="Community Impact Summit"
-            date="April 5, 2025"
-            location="Community Center, Main Street"
-            description="Annual gathering of non-profits, social enterprises, and changemakers. Share experiences, learn best practices, and forge new partnerships."
-            registrationUrl="https://forms.gle/example"
-          />
-
-          <EventCard
-            title="Volunteer Orientation"
-            date="First Saturday of every month"
-            location="Our Office + Virtual Option"
-            description="New volunteer orientation session. Learn about our programs, find the right fit for your skills, and start making an impact."
-            registrationUrl="https://forms.gle/example"
-          />
+  <div class="space-y-8 max-w-4xl">
+    <!-- S.R.T.P. Lectures -->
+    <section>
+      <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-2xl">🎓</span>
+          <h2 class="text-2xl font-bold text-white">S.R.T.P. Lectures</h2>
         </div>
-      </section>
 
-      <!-- Past Events -->
-      <section id="past">
-        <h2 class="text-2xl font-bold text-white mb-6">Past Events</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
-            <h3 class="font-semibold text-white">Fall Fundraiser Gala</h3>
-            <p class="text-sm text-zinc-400 mt-1">October 2024 • Raised $50,000 for programs</p>
+        <div class="grid md:grid-cols-3 gap-4 mb-4">
+          <div class="bg-zinc-800/50 rounded-lg p-4">
+            <h3 class="text-red-400 font-semibold mb-2">Where</h3>
+            <p class="text-zinc-300">Boston, USA</p>
           </div>
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
-            <h3 class="font-semibold text-white">Summer Code Camp</h3>
-            <p class="text-sm text-zinc-400 mt-1">July 2024 • 100+ students trained</p>
+          <div class="bg-zinc-800/50 rounded-lg p-4">
+            <h3 class="text-red-400 font-semibold mb-2">When</h3>
+            <p class="text-zinc-300">Every Saturday, Fall 2025</p>
           </div>
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
-            <h3 class="font-semibold text-white">Green Tech Symposium</h3>
-            <p class="text-sm text-zinc-400 mt-1">May 2024 • 200+ attendees</p>
-          </div>
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
-            <h3 class="font-semibold text-white">Winter Workshop Series</h3>
-            <p class="text-sm text-zinc-400 mt-1">December 2023 • 5 workshops, 150 participants</p>
+          <div class="bg-zinc-800/50 rounded-lg p-4 md:col-span-1">
+            <h3 class="text-red-400 font-semibold mb-2">Format</h3>
+            <p class="text-zinc-300">In-person</p>
           </div>
         </div>
-      </section>
 
-      <!-- Stay Updated -->
-      <section class="mt-12 p-8 bg-zinc-900/50 border border-zinc-800 rounded-lg text-center">
-        <h2 class="text-2xl font-bold text-white mb-4">Never Miss an Event</h2>
-        <p class="text-zinc-300 mb-6">
-          Subscribe to our newsletter to receive updates about upcoming events, workshops, and opportunities.
-        </p>
-        <a
-          href="/contact"
-          class="inline-block px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-        >
-          Subscribe to Newsletter
-        </a>
-      </section>
+        <div class="bg-zinc-800/30 rounded-lg p-4">
+          <h3 class="text-red-400 font-semibold mb-3">What</h3>
+          <p class="text-zinc-300 leading-relaxed">
+            S.R.T.P. (Sinthome Revolutionary Theory Practice) is a department dedicated to closely linking theoretical critique with social praxis. Through weekly lectures and seminars, it encourages practitioners to continually reflect on and interrogate their actions, explore their meaning and potential, and transform practical experience into new theory and revolutionary ideas. S.R.T.P. focuses not only on praxis itself but also on how to create the future and change the world through practice.
+          </p>
+        </div>
+      </div>
+    </section>
 
-      <!-- Host an Event -->
-      <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Host an Event with Us</h2>
-        <p class="text-zinc-300 mb-4">
-          Have an idea for an event that aligns with our mission? We're always looking for partners
-          and collaborators to organize impactful events.
-        </p>
-        <a
-          href="/contact"
-          class="inline-block px-6 py-3 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-colors"
-        >
-          Propose an Event
-        </a>
-      </section>
-    </div>
+    <!-- Online Community -->
+    <section>
+      <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-2xl">🌐</span>
+          <h2 class="text-2xl font-bold text-white">Online Community</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 mb-4">
+          <div class="bg-zinc-800/50 rounded-lg p-4">
+            <h3 class="text-red-400 font-semibold mb-2">Where</h3>
+            <p class="text-zinc-300">Online</p>
+          </div>
+          <div class="bg-zinc-800/50 rounded-lg p-4">
+            <h3 class="text-red-400 font-semibold mb-2">When</h3>
+            <p class="text-zinc-300">TBD</p>
+          </div>
+          <div class="bg-zinc-800/50 rounded-lg p-4 md:col-span-1">
+            <h3 class="text-red-400 font-semibold mb-2">Format</h3>
+            <p class="text-zinc-300">Virtual</p>
+          </div>
+        </div>
+
+        <div class="bg-zinc-800/30 rounded-lg p-4">
+          <h3 class="text-red-400 font-semibold mb-3">What</h3>
+          <p class="text-zinc-300 leading-relaxed">
+            The online community is Sinthome's public education platform. In the summer of 2025, we organized four lecture series—each about eight weeks long—on History, community practice, Political Philosophy, and Lacan's Seminar on Love. After the summer, the platform shifted to weekly year-round lectures on Leftist theory, philosophy, sociology, and the broader humanities. It enables participation for those unable to attend offline, systematizes and shares our knowledge, provides a steady space for discussion and learning, and allows those who resonate with these ideas to engage further, receive training, and put theory into practice.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- New York Media & Interviews -->
+    <section>
+      <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-2xl">🎬</span>
+          <h2 class="text-2xl font-bold text-white">Media Initiative</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 mb-4">
+          <div class="bg-zinc-800/50 rounded-lg p-4">
+            <h3 class="text-red-400 font-semibold mb-2">Where</h3>
+            <p class="text-zinc-300">New York City</p>
+          </div>
+          <div class="bg-zinc-800/50 rounded-lg p-4">
+            <h3 class="text-red-400 font-semibold mb-2">When</h3>
+            <p class="text-zinc-300">Ongoing, irregularly</p>
+          </div>
+          <div class="bg-zinc-800/50 rounded-lg p-4 md:col-span-1">
+            <h3 class="text-red-400 font-semibold mb-2">Format</h3>
+            <p class="text-zinc-300">Interviews & Documentaries</p>
+          </div>
+        </div>
+
+        <div class="bg-zinc-800/30 rounded-lg p-4">
+          <h3 class="text-red-400 font-semibold mb-3">What</h3>
+          <p class="text-zinc-300 leading-relaxed">
+            The media initiative is a key platform for connecting Sinthome with social movements in the U.S. A friend of ours studying journalism in New York, together with his small team, carries out interviews and documentary work. They meet with scholars and activists across the country and focus on grassroots organizations in New York, using interviews, films, and collaborative reporting to highlight the histories and struggles of the Left. At the same time, this project provides Chinese-speaking audiences with a channel to understand and connect with U.S. movements.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hackathon -->
+    <section>
+      <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-2xl">💻</span>
+          <h2 class="text-2xl font-bold text-white">Hackathon</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 mb-4">
+          <div class="bg-zinc-800/50 rounded-lg p-4">
+            <h3 class="text-red-400 font-semibold mb-2">Where</h3>
+            <p class="text-zinc-300">Boston TBD</p>
+          </div>
+          <div class="bg-zinc-800/50 rounded-lg p-4">
+            <h3 class="text-red-400 font-semibold mb-2">When</h3>
+            <p class="text-zinc-300">Sept 2025 (internal trial), TBD (public)</p>
+          </div>
+          <div class="bg-zinc-800/50 rounded-lg p-4 md:col-span-1">
+            <h3 class="text-red-400 font-semibold mb-2">Format</h3>
+            <p class="text-zinc-300">In-person</p>
+          </div>
+        </div>
+
+        <div class="bg-zinc-800/30 rounded-lg p-4">
+          <h3 class="text-red-400 font-semibold mb-3">What</h3>
+          <p class="text-zinc-300 leading-relaxed">
+            A hackathon initiative combining artificial intelligence and social issues. By bringing together students, young professionals, and nonprofit workers, the hackathon fosters mutual learning across diverse perspectives and creates a shared space to reimagine how technology can be practiced in the service of public good. This year's subthemes highlight diverse challenges, from supporting Asian workers in Boston with language access, to providing peer counseling for youth mental health, to empowering small and medium-sized manufacturers through industry-specific AI agents.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Free ESL Class -->
+    <section>
+      <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-2xl">📚</span>
+          <h2 class="text-2xl font-bold text-white">Free ESL Class</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 mb-4">
+          <div class="bg-zinc-800/50 rounded-lg p-4">
+            <h3 class="text-red-400 font-semibold mb-2">Where</h3>
+            <p class="text-zinc-300">Boston, Chinatown, USA</p>
+          </div>
+          <div class="bg-zinc-800/50 rounded-lg p-4">
+            <h3 class="text-red-400 font-semibold mb-2">When</h3>
+            <p class="text-zinc-300">Two in-person classes, two online classes per week</p>
+          </div>
+          <div class="bg-zinc-800/50 rounded-lg p-4 md:col-span-1">
+            <h3 class="text-red-400 font-semibold mb-2">Format</h3>
+            <p class="text-zinc-300">Hybrid</p>
+          </div>
+        </div>
+
+        <div class="bg-zinc-800/30 rounded-lg p-4">
+          <h3 class="text-red-400 font-semibold mb-3">What</h3>
+          <p class="text-zinc-300 leading-relaxed">
+            Workers Assist invites you to our free English class! Together, we'll practice daily English, learn useful life skills, and support each other in a friendly, community-based classroom.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
 </PageLayout>
