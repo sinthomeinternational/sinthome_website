@@ -64,17 +64,17 @@ export default function WarpBackgroundTester() {
 
     const [params, setParams] = useState({
         color1: '#000000',
-        color2: '#5a0000',
-        color3: '#ff0000',
-        speed: 0.9,
+        color2: '#940000',
+        color3: '#000000',
+        speed: 0.2,
         swirl: 0.98,
-        swirlIterations: 25,
-        shapeScale: 0.12,
-        rotation: 0.85,
-        scale: 1.0,
+        swirlIterations: 29,
+        shapeScale: 0.04,
+        rotation: 0.65,
+        scale: 0.1,
         proportion: 1.0,
-        softness: 0.5,
-        distortion: 0.5
+        softness: 0,
+        distortion: 0
     });
 
     // Check WebGL support
@@ -139,15 +139,16 @@ export default function WarpBackgroundTester() {
             return (
                 <div
                     ref={warpContainerRef}
-                    className="absolute inset-0"
+                    className="absolute inset-0 warp-drift-container"
                     style={{
-                        width: '100%',
-                        height: '100%',
+                        width: '150%',
+                        height: '150%',
                         position: 'absolute',
-                        top: 0,
-                        left: 0,
+                        top: '-25%',
+                        left: '-25%',
                         zIndex: 1,
-                        overflow: 'hidden'
+                        overflow: 'hidden',
+                        animation: 'drift 30s ease-in-out infinite'
                     }}
                 >
                     <ErrorBoundary fallback={<WarpFallback />}>
@@ -484,6 +485,26 @@ export default function WarpBackgroundTester() {
 
                 .overflow-y-auto::-webkit-scrollbar-thumb:hover {
                     background: #52525b;
+                }
+
+                /* Drift animation - same as homepage */
+                @keyframes drift {
+                    0%, 100% {
+                        transform: translate(0, 0);
+                    }
+                    25% {
+                        transform: translate(10%, 5%);
+                    }
+                    50% {
+                        transform: translate(5%, 15%);
+                    }
+                    75% {
+                        transform: translate(15%, 10%);
+                    }
+                }
+
+                .warp-drift-container {
+                    transform-origin: center;
                 }
             `}</style>
         </div>
