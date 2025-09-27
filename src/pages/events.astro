@@ -1,170 +1,278 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import H1 from "../components/ui/H1.astro";
+import Card from "../components/ui/Card.astro";
 ---
 
 <PageLayout title="Upcoming Events - Sinthome" useInfoLayout={true}>
   <H1>Upcoming Events</H1>
 
-  <div class="space-y-8 max-w-4xl">
+  <div class="space-y-10 max-w-5xl">
     <!-- S.R.T.P. Lectures -->
-    <section>
-      <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-2xl">🎓</span>
-          <h2 class="text-2xl font-bold text-white">S.R.T.P. Lectures</h2>
-        </div>
+    <article>
+      <Card variant="elevated" className="relative overflow-hidden">
+        <!-- Category accent bar -->
+        <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-500 to-blue-600"></div>
 
-        <div class="grid md:grid-cols-3 gap-4 mb-4">
-          <div class="bg-zinc-800/50 rounded-lg p-4">
-            <h3 class="text-red-400 font-semibold mb-2">Where</h3>
-            <p class="text-zinc-300">Boston, USA</p>
+        <div class="pl-6">
+          <!-- Header with category badge -->
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-4">
+              <h2 class="text-3xl font-bold text-white">S.R.T.P. Lectures</h2>
+              <span class="px-3 py-1 text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full">
+                Theory & Practice
+              </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span class="text-sm font-medium text-green-400">Ongoing</span>
+            </div>
           </div>
-          <div class="bg-zinc-800/50 rounded-lg p-4">
-            <h3 class="text-red-400 font-semibold mb-2">When</h3>
-            <p class="text-zinc-300">Every Saturday, Fall 2025</p>
-          </div>
-          <div class="bg-zinc-800/50 rounded-lg p-4 md:col-span-1">
-            <h3 class="text-red-400 font-semibold mb-2">Format</h3>
-            <p class="text-zinc-300">In-person</p>
-          </div>
-        </div>
 
-        <div class="bg-zinc-800/30 rounded-lg p-4">
-          <h3 class="text-red-400 font-semibold mb-3">What</h3>
-          <p class="text-zinc-300 leading-relaxed">
-            S.R.T.P. (Sinthome Revolutionary Theory Practice) is a department dedicated to closely linking theoretical critique with social praxis. Through weekly lectures and seminars, it encourages practitioners to continually reflect on and interrogate their actions, explore their meaning and potential, and transform practical experience into new theory and revolutionary ideas. S.R.T.P. focuses not only on praxis itself but also on how to create the future and change the world through practice.
-          </p>
+          <!-- Event details grid -->
+          <div class="grid md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-blue-400 font-semibold text-sm uppercase tracking-wide mb-2">Location</h3>
+              <p class="text-zinc-200 font-medium">Boston, USA</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-blue-400 font-semibold text-sm uppercase tracking-wide mb-2">Schedule</h3>
+              <p class="text-zinc-200 font-medium">Every Saturday</p>
+              <p class="text-zinc-400 text-sm">Fall 2025</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-blue-400 font-semibold text-sm uppercase tracking-wide mb-2">Format</h3>
+              <p class="text-zinc-200 font-medium">In-person</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-blue-400 font-semibold text-sm uppercase tracking-wide mb-2">Type</h3>
+              <p class="text-zinc-200 font-medium">Lectures & Seminars</p>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="bg-zinc-800/20 border border-zinc-700/30 rounded-lg p-6">
+            <h3 class="text-white font-semibold text-lg mb-4">About This Event</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              S.R.T.P. (Sinthome Revolutionary Theory Practice) is a department dedicated to closely linking theoretical critique with social praxis. Through weekly lectures and seminars, it encourages practitioners to continually reflect on and interrogate their actions, explore their meaning and potential, and transform practical experience into new theory and revolutionary ideas. S.R.T.P. focuses not only on praxis itself but also on how to create the future and change the world through practice.
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </Card>
+    </article>
 
     <!-- Online Community -->
-    <section>
-      <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-2xl">🌐</span>
-          <h2 class="text-2xl font-bold text-white">Online Community</h2>
-        </div>
+    <article>
+      <Card variant="elevated" className="relative overflow-hidden">
+        <!-- Category accent bar -->
+        <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-500 to-emerald-600"></div>
 
-        <div class="grid md:grid-cols-3 gap-4 mb-4">
-          <div class="bg-zinc-800/50 rounded-lg p-4">
-            <h3 class="text-red-400 font-semibold mb-2">Where</h3>
-            <p class="text-zinc-300">Online</p>
+        <div class="pl-6">
+          <!-- Header with category badge -->
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-4">
+              <h2 class="text-3xl font-bold text-white">Online Community</h2>
+              <span class="px-3 py-1 text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full">
+                Education Platform
+              </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+              <span class="text-sm font-medium text-yellow-400">Schedule TBD</span>
+            </div>
           </div>
-          <div class="bg-zinc-800/50 rounded-lg p-4">
-            <h3 class="text-red-400 font-semibold mb-2">When</h3>
-            <p class="text-zinc-300">TBD</p>
-          </div>
-          <div class="bg-zinc-800/50 rounded-lg p-4 md:col-span-1">
-            <h3 class="text-red-400 font-semibold mb-2">Format</h3>
-            <p class="text-zinc-300">Virtual</p>
-          </div>
-        </div>
 
-        <div class="bg-zinc-800/30 rounded-lg p-4">
-          <h3 class="text-red-400 font-semibold mb-3">What</h3>
-          <p class="text-zinc-300 leading-relaxed">
-            The online community is Sinthome's public education platform. In the summer of 2025, we organized four lecture series—each about eight weeks long—on History, community practice, Political Philosophy, and Lacan's Seminar on Love. After the summer, the platform shifted to weekly year-round lectures on Leftist theory, philosophy, sociology, and the broader humanities. It enables participation for those unable to attend offline, systematizes and shares our knowledge, provides a steady space for discussion and learning, and allows those who resonate with these ideas to engage further, receive training, and put theory into practice.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- New York Media & Interviews -->
-    <section>
-      <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-2xl">🎬</span>
-          <h2 class="text-2xl font-bold text-white">Media Initiative</h2>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-4 mb-4">
-          <div class="bg-zinc-800/50 rounded-lg p-4">
-            <h3 class="text-red-400 font-semibold mb-2">Where</h3>
-            <p class="text-zinc-300">New York City</p>
+          <!-- Event details grid -->
+          <div class="grid md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-emerald-400 font-semibold text-sm uppercase tracking-wide mb-2">Location</h3>
+              <p class="text-zinc-200 font-medium">Online</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-emerald-400 font-semibold text-sm uppercase tracking-wide mb-2">Schedule</h3>
+              <p class="text-zinc-200 font-medium">TBD</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-emerald-400 font-semibold text-sm uppercase tracking-wide mb-2">Format</h3>
+              <p class="text-zinc-200 font-medium">Virtual</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-emerald-400 font-semibold text-sm uppercase tracking-wide mb-2">Type</h3>
+              <p class="text-zinc-200 font-medium">Weekly Lectures</p>
+            </div>
           </div>
-          <div class="bg-zinc-800/50 rounded-lg p-4">
-            <h3 class="text-red-400 font-semibold mb-2">When</h3>
-            <p class="text-zinc-300">Ongoing, irregularly</p>
-          </div>
-          <div class="bg-zinc-800/50 rounded-lg p-4 md:col-span-1">
-            <h3 class="text-red-400 font-semibold mb-2">Format</h3>
-            <p class="text-zinc-300">Interviews & Documentaries</p>
+
+          <!-- Description -->
+          <div class="bg-zinc-800/20 border border-zinc-700/30 rounded-lg p-6">
+            <h3 class="text-white font-semibold text-lg mb-4">About This Event</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              The online community is Sinthome's public education platform. In the summer of 2025, we organized four lecture series—each about eight weeks long—on History, community practice, Political Philosophy, and Lacan's Seminar on Love. After the summer, the platform shifted to weekly year-round lectures on Leftist theory, philosophy, sociology, and the broader humanities. It enables participation for those unable to attend offline, systematizes and shares our knowledge, provides a steady space for discussion and learning, and allows those who resonate with these ideas to engage further, receive training, and put theory into practice.
+            </p>
           </div>
         </div>
+      </Card>
+    </article>
 
-        <div class="bg-zinc-800/30 rounded-lg p-4">
-          <h3 class="text-red-400 font-semibold mb-3">What</h3>
-          <p class="text-zinc-300 leading-relaxed">
-            The media initiative is a key platform for connecting Sinthome with social movements in the U.S. A friend of ours studying journalism in New York, together with his small team, carries out interviews and documentary work. They meet with scholars and activists across the country and focus on grassroots organizations in New York, using interviews, films, and collaborative reporting to highlight the histories and struggles of the Left. At the same time, this project provides Chinese-speaking audiences with a channel to understand and connect with U.S. movements.
-          </p>
+    <!-- Media Initiative -->
+    <article>
+      <Card variant="elevated" className="relative overflow-hidden">
+        <!-- Category accent bar -->
+        <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-purple-600"></div>
+
+        <div class="pl-6">
+          <!-- Header with category badge -->
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-4">
+              <h2 class="text-3xl font-bold text-white">Media Initiative</h2>
+              <span class="px-3 py-1 text-xs font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-full">
+                Documentary & Journalism
+              </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span class="text-sm font-medium text-green-400">Ongoing</span>
+            </div>
+          </div>
+
+          <!-- Event details grid -->
+          <div class="grid md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-purple-400 font-semibold text-sm uppercase tracking-wide mb-2">Location</h3>
+              <p class="text-zinc-200 font-medium">New York City</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-purple-400 font-semibold text-sm uppercase tracking-wide mb-2">Schedule</h3>
+              <p class="text-zinc-200 font-medium">Ongoing</p>
+              <p class="text-zinc-400 text-sm">Irregularly</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-purple-400 font-semibold text-sm uppercase tracking-wide mb-2">Format</h3>
+              <p class="text-zinc-200 font-medium">Interviews</p>
+              <p class="text-zinc-400 text-sm">Documentaries</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-purple-400 font-semibold text-sm uppercase tracking-wide mb-2">Type</h3>
+              <p class="text-zinc-200 font-medium">Media Production</p>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="bg-zinc-800/20 border border-zinc-700/30 rounded-lg p-6">
+            <h3 class="text-white font-semibold text-lg mb-4">About This Event</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              The media initiative is a key platform for connecting Sinthome with social movements in the U.S. A friend of ours studying journalism in New York, together with his small team, carries out interviews and documentary work. They meet with scholars and activists across the country and focus on grassroots organizations in New York, using interviews, films, and collaborative reporting to highlight the histories and struggles of the Left. At the same time, this project provides Chinese-speaking audiences with a channel to understand and connect with U.S. movements.
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </Card>
+    </article>
 
     <!-- Hackathon -->
-    <section>
-      <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-2xl">💻</span>
-          <h2 class="text-2xl font-bold text-white">Hackathon</h2>
-        </div>
+    <article>
+      <Card variant="elevated" className="relative overflow-hidden">
+        <!-- Category accent bar -->
+        <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-red-500 to-red-600"></div>
 
-        <div class="grid md:grid-cols-3 gap-4 mb-4">
-          <div class="bg-zinc-800/50 rounded-lg p-4">
-            <h3 class="text-red-400 font-semibold mb-2">Where</h3>
-            <p class="text-zinc-300">Boston TBD</p>
+        <div class="pl-6">
+          <!-- Header with category badge -->
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-4">
+              <h2 class="text-3xl font-bold text-white">Hackathon</h2>
+              <span class="px-3 py-1 text-xs font-semibold bg-red-500/20 text-red-300 border border-red-500/30 rounded-full">
+                Technology & Social Good
+              </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+              <span class="text-sm font-medium text-orange-400">Upcoming</span>
+            </div>
           </div>
-          <div class="bg-zinc-800/50 rounded-lg p-4">
-            <h3 class="text-red-400 font-semibold mb-2">When</h3>
-            <p class="text-zinc-300">Sept 2025 (internal trial), TBD (public)</p>
-          </div>
-          <div class="bg-zinc-800/50 rounded-lg p-4 md:col-span-1">
-            <h3 class="text-red-400 font-semibold mb-2">Format</h3>
-            <p class="text-zinc-300">In-person</p>
-          </div>
-        </div>
 
-        <div class="bg-zinc-800/30 rounded-lg p-4">
-          <h3 class="text-red-400 font-semibold mb-3">What</h3>
-          <p class="text-zinc-300 leading-relaxed">
-            A hackathon initiative combining artificial intelligence and social issues. By bringing together students, young professionals, and nonprofit workers, the hackathon fosters mutual learning across diverse perspectives and creates a shared space to reimagine how technology can be practiced in the service of public good. This year's subthemes highlight diverse challenges, from supporting Asian workers in Boston with language access, to providing peer counseling for youth mental health, to empowering small and medium-sized manufacturers through industry-specific AI agents.
-          </p>
+          <!-- Event details grid -->
+          <div class="grid md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-red-400 font-semibold text-sm uppercase tracking-wide mb-2">Location</h3>
+              <p class="text-zinc-200 font-medium">Boston</p>
+              <p class="text-zinc-400 text-sm">TBD</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-red-400 font-semibold text-sm uppercase tracking-wide mb-2">Schedule</h3>
+              <p class="text-zinc-200 font-medium">Sept 2025</p>
+              <p class="text-zinc-400 text-sm">Internal trial</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-red-400 font-semibold text-sm uppercase tracking-wide mb-2">Format</h3>
+              <p class="text-zinc-200 font-medium">In-person</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-red-400 font-semibold text-sm uppercase tracking-wide mb-2">Type</h3>
+              <p class="text-zinc-200 font-medium">AI Hackathon</p>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="bg-zinc-800/20 border border-zinc-700/30 rounded-lg p-6">
+            <h3 class="text-white font-semibold text-lg mb-4">About This Event</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              A hackathon initiative combining artificial intelligence and social issues. By bringing together students, young professionals, and nonprofit workers, the hackathon fosters mutual learning across diverse perspectives and creates a shared space to reimagine how technology can be practiced in the service of public good. This year's subthemes highlight diverse challenges, from supporting Asian workers in Boston with language access, to providing peer counseling for youth mental health, to empowering small and medium-sized manufacturers through industry-specific AI agents.
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </Card>
+    </article>
 
     <!-- Free ESL Class -->
-    <section>
-      <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-2xl">📚</span>
-          <h2 class="text-2xl font-bold text-white">Free ESL Class</h2>
-        </div>
+    <article>
+      <Card variant="elevated" className="relative overflow-hidden">
+        <!-- Category accent bar -->
+        <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-amber-500 to-amber-600"></div>
 
-        <div class="grid md:grid-cols-3 gap-4 mb-4">
-          <div class="bg-zinc-800/50 rounded-lg p-4">
-            <h3 class="text-red-400 font-semibold mb-2">Where</h3>
-            <p class="text-zinc-300">Boston, Chinatown, USA</p>
+        <div class="pl-6">
+          <!-- Header with category badge -->
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-4">
+              <h2 class="text-3xl font-bold text-white">Free ESL Class</h2>
+              <span class="px-3 py-1 text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full">
+                Community Education
+              </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span class="text-sm font-medium text-green-400">Ongoing</span>
+            </div>
           </div>
-          <div class="bg-zinc-800/50 rounded-lg p-4">
-            <h3 class="text-red-400 font-semibold mb-2">When</h3>
-            <p class="text-zinc-300">Two in-person classes, two online classes per week</p>
-          </div>
-          <div class="bg-zinc-800/50 rounded-lg p-4 md:col-span-1">
-            <h3 class="text-red-400 font-semibold mb-2">Format</h3>
-            <p class="text-zinc-300">Hybrid</p>
-          </div>
-        </div>
 
-        <div class="bg-zinc-800/30 rounded-lg p-4">
-          <h3 class="text-red-400 font-semibold mb-3">What</h3>
-          <p class="text-zinc-300 leading-relaxed">
-            Workers Assist invites you to our free English class! Together, we'll practice daily English, learn useful life skills, and support each other in a friendly, community-based classroom.
-          </p>
+          <!-- Event details grid -->
+          <div class="grid md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-amber-400 font-semibold text-sm uppercase tracking-wide mb-2">Location</h3>
+              <p class="text-zinc-200 font-medium">Boston</p>
+              <p class="text-zinc-400 text-sm">Chinatown</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-amber-400 font-semibold text-sm uppercase tracking-wide mb-2">Schedule</h3>
+              <p class="text-zinc-200 font-medium">4 Classes/Week</p>
+              <p class="text-zinc-400 text-sm">2 in-person, 2 online</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-amber-400 font-semibold text-sm uppercase tracking-wide mb-2">Format</h3>
+              <p class="text-zinc-200 font-medium">Hybrid</p>
+            </div>
+            <div class="bg-zinc-800/40 border border-zinc-700/50 rounded-lg p-4">
+              <h3 class="text-amber-400 font-semibold text-sm uppercase tracking-wide mb-2">Type</h3>
+              <p class="text-zinc-200 font-medium">Language Learning</p>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="bg-zinc-800/20 border border-zinc-700/30 rounded-lg p-6">
+            <h3 class="text-white font-semibold text-lg mb-4">About This Event</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              Workers Assist invites you to our free English class! Together, we'll practice daily English, learn useful life skills, and support each other in a friendly, community-based classroom.
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </Card>
+    </article>
   </div>
 </PageLayout>
