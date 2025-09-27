@@ -4,8 +4,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 ---
 
 <RootLayout>
-	<main>
-		<div class="group relative w-full h-dvh flex items-center justify-center overflow-hidden">
+	<main class="homepage-main">
+		<div id="homepage-container" class="group relative w-full h-dvh flex items-center justify-center overflow-hidden">
 			<div class="absolute w-full h-dvh -z-10">
 				{/* Zero softness configuration with sharper edges */}
 				<WarpBackground
@@ -96,109 +96,134 @@ import WarpBackground from "../components/ui/WarpBackground";
 </RootLayout>
 
 <script>
-	// Animation logic
-	let hasScrolled = false;
+	// Animation logic - scoped to homepage container only
+	document.addEventListener('DOMContentLoaded', () => {
+		const container = document.getElementById('homepage-container');
 
-	function triggerAnimation() {
-		const emergingContent = document.getElementById('emerging-content');
-		const sinthomeTitle = document.getElementById('sinthome-title');
-		const scrollIndicator = document.getElementById('scroll-indicator');
+		// Only proceed if we're on the homepage
+		if (!container) return;
 
-		if (!hasScrolled) {
-			hasScrolled = true;
+		let hasScrolled = false;
 
-			// Move SINTHOME up slightly
-			sinthomeTitle?.classList.add('-translate-y-12');
-
-			// Make content appear
-			emergingContent?.classList.remove('opacity-0', 'translate-y-8');
-			emergingContent?.classList.add('opacity-100', 'translate-y-0');
-
-			// Hide scroll indicator
-			scrollIndicator?.classList.remove('opacity-100');
-			scrollIndicator?.classList.add('opacity-0');
-
-			// Add staggered animation to tags
-			const tags = document.querySelectorAll('.tag-item');
-			tags.forEach((tag, index) => {
-				setTimeout(() => {
-					tag.classList.add('animate-fade-in');
-				}, index * 100);
-			});
-
-			// Add staggered animation to buttons
-			const buttons = document.querySelectorAll('.cta-button');
-			buttons.forEach((button, index) => {
-				setTimeout(() => {
-					button.classList.add('animate-fade-in');
-				}, 500 + (index * 100));
-			});
-		}
-	}
-
-	function resetAnimation() {
-		if (hasScrolled) {
-			hasScrolled = false;
-
+		function triggerAnimation() {
 			const emergingContent = document.getElementById('emerging-content');
 			const sinthomeTitle = document.getElementById('sinthome-title');
 			const scrollIndicator = document.getElementById('scroll-indicator');
 
-			// Reset SINTHOME position
-			sinthomeTitle?.classList.remove('-translate-y-12');
+			if (!hasScrolled) {
+				hasScrolled = true;
 
-			// Hide content again
-			emergingContent?.classList.add('opacity-0', 'translate-y-8');
-			emergingContent?.classList.remove('opacity-100', 'translate-y-0');
+				// Move SINTHOME up slightly
+				sinthomeTitle?.classList.add('-translate-y-12');
 
-			// Show scroll indicator
-			scrollIndicator?.classList.add('opacity-100');
-			scrollIndicator?.classList.remove('opacity-0');
+				// Make content appear
+				emergingContent?.classList.remove('opacity-0', 'translate-y-8');
+				emergingContent?.classList.add('opacity-100', 'translate-y-0');
 
-			// Remove animation classes
-			document.querySelectorAll('.animate-fade-in').forEach(el => {
-				el.classList.remove('animate-fade-in');
-			});
+				// Hide scroll indicator
+				scrollIndicator?.classList.remove('opacity-100');
+				scrollIndicator?.classList.add('opacity-0');
+
+				// Add staggered animation to tags
+				const tags = document.querySelectorAll('.tag-item');
+				tags.forEach((tag, index) => {
+					setTimeout(() => {
+						tag.classList.add('animate-fade-in');
+					}, index * 100);
+				});
+
+				// Add staggered animation to buttons
+				const buttons = document.querySelectorAll('.cta-button');
+				buttons.forEach((button, index) => {
+					setTimeout(() => {
+						button.classList.add('animate-fade-in');
+					}, 500 + (index * 100));
+				});
+			}
 		}
-	}
 
-	// Trigger on wheel/scroll without actually scrolling the page
-	window.addEventListener('wheel', (e) => {
-		e.preventDefault();
-		if (e.deltaY > 0) {
-			triggerAnimation();
-		} else if (e.deltaY < 0) {
-			resetAnimation();
+		function resetAnimation() {
+			if (hasScrolled) {
+				hasScrolled = false;
+
+				const emergingContent = document.getElementById('emerging-content');
+				const sinthomeTitle = document.getElementById('sinthome-title');
+				const scrollIndicator = document.getElementById('scroll-indicator');
+
+				// Reset SINTHOME position
+				sinthomeTitle?.classList.remove('-translate-y-12');
+
+				// Hide content again
+				emergingContent?.classList.add('opacity-0', 'translate-y-8');
+				emergingContent?.classList.remove('opacity-100', 'translate-y-0');
+
+				// Show scroll indicator
+				scrollIndicator?.classList.add('opacity-100');
+				scrollIndicator?.classList.remove('opacity-0');
+
+				// Remove animation classes
+				document.querySelectorAll('.animate-fade-in').forEach(el => {
+					el.classList.remove('animate-fade-in');
+				});
+			}
 		}
-	}, { passive: false });
 
-	// Touch support for mobile
-	let touchStartY = 0;
-	window.addEventListener('touchstart', (e) => {
-		touchStartY = e.touches[0].clientY;
-	});
-
-	window.addEventListener('touchmove', (e) => {
-		e.preventDefault();
-		const touchEndY = e.touches[0].clientY;
-		const deltaY = touchStartY - touchEndY;
-
-		if (deltaY > 30) {
-			triggerAnimation();
-		} else if (deltaY < -30) {
-			resetAnimation();
-		}
-	}, { passive: false });
-
-	// Keyboard support
-	window.addEventListener('keydown', (e) => {
-		if (e.key === 'ArrowDown' || e.key === ' ') {
+		// Attach listeners ONLY to the homepage container, not window
+		container.addEventListener('wheel', (e) => {
+			// Only prevent default within the homepage container
 			e.preventDefault();
-			triggerAnimation();
-		} else if (e.key === 'ArrowUp') {
+			e.stopPropagation();
+
+			if (e.deltaY > 0) {
+				triggerAnimation();
+			} else if (e.deltaY < 0) {
+				resetAnimation();
+			}
+		}, { passive: false });
+
+		// Touch support - also scoped to container
+		let touchStartY = 0;
+
+		container.addEventListener('touchstart', (e) => {
+			touchStartY = e.touches[0].clientY;
+		}, { passive: true });
+
+		container.addEventListener('touchmove', (e) => {
 			e.preventDefault();
-			resetAnimation();
-		}
+			e.stopPropagation();
+
+			const touchEndY = e.touches[0].clientY;
+			const deltaY = touchStartY - touchEndY;
+
+			if (deltaY > 30) {
+				triggerAnimation();
+			} else if (deltaY < -30) {
+				resetAnimation();
+			}
+		}, { passive: false });
+
+		// Keyboard support - only when homepage is focused
+		container.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowDown' || e.key === ' ') {
+				e.preventDefault();
+				e.stopPropagation();
+				triggerAnimation();
+			} else if (e.key === 'ArrowUp') {
+				e.preventDefault();
+				e.stopPropagation();
+				resetAnimation();
+			}
+		});
+
+		// Make container focusable for keyboard events
+		container.setAttribute('tabindex', '0');
+
+		// Cleanup function for when navigating away
+		document.addEventListener('astro:before-swap', () => {
+			// Remove all event listeners when navigating away
+			const newContainer = container.cloneNode(true);
+			container.parentNode?.replaceChild(newContainer, container);
+		});
 	});
 </script>
 
@@ -220,8 +245,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 		transform-origin: center;
 	}
 
-	/* Prevent actual scrolling */
-	main {
+	/* Prevent actual scrolling only on homepage */
+	.homepage-main {
 		height: 100vh;
 		overflow: hidden;
 	}
