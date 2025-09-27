@@ -4,7 +4,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 ---
 
 <RootLayout>
-	<main>
+	<main class="homepage-main">
 		<div class="group relative w-full h-dvh flex items-center justify-center overflow-hidden">
 			<div class="absolute w-full h-dvh -z-10">
 				{/* Zero softness configuration with sharper edges */}
@@ -220,8 +220,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 		transform-origin: center;
 	}
 
-	/* Prevent actual scrolling */
-	main {
+	/* Prevent actual scrolling only on homepage */
+	.homepage-main {
 		height: 100vh;
 		overflow: hidden;
 	}
