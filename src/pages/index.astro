@@ -5,7 +5,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 <RootLayout>
 	<main>
-		<div class="group relative w-full min-h-dvh flex items-center justify-center overflow-auto">
+		<div class="group relative w-full h-dvh flex items-center justify-center overflow-hidden">
 			<div class="absolute w-full h-dvh -z-10">
 				{/* Zero softness configuration with sharper edges */}
 				<WarpBackground
@@ -59,7 +59,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 						</div>
 
 						<!-- Simple, Direct CTAs -->
-						<div class="flex flex-col sm:flex-row gap-4 button-group">
+						<div class="flex flex-col sm:flex-row gap-4 button-group justify-center items-center">
 							<a
 								href="/who-we-are"
 								class="px-8 py-4 bg-white text-black font-bold hover:bg-gray-200 transition-colors cta-button"
@@ -99,14 +99,12 @@ import WarpBackground from "../components/ui/WarpBackground";
 	// Animation logic
 	let hasScrolled = false;
 
-	function handleScroll() {
-		const scrollY = window.scrollY;
+	function triggerAnimation() {
 		const emergingContent = document.getElementById('emerging-content');
 		const sinthomeTitle = document.getElementById('sinthome-title');
 		const scrollIndicator = document.getElementById('scroll-indicator');
 
-		// Trigger animation after minimal scroll (even 10px)
-		if (scrollY > 10 && !hasScrolled) {
+		if (!hasScrolled) {
 			hasScrolled = true;
 
 			// Move SINTHOME up slightly
@@ -136,10 +134,15 @@ import WarpBackground from "../components/ui/WarpBackground";
 				}, 500 + (index * 100));
 			});
 		}
+	}
 
-		// Reset if scrolled back to top
-		if (scrollY === 0 && hasScrolled) {
+	function resetAnimation() {
+		if (hasScrolled) {
 			hasScrolled = false;
+
+			const emergingContent = document.getElementById('emerging-content');
+			const sinthomeTitle = document.getElementById('sinthome-title');
+			const scrollIndicator = document.getElementById('scroll-indicator');
 
 			// Reset SINTHOME position
 			sinthomeTitle?.classList.remove('-translate-y-12');
@@ -159,17 +162,42 @@ import WarpBackground from "../components/ui/WarpBackground";
 		}
 	}
 
-	// Attach scroll listener
-	window.addEventListener('scroll', handleScroll);
-
-	// Also trigger on touch for mobile
-	window.addEventListener('touchmove', handleScroll);
-
-	// Allow triggering with wheel event even if page doesn't actually scroll
+	// Trigger on wheel/scroll without actually scrolling the page
 	window.addEventListener('wheel', (e) => {
-		if (e.deltaY > 0 && !hasScrolled) {
-			// Simulate scroll down
-			window.scrollTo(0, 20);
+		e.preventDefault();
+		if (e.deltaY > 0) {
+			triggerAnimation();
+		} else if (e.deltaY < 0) {
+			resetAnimation();
+		}
+	}, { passive: false });
+
+	// Touch support for mobile
+	let touchStartY = 0;
+	window.addEventListener('touchstart', (e) => {
+		touchStartY = e.touches[0].clientY;
+	});
+
+	window.addEventListener('touchmove', (e) => {
+		e.preventDefault();
+		const touchEndY = e.touches[0].clientY;
+		const deltaY = touchStartY - touchEndY;
+
+		if (deltaY > 30) {
+			triggerAnimation();
+		} else if (deltaY < -30) {
+			resetAnimation();
+		}
+	}, { passive: false });
+
+	// Keyboard support
+	window.addEventListener('keydown', (e) => {
+		if (e.key === 'ArrowDown' || e.key === ' ') {
+			e.preventDefault();
+			triggerAnimation();
+		} else if (e.key === 'ArrowUp') {
+			e.preventDefault();
+			resetAnimation();
 		}
 	});
 </script>
@@ -192,9 +220,10 @@ import WarpBackground from "../components/ui/WarpBackground";
 		transform-origin: center;
 	}
 
-	/* Ensure page is scrollable */
+	/* Prevent actual scrolling */
 	main {
-		min-height: 110vh;
+		height: 100vh;
+		overflow: hidden;
 	}
 
 	/* Custom fade-in animation */
