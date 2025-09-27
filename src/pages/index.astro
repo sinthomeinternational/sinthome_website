@@ -96,110 +96,117 @@ import WarpBackground from "../components/ui/WarpBackground";
 </RootLayout>
 
 <script>
-	// Animation logic
-	let hasScrolled = false;
+	// Animation logic - only run on homepage
+	if (window.location.pathname === '/' || window.location.pathname === '/sinthome_website/' || window.location.pathname === '/zero-softness-test' || window.location.pathname === '/zero-softness-test-2') {
+		let hasScrolled = false;
 
-	function triggerAnimation() {
-		const emergingContent = document.getElementById('emerging-content');
-		const sinthomeTitle = document.getElementById('sinthome-title');
-		const scrollIndicator = document.getElementById('scroll-indicator');
-
-		if (!hasScrolled) {
-			hasScrolled = true;
-
-			// Move SINTHOME up slightly
-			sinthomeTitle?.classList.add('-translate-y-12');
-
-			// Make content appear
-			emergingContent?.classList.remove('opacity-0', 'translate-y-8');
-			emergingContent?.classList.add('opacity-100', 'translate-y-0');
-
-			// Hide scroll indicator
-			scrollIndicator?.classList.remove('opacity-100');
-			scrollIndicator?.classList.add('opacity-0');
-
-			// Add staggered animation to tags
-			const tags = document.querySelectorAll('.tag-item');
-			tags.forEach((tag, index) => {
-				setTimeout(() => {
-					tag.classList.add('animate-fade-in');
-				}, index * 100);
-			});
-
-			// Add staggered animation to buttons
-			const buttons = document.querySelectorAll('.cta-button');
-			buttons.forEach((button, index) => {
-				setTimeout(() => {
-					button.classList.add('animate-fade-in');
-				}, 500 + (index * 100));
-			});
-		}
-	}
-
-	function resetAnimation() {
-		if (hasScrolled) {
-			hasScrolled = false;
-
+		function triggerAnimation() {
 			const emergingContent = document.getElementById('emerging-content');
 			const sinthomeTitle = document.getElementById('sinthome-title');
 			const scrollIndicator = document.getElementById('scroll-indicator');
 
-			// Reset SINTHOME position
-			sinthomeTitle?.classList.remove('-translate-y-12');
+			if (!hasScrolled) {
+				hasScrolled = true;
 
-			// Hide content again
-			emergingContent?.classList.add('opacity-0', 'translate-y-8');
-			emergingContent?.classList.remove('opacity-100', 'translate-y-0');
+				// Move SINTHOME up slightly
+				sinthomeTitle?.classList.add('-translate-y-12');
 
-			// Show scroll indicator
-			scrollIndicator?.classList.add('opacity-100');
-			scrollIndicator?.classList.remove('opacity-0');
+				// Make content appear
+				emergingContent?.classList.remove('opacity-0', 'translate-y-8');
+				emergingContent?.classList.add('opacity-100', 'translate-y-0');
 
-			// Remove animation classes
-			document.querySelectorAll('.animate-fade-in').forEach(el => {
-				el.classList.remove('animate-fade-in');
+				// Hide scroll indicator
+				scrollIndicator?.classList.remove('opacity-100');
+				scrollIndicator?.classList.add('opacity-0');
+
+				// Add staggered animation to tags
+				const tags = document.querySelectorAll('.tag-item');
+				tags.forEach((tag, index) => {
+					setTimeout(() => {
+						tag.classList.add('animate-fade-in');
+					}, index * 100);
+				});
+
+				// Add staggered animation to buttons
+				const buttons = document.querySelectorAll('.cta-button');
+				buttons.forEach((button, index) => {
+					setTimeout(() => {
+						button.classList.add('animate-fade-in');
+					}, 500 + (index * 100));
+				});
+			}
+		}
+
+		function resetAnimation() {
+			if (hasScrolled) {
+				hasScrolled = false;
+
+				const emergingContent = document.getElementById('emerging-content');
+				const sinthomeTitle = document.getElementById('sinthome-title');
+				const scrollIndicator = document.getElementById('scroll-indicator');
+
+				// Reset SINTHOME position
+				sinthomeTitle?.classList.remove('-translate-y-12');
+
+				// Hide content again
+				emergingContent?.classList.add('opacity-0', 'translate-y-8');
+				emergingContent?.classList.remove('opacity-100', 'translate-y-0');
+
+				// Show scroll indicator
+				scrollIndicator?.classList.add('opacity-100');
+				scrollIndicator?.classList.remove('opacity-0');
+
+				// Remove animation classes
+				document.querySelectorAll('.animate-fade-in').forEach(el => {
+					el.classList.remove('animate-fade-in');
+				});
+			}
+		}
+
+		// Only prevent default on homepage
+		const isHomepage = document.querySelector('.homepage-main');
+
+		if (isHomepage) {
+			// Trigger on wheel/scroll without actually scrolling the page
+			window.addEventListener('wheel', (e) => {
+				e.preventDefault();
+				if (e.deltaY > 0) {
+					triggerAnimation();
+				} else if (e.deltaY < 0) {
+					resetAnimation();
+				}
+			}, { passive: false });
+
+			// Touch support for mobile
+			let touchStartY = 0;
+			window.addEventListener('touchstart', (e) => {
+				touchStartY = e.touches[0].clientY;
+			});
+
+			window.addEventListener('touchmove', (e) => {
+				e.preventDefault();
+				const touchEndY = e.touches[0].clientY;
+				const deltaY = touchStartY - touchEndY;
+
+				if (deltaY > 30) {
+					triggerAnimation();
+				} else if (deltaY < -30) {
+					resetAnimation();
+				}
+			}, { passive: false });
+
+			// Keyboard support
+			window.addEventListener('keydown', (e) => {
+				if (e.key === 'ArrowDown' || e.key === ' ') {
+					e.preventDefault();
+					triggerAnimation();
+				} else if (e.key === 'ArrowUp') {
+					e.preventDefault();
+					resetAnimation();
+				}
 			});
 		}
 	}
-
-	// Trigger on wheel/scroll without actually scrolling the page
-	window.addEventListener('wheel', (e) => {
-		e.preventDefault();
-		if (e.deltaY > 0) {
-			triggerAnimation();
-		} else if (e.deltaY < 0) {
-			resetAnimation();
-		}
-	}, { passive: false });
-
-	// Touch support for mobile
-	let touchStartY = 0;
-	window.addEventListener('touchstart', (e) => {
-		touchStartY = e.touches[0].clientY;
-	});
-
-	window.addEventListener('touchmove', (e) => {
-		e.preventDefault();
-		const touchEndY = e.touches[0].clientY;
-		const deltaY = touchStartY - touchEndY;
-
-		if (deltaY > 30) {
-			triggerAnimation();
-		} else if (deltaY < -30) {
-			resetAnimation();
-		}
-	}, { passive: false });
-
-	// Keyboard support
-	window.addEventListener('keydown', (e) => {
-		if (e.key === 'ArrowDown' || e.key === ' ') {
-			e.preventDefault();
-			triggerAnimation();
-		} else if (e.key === 'ArrowUp') {
-			e.preventDefault();
-			resetAnimation();
-		}
-	});
 </script>
 
 <style>
