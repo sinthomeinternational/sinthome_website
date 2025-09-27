@@ -5,7 +5,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 <RootLayout>
 	<main class="homepage-main">
-		<div class="group relative w-full h-dvh flex items-center justify-center overflow-hidden">
+		<div id="homepage-container" class="group relative w-full h-dvh flex items-center justify-center overflow-hidden">
 			<div class="absolute w-full h-dvh -z-10">
 				{/* Zero softness configuration with sharper edges */}
 				<WarpBackground
@@ -96,8 +96,13 @@ import WarpBackground from "../components/ui/WarpBackground";
 </RootLayout>
 
 <script>
-	// Animation logic - only run on homepage
-	if (window.location.pathname === '/' || window.location.pathname === '/sinthome_website/' || window.location.pathname === '/zero-softness-test' || window.location.pathname === '/zero-softness-test-2') {
+	// Animation logic - scoped to homepage container only
+	document.addEventListener('DOMContentLoaded', () => {
+		const container = document.getElementById('homepage-container');
+
+		// Only proceed if we're on the homepage
+		if (!container) return;
+
 		let hasScrolled = false;
 
 		function triggerAnimation() {
@@ -163,50 +168,63 @@ import WarpBackground from "../components/ui/WarpBackground";
 			}
 		}
 
-		// Only prevent default on homepage
-		const isHomepage = document.querySelector('.homepage-main');
+		// Attach listeners ONLY to the homepage container, not window
+		container.addEventListener('wheel', (e) => {
+			// Only prevent default within the homepage container
+			e.preventDefault();
+			e.stopPropagation();
 
-		if (isHomepage) {
-			// Trigger on wheel/scroll without actually scrolling the page
-			window.addEventListener('wheel', (e) => {
+			if (e.deltaY > 0) {
+				triggerAnimation();
+			} else if (e.deltaY < 0) {
+				resetAnimation();
+			}
+		}, { passive: false });
+
+		// Touch support - also scoped to container
+		let touchStartY = 0;
+
+		container.addEventListener('touchstart', (e) => {
+			touchStartY = e.touches[0].clientY;
+		}, { passive: true });
+
+		container.addEventListener('touchmove', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+
+			const touchEndY = e.touches[0].clientY;
+			const deltaY = touchStartY - touchEndY;
+
+			if (deltaY > 30) {
+				triggerAnimation();
+			} else if (deltaY < -30) {
+				resetAnimation();
+			}
+		}, { passive: false });
+
+		// Keyboard support - only when homepage is focused
+		container.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowDown' || e.key === ' ') {
 				e.preventDefault();
-				if (e.deltaY > 0) {
-					triggerAnimation();
-				} else if (e.deltaY < 0) {
-					resetAnimation();
-				}
-			}, { passive: false });
-
-			// Touch support for mobile
-			let touchStartY = 0;
-			window.addEventListener('touchstart', (e) => {
-				touchStartY = e.touches[0].clientY;
-			});
-
-			window.addEventListener('touchmove', (e) => {
+				e.stopPropagation();
+				triggerAnimation();
+			} else if (e.key === 'ArrowUp') {
 				e.preventDefault();
-				const touchEndY = e.touches[0].clientY;
-				const deltaY = touchStartY - touchEndY;
+				e.stopPropagation();
+				resetAnimation();
+			}
+		});
 
-				if (deltaY > 30) {
-					triggerAnimation();
-				} else if (deltaY < -30) {
-					resetAnimation();
-				}
-			}, { passive: false });
+		// Make container focusable for keyboard events
+		container.setAttribute('tabindex', '0');
 
-			// Keyboard support
-			window.addEventListener('keydown', (e) => {
-				if (e.key === 'ArrowDown' || e.key === ' ') {
-					e.preventDefault();
-					triggerAnimation();
-				} else if (e.key === 'ArrowUp') {
-					e.preventDefault();
-					resetAnimation();
-				}
-			});
-		}
-	}
+		// Cleanup function for when navigating away
+		document.addEventListener('astro:before-swap', () => {
+			// Remove all event listeners when navigating away
+			const newContainer = container.cloneNode(true);
+			container.parentNode?.replaceChild(newContainer, container);
+		});
+	});
 </script>
 
 <style>
