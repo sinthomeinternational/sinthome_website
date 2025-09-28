@@ -2,197 +2,86 @@
 import RootLayout from "../../layouts/RootLayout.astro";
 import InfoLayout from "../../layouts/InfoLayout.astro";
 import H1 from "../../components/ui/H1.astro";
+import { getTranslations, getCurrentLang } from "../../lib/translations";
+
+// Get current language and translations
+const lang = getCurrentLang();
+const t = getTranslations(lang);
+const pageContent = t.pages.upcomingEvents;
+
+// Get events data
+const events = [
+  { key: 'srtp', data: pageContent.events.srtp },
+  { key: 'onlineCommunity', data: pageContent.events.onlineCommunity },
+  { key: 'nyMedia', data: pageContent.events.nyMedia },
+  { key: 'hackathon', data: pageContent.events.hackathon },
+  { key: 'eslClass', data: pageContent.events.eslClass },
+];
 ---
 
 <RootLayout>
   <InfoLayout>
-    <H1>Upcoming Events</H1>
+    <H1>{pageContent.title}</H1>
 
     <div class="space-y-8 max-w-4xl">
-      <!-- S.R.T.P. Lectures -->
-      <section>
-        <div class="bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">S.R.T.P. Lectures</h2>
-            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded">Theory & Practice</span>
-            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded ml-auto">Ongoing</span>
-          </div>
+      {events.map(({ key, data }) => (
+        <section key={key}>
+          <div class="bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{data.title}</h2>
+              {data.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  class={`text-xs px-2 py-1 rounded ${
+                    index === 0
+                      ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
+                      : 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 ml-auto'
+                  }`}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
 
-          <div class="grid md:grid-cols-4 gap-4 mb-4">
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Location</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Boston, USA</p>
+            <div class="grid md:grid-cols-4 gap-4 mb-4">
+              <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
+                <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">
+                  {pageContent.labels.location}
+                </h3>
+                <p class="text-gray-700 dark:text-zinc-300">{data.location}</p>
+              </div>
+              <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
+                <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">
+                  {pageContent.labels.schedule}
+                </h3>
+                <p class="text-gray-700 dark:text-zinc-300">
+                  {data.schedule}
+                  {data.scheduleFull && <><br/>{data.scheduleFull}</>}
+                </p>
+              </div>
+              <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
+                <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">
+                  {pageContent.labels.format}
+                </h3>
+                <p class="text-gray-700 dark:text-zinc-300">{data.format}</p>
+              </div>
+              <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
+                <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">
+                  {pageContent.labels.type}
+                </h3>
+                <p class="text-gray-700 dark:text-zinc-300">{data.type}</p>
+              </div>
             </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Schedule</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Every Saturday<br>Fall 2025</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Format</h3>
-              <p class="text-gray-700 dark:text-zinc-300">In-person</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Type</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Lectures &<br>Seminars</p>
-            </div>
-          </div>
 
-          <div class="border-t border-gray-200 dark:border-zinc-700 pt-4">
-            <h3 class="text-gray-900 dark:text-white font-semibold mb-3">About This Event</h3>
-            <p class="text-gray-600 dark:text-zinc-300 leading-relaxed">
-              S.R.T.P. (Sinthome Revolutionary Theory Practice) is a department dedicated to closely linking theoretical critique with social praxis. Through weekly lectures and seminars, it encourages practitioners to continually reflect on and interrogate their actions, explore their meaning and potential, and transform practical experience into new theory and revolutionary ideas. S.R.T.P. focuses not only on praxis itself but also on how to create the future and change the world through practice.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Online Community -->
-      <section>
-        <div class="bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Online Community</h2>
-            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded">Education Platform</span>
-            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs px-2 py-1 rounded ml-auto">Schedule TBD</span>
-          </div>
-
-          <div class="grid md:grid-cols-4 gap-4 mb-4">
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Location</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Online</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Schedule</h3>
-              <p class="text-gray-700 dark:text-zinc-300">TBD</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Format</h3>
-              <p class="text-gray-700 dark:text-zinc-300">WeChat +<br>Tencent Meeting</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Type</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Virtual<br>Community</p>
+            <div class="border-t border-gray-200 dark:border-zinc-700 pt-4">
+              <h3 class="text-gray-900 dark:text-white font-semibold mb-3">{data.aboutTitle}</h3>
+              <p class="text-gray-600 dark:text-zinc-300 leading-relaxed">
+                {data.description}
+              </p>
             </div>
           </div>
-
-          <div class="border-t border-gray-200 dark:border-zinc-700 pt-4">
-            <h3 class="text-gray-900 dark:text-white font-semibold mb-3">About This Event</h3>
-            <p class="text-gray-600 dark:text-zinc-300 leading-relaxed">
-              The online community is Sinthome's public education platform. In the summer of 2025, we organized four lecture series—each about eight weeks long—on History, community practice, Political Philosophy, and Lacan's Seminar on Love. After the summer, the platform shifted to weekly year-round lectures on Leftist theory, philosophy, sociology, and the broader humanities. It enables participation for those unable to attend offline, systematizes and shares our knowledge, provides a steady space for discussion and learning, and allows those who resonate with these ideas to engage further, receive training, and put theory into practice.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- New York Media & Interviews -->
-      <section>
-        <div class="bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">New York Media & Interviews</h2>
-            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-2 py-1 rounded">Media Initiative</span>
-            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded ml-auto">Ongoing</span>
-          </div>
-
-          <div class="grid md:grid-cols-4 gap-4 mb-4">
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Location</h3>
-              <p class="text-gray-700 dark:text-zinc-300">New York City</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Schedule</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Ongoing,<br>irregularly</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Format</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Interviews &<br>Documentaries</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Type</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Media<br>Production</p>
-            </div>
-          </div>
-
-          <div class="border-t border-gray-200 dark:border-zinc-700 pt-4">
-            <h3 class="text-gray-900 dark:text-white font-semibold mb-3">About This Event</h3>
-            <p class="text-gray-600 dark:text-zinc-300 leading-relaxed">
-              The media initiative is a key platform for connecting Sinthome with social movements in the U.S. A friend of ours studying journalism in New York, together with his small team, carries out interviews and documentary work. They meet with scholars and activists across the country and focus on grassroots organizations in New York, using interviews, films, and collaborative reporting to highlight the histories and struggles of the Left. At the same time, this project provides Chinese-speaking audiences with a channel to understand and connect with U.S. movements.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Hackathon -->
-      <section>
-        <div class="bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Hackathon</h2>
-            <span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs px-2 py-1 rounded">Tech for Good</span>
-            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs px-2 py-1 rounded ml-auto">Sept 2025</span>
-          </div>
-
-          <div class="grid md:grid-cols-4 gap-4 mb-4">
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Location</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Boston TBD</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Schedule</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Sept 2025 (trial)<br>TBD (public)</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Format</h3>
-              <p class="text-gray-700 dark:text-zinc-300">In-person</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Type</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Competition &<br>Collaboration</p>
-            </div>
-          </div>
-
-          <div class="border-t border-gray-200 dark:border-zinc-700 pt-4">
-            <h3 class="text-gray-900 dark:text-white font-semibold mb-3">About This Event</h3>
-            <p class="text-gray-600 dark:text-zinc-300 leading-relaxed">
-              A hackathon initiative combining artificial intelligence and social issues. By bringing together students, young professionals, and nonprofit workers, the hackathon fosters mutual learning across diverse perspectives and creates a shared space to reimagine how technology can be practiced in the service of public good. This year's subthemes highlight diverse challenges, from supporting Asian workers in Boston with language access, to providing peer counseling for youth mental health, to empowering small and medium-sized manufacturers through industry-specific AI agents.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Free ESL Class -->
-      <section>
-        <div class="bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Free ESL Class</h2>
-            <span class="bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-200 text-xs px-2 py-1 rounded">Workers Assist</span>
-            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded ml-auto">Ongoing</span>
-          </div>
-
-          <div class="grid md:grid-cols-4 gap-4 mb-4">
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Location</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Boston,<br>Chinatown</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Schedule</h3>
-              <p class="text-gray-700 dark:text-zinc-300">2x in-person<br>2x online/week</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Format</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Hybrid</p>
-            </div>
-            <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
-              <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">Type</h3>
-              <p class="text-gray-700 dark:text-zinc-300">Education &<br>Support</p>
-            </div>
-          </div>
-
-          <div class="border-t border-gray-200 dark:border-zinc-700 pt-4">
-            <h3 class="text-gray-900 dark:text-white font-semibold mb-3">About This Event</h3>
-            <p class="text-gray-600 dark:text-zinc-300 leading-relaxed">
-              Workers Assist invites you to our free English class! Together, we'll practice daily English, learn useful life skills, and support each other in a friendly, community-based classroom.
-            </p>
-          </div>
-        </div>
-      </section>
+        </section>
+      ))}
     </div>
   </InfoLayout>
 </RootLayout>

@@ -21,6 +21,23 @@ export interface PageContent {
     keywords?: string[];
     ogImage?: string;
   };
+  // For upcoming events page
+  events?: {
+    [key: string]: {
+      title: string;
+      tags: string[];
+      location: string;
+      schedule: string;
+      scheduleFull?: string;
+      format: string;
+      type: string;
+      aboutTitle: string;
+      description: string;
+    };
+  };
+  labels?: {
+    [key: string]: string;
+  };
 }
 
 export interface ContentSection {
