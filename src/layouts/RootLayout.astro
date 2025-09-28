@@ -44,7 +44,7 @@ const defaultDescription = "A public-interest community reconstructing new relat
 		<ClientRouter />
 		<LoadingIndicator color="#f4f4f5" height="2px" />
 
-		<!-- Inline script to prevent theme flash and handle language switching -->
+		<!-- Inline script to prevent theme flash -->
 		<script is:inline>
 			(function() {
 				// Get stored theme or default to dark
@@ -55,43 +55,21 @@ const defaultDescription = "A public-interest community reconstructing new relat
 
 				// Apply data attribute for CSS targeting
 				document.documentElement.setAttribute('data-theme', storedTheme);
-
-				// Check if this is a language switch
-				const isLanguageSwitch = sessionStorage.getItem('isLanguageSwitch');
-				if (isLanguageSwitch === 'true') {
-					// Hide content initially for smooth fade-in
-					document.documentElement.classList.add('language-restoring');
-					sessionStorage.removeItem('isLanguageSwitch');
-				}
 			})();
 		</script>
 	</head>
 	<body class="font-sans min-h-screen">
 		<slot />
 
-		<!-- Script to handle language switch restoration -->
+		<!-- Script to restore scroll position after language switch -->
 		<script>
-			// Handle smooth fade-in after language switch
-			if (document.documentElement.classList.contains('language-restoring')) {
-				// Wait for content to be ready
-				window.addEventListener('DOMContentLoaded', () => {
-					// Restore scroll position
-					const scrollPosition = sessionStorage.getItem('scrollPosition');
-					if (scrollPosition) {
-						window.scrollTo(0, parseInt(scrollPosition));
-						sessionStorage.removeItem('scrollPosition');
-					}
-
-					// Trigger fade-in animation
-					requestAnimationFrame(() => {
-						document.documentElement.classList.remove('language-restoring');
-						document.documentElement.classList.add('language-restoring-fade-in');
-
-						// Clean up after animation
-						setTimeout(() => {
-							document.documentElement.classList.remove('language-restoring-fade-in');
-						}, 250);
-					});
+			// Restore scroll position if this was a language switch
+			const scrollPosition = sessionStorage.getItem('scrollPosition');
+			if (scrollPosition) {
+				// Use requestAnimationFrame to ensure DOM is ready
+				requestAnimationFrame(() => {
+					window.scrollTo(0, parseInt(scrollPosition));
+					sessionStorage.removeItem('scrollPosition');
 				});
 			}
 		</script>
