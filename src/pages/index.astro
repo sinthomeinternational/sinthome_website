@@ -1,27 +1,30 @@
 ---
 import RootLayout from "../layouts/RootLayout.astro";
 import WarpBackground from "../components/ui/WarpBackground";
+import "../styles/warp-drift.css";
 ---
 
 <RootLayout>
 	<main class="homepage-main">
 		<div id="homepage-container" class="group relative w-full h-dvh flex items-center justify-center overflow-hidden">
-			<div class="absolute w-full h-dvh -z-10">
-				{/* Zero softness configuration with sharper edges */}
-				<WarpBackground
-					color1="#000000"
-					color2="#a80000"
-					color3="#000000"
-					speed={0.3}
-					swirl={0.98}
-					swirlIterations={31}
-					shapeScale={0.04}
-					rotation={0.85}
-					scale={0.1}
-					softness={0}
-					distortion={0}
-					client:load
-				/>
+			<div class="absolute w-full h-dvh -z-10 overflow-hidden">
+				{/* Enhanced Warp with directional movement */}
+				<div class="warp-drift-container">
+					<WarpBackground
+						color1="#000000"
+						color2="#940000"
+						color3="#000000"
+						speed={0.2}
+						swirl={0.98}
+						swirlIterations={29}
+						shapeScale={0.04}
+						rotation={0.55}
+						scale={0.4}
+						softness={0}
+						distortion={0}
+						client:load
+					/>
+				</div>
 			</div>
 
 			<div class="absolute w-full h-dvh flex flex-col justify-center items-center z-10">
@@ -33,48 +36,48 @@ import WarpBackground from "../components/ui/WarpBackground";
 					</h1>
 
 					<!-- Initially Hidden Elements -->
-					<div id="emerging-content" class="opacity-0 translate-y-8 transition-all duration-700 ease-out delay-100">
+					<div id="emerging-content" class="content-hidden">
 						<!-- Straightforward Tagline -->
-						<p class="text-xl sm:text-2xl text-white font-semibold mb-6 mt-4">
+						<p class="tagline text-xl sm:text-2xl text-white font-semibold mb-6 mt-4">
 							Knowledge — Critique — Praxis
 						</p>
 
 						<!-- Plain Practice Tags -->
-						<div class="flex flex-wrap justify-center gap-3 mb-10 max-w-3xl">
-							<span class="px-4 py-2 text-white border border-white rounded-full text-sm tag-item">
+						<div class="tags-container flex flex-wrap justify-center gap-3 mb-10 max-w-3xl">
+							<span class="tag-item px-4 py-2 text-white border border-white rounded-full text-sm">
 								Public Lectures
 							</span>
-							<span class="px-4 py-2 text-white border border-white rounded-full text-sm tag-item">
+							<span class="tag-item px-4 py-2 text-white border border-white rounded-full text-sm">
 								Psychoanalysis
 							</span>
-							<span class="px-4 py-2 text-white border border-white rounded-full text-sm tag-item">
+							<span class="tag-item px-4 py-2 text-white border border-white rounded-full text-sm">
 								Workers Assist
 							</span>
-							<span class="px-4 py-2 text-white border border-white rounded-full text-sm tag-item">
+							<span class="tag-item px-4 py-2 text-white border border-white rounded-full text-sm">
 								AI for Public Good
 							</span>
-							<span class="px-4 py-2 text-white border border-white rounded-full text-sm tag-item">
+							<span class="tag-item px-4 py-2 text-white border border-white rounded-full text-sm">
 								Factory AI Solution
 							</span>
 						</div>
 
 						<!-- Simple, Direct CTAs -->
-						<div class="flex flex-col sm:flex-row gap-4 button-group justify-center items-center">
+						<div class="buttons-container flex flex-col sm:flex-row gap-4 justify-center items-center">
 							<a
 								href="/who-we-are"
-								class="px-8 py-4 bg-white text-black font-bold hover:bg-gray-200 transition-colors cta-button"
+								class="cta-button px-8 py-4 bg-white text-black font-bold hover:bg-gray-200 transition-colors"
 							>
 								ABOUT US
 							</a>
 							<a
 								href="/what-we-do"
-								class="px-8 py-4 bg-black text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors cta-button"
+								class="cta-button px-8 py-4 bg-black text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors"
 							>
 								OUR PROJECTS
 							</a>
 							<a
 								href="/contact"
-								class="px-8 py-4 text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors cta-button"
+								class="cta-button px-8 py-4 text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors"
 							>
 								JOIN US
 							</a>
@@ -96,7 +99,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 </RootLayout>
 
 <script>
-	// Animation logic - scoped to homepage container only
+	// Professional smooth animation logic - scoped to homepage container only
 	document.addEventListener('DOMContentLoaded', () => {
 		const container = document.getElementById('homepage-container');
 
@@ -104,68 +107,110 @@ import WarpBackground from "../components/ui/WarpBackground";
 		if (!container) return;
 
 		let hasScrolled = false;
+		let animationInProgress = false;
+
+		// Professional animation timing configuration
+		const ANIMATION_CONFIG = {
+			titleMove: 400,
+			contentDelay: 150,
+			taglineDelay: 300,
+			tagsDelay: 450,
+			buttonsDelay: 700,
+			staggerDelay: 60,
+			microAnimationDelay: 1200 // Delay before micro-animations
+		};
 
 		function triggerAnimation() {
+			if (hasScrolled || animationInProgress) return;
+
+			animationInProgress = true;
+			hasScrolled = true;
+
 			const emergingContent = document.getElementById('emerging-content');
 			const sinthomeTitle = document.getElementById('sinthome-title');
 			const scrollIndicator = document.getElementById('scroll-indicator');
 
-			if (!hasScrolled) {
-				hasScrolled = true;
+			// Step 1: Move SINTHOME title up smoothly
+			sinthomeTitle?.classList.add('title-moved');
 
-				// Move SINTHOME up slightly
-				sinthomeTitle?.classList.add('-translate-y-12');
+			// Step 2: Hide scroll indicator immediately
+			scrollIndicator?.classList.add('scroll-hidden');
 
-				// Make content appear
-				emergingContent?.classList.remove('opacity-0', 'translate-y-8');
-				emergingContent?.classList.add('opacity-100', 'translate-y-0');
+			// Step 3: Start content animation sequence
+			setTimeout(() => {
+				emergingContent?.classList.add('content-visible');
+			}, ANIMATION_CONFIG.contentDelay);
 
-				// Hide scroll indicator
-				scrollIndicator?.classList.remove('opacity-100');
-				scrollIndicator?.classList.add('opacity-0');
+			// Step 4: Animate tagline
+			setTimeout(() => {
+				const tagline = document.querySelector('.tagline');
+				tagline?.classList.add('element-visible');
+			}, ANIMATION_CONFIG.taglineDelay);
 
-				// Add staggered animation to tags
+			// Step 5: Animate tags with stagger
+			setTimeout(() => {
 				const tags = document.querySelectorAll('.tag-item');
 				tags.forEach((tag, index) => {
 					setTimeout(() => {
-						tag.classList.add('animate-fade-in');
-					}, index * 100);
+						tag.classList.add('element-visible');
+					}, index * ANIMATION_CONFIG.staggerDelay);
 				});
+			}, ANIMATION_CONFIG.tagsDelay);
 
-				// Add staggered animation to buttons
+			// Step 6: Animate buttons with stagger
+			setTimeout(() => {
 				const buttons = document.querySelectorAll('.cta-button');
 				buttons.forEach((button, index) => {
 					setTimeout(() => {
-						button.classList.add('animate-fade-in');
-					}, 500 + (index * 100));
+						button.classList.add('element-visible');
+					}, index * ANIMATION_CONFIG.staggerDelay);
 				});
-			}
+
+				// Step 7: Add subtle micro-animations after main sequence
+				setTimeout(() => {
+					// Add gentle floating animation to tags
+					const tags = document.querySelectorAll('.tag-item');
+					tags.forEach((tag, index) => {
+						tag.classList.add('micro-float');
+						(tag as HTMLElement).style.animationDelay = `${index * 0.2}s`;
+					});
+
+					// Add subtle pulse to buttons
+					buttons.forEach((button, index) => {
+						setTimeout(() => {
+							button.classList.add('micro-pulse');
+						}, index * 100);
+					});
+
+					animationInProgress = false;
+				}, ANIMATION_CONFIG.microAnimationDelay);
+			}, ANIMATION_CONFIG.buttonsDelay);
 		}
 
 		function resetAnimation() {
-			if (hasScrolled) {
-				hasScrolled = false;
+			if (!hasScrolled || animationInProgress) return;
 
-				const emergingContent = document.getElementById('emerging-content');
-				const sinthomeTitle = document.getElementById('sinthome-title');
-				const scrollIndicator = document.getElementById('scroll-indicator');
+			animationInProgress = true;
+			hasScrolled = false;
 
-				// Reset SINTHOME position
-				sinthomeTitle?.classList.remove('-translate-y-12');
+			const emergingContent = document.getElementById('emerging-content');
+			const sinthomeTitle = document.getElementById('sinthome-title');
+			const scrollIndicator = document.getElementById('scroll-indicator');
 
-				// Hide content again
-				emergingContent?.classList.add('opacity-0', 'translate-y-8');
-				emergingContent?.classList.remove('opacity-100', 'translate-y-0');
+			// Remove all animation classes simultaneously for instant reset
+			sinthomeTitle?.classList.remove('title-moved');
+			emergingContent?.classList.remove('content-visible');
+			scrollIndicator?.classList.remove('scroll-hidden');
 
-				// Show scroll indicator
-				scrollIndicator?.classList.add('opacity-100');
-				scrollIndicator?.classList.remove('opacity-0');
+			// Reset all child elements and micro-animations
+			document.querySelectorAll('.element-visible').forEach(el => {
+				el.classList.remove('element-visible', 'micro-float', 'micro-pulse');
+				(el as HTMLElement).style.animationDelay = '';
+			});
 
-				// Remove animation classes
-				document.querySelectorAll('.animate-fade-in').forEach(el => {
-					el.classList.remove('animate-fade-in');
-				});
-			}
+			setTimeout(() => {
+				animationInProgress = false;
+			}, 100);
 		}
 
 		// Attach listeners ONLY to the homepage container, not window
@@ -228,6 +273,16 @@ import WarpBackground from "../components/ui/WarpBackground";
 </script>
 
 <style>
+	/* CSS Variables for consistent animation timing */
+	:root {
+		--animation-duration-fast: 0.25s;
+		--animation-duration-medium: 0.45s;
+		--animation-duration-slow: 0.65s;
+		--animation-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Professional ease-out curve */
+		--animation-easing-entrance: cubic-bezier(0.16, 1, 0.3, 1); /* Smooth entrance */
+		--animation-easing-micro: cubic-bezier(0.4, 0, 0.2, 1); /* Subtle micro-animations */
+	}
+
 	/* SINTHOME title styling - League Spartan Bold */
 	.sinthome-title {
 		/* League Spartan - geometric sans-serif with strong, clean lines */
@@ -243,6 +298,13 @@ import WarpBackground from "../components/ui/WarpBackground";
 		/* No horizontal compression - natural width */
 		transform: scaleX(1);
 		transform-origin: center;
+		/* Smooth transition for title movement */
+		transition: transform var(--animation-duration-medium) var(--animation-easing);
+	}
+
+	/* Title moved state */
+	.sinthome-title.title-moved {
+		transform: translateY(-3rem);
 	}
 
 	/* Prevent actual scrolling only on homepage */
@@ -251,26 +313,147 @@ import WarpBackground from "../components/ui/WarpBackground";
 		overflow: hidden;
 	}
 
-	/* Custom fade-in animation */
-	@keyframes fadeInUp {
-		from {
-			opacity: 0;
-			transform: translateY(20px);
+	/* Professional Animation System */
+
+	/* Initial hidden state for content */
+	.content-hidden {
+		opacity: 0;
+		transform: translateY(2rem);
+		transition: opacity var(--animation-duration-slow) var(--animation-easing),
+					transform var(--animation-duration-slow) var(--animation-easing);
+	}
+
+	/* Content visible state */
+	.content-hidden.content-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* Individual element initial states */
+	.tagline,
+	.tag-item,
+	.cta-button {
+		opacity: 0;
+		transform: translateY(1.2rem) scale(0.98);
+		transition: opacity var(--animation-duration-medium) var(--animation-easing-entrance),
+					transform var(--animation-duration-medium) var(--animation-easing-entrance),
+					scale var(--animation-duration-medium) var(--animation-easing-entrance);
+	}
+
+	/* Individual element visible states */
+	.tagline.element-visible,
+	.tag-item.element-visible,
+	.cta-button.element-visible {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+
+	/* Subtle hover enhancement for tags */
+	.tag-item.element-visible {
+		transition: opacity var(--animation-duration-medium) var(--animation-easing-entrance),
+					transform var(--animation-duration-medium) var(--animation-easing-entrance),
+					background-color var(--animation-duration-fast) ease,
+					border-color var(--animation-duration-fast) ease;
+	}
+
+	.tag-item.element-visible:hover {
+		background-color: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255, 255, 255, 0.8);
+	}
+
+	/* Professional button transitions */
+	.cta-button.element-visible {
+		transition: opacity var(--animation-duration-medium) var(--animation-easing-entrance),
+					transform var(--animation-duration-medium) var(--animation-easing-entrance),
+					background-color var(--animation-duration-fast) ease,
+					color var(--animation-duration-fast) ease,
+					border-color var(--animation-duration-fast) ease,
+					box-shadow var(--animation-duration-fast) ease;
+	}
+
+	/* Subtle elevation on button hover */
+	.cta-button.element-visible:hover {
+		transform: translateY(-2px) scale(1.02);
+		box-shadow: 0 6px 20px rgba(168, 0, 0, 0.2);
+	}
+
+	/* Scroll indicator smooth hide */
+	#scroll-indicator {
+		opacity: 1;
+		transition: opacity var(--animation-duration-fast) var(--animation-easing);
+	}
+
+	#scroll-indicator.scroll-hidden {
+		opacity: 0;
+	}
+
+	/* Performance optimizations */
+	.sinthome-title,
+	.content-hidden,
+	.tagline,
+	.tag-item,
+	.cta-button,
+	#scroll-indicator {
+		will-change: transform, opacity;
+	}
+
+	/* Ensure smooth rendering on all devices */
+	* {
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	/* Micro-animations for enhanced polish */
+	@keyframes microFloat {
+		0%, 100% {
+			transform: translateY(0) scale(1);
 		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
+		50% {
+			transform: translateY(-2px) scale(1.01);
 		}
 	}
 
-	.animate-fade-in {
-		animation: fadeInUp 0.6s ease-out forwards;
+	@keyframes microPulse {
+		0% {
+			transform: translateY(0) scale(1);
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		}
+		50% {
+			transform: translateY(0) scale(1.015);
+			box-shadow: 0 4px 16px rgba(168, 0, 0, 0.15);
+		}
+		100% {
+			transform: translateY(0) scale(1);
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		}
 	}
 
-	/* Delay classes for staggered animations */
-	.delay-100 { animation-delay: 100ms; }
-	.delay-200 { animation-delay: 200ms; }
-	.delay-300 { animation-delay: 300ms; }
-	.delay-400 { animation-delay: 400ms; }
-	.delay-500 { animation-delay: 500ms; }
+	/* Apply micro-animations */
+	.tag-item.micro-float {
+		animation: microFloat 3s var(--animation-easing-micro) infinite;
+	}
+
+	.cta-button.micro-pulse {
+		animation: microPulse 2s var(--animation-easing-micro);
+		animation-fill-mode: forwards;
+	}
+
+	/* Remove will-change after animations complete to optimize performance */
+	@media (prefers-reduced-motion: reduce) {
+		:root {
+			--animation-duration-fast: 0.1s;
+			--animation-duration-medium: 0.1s;
+			--animation-duration-slow: 0.1s;
+		}
+
+		/* Respect user's motion preferences */
+		.sinthome-title,
+		.content-hidden,
+		.tagline,
+		.tag-item,
+		.cta-button,
+		#scroll-indicator {
+			transition-duration: 0.1s !important;
+		}
+	}
 </style>
