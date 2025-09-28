@@ -1,133 +1,16 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
+import { Image } from 'astro:assets';
+
+// Import event images (placeholders for now - replace with actual images)
+// import nezhaPoster from "../../assets/srtp/nezha-poster.jpg";
+// import nezhaEvent from "../../assets/srtp/nezha-event.png";
+// import dialecticsPoster from "../../assets/srtp/dialectics-poster.png";
+// import dialecticsEvent from "../../assets/srtp/dialectics-event.png";
+// import deleuzePoster from "../../assets/srtp/deleuze-poster.png";
+// import deleuzeEvent from "../../assets/srtp/deleuze-event.png";
 ---
-
-<style>
-  /* Tooltip styling */
-  .tooltip-term {
-    position: relative;
-    transition: all 0.3s ease;
-  }
-
-  .tooltip-term:hover {
-    color: rgb(239 68 68); /* red-500 */
-    text-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
-  }
-
-  .tooltip-term:hover::after {
-    content: attr(title);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.95);
-    color: rgb(244 244 245); /* zinc-100 */
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    white-space: nowrap;
-    z-index: 1000;
-    border: 1px solid rgb(239 68 68 / 0.3);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.2s ease-in;
-  }
-
-  .tooltip-term:hover::before {
-    content: '';
-    position: absolute;
-    bottom: 94%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid rgba(0, 0, 0, 0.95);
-    z-index: 1001;
-    animation: fadeIn 0.2s ease-in;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateX(-50%) translateY(-4px); }
-    to { opacity: 1; transform: translateX(-50%) translateY(0); }
-  }
-
-  /* Concept block hover effect */
-  .concept-block {
-    transition: all 0.3s ease;
-    position: relative;
-  }
-
-  .concept-block::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(to bottom, transparent, rgb(220 38 38 / 0.5), transparent);
-    transition: all 0.3s ease;
-    opacity: 0;
-  }
-
-  .concept-block:hover::before {
-    opacity: 1;
-  }
-
-  .concept-block:hover {
-    transform: translateX(4px);
-    background: rgba(39, 39, 42, 0.3); /* zinc-800/30 */
-    margin-left: -8px;
-    padding-left: 2rem;
-    border-radius: 8px;
-  }
-
-  /* Pull quote animation */
-  .pull-quote blockquote {
-    position: relative;
-  }
-
-  .pull-quote blockquote::before,
-  .pull-quote blockquote::after {
-    content: '"';
-    font-size: 4rem;
-    color: rgb(220 38 38 / 0.3);
-    position: absolute;
-    line-height: 1;
-  }
-
-  .pull-quote blockquote::before {
-    top: -1rem;
-    left: -2rem;
-  }
-
-  .pull-quote blockquote::after {
-    bottom: -2rem;
-    right: -2rem;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 640px) {
-    .tooltip-term:hover::after {
-      font-size: 0.75rem;
-      max-width: 200px;
-      white-space: normal;
-      text-align: center;
-    }
-
-    .concept-block:hover {
-      transform: none;
-      margin-left: 0;
-      padding-left: 2rem;
-    }
-
-    .pull-quote blockquote::before,
-    .pull-quote blockquote::after {
-      display: none;
-    }
-  }
-</style>
 
 <PageLayout title="S.R.T.P. - Sinthome" useContentLayout={true}>
     <!-- Enhanced Title Structure -->
@@ -138,166 +21,9 @@ import H1 from "../../components/ui/H1.astro";
     </div>
 
     <div class="space-y-16">
-      <!-- Overview -->
-      <section>
-        <h3 class="text-2xl font-bold text-white mb-8 text-center">Interrogating praxis, until it unveils the future.</h3>
-
-        <!-- Enhanced Marx Quote Section -->
-        <div class="relative mb-10">
-          <div class="absolute inset-0 bg-gradient-to-r from-red-900/10 via-red-800/5 to-transparent rounded-lg"></div>
-          <div class="relative bg-zinc-900/70 border border-zinc-700 rounded-lg p-8 backdrop-blur-sm">
-            <blockquote class="text-zinc-100 text-xl font-medium italic text-center leading-relaxed mb-4">
-              "Die Philosophen haben die Welt nur verschieden interpretiert; es kommt aber darauf an, sie zu verändern."
-            </blockquote>
-            <p class="text-zinc-400 text-center text-lg">
-              —— Karl Marx
-            </p>
-          </div>
-        </div>
-
-        <!-- Introduction -->
-        <div class="space-y-6 text-lg leading-8">
-          <p class="text-zinc-300">
-            There is no clear path that leads theoretical critique to social praxis. Born from this rupture between theory and praxis, Sinthome Revolutionary Theory Practice (S.R.T.P.) is such a special yet indispensable program that formulates the guidelines for Sinthome's social praxis.
-          </p>
-
-          <p class="text-zinc-300">
-            By hosting weekly lectures and seminars, S.R.T.P. harbors a self-reflexive intellectual community that facilitates the necessary circulation between theoretical critique and social praxis.
-          </p>
-
-          <!-- Key Questions Callout -->
-          <div class="bg-gradient-to-br from-zinc-900/80 to-zinc-800/60 border border-zinc-600 rounded-lg p-6 my-8">
-            <p class="text-zinc-200 font-medium mb-4">
-              Departing from knowledge learning and theoretical critique, we interrogate every possible dimension of our own praxis:
-            </p>
-            <ul class="space-y-3">
-              <li class="flex items-start text-zinc-300">
-                <span class="text-red-500 mr-3 mt-1">•</span>
-                <span>What is the meaning of our praxis?</span>
-              </li>
-              <li class="flex items-start text-zinc-300">
-                <span class="text-red-500 mr-3 mt-1">•</span>
-                <span>How can it be theorized?</span>
-              </li>
-              <li class="flex items-start text-zinc-300">
-                <span class="text-red-500 mr-3 mt-1">•</span>
-                <span>How can it lead to new revolutionary thinking?</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Philosophical Foundation: Themed Sections -->
-          <div class="space-y-12">
-
-            <!-- Section 1: The Origin -->
-            <div class="concept-block border-l-4 border-red-600/50 pl-8 py-6">
-              <h4 class="text-xl font-semibold text-red-400 mb-4 flex items-center">
-                <span class="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
-                The Origin
-              </h4>
-              <p class="text-zinc-300 leading-8 mb-6">
-                Marx once said, "Philosophers have only interpreted the world in various ways; the point, however, is to change it." Yet, who is changing the world? Which world needs to be changed? On this point, Marx remained silent.
-              </p>
-              <p class="text-zinc-300 leading-8">
-                It is precisely this silence that constitutes our origin (<span class="tooltip-term text-red-300 underline decoration-dotted cursor-help" title="Greek: ἀρχή - beginning, origin, first principle">ἀρχή</span>) of departure: not the elements of classical Greek philosophy—water, fire, earth, air—nor the ideas of German classical philosophy or the "unmoved mover," but a concrete call—a call that must be answered.
-              </p>
-            </div>
-
-            <!-- Pull Quote 1 -->
-            <div class="pull-quote text-center py-8 px-6 bg-gradient-to-r from-transparent via-zinc-900/40 to-transparent border-y border-zinc-700">
-              <blockquote class="text-2xl font-medium text-zinc-100 italic leading-relaxed">
-                "We create the world through change"
-              </blockquote>
-              <div class="w-16 h-1 bg-red-600 mx-auto mt-4"></div>
-            </div>
-
-            <!-- Section 2: The Task -->
-            <div class="concept-block border-l-4 border-red-600/50 pl-8 py-6">
-              <h4 class="text-xl font-semibold text-red-400 mb-4 flex items-center">
-                <span class="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
-                The Task
-              </h4>
-              <p class="text-zinc-300 leading-8 mb-6">
-                The task of S.R.T.P. is established within this call. We are not here to interpret the world in order to understand it, nor do we interpret first and only "then (<span class="tooltip-term text-red-300 underline decoration-dotted cursor-help" title="German: dann - then, afterwards">dann</span>)" go on to change it.
-              </p>
-              <p class="text-zinc-300 leading-8">
-                Marx's "<span class="tooltip-term text-red-300 underline decoration-dotted cursor-help font-semibold" title="German: aber - but, however. The decisive 'but' that Marx uses to pivot from interpretation to change">aber</span>" precedes all interpretation, precedes all theory. Changing the world is the sole a priori, the absolute principle.
-              </p>
-            </div>
-
-            <!-- Section 3: The World-to-be-Changed -->
-            <div class="concept-block border-l-4 border-red-600/50 pl-8 py-6">
-              <h4 class="text-xl font-semibold text-red-400 mb-4 flex items-center">
-                <span class="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
-                The World-to-be-Changed
-              </h4>
-              <p class="text-zinc-300 leading-8">
-                For us, the world is not a pre-given totality; it is the world-to-be-changed, the future (<span class="tooltip-term text-red-300 underline decoration-dotted cursor-help" title="German: zu-Kunft - future, literally 'to-coming'; French: à-venir - to come">zu-Kunft, à-venir</span>). We are not facing a world that is waiting to be interpreted; we create the world through change.
-              </p>
-            </div>
-
-            <!-- Pull Quote 2 -->
-            <div class="pull-quote text-center py-8 px-6 bg-gradient-to-r from-transparent via-zinc-900/40 to-transparent border-y border-zinc-700">
-              <blockquote class="text-2xl font-medium text-zinc-100 italic leading-relaxed">
-                "Marx's 'aber' precedes all interpretation"
-              </blockquote>
-              <div class="w-16 h-1 bg-red-600 mx-auto mt-4"></div>
-            </div>
-
-            <!-- Section 4: Revolutionary Apparatus -->
-            <div class="concept-block border-l-4 border-red-600/50 pl-8 py-6">
-              <h4 class="text-xl font-semibold text-red-400 mb-4 flex items-center">
-                <span class="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
-                Revolutionary Apparatus
-              </h4>
-              <p class="text-zinc-300 leading-8 mb-6">
-                We refuse to let praxis remain at the empirical level. S.R.T.P. compels practitioners to transform their actions into theory, thereby generating new revolutionary concepts, new critiques, and new weapons.
-              </p>
-              <p class="text-zinc-300 leading-8">
-                S.R.T.P. is both the rupture-point of theory and praxis, and their intersection. It does not produce "ready-made" theory; rather, through repeated interrogation and forging of praxis, it generates thought capable of opening the future.
-              </p>
-            </div>
-
-            <!-- Section 5: The Decisive Moment -->
-            <div class="concept-block border-l-4 border-red-600/50 pl-8 py-6 mb-8">
-              <h4 class="text-xl font-semibold text-red-400 mb-4 flex items-center">
-                <span class="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
-                The Decisive Moment
-              </h4>
-              <p class="text-zinc-300 leading-8 mb-6">
-                Without the "<span class="tooltip-term text-red-300 underline decoration-dotted cursor-help font-semibold" title="The 'aber' that is not derived from anything - Marx's decisive 'but' that stands as an absolute principle">aber</span>" that is not derived from anything, the fate of all possible worlds hangs undecided.
-              </p>
-            </div>
-
-            <!-- Final Pull Quote / Mission Statement -->
-            <div class="bg-gradient-to-br from-zinc-900/90 to-zinc-800/70 border border-red-600/30 rounded-xl p-8 text-center">
-              <p class="text-zinc-300 text-lg mb-4">
-                In this sense, S.R.T.P. is both a machine of reflection and an apparatus of interrogation:
-              </p>
-              <p class="text-zinc-300 italic text-lg mb-6">
-                Its very existence is a reminder—
-              </p>
-              <blockquote class="text-2xl font-bold text-white leading-relaxed">
-                The world must be changed, and all theory and praxis must assume this mission.
-              </blockquote>
-              <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-red-800 mx-auto mt-6"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- Activities Section -->
-      <section class="relative">
-        <!-- Section divider -->
-        <div class="flex items-center mb-12">
-          <div class="flex-grow h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent"></div>
-          <div class="px-6">
-            <span class="text-zinc-500 text-sm uppercase tracking-wider">Activities</span>
-          </div>
-          <div class="flex-grow h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent"></div>
-        </div>
-
-        <h2 class="text-3xl font-bold text-white mb-10 text-center">Engaging in Revolutionary Praxis</h2>
+      <section>
+        <h2 class="text-3xl font-bold text-white mb-10 text-center">Activities</h2>
 
         <!-- Enhanced Activities Card -->
         <div class="relative group">
@@ -364,76 +90,230 @@ import H1 from "../../components/ui/H1.astro";
         </div>
       </section>
 
-      <!-- Join Section -->
-      <section class="relative">
-        <!-- Section divider -->
-        <div class="flex items-center mb-12">
-          <div class="flex-grow h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent"></div>
-          <div class="px-6">
-            <span class="text-zinc-500 text-sm uppercase tracking-wider">Join the Movement</span>
+      <!-- Past Events Section -->
+      <section>
+        <h2 class="text-3xl font-bold text-white mb-10 text-center">Past Events</h2>
+
+        <div class="space-y-12">
+          <!-- Event 1: The Suffering Body -->
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-2xl font-bold text-red-400 mb-3">【Philosophy Lecture】The Suffering Body: From Merleau-Ponty to Nezha</h3>
+
+            <div class="mb-4">
+              <a href="https://www.bilibili.com/video/BV1Pj7kzWEPJ/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-red-400 transition">
+                Recording: Bilibili →
+              </a>
+            </div>
+
+            <div class="mb-4">
+              <p class="text-zinc-300 italic mb-2">
+                Amid the contradictions in history and the "debts" of the body, a new body and self emerge through the practice of justice.
+              </p>
+              <p class="text-zinc-500 text-sm">
+                在历史的矛盾与身体的"债务"中，通过实践正义，重塑自我，生成全新的身体。
+              </p>
+            </div>
+
+            <div class="space-y-4 text-zinc-300 leading-relaxed">
+              <p>
+                When we talk about ethics, we often begin from the outside: duty, command, the face of the other. But this lecture begins elsewhere—with the suffering body.
+              </p>
+              <p>
+                In Merleau-Ponty's phenomenology, the body is the stylist of our access to the world, the site where meaning sediments and the self comes into being. Yet when suffering arrives, all of this is shattered: the body no longer organizes perception but becomes the fissure where perception collapses; the world is no longer inhabitable, and the body is no longer "me." In this rupture, ethics first appears—not as norm, duty, or response, but as the most urgent practical question: how can I, in the place of the unbearable, construct for myself a "body that can exist"?
+              </p>
+              <p>
+                Here we turn to the story of Nezha: he does not sacrifice himself, but denies the body shaped by fate and bloodline, and in the fissure remakes a new body out of lotus flowers. He responds to "that which cannot be responded to" not with obedience, but with action—opening up a "revolutionary bodily ethics." Not repair, not compassion, but practice, creation, the reconstruction of form.
+              </p>
+              <p>
+                This is precisely the problem faced by communities today: we each carry pain, anxiety, the weight of identity and history. But can we, like Nezha, do more than endure these ruptures? Can we, in the fissures of body and life, use action to remake a new shared form?
+              </p>
+              <p>
+                The lecture unfolds around the triadic structure of suffering—body—form, and invites us to reflect together: ethics is not just an idea; it may be the most urgent way of living for us today.
+              </p>
+            </div>
           </div>
-          <div class="flex-grow h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent"></div>
+
+          <!-- Event 2: Dialectical Materialism -->
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-2xl font-bold text-red-400 mb-3">【Reading Seminar】Dialectics: What is Marx's Dialectical Materialism?</h3>
+
+            <div class="mb-4">
+              <a href="https://www.bilibili.com/video/BV12ALvzwELV" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-red-400 transition">
+                Recording: Bilibili →
+              </a>
+            </div>
+
+            <div class="mb-4">
+              <p class="text-zinc-300 italic">
+                If there is such a thing as a revolutionary theory, then it is dialectical materialism.
+              </p>
+              <p class="text-zinc-500 text-sm">
+                如果有一种革命性理论，那么它是辩证唯物主义。
+              </p>
+            </div>
+
+            <div class="space-y-4 text-zinc-300 leading-relaxed">
+              <p>
+                Theory always seems to concern what is already present, while the revolutionary points toward the future. How, then, can there be a revolutionary theory? The lecture answers: if there is one, it is dialectical materialism.
+              </p>
+              <p>
+                Although Marx himself never used this term, in Capital he explicitly declared the need to "invert" Hegel's dialectic and strip away its mystical shell. The lecture therefore begins with Hegel: his dialectic sought to bridge the gap between necessity and certainty, to reveal the mutual determination of form and content, thought and sensory experience, and through negation to arrive at new knowledge, ultimately culminating in "absolute knowledge." The distinctive feature of Hegel's dialectic is that it treats the production of knowledge as the unfolding of the Idea itself, imbued with theological and metaphysical presuppositions.
+              </p>
+              <p>
+                The lecturer pointed out that Marx's decisive turn lay in discarding Hegel's metaphysical presuppositions and examining every given phenomenon from the perspective of production and reproduction, thereby laying the foundation for dialectical materialism.
+              </p>
+              <p>
+                Unlike Hegel, dialectical materialism does not search for an absolute starting point but begins from concrete phenomena and practices. No phenomenon is isolated; each is the result of multiple interacting processes, i.e. "overdetermined." Hence, what is given is not a static object but a relational whole, produced and reproduced in practice. In this view, thought itself is part of reality, operating within ideology and social relations. Crucially, dialectical materialism is not merely an epistemology or explanatory method, but a practice-oriented theory. In this sense, it constitutes the revolutionary methodology and intellectual weapon upon which Marxism rests.
+              </p>
+            </div>
+          </div>
+
+          <!-- Event 3: Deleuze and Lefebvre -->
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-2xl font-bold text-red-400 mb-3">Deleuze and Lefebvre: Social Governance and the Production of Space</h3>
+
+            <div class="mb-4">
+              <a href="https://www.bilibili.com/video/BV1kLVfzWECp/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-red-400 transition">
+                Recording: Bilibili →
+              </a>
+            </div>
+
+            <div class="mb-4">
+              <p class="text-zinc-500 text-sm">
+                德勒兹、列斐伏尔：社会管理和空间生产
+              </p>
+            </div>
+
+            <div class="space-y-4 text-zinc-300 leading-relaxed">
+              <p>
+                Imagine yourself on a speeding train. Outside the window, rows of factories, schools, and prisons stretch endlessly along the tracks. Within these institutions, people live atomized, homogenized lives. Just as you begin to question how this system operates, a voice over the intercom announces:
+              </p>
+              <p class="italic">
+                "Dear passengers, we have arrived at our current stop: the Disciplinary Society. The next and final destination of this train: Cybernetic Governance! Please prepare to disembark."
+              </p>
+              <p>
+                You wonder—why is this the final stop? Stepping off the train and looking back, you suddenly understand. Stamped boldly across the side of the train are five unmistakable characters: Late Capitalism.
+              </p>
+              <p>
+                This seminar invites you to join us in deconstructing late capitalism and its apparatuses of control. Together, we will examine how the spaces of our daily lives—and even our very bodies—are managed, governed, and shaped by the logic of late capitalist society.
+              </p>
+
+              <h4 class="text-lg font-semibold text-white mt-6 mb-3">Topics and Texts:</h4>
+
+              <div class="space-y-4">
+                <div>
+                  <h5 class="font-semibold text-zinc-200">The Emergence of the Control Society under Late Capitalism</h5>
+                  <ul class="ml-6 mt-2 text-zinc-400">
+                    <li>• Michel Foucault, Discipline and Punish</li>
+                    <li>• Gilles Deleuze, Postscript on the Societies of Control</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h5 class="font-semibold text-zinc-200">Biopolitics in Late Capitalism</h5>
+                  <ul class="ml-6 mt-2 text-zinc-400">
+                    <li>• Michel Foucault, The Birth of Biopolitics</li>
+                    <li>• Antonio Negri & Michael Hardt, Empire</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h5 class="font-semibold text-zinc-200">The Topology of Capitalist Space</h5>
+                  <ul class="ml-6 mt-2 text-zinc-400">
+                    <li>• Henri Lefebvre, The Production of Space</li>
+                    <li>• David Harvey, The Logic of the World</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold text-white mb-6">Join Us</h2>
+      <!-- FAQ Section -->
+      <section>
+        <h2 class="text-3xl font-bold text-white mb-10 text-center">Frequently Asked Questions</h2>
 
-          <!-- Call to action with pull quote styling -->
-          <div class="max-w-3xl mx-auto mb-8">
-            <blockquote class="text-xl font-medium text-zinc-200 italic leading-relaxed mb-4">
-              Ready to engage with revolutionary theory and practice?
-            </blockquote>
-            <p class="text-zinc-400 text-lg">
-              Join our intellectual community and be part of the interrogation that opens the future.
+        <div class="space-y-6">
+          <!-- Q1 -->
+          <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Q1: When are the lectures/seminars held?</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              Our in-person lectures/seminars in Boston take place in the spring (mid-January to mid-May) and fall (September to mid-December), every Saturday from 3:00–5:00 PM (EST).
+            </p>
+            <p class="text-zinc-300 leading-relaxed mt-3">
+              During the summer, we mainly host online lectures and in-person events in China. In the summer of 2025, for example, Sinthome organized lecture series such as The History of Leftist Organizations, History of Philosophy: Metaphysics, Parrhesia and Politics, and Lacan on Love, as well as in-person literature seminars in China.
             </p>
           </div>
 
-          <!-- Key points before form -->
-          <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
-            <div class="bg-zinc-900/40 border border-zinc-700/50 rounded-lg p-4">
-              <div class="w-3 h-3 bg-red-500 rounded-full mx-auto mb-3"></div>
-              <h4 class="text-red-400 font-semibold mb-2">Think Critically</h4>
-              <p class="text-zinc-400 text-sm">Engage with foundational texts and revolutionary concepts</p>
-            </div>
-
-            <div class="bg-zinc-900/40 border border-zinc-700/50 rounded-lg p-4">
-              <div class="w-3 h-3 bg-red-500 rounded-full mx-auto mb-3"></div>
-              <h4 class="text-red-400 font-semibold mb-2">Act Collectively</h4>
-              <p class="text-zinc-400 text-sm">Transform theory into revolutionary practice</p>
-            </div>
-
-            <div class="bg-zinc-900/40 border border-zinc-700/50 rounded-lg p-4">
-              <div class="w-3 h-3 bg-red-500 rounded-full mx-auto mb-3"></div>
-              <h4 class="text-red-400 font-semibold mb-2">Open the Future</h4>
-              <p class="text-zinc-400 text-sm">Generate new revolutionary concepts and critiques</p>
-            </div>
+          <!-- Q2 -->
+          <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Q2: Where are the in-person lectures in Boston held?</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              Address: 175 Washington St, Brighton, MA 02135.
+            </p>
           </div>
 
-          <!-- Single Contact CTA -->
-          <div class="relative group max-w-2xl mx-auto">
-            <!-- Background glow effect -->
-            <div class="absolute -inset-1 bg-gradient-to-r from-red-900/20 via-red-800/10 to-red-900/20 rounded-xl blur opacity-50 group-hover:opacity-75 transition duration-500"></div>
+          <!-- Q3 -->
+          <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Q3: Do I need to register in advance to attend?</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              No. You can simply come to the venue on the day of the lecture.
+            </p>
+          </div>
 
-            <!-- CTA card -->
-            <div class="relative bg-gradient-to-br from-zinc-900/95 to-zinc-800/80 border border-zinc-700/50 rounded-xl p-10 backdrop-blur-sm text-center">
-              <p class="text-zinc-300 text-lg mb-8 leading-relaxed">
-                To learn more about joining S.R.T.P. and participating in our weekly seminars, please reach out to us.
-              </p>
+          <!-- Q4 -->
+          <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Q4: Can I join the lectures online?</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              Yes. All Boston in-person lectures are simultaneously livestreamed on Tencent Meeting.
+            </p>
+            <p class="text-zinc-300 leading-relaxed mt-3">
+              To receive the meeting link, please DM @圣状Sinthome on Xiaohongshu to join the Xiaohongshu/WeChat group. The link will be shared in the group before each lecture.
+            </p>
+          </div>
 
-              <a
-                href="/contact"
-                class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-600/25"
-              >
-                Contact Us
-                <span class="ml-2">→</span>
-              </a>
+          <!-- Q5 -->
+          <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Q5: Are lecture recordings available?</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              Yes. Recordings are uploaded after each lecture to our Bilibili account @圣状Sinthome.
+            </p>
+          </div>
 
-              <p class="text-zinc-500 text-sm mt-6">
-                Application details will be available soon
-              </p>
-            </div>
+          <!-- Q6 -->
+          <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Q6: Does Sinthome offer lectures suitable for Beijing Time?</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              Yes. Our online community hosts lectures/talks scheduled for Beijing Time.
+            </p>
+            <p class="text-zinc-300 leading-relaxed mt-3">
+              To join, please add WeChat: 13276453866 and request access to the online community group. Details of upcoming events will be shared there.
+            </p>
           </div>
         </div>
+      </section>
+
+      <!-- Join Section -->
+      <section class="text-center">
+        <h2 class="text-3xl font-bold text-white mb-6">Join Us</h2>
+
+        <div class="max-w-3xl mx-auto mb-8">
+          <blockquote class="text-xl font-medium text-zinc-200 italic leading-relaxed mb-4">
+            Ready to engage with revolutionary theory and practice?
+          </blockquote>
+          <p class="text-zinc-400 text-lg">
+            Join our intellectual community and be part of the interrogation that opens the future.
+          </p>
+        </div>
+
+        <a
+          href="/contact"
+          class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-600/25"
+        >
+          Contact Us
+          <span class="ml-2">→</span>
+        </a>
       </section>
     </div>
 </PageLayout>
