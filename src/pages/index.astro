@@ -26,14 +26,14 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 			<div class="absolute w-full h-dvh flex flex-col justify-center items-center z-10">
 				<!-- Animated Content Container -->
-				<div id="hero-content" class="flex flex-col justify-center items-center text-center transition-all duration-700 ease-out">
-					<!-- SINTHOME - Starts Centered -->
-					<h1 id="sinthome-title" class="sinthome-title text-white font-black uppercase mb-0 transition-all duration-700 ease-out">
+				<div id="hero-content" class="flex flex-col justify-center items-center text-center transition-all duration-700 ease-out w-full">
+					<!-- SINTHOME - Starts Centered with responsive positioning -->
+					<h1 id="sinthome-title" class="sinthome-title text-white font-black uppercase mb-0 transition-all duration-700 ease-out sinthome-centered">
 						SINTHOME
 					</h1>
 
 					<!-- Initially Hidden Elements -->
-					<div id="emerging-content" class="opacity-0 translate-y-8 transition-all duration-700 ease-out delay-100">
+					<div id="emerging-content" class="opacity-0 translate-y-8 transition-all duration-700 ease-out delay-100 absolute-content">
 						<!-- Straightforward Tagline -->
 						<p class="text-xl sm:text-2xl text-white font-semibold mb-6 mt-4">
 							Knowledge — Critique — Praxis
@@ -113,8 +113,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 			if (!hasScrolled) {
 				hasScrolled = true;
 
-				// Move SINTHOME up slightly
-				sinthomeTitle?.classList.add('-translate-y-12');
+				// Move SINTHOME up on desktop, less on mobile
+				sinthomeTitle?.classList.add('sinthome-animated');
 
 				// Make content appear
 				emergingContent?.classList.remove('opacity-0', 'translate-y-8');
@@ -151,7 +151,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 				const scrollIndicator = document.getElementById('scroll-indicator');
 
 				// Reset SINTHOME position
-				sinthomeTitle?.classList.remove('-translate-y-12');
+				sinthomeTitle?.classList.remove('sinthome-animated');
 
 				// Hide content again
 				emergingContent?.classList.add('opacity-0', 'translate-y-8');
@@ -243,6 +243,53 @@ import WarpBackground from "../components/ui/WarpBackground";
 		/* No horizontal compression - natural width */
 		transform: scaleX(1);
 		transform-origin: center;
+	}
+
+	/* Center SINTHOME properly on different screen sizes */
+	.sinthome-centered {
+		/* Mobile: Keep towards upper part of screen */
+		@apply mt-[-20vh];
+	}
+
+	/* Desktop: Perfect centering */
+	@media (min-width: 768px) {
+		.sinthome-centered {
+			margin-top: 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		/* When animated, move SINTHOME up */
+		.sinthome-animated {
+			transform: translate(-50%, calc(-50% - 3rem)) !important;
+		}
+	}
+
+	/* Position the emerging content properly */
+	.absolute-content {
+		position: absolute;
+		top: 55%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100%;
+		max-width: 64rem;
+		padding: 0 1rem;
+	}
+
+	/* Mobile adjustments for emerging content */
+	@media (max-width: 767px) {
+		.absolute-content {
+			position: static;
+			transform: none;
+			margin-top: 2rem;
+		}
+
+		/* On mobile, just move up slightly when animated */
+		.sinthome-animated {
+			transform: translateY(-3rem);
+		}
 	}
 
 	/* Prevent actual scrolling only on homepage */
