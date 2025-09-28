@@ -1,72 +1,166 @@
 ---
 import PageLayout from "../../../layouts/PageLayout.astro";
 import H1 from "../../../components/ui/H1.astro";
-import GoogleForm from "../../../components/forms/GoogleForm";
-import { FORMS } from "../../../config/forms";
 ---
 
-<PageLayout title="AI Hackathon - Sinthome" useContentLayout={true}>
-    <H1>AI Hackathon</H1>
+<PageLayout title="AI NGO & Hackathon - Sinthome" useContentLayout={true}>
+    <H1>AI NGO & Hackathon</H1>
 
-    <div class="space-y-8">
-      <!-- Overview -->
+    <div class="space-y-12">
+      <!-- Hero Section with Vision -->
+      <section class="relative">
+        <div class="absolute -inset-1 bg-gradient-to-r from-red-900/20 via-red-800/10 to-red-900/20 rounded-xl blur opacity-50"></div>
+        <div class="relative bg-gradient-to-br from-zinc-900/95 to-zinc-800/90 border border-red-600/30 rounded-xl p-8">
+          <div class="flex items-center mb-4">
+            <div class="w-3 h-3 bg-red-500 rounded-full mr-3 animate-pulse"></div>
+            <h2 class="text-xl font-semibold text-red-400">Our Vision</h2>
+          </div>
+          <p class="text-lg text-zinc-100 leading-relaxed font-medium">
+            Rooted in our experience running Workers Assist, Sinthome Hackathon brings real-world challenges to AI practitioners and university students, creating a space for mutual learning and development of practical solutions for social good.
+          </p>
+        </div>
+      </section>
+
+      <!-- Overview Section -->
       <section>
-        <h2 class="text-2xl font-bold text-white mb-4">AI NGO & Hackathon</h2>
-        <p class="text-zinc-300 leading-relaxed mb-4">
-          Sinthome Hackathon starts with a simple question: how can current AI tools be tailored to address real-world challenges in the practice of social good? We believe the answer does not lie in lofty ideals, but in grounding our work in the lived experiences of Boston's NGOs and local communities. By bringing together students, young professionals, and nonprofit workers, the hackathon fosters mutual learning across diverse perspectives and creates a shared space to reimagine how technology can be practiced in the service of public good. This year's subthemes highlight diverse challenges, from supporting Asian workers in Boston with language access, to providing peer counseling for youth mental health, to empowering small and medium-sized manufacturers through industry-specific AI agents.
+        <h2 class="text-3xl font-bold text-white mb-6">Bridging AI and Social Impact</h2>
+        <p class="text-lg text-zinc-300 leading-relaxed mb-6">
+          Sinthome Hackathon starts with a simple question: <span class="text-red-400 font-semibold">how can AI offer better solutions to the difficult problems faced by nonprofit organizations?</span>
+        </p>
+        <p class="text-zinc-300 leading-relaxed mb-6">
+          We believe the answer emerges from creating links between nonprofit workers, interested students and AI practitioners. By bringing together students, young professionals, and nonprofit workers, the hackathon fosters mutual learning across diverse perspectives and creates a shared space to reimagine how technology can be practiced in the service of public good.
+        </p>
+        <p class="text-zinc-300 leading-relaxed">
+          This year's subthemes highlight diverse challenges, from supporting Asian workers in Boston with language access, to providing peer counseling for youth mental health, to empowering small and medium-sized manufacturers through industry-specific AI agents.
         </p>
       </section>
 
-      <!-- Objectives -->
+      <!-- Objectives Section -->
       <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Objectives</h2>
-        <div class="space-y-4">
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">Giving voice to nonprofits and vulnerable groups</h3>
-            <p class="text-zinc-400">
-              Helping practitioners and beneficiaries clearly articulate their needs, and turning these needs into actionable solutions through AI tools.
-            </p>
+        <h2 class="text-3xl font-bold text-white mb-8">Our Objectives</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Objective 1 -->
+          <div class="group relative">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-red-600 to-red-800 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
+            <div class="relative bg-zinc-900 rounded-xl p-6 h-full border border-zinc-800 hover:border-red-600/50 transition-all duration-300">
+              <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">Giving Voice to Communities</h3>
+              <p class="text-zinc-400 leading-relaxed">
+                Helping NGOs and local disadvantaged communities clearly articulate their needs, turning these needs into actionable prompts for AI tools development.
+              </p>
+            </div>
           </div>
-          
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">Cultivating social awareness among technologists</h3>
-            <p class="text-zinc-400">
-              Building bridges between students, young professionals, and nonprofit workers, enabling mutual learning in hackathons on how AI can be transformed into social impact.
-            </p>
+
+          <!-- Objective 2 -->
+          <div class="group relative">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-red-600 to-red-800 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
+            <div class="relative bg-zinc-900 rounded-xl p-6 h-full border border-zinc-800 hover:border-red-600/50 transition-all duration-300">
+              <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">Cultivating Social Awareness</h3>
+              <p class="text-zinc-400 leading-relaxed">
+                Building bridges between students, young professionals, and nonprofit workers, enabling mutual learning on how AI technologies can be transformed into social impact.
+              </p>
+            </div>
           </div>
-          
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">Driving solutions to concrete social issues</h3>
-            <p class="text-zinc-400">
-              Developing practical and sustainable approaches to challenges such as language barriers, employment skills, youth mental health, and maternal and infant health.
-            </p>
-          </div>
-          
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">Integrating the humanities with technology</h3>
-            <p class="text-zinc-400">
-              Encouraging participants to explore the humanistic value of AI through real-world social issues, fostering dialogue between technology and the humanities.
-            </p>
+
+          <!-- Objective 3 -->
+          <div class="group relative">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-red-600 to-red-800 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
+            <div class="relative bg-zinc-900 rounded-xl p-6 h-full border border-zinc-800 hover:border-red-600/50 transition-all duration-300">
+              <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">Driving Practical Solutions</h3>
+              <p class="text-zinc-400 leading-relaxed">
+                Developing practical and sustainable solutions to challenges in social work, such as language barriers, employment skills, and youth mental health.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
+      <!-- Key Focus Areas -->
+      <section>
+        <h2 class="text-3xl font-bold text-white mb-8">Focus Areas</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 hover:bg-zinc-800/50 transition-all duration-300">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+              <h3 class="font-semibold text-white">Language Access</h3>
+            </div>
+            <p class="text-sm text-zinc-400 mt-2">Supporting Asian workers with translation and communication tools</p>
+          </div>
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 hover:bg-zinc-800/50 transition-all duration-300">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+              <h3 class="font-semibold text-white">Youth Mental Health</h3>
+            </div>
+            <p class="text-sm text-zinc-400 mt-2">Peer counseling and support systems for young people</p>
+          </div>
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 hover:bg-zinc-800/50 transition-all duration-300">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+              <h3 class="font-semibold text-white">Industrial AI Agents</h3>
+            </div>
+            <p class="text-sm text-zinc-400 mt-2">Empowering small and medium manufacturers with AI tools</p>
+          </div>
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 hover:bg-zinc-800/50 transition-all duration-300">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+              <h3 class="font-semibold text-white">Employment Skills</h3>
+            </div>
+            <p class="text-sm text-zinc-400 mt-2">Training and job readiness programs for workers</p>
+          </div>
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 hover:bg-zinc-800/50 transition-all duration-300">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+              <h3 class="font-semibold text-white">Community Building</h3>
+            </div>
+            <p class="text-sm text-zinc-400 mt-2">Strengthening social connections and support networks</p>
+          </div>
+          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 hover:bg-zinc-800/50 transition-all duration-300">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+              <h3 class="font-semibold text-white">Healthcare Access</h3>
+            </div>
+            <p class="text-sm text-zinc-400 mt-2">Improving healthcare navigation for immigrant communities</p>
+          </div>
+        </div>
+      </section>
 
-
-
-      <!-- Registration -->
-      <section class="mt-12">
-        <h2 class="text-2xl font-bold text-white mb-4">Register for Next Hackathon</h2>
-        <p class="text-zinc-300 mb-6">
-          Join us for the next AI Hackathon! Registration is free but spaces are limited.
-        </p>
-        <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-          <GoogleForm
-            formId={FORMS.projects.aiHackathon.id}
-            title={FORMS.projects.aiHackathon.title}
-            height={FORMS.projects.aiHackathon.height}
-            client:visible
-          />
+      <!-- Call to Action -->
+      <section class="mt-12 p-8 bg-gradient-to-r from-red-600/10 to-red-700/10 rounded-xl border border-red-600/20">
+        <div class="text-center">
+          <h2 class="text-3xl font-bold text-white mb-4">Join the Next Hackathon</h2>
+          <p class="text-zinc-300 mb-6 max-w-2xl mx-auto">
+            Whether you're a student, AI practitioner, nonprofit worker, or community member, we invite you to be part of this transformative initiative. Together, we can build AI solutions that truly serve the public good.
+          </p>
+          <div class="flex flex-wrap gap-4 justify-center">
+            <a
+              href="/contact"
+              class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-600/25"
+            >
+              Get Involved
+              <span class="ml-2">→</span>
+            </a>
+            <a
+              href="/events"
+              class="inline-flex items-center px-6 py-3 bg-zinc-800 hover:bg-zinc-700 text-white font-medium rounded-lg transition-colors"
+            >
+              View Upcoming Events
+              <span class="ml-2">→</span>
+            </a>
+          </div>
         </div>
       </section>
     </div>
