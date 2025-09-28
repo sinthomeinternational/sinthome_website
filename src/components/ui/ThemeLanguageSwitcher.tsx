@@ -24,9 +24,21 @@ export default function ThemeLanguageSwitcher({
 
   useEffect(() => {
     setMounted(true);
-    // Get current theme from DOM (already applied by inline script)
+    // Get current theme from localStorage first, then fallback to DOM
+    const storedTheme = localStorage.getItem('theme') as ThemeId;
     const root = document.documentElement;
-    const currentThemeFromDOM = root.classList.contains('theme-light') ? 'light' : 'dark';
+
+    // Check multiple sources for theme
+    let currentThemeFromDOM: ThemeId;
+    if (storedTheme === 'light' || storedTheme === 'dark') {
+      currentThemeFromDOM = storedTheme;
+    } else if (root.classList.contains('theme-light')) {
+      currentThemeFromDOM = 'light';
+    } else {
+      // Default to dark if nothing else is set
+      currentThemeFromDOM = 'dark';
+    }
+
     setCurrentTheme(currentThemeFromDOM);
 
     // Get current language from URL

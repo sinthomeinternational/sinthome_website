@@ -47,14 +47,30 @@ const defaultDescription = "A public-interest community reconstructing new relat
 		<!-- Inline script to prevent theme flash -->
 		<script is:inline>
 			(function() {
-				// Get stored theme or default to dark
-				const storedTheme = localStorage.getItem('theme') || 'dark';
+				// Remove any existing theme classes first
+				document.documentElement.classList.remove('theme-light', 'theme-dark');
+
+				// Check if user has explicitly set a theme preference
+				const storedTheme = localStorage.getItem('theme');
+
+				// Determine which theme to use
+				let theme;
+				if (storedTheme === 'light') {
+					theme = 'light';
+				} else {
+					// Default to dark for any other case (including null, undefined, or invalid values)
+					theme = 'dark';
+					// Ensure localStorage is set to dark if it wasn't already
+					if (storedTheme !== 'dark') {
+						localStorage.setItem('theme', 'dark');
+					}
+				}
 
 				// Apply theme classes to html element
-				document.documentElement.classList.add(`theme-${storedTheme}`);
+				document.documentElement.classList.add(`theme-${theme}`);
 
 				// Apply data attribute for CSS targeting
-				document.documentElement.setAttribute('data-theme', storedTheme);
+				document.documentElement.setAttribute('data-theme', theme);
 			})();
 		</script>
 	</head>
