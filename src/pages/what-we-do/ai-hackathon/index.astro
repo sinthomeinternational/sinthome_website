@@ -186,14 +186,47 @@ import H1 from "../../../components/ui/H1.astro";
             <div class="w-8 h-0.5 bg-yellow-500"></div>
           </div>
 
+          <!-- We Need Your Help Arrow -->
+          <div class="absolute right-0 flex items-center animate-bounce" style="top: 60px;">
+            <div class="bg-red-600 text-white text-sm font-bold px-4 py-2 rounded-lg shadow-lg">
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                WE NEED YOUR HELP!
+              </div>
+            </div>
+            <div class="w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-red-600"></div>
+          </div>
+
           <!-- Timeline items -->
           <div class="space-y-8">
             <!-- Current Status -->
             <div class="relative flex items-start">
               <div class="absolute left-8 w-4 h-4 bg-yellow-500 rounded-full transform -translate-x-1/2 animate-pulse"></div>
               <div class="ml-20 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-                <h3 class="font-bold text-yellow-400 mb-1">Planning Phase</h3>
-                <p class="text-sm text-zinc-400">Currently organizing partners and finalizing challenges</p>
+                <h3 class="font-bold text-yellow-400 mb-2">Planning Phase - Help Wanted!</h3>
+                <p class="text-sm text-zinc-400 mb-3">Currently organizing partners and finalizing challenges</p>
+                <div class="bg-zinc-800/50 rounded-lg p-3 space-y-2">
+                  <p class="text-sm font-semibold text-white">We're recruiting:</p>
+                  <ul class="text-xs text-zinc-300 space-y-1">
+                    <li class="flex items-start">
+                      <span class="text-red-400 mr-1">•</span>
+                      <span><strong>Organizers</strong> - Help plan and coordinate the event</span>
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-red-400 mr-1">•</span>
+                      <span><strong>NGO Partners</strong> - Bring real-world challenges</span>
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-red-400 mr-1">•</span>
+                      <span><strong>Tech Company Sponsors</strong> - Provide resources and mentorship</span>
+                    </li>
+                  </ul>
+                  <a href="/contact" class="inline-flex items-center text-yellow-400 hover:text-yellow-300 font-semibold text-xs mt-2">
+                    Contact us to get involved →
+                  </a>
+                </div>
               </div>
             </div>
 
