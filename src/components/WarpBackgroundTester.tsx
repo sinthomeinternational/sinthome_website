@@ -205,10 +205,10 @@ export default function WarpBackgroundTester() {
     };
 
     return (
-        <div className="relative min-h-screen bg-black text-white flex" style={{ backgroundColor: '#000000', color: 'white' }}>
+        <div className="relative min-h-screen bg-black text-white flex flex-row" style={{ backgroundColor: '#000000', color: 'white', display: 'flex', flexDirection: 'row' }}>
             {/* Left Panel - Controls (Fixed width, scrollable) */}
             <div
-                className="w-[450px] flex-shrink-0 h-screen overflow-y-auto bg-zinc-900/95 border-r border-zinc-800"
+                className="w-[450px] min-w-[450px] flex-shrink-0 h-screen overflow-y-auto bg-zinc-900/95 border-r border-zinc-800"
                 style={{
                     position: 'relative',
                     zIndex: 10,
@@ -398,11 +398,13 @@ export default function WarpBackgroundTester() {
             </div>
 
             {/* Right Panel - Warp Animation (Flexible width) */}
-            <div className="flex-1 relative bg-black" style={{
+            <div className="flex-1 flex-grow relative bg-black h-screen" style={{
                 position: 'relative',
                 zIndex: 1,
                 backgroundColor: '#000000',
-                minHeight: '100vh'
+                minHeight: '100vh',
+                flexGrow: 1,
+                width: 'calc(100% - 450px)'
             }}>
                 {/* Warp Background */}
                 {warpStatus === 'loading' && <WarpLoader />}
