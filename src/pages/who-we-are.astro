@@ -20,7 +20,7 @@ const pageContent = t.pages.whoWeAre;
 
     <div class="space-y-12 text-gray-700 dark:text-zinc-300 max-w-4xl">
       {pageContent.sections?.map((section) => (
-        <section key={section.id}>
+        <section>
           <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             {section.title}
           </h2>
@@ -28,8 +28,8 @@ const pageContent = t.pages.whoWeAre;
           {/* Handle content as string or array */}
           {section.content && (
             Array.isArray(section.content) ? (
-              section.content.map((paragraph, index) => (
-                <p key={index} class="leading-relaxed mb-4">
+              section.content.map((paragraph) => (
+                <p class="leading-relaxed mb-4">
                   {paragraph}
                 </p>
               ))
@@ -41,8 +41,8 @@ const pageContent = t.pages.whoWeAre;
           {/* Handle items if present */}
           {section.items && section.items.length > 0 && (
             <div class="space-y-4 mt-4">
-              {section.items.map((item: any, index: number) => (
-                <div key={index} class="bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg p-6">
+              {section.items.map((item: any) => (
+                <div class="bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg p-6">
                   <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                     {item.name || item.title}
                   </h3>
