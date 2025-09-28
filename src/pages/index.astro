@@ -104,7 +104,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 		if (!container) return;
 
 		let hasScrolled = false;
-		let animationTimeouts: number[] = []; // Store all timeout IDs for cancellation
+		let animationTimeouts: NodeJS.Timeout[] = []; // Store all timeout IDs for cancellation
 
 		// Professional animation timing configuration
 		const ANIMATION_CONFIG = {
