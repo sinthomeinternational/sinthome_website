@@ -3,13 +3,13 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
 import { Image } from 'astro:assets';
 
-// Import event images (placeholders for now - replace with actual images)
-// import nezhaPoster from "../../assets/srtp/nezha-poster.jpg";
-// import nezhaEvent from "../../assets/srtp/nezha-event.png";
-// import dialecticsPoster from "../../assets/srtp/dialectics-poster.png";
-// import dialecticsEvent from "../../assets/srtp/dialectics-event.png";
-// import deleuzePoster from "../../assets/srtp/deleuze-poster.png";
-// import deleuzeEvent from "../../assets/srtp/deleuze-event.png";
+// Import event images
+import nezhaPoster from "../../assets/srtp/nezha-poster.jpg";
+import nezhaEvent from "../../assets/srtp/nezha-event.png";
+import dialecticsPoster from "../../assets/srtp/dialectics-poster.png";
+import dialecticsEvent from "../../assets/srtp/dialectics-event.png";
+import deleuzePoster from "../../assets/srtp/deleuze-poster.png";
+import deleuzeEvent from "../../assets/srtp/deleuze-event.png";
 ---
 
 <PageLayout title="S.R.T.P. - Sinthome" useContentLayout={true}>
@@ -99,6 +99,16 @@ import { Image } from 'astro:assets';
           <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
             <h3 class="text-2xl font-bold text-red-400 mb-3">【Philosophy Lecture】The Suffering Body: From Merleau-Ponty to Nezha</h3>
 
+            <!-- Event Images -->
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+              <div>
+                <Image src={nezhaPoster} alt="Nezha Event Poster" class="w-full rounded-lg" />
+              </div>
+              <div>
+                <Image src={nezhaEvent} alt="Nezha Event Photo" class="w-full rounded-lg" />
+              </div>
+            </div>
+
             <div class="mb-4">
               <a href="https://www.bilibili.com/video/BV1Pj7kzWEPJ/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-red-400 transition">
                 Recording: Bilibili →
@@ -137,6 +147,16 @@ import { Image } from 'astro:assets';
           <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
             <h3 class="text-2xl font-bold text-red-400 mb-3">【Reading Seminar】Dialectics: What is Marx's Dialectical Materialism?</h3>
 
+            <!-- Event Images -->
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+              <div>
+                <Image src={dialecticsPoster} alt="Dialectics Event Poster" class="w-full rounded-lg" />
+              </div>
+              <div>
+                <Image src={dialecticsEvent} alt="Dialectics Event Photo" class="w-full rounded-lg" />
+              </div>
+            </div>
+
             <div class="mb-4">
               <a href="https://www.bilibili.com/video/BV12ALvzwELV" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-red-400 transition">
                 Recording: Bilibili →
@@ -171,6 +191,16 @@ import { Image } from 'astro:assets';
           <!-- Event 3: Deleuze and Lefebvre -->
           <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
             <h3 class="text-2xl font-bold text-red-400 mb-3">Deleuze and Lefebvre: Social Governance and the Production of Space</h3>
+
+            <!-- Event Images -->
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+              <div>
+                <Image src={deleuzePoster} alt="Deleuze Event Poster" class="w-full rounded-lg" />
+              </div>
+              <div>
+                <Image src={deleuzeEvent} alt="Deleuze Event Photo" class="w-full rounded-lg" />
+              </div>
+            </div>
 
             <div class="mb-4">
               <a href="https://www.bilibili.com/video/BV1kLVfzWECp/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-red-400 transition">
