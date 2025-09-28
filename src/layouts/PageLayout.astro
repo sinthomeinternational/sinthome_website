@@ -8,20 +8,34 @@ const {
   title,
   description,
   showNavigation = true,
-  useInfoLayout = false
+  useInfoLayout = false,
+  useContentLayout = false
 } = Astro.props;
 ---
 
 <RootLayout title={title} description={description}>
-  {showNavigation && !useInfoLayout && (
+  {showNavigation && !useInfoLayout && !useContentLayout && (
     <TopNavigation client:load />
     <div class="h-16"></div> <!-- Spacer for fixed nav -->
   )}
 
-  {useInfoLayout ? (
+  {useContentLayout ? (
+    <!-- Content-focused layout without warp animation for better readability -->
+    <div class="bg-black min-h-screen">
+      {showNavigation && (
+        <TopNavigation variant="static" client:load />
+      )}
+      <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="[&_h1]:text-red-600 pt-8 pb-20 text-white">
+          <slot />
+        </div>
+      </main>
+      <Footer />
+    </div>
+  ) : useInfoLayout ? (
     <div class="flex relative gap-4 w-full max-w-screen-xl">
-      <nav class="relative w-4 md:min-w-[18rem] xl:min-w-[24rem] sm:min-h-screen sm:ml-4 sm:pb-4">
-        <div class="w-full h-full max-sm:w-4 md:max-w-[18rem] xl:max-w-[24rem] fixed -z-10 sm:bottom-4 sm:rounded-b-full overflow-hidden">
+      <nav class="relative w-4 md:min-w-[12rem] xl:min-w-[16rem] sm:min-h-screen sm:ml-4 sm:pb-4">
+        <div class="w-full h-full max-sm:w-4 md:max-w-[12rem] xl:max-w-[16rem] fixed -z-10 sm:bottom-4 sm:rounded-b-full overflow-hidden">
           <WarpBackground
             color1="#fca5a5"
             color2="#ef4444"
