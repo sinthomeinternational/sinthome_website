@@ -34,7 +34,31 @@ export default defineConfig({
   base: config.base,
 
   vite: {
-    plugins: /** @type {any} */ ([...tailwindcss()])
+    plugins: /** @type {any} */ ([...tailwindcss()]),
+    optimizeDeps: {
+      // Force pre-bundling of shader library
+      include: ['@paper-design/shaders-react'],
+      // Exclude from optimization if causing issues
+      exclude: []
+    },
+    ssr: {
+      // Don't externalize the shader library for SSR
+      noExternal: ['@paper-design/shaders-react']
+    },
+    build: {
+      // Ensure compatibility with shader modules
+      target: 'esnext',
+      rollupOptions: {
+        output: {
+          // Handle dynamic imports properly
+          manualChunks: (id) => {
+            if (id.includes('@paper-design/shaders-react')) {
+              return 'shaders';
+            }
+          }
+        }
+      }
+    }
   },
 
   integrations: [react()]

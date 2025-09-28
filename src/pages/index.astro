@@ -26,21 +26,21 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 			<div class="absolute w-full h-dvh flex flex-col justify-center items-center z-10">
 				<!-- Animated Content Container -->
-				<div id="hero-content" class="flex flex-col justify-center items-center text-center transition-all duration-700 ease-out">
-					<!-- SINTHOME - Starts Centered -->
-					<h1 id="sinthome-title" class="sinthome-title text-white font-black uppercase mb-0 transition-all duration-700 ease-out">
+				<div id="hero-content" class="flex flex-col justify-center items-center text-center transition-all duration-700 ease-out w-full">
+					<!-- SINTHOME - Starts Centered with responsive positioning -->
+					<h1 id="sinthome-title" class="sinthome-title text-white font-black uppercase mb-0 transition-all duration-700 ease-out sinthome-centered">
 						SINTHOME
 					</h1>
 
 					<!-- Initially Hidden Elements -->
-					<div id="emerging-content" class="content-hidden">
+					<div id="emerging-content" class="content-hidden absolute-content">
 						<!-- Straightforward Tagline -->
-						<p class="tagline text-xl sm:text-2xl text-white font-semibold mb-6 mt-4">
+						<p class="tagline text-xl sm:text-2xl text-white font-semibold mb-6 mt-4 text-center">
 							Knowledge — Critique — Praxis
 						</p>
 
 						<!-- Plain Practice Tags -->
-						<div class="tags-container flex flex-wrap justify-center gap-3 mb-10 max-w-3xl">
+						<div class="tags-container flex flex-wrap justify-center gap-3 mb-10 max-w-3xl mx-auto">
 							<span class="tag-item px-4 py-2 text-white border border-white rounded-full text-sm">
 								Public Lectures
 							</span>
@@ -335,9 +335,53 @@ import WarpBackground from "../components/ui/WarpBackground";
 		transition: transform var(--animation-duration-medium) var(--animation-easing);
 	}
 
-	/* Title moved state */
-	.sinthome-title.title-moved {
-		transform: translateY(-3rem);
+	/* Center SINTHOME properly on different screen sizes */
+	.sinthome-centered {
+		/* Mobile: Keep towards upper part of screen */
+		@apply mt-[-20vh];
+	}
+
+	/* Desktop: Perfect centering and animation states */
+	@media (min-width: 768px) {
+		.sinthome-centered {
+			margin-top: 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		/* When animated, move SINTHOME up - combines with title-moved class */
+		.sinthome-title.title-moved.sinthome-centered {
+			transform: translate(-50%, calc(-50% - 3rem));
+		}
+	}
+
+	/* Mobile title movement */
+	@media (max-width: 767px) {
+		.sinthome-title.title-moved {
+			transform: translateY(-3rem);
+		}
+	}
+
+	/* Position the emerging content properly */
+	.absolute-content {
+		position: absolute;
+		top: 55%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100%;
+		max-width: 64rem;
+		padding: 0 1rem;
+	}
+
+	/* Mobile adjustments for emerging content */
+	@media (max-width: 767px) {
+		.absolute-content {
+			position: static;
+			transform: none;
+			margin-top: 2rem;
+		}
 	}
 
 	/* Prevent actual scrolling only on homepage */
@@ -348,18 +392,36 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 	/* Professional Animation System */
 
-	/* Initial hidden state for content */
-	.content-hidden {
-		opacity: 0;
-		transform: translateY(2rem);
-		transition: opacity var(--animation-duration-slow) var(--animation-easing),
-					transform var(--animation-duration-slow) var(--animation-easing);
+	/* Initial hidden state for content - desktop */
+	@media (min-width: 768px) {
+		.content-hidden.absolute-content {
+			opacity: 0;
+			transform: translateX(-50%) translateY(2rem);
+			transition: opacity var(--animation-duration-slow) var(--animation-easing),
+						transform var(--animation-duration-slow) var(--animation-easing);
+		}
+
+		/* Content visible state - desktop */
+		.content-hidden.content-visible.absolute-content {
+			opacity: 1;
+			transform: translateX(-50%) translateY(0);
+		}
 	}
 
-	/* Content visible state */
-	.content-hidden.content-visible {
-		opacity: 1;
-		transform: translateY(0);
+	/* Initial hidden state for content - mobile */
+	@media (max-width: 767px) {
+		.content-hidden {
+			opacity: 0;
+			transform: translateY(2rem);
+			transition: opacity var(--animation-duration-slow) var(--animation-easing),
+						transform var(--animation-duration-slow) var(--animation-easing);
+		}
+
+		/* Content visible state - mobile */
+		.content-hidden.content-visible {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	/* Individual element initial states */
