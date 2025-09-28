@@ -42,12 +42,23 @@ export default function ThemeLanguageSwitcher({
   const handleLanguageToggle = () => {
     const newLang = currentLang === 'en' ? 'zh' : 'en';
 
-    // Update URL with new language parameter
-    const url = new URL(window.location.href);
-    url.searchParams.set('lang', newLang);
+    // Add a smooth fade transition before switching
+    const root = document.documentElement;
+    root.classList.add('language-transition');
 
-    // Navigate to the new URL (this will trigger a page reload)
-    window.location.href = url.toString();
+    // Store the scroll position to restore it after reload
+    sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+    sessionStorage.setItem('isLanguageSwitch', 'true');
+
+    // Wait for fade out animation then navigate
+    setTimeout(() => {
+      // Update URL with new language parameter
+      const url = new URL(window.location.href);
+      url.searchParams.set('lang', newLang);
+
+      // Navigate to the new URL (this will trigger a page reload)
+      window.location.href = url.toString();
+    }, 150);
   };
 
   if (!mounted) {
