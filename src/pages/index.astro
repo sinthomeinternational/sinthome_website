@@ -26,21 +26,21 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 			<div class="absolute w-full h-dvh flex flex-col justify-center items-center z-10">
 				<!-- Animated Content Container -->
-				<div id="hero-content" class="flex flex-col justify-center items-center text-center transition-all duration-700 ease-out">
-					<!-- SINTHOME - Starts Centered -->
-					<h1 id="sinthome-title" class="sinthome-title text-white font-black uppercase mb-0 transition-all duration-700 ease-out">
+				<div id="hero-content" class="flex flex-col justify-center items-center text-center transition-all duration-700 ease-out w-full">
+					<!-- SINTHOME - Starts Centered with responsive positioning -->
+					<h1 id="sinthome-title" class="sinthome-title text-white font-black uppercase mb-0 transition-all duration-700 ease-out sinthome-centered">
 						SINTHOME
 					</h1>
 
 					<!-- Initially Hidden Elements -->
-					<div id="emerging-content" class="content-hidden">
+					<div id="emerging-content" class="content-hidden absolute-content">
 						<!-- Straightforward Tagline -->
-						<p class="tagline text-xl sm:text-2xl text-white font-semibold mb-6 mt-4">
+						<p class="tagline text-xl sm:text-2xl text-white font-semibold mb-6 mt-4 text-center">
 							Knowledge — Critique — Praxis
 						</p>
 
 						<!-- Plain Practice Tags -->
-						<div class="tags-container flex flex-wrap justify-center gap-3 mb-10 max-w-3xl">
+						<div class="tags-container flex flex-wrap justify-center gap-3 mb-10 max-w-3xl mx-auto">
 							<span class="tag-item px-4 py-2 text-white border border-white rounded-full text-sm">
 								Public Lectures
 							</span>
@@ -82,11 +82,20 @@ import WarpBackground from "../components/ui/WarpBackground";
 					</div>
 				</div>
 
-				<!-- Scroll Indicator -->
+				<!-- Enhanced Scroll Indicator -->
 				<div id="scroll-indicator" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-100 transition-opacity duration-500">
-					<div class="animate-bounce text-white/50">
-						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+					<div class="scroll-pulse-animation bg-white/20 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center border border-white/30 shadow-lg transition-all duration-300">
+						<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+						</svg>
+					</div>
+				</div>
+
+				<!-- Collapse Button (hidden by default, shown when content is visible) -->
+				<div id="collapse-button" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 pointer-events-none transition-all duration-300">
+					<div class="bg-black/40 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center border border-white/30 shadow-lg transition-all duration-300 hover:bg-black/50 hover:scale-110 cursor-pointer">
+						<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 11l7-7 7 7M5 19l7-7 7 7"></path>
 						</svg>
 					</div>
 				</div>
@@ -124,8 +133,9 @@ import WarpBackground from "../components/ui/WarpBackground";
 		}
 
 		function triggerAnimation() {
-			// Hide scroll indicator IMMEDIATELY, before any checks
+			// Hide scroll indicator and show collapse button
 			const scrollIndicator = document.getElementById('scroll-indicator');
+			const collapseButton = document.getElementById('collapse-button');
 			scrollIndicator?.classList.add('scroll-hidden');
 
 			if (hasScrolled) return;
@@ -139,6 +149,12 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 			// Step 1: Move SINTHOME title up smoothly
 			sinthomeTitle?.classList.add('title-moved');
+
+			// Show collapse button after a delay
+			animationTimeouts.push(setTimeout(() => {
+				collapseButton?.classList.remove('opacity-0', 'pointer-events-none');
+				collapseButton?.classList.add('opacity-100');
+			}, ANIMATION_CONFIG.buttonsDelay + 200));
 
 			// Step 3: Start content animation sequence
 			animationTimeouts.push(setTimeout(() => {
@@ -199,11 +215,16 @@ import WarpBackground from "../components/ui/WarpBackground";
 			const emergingContent = document.getElementById('emerging-content');
 			const sinthomeTitle = document.getElementById('sinthome-title');
 			const scrollIndicator = document.getElementById('scroll-indicator');
+			const collapseButton = document.getElementById('collapse-button');
 
 			// Remove all animation classes simultaneously for instant reset
 			sinthomeTitle?.classList.remove('title-moved');
 			emergingContent?.classList.remove('content-visible');
 			scrollIndicator?.classList.remove('scroll-hidden');
+
+			// Hide collapse button and show scroll indicator
+			collapseButton?.classList.add('opacity-0', 'pointer-events-none');
+			collapseButton?.classList.remove('opacity-100');
 
 			// Reset all child elements and micro-animations
 			document.querySelectorAll('.element-visible').forEach(el => {
@@ -257,6 +278,24 @@ import WarpBackground from "../components/ui/WarpBackground";
 			}
 		};
 
+		// Click handler for scroll indicator
+		const scrollIndicatorClickHandler = (e: Event) => {
+			e.preventDefault();
+			triggerAnimation();
+		};
+
+		// Click handler for collapse button
+		const collapseButtonClickHandler = (e: Event) => {
+			e.preventDefault();
+			resetAnimation();
+		};
+
+		// Add click listeners
+		const scrollIndicator = document.getElementById('scroll-indicator');
+		const collapseButton = document.getElementById('collapse-button');
+		scrollIndicator?.addEventListener('click', scrollIndicatorClickHandler);
+		collapseButton?.addEventListener('click', collapseButtonClickHandler);
+
 		// Attach listeners ONLY to the homepage container, not window
 		container.addEventListener('wheel', wheelHandler, { passive: false });
 		container.addEventListener('touchstart', touchStartHandler, { passive: true });
@@ -273,6 +312,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 			container.removeEventListener('touchstart', touchStartHandler);
 			container.removeEventListener('touchmove', touchMoveHandler);
 			container.removeEventListener('keydown', keydownHandler);
+			scrollIndicator?.removeEventListener('click', scrollIndicatorClickHandler);
+			collapseButton?.removeEventListener('click', collapseButtonClickHandler);
 		};
 	}
 
@@ -335,9 +376,53 @@ import WarpBackground from "../components/ui/WarpBackground";
 		transition: transform var(--animation-duration-medium) var(--animation-easing);
 	}
 
-	/* Title moved state */
-	.sinthome-title.title-moved {
-		transform: translateY(-3rem);
+	/* Center SINTHOME properly on different screen sizes */
+	.sinthome-centered {
+		/* Mobile: Keep towards upper part of screen */
+		@apply mt-[-20vh];
+	}
+
+	/* Desktop: Perfect centering and animation states */
+	@media (min-width: 768px) {
+		.sinthome-centered {
+			margin-top: 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		/* When animated, move SINTHOME up - combines with title-moved class */
+		.sinthome-title.title-moved.sinthome-centered {
+			transform: translate(-50%, calc(-50% - 3rem));
+		}
+	}
+
+	/* Mobile title movement */
+	@media (max-width: 767px) {
+		.sinthome-title.title-moved {
+			transform: translateY(-3rem);
+		}
+	}
+
+	/* Position the emerging content properly */
+	.absolute-content {
+		position: absolute;
+		top: 55%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100%;
+		max-width: 64rem;
+		padding: 0 1rem;
+	}
+
+	/* Mobile adjustments for emerging content */
+	@media (max-width: 767px) {
+		.absolute-content {
+			position: static;
+			transform: none;
+			margin-top: 2rem;
+		}
 	}
 
 	/* Prevent actual scrolling only on homepage */
@@ -348,18 +433,36 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 	/* Professional Animation System */
 
-	/* Initial hidden state for content */
-	.content-hidden {
-		opacity: 0;
-		transform: translateY(2rem);
-		transition: opacity var(--animation-duration-slow) var(--animation-easing),
-					transform var(--animation-duration-slow) var(--animation-easing);
+	/* Initial hidden state for content - desktop */
+	@media (min-width: 768px) {
+		.content-hidden.absolute-content {
+			opacity: 0;
+			transform: translateX(-50%) translateY(2rem);
+			transition: opacity var(--animation-duration-slow) var(--animation-easing),
+						transform var(--animation-duration-slow) var(--animation-easing);
+		}
+
+		/* Content visible state - desktop */
+		.content-hidden.content-visible.absolute-content {
+			opacity: 1;
+			transform: translateX(-50%) translateY(0);
+		}
 	}
 
-	/* Content visible state */
-	.content-hidden.content-visible {
-		opacity: 1;
-		transform: translateY(0);
+	/* Initial hidden state for content - mobile */
+	@media (max-width: 767px) {
+		.content-hidden {
+			opacity: 0;
+			transform: translateY(2rem);
+			transition: opacity var(--animation-duration-slow) var(--animation-easing),
+						transform var(--animation-duration-slow) var(--animation-easing);
+		}
+
+		/* Content visible state - mobile */
+		.content-hidden.content-visible {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	/* Individual element initial states */
@@ -410,7 +513,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 		box-shadow: 0 6px 20px rgba(168, 0, 0, 0.2);
 	}
 
-	/* Scroll indicator instant hide */
+	/* Enhanced scroll indicator with pulsing circle */
 	#scroll-indicator {
 		opacity: 1;
 		transition: opacity 0.15s ease-out; /* Even faster fade */
@@ -419,6 +522,31 @@ import WarpBackground from "../components/ui/WarpBackground";
 	#scroll-indicator.scroll-hidden {
 		opacity: 0;
 		pointer-events: none; /* Prevent any interaction when hidden */
+	}
+
+	/* Custom pulse animation for scroll indicator */
+	@keyframes scrollPulse {
+		0%, 100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+		50% {
+			transform: scale(1.05);
+			opacity: 0.9;
+		}
+	}
+
+	.scroll-pulse-animation {
+		animation: scrollPulse 2s ease-in-out infinite;
+	}
+
+	/* Add hover effect for scroll indicator */
+	#scroll-indicator:hover .scroll-pulse-animation {
+		animation-play-state: paused;
+		transform: scale(1.1);
+		background-color: rgba(255, 255, 255, 0.25);
+		border-color: rgba(255, 255, 255, 0.4);
+		cursor: pointer;
 	}
 
 	/* Performance optimizations */

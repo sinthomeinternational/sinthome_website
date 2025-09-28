@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 
-export const prerender = false; // Enable SSR for this route
+export const prerender = true; // Disabled for static build
 
 export const POST: APIRoute = async ({ request }) => {
   try {

@@ -74,6 +74,28 @@ git checkout -b feature/[feature-name]
 - `test:` Test additions or changes
 - `chore:` Build process or auxiliary tool changes
 
+### Branch Naming Convention
+
+Use the following standardized branch naming pattern:
+
+- `name/feat-description` - For new features
+- `name/fix-description` - For bug fixes
+- `name/refactor-description` - For refactoring
+- `name/docs-description` - For documentation changes
+
+Where:
+- `name` is your GitHub username (e.g., nadie, photon, etc.)
+- `description` is a brief kebab-case description of the work
+
+Examples:
+- `nadie/feat-warp-background-tester`
+- `photon/fix-navigation-dropdown`
+- `jane/refactor-api-client`
+- `john/docs-update-readme`
+
+Note: When creating issues that reference branches, include the issue number:
+- Branch: `nadie/feat-#27-update-readme`
+
 ## Vercel Deployment (Primary)
 
 ### Automatic Deployment Workflow
