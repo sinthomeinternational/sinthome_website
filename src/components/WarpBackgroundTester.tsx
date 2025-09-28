@@ -216,17 +216,17 @@ export default function WarpBackgroundTester() {
                     color: 'white',
                     borderRightColor: 'rgb(39, 39, 42)'
                 }}>
-                <div className="p-5">
+                <div className="p-3">
                     {/* Header */}
-                    <div className="mb-6">
-                        <h1 className="text-xl font-medium text-zinc-100 tracking-tight">
+                    <div className="mb-3">
+                        <h1 className="text-lg font-medium text-zinc-100 tracking-tight">
                             Warp Background Tester
                         </h1>
-                        <p className="text-xs text-zinc-500 mt-1">Configure and test warp animation parameters</p>
+                        <p className="text-[11px] text-zinc-500">Configure and test warp animation parameters</p>
                     </div>
 
                     {/* Status Indicator Panel */}
-                    <div className="bg-zinc-900/30 rounded-xl p-3 border border-zinc-800/50 mb-6">
+                    <div className="bg-zinc-900/30 rounded-lg p-2 border border-zinc-800/50 mb-3">
                         <div className="flex items-center gap-2">
                             <div className={`w-2 h-2 rounded-full animate-pulse ${
                                 warpStatus === 'loaded' ? 'bg-green-500' :
@@ -246,10 +246,10 @@ export default function WarpBackgroundTester() {
                         </div>
                     </div>
 
-                    <div className="space-y-5">
+                    <div className="space-y-3">
                         {/* Color Controls Panel */}
-                        <div className="bg-zinc-900/30 rounded-xl p-4 border border-zinc-800/50">
-                            <h2 className="text-sm font-semibold text-zinc-200 mb-4 flex items-center gap-2">
+                        <div className="bg-zinc-900/30 rounded-lg p-3 border border-zinc-800/50">
+                            <h2 className="text-xs font-semibold text-zinc-200 mb-2 flex items-center gap-1">
                                 <svg className="w-3.5 h-3.5 text-zinc-400" style={{ width: '14px', height: '14px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                                 </svg>
@@ -257,17 +257,17 @@ export default function WarpBackgroundTester() {
                             </h2>
 
                             {/* Enhanced color pickers with preview */}
-                            <div className="grid grid-cols-3 gap-4">
+                            <div className="grid grid-cols-3 gap-2">
                                 {[
                                     { key: 'color1', label: 'C1', value: params.color1 },
                                     { key: 'color2', label: 'C2', value: params.color2 },
                                     { key: 'color3', label: 'C3', value: params.color3 }
                                 ].map(({ key, label, value }) => (
-                                    <div key={key} className="flex flex-col gap-2">
-                                        <label className="text-xs text-zinc-400 font-medium">Color {label.replace('C', '')}</label>
+                                    <div key={key} className="flex flex-col gap-1">
+                                        <label className="text-[10px] text-zinc-400 font-medium">{label}</label>
                                         <div className="relative group">
                                             <div
-                                                className="w-full h-10 rounded-lg border border-zinc-700 cursor-pointer overflow-hidden hover:border-zinc-600 transition-colors"
+                                                className="w-full h-8 rounded border border-zinc-700 cursor-pointer overflow-hidden hover:border-zinc-600 transition-colors"
                                                 style={{ backgroundColor: value }}
                                             >
                                                 <input
@@ -278,9 +278,8 @@ export default function WarpBackgroundTester() {
                                                     aria-label={`Color ${label.replace('C', '')}`}
                                                 />
                                             </div>
-                                            <div className="absolute inset-0 rounded-lg pointer-events-none group-hover:ring-2 group-hover:ring-zinc-600 group-hover:ring-opacity-50"></div>
                                         </div>
-                                        <span className="text-[11px] font-mono text-zinc-500 text-center">
+                                        <span className="text-[9px] font-mono text-zinc-500 text-center">
                                             {value.toUpperCase()}
                                         </span>
                                     </div>
@@ -289,14 +288,14 @@ export default function WarpBackgroundTester() {
                         </div>
 
                         {/* Parameter Controls Panel */}
-                        <div className="bg-zinc-900/30 rounded-xl p-4 border border-zinc-800/50">
-                            <h2 className="text-sm font-semibold text-zinc-200 mb-4 flex items-center gap-2">
+                        <div className="bg-zinc-900/30 rounded-lg p-3 border border-zinc-800/50">
+                            <h2 className="text-xs font-semibold text-zinc-200 mb-2 flex items-center gap-1">
                                 <svg className="w-3.5 h-3.5 text-zinc-400" style={{ width: '14px', height: '14px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                                 </svg>
                                 Animation Parameters
                             </h2>
-                            <div className="grid grid-cols-2 gap-x-3 gap-y-3">
+                            <div className="space-y-1">
 
                             {[
                                 { key: 'speed', label: 'Speed', min: 0, max: 2, step: 0.05 },
@@ -308,17 +307,8 @@ export default function WarpBackgroundTester() {
                                 { key: 'softness', label: 'Softness', min: 0, max: 1, step: 0.01 },
                                 { key: 'distortion', label: 'Distortion', min: 0, max: 1, step: 0.01 }
                             ].map(({ key, label, min, max, step }) => (
-                                <div key={key} className="col-span-1">
-                                    <div className="flex justify-between items-center mb-2">
-                                        <label className="text-xs font-medium text-zinc-300">{label}</label>
-                                        <span className="text-xs font-mono text-zinc-500">
-                                            {typeof params[key as keyof typeof params] === 'number'
-                                                ? (params[key as keyof typeof params] as number).toFixed(
-                                                    step < 1 ? step.toString().split('.')[1]?.length || 2 : 0
-                                                )
-                                                : params[key as keyof typeof params]}
-                                        </span>
-                                    </div>
+                                <div key={key} className="flex items-center gap-2">
+                                    <label className="text-[10px] font-medium text-zinc-400 min-w-[70px]">{label}</label>
                                     <input
                                         type="range"
                                         min={min}
@@ -326,48 +316,53 @@ export default function WarpBackgroundTester() {
                                         step={step}
                                         value={params[key as keyof typeof params] as number}
                                         onChange={(e) => updateParam(key, step < 1 ? parseFloat(e.target.value) : parseInt(e.target.value))}
-                                        className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer
-                                            [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4
+                                        className="flex-1 h-1 bg-zinc-700 rounded appearance-none cursor-pointer
+                                            [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3
                                             [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-red-500
                                             [&::-webkit-slider-thumb]:hover:bg-red-400 [&::-webkit-slider-thumb]:transition-colors
-                                            [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full
+                                            [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:rounded-full
                                             [&::-moz-range-thumb]:bg-red-500 [&::-moz-range-thumb]:hover:bg-red-400
                                             [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:transition-colors"
                                         aria-label={`${label}: ${params[key as keyof typeof params]}`}
                                     />
+                                    <span className="text-[10px] font-mono text-zinc-500 min-w-[35px] text-right">
+                                        {typeof params[key as keyof typeof params] === 'number'
+                                            ? (params[key as keyof typeof params] as number).toFixed(
+                                                step < 1 ? step.toString().split('.')[1]?.length || 2 : 0
+                                            )
+                                            : params[key as keyof typeof params]}
+                                    </span>
                                 </div>
                             ))}
                             </div>
                         </div>
 
                         {/* Action Buttons Panel */}
-                        <div className="bg-zinc-900/30 rounded-xl p-4 border border-zinc-800/50">
-                            <h2 className="text-sm font-semibold text-zinc-200 mb-4">Actions</h2>
-                            <div className="grid grid-cols-2 gap-2 mb-3">
+                        <div className="bg-zinc-900/30 rounded-lg p-2 border border-zinc-800/50">
+                            <h2 className="text-xs font-semibold text-zinc-200 mb-2">Actions</h2>
+                            <div className="flex gap-1 mb-2">
                                 <button
                                     onClick={copyConfig}
-                                    className="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg
-                                        hover:bg-red-500 active:bg-red-700 transition-all duration-200
-                                        shadow-sm hover:shadow-md"
+                                    className="flex-1 px-2 py-1.5 bg-red-600 text-white text-[11px] font-medium rounded
+                                        hover:bg-red-500 active:bg-red-700 transition-colors"
                                 >
-                                    {copied ? '✓ Copied!' : 'Copy Config'}
+                                    {copied ? '✓ Copied' : 'Copy'}
                                 </button>
                                 <button
                                     onClick={resetToDefaults}
-                                    className="px-4 py-2 bg-zinc-800 text-zinc-100 text-sm font-medium rounded-lg
-                                        hover:bg-zinc-700 active:bg-zinc-900 transition-all duration-200
-                                        shadow-sm hover:shadow-md"
+                                    className="flex-1 px-2 py-1.5 bg-zinc-700 text-zinc-100 text-[11px] font-medium rounded
+                                        hover:bg-zinc-600 active:bg-zinc-800 transition-colors"
                                 >
-                                    Reset Defaults
+                                    Reset
                                 </button>
                             </div>
 
                             {/* Debug Controls */}
-                            <div className="grid grid-cols-3 gap-1">
+                            <div className="flex gap-1">
                                 <button
                                     onClick={() => setDebugMode(!debugMode)}
-                                    className={`px-2 py-1 rounded text-[10px] transition-colors ${
-                                        debugMode ? 'bg-green-900/30 text-green-400' : 'bg-zinc-800 text-zinc-400'
+                                    className={`flex-1 px-2 py-1 rounded text-[10px] font-medium transition-colors ${
+                                        debugMode ? 'bg-green-600/20 text-green-400' : 'bg-zinc-800 text-zinc-400'
                                     }`}
                                     aria-label={`Debug mode ${debugMode ? 'on' : 'off'}`}
                                 >
@@ -382,14 +377,14 @@ export default function WarpBackgroundTester() {
                                             setWarpStatus('loaded');
                                         }, 500);
                                     }}
-                                    className="px-2 py-1 bg-blue-600/20 text-blue-400 rounded transition hover:bg-blue-600/30 text-[10px]"
+                                    className="flex-1 px-2 py-1 bg-zinc-800 text-zinc-400 rounded hover:bg-zinc-700 text-[10px] font-medium transition-colors"
                                     aria-label="Force reload animation"
                                 >
                                     Reload
                                 </button>
                                 <button
                                     onClick={() => setWarpStatus('fallback')}
-                                    className="px-2 py-1 bg-yellow-600/20 text-yellow-400 rounded transition hover:bg-yellow-600/30 text-[10px]"
+                                    className="flex-1 px-2 py-1 bg-zinc-800 text-zinc-400 rounded hover:bg-zinc-700 text-[10px] font-medium transition-colors"
                                     aria-label="Use fallback animation"
                                 >
                                     Fallback
@@ -399,25 +394,25 @@ export default function WarpBackgroundTester() {
 
                         {/* Debug Info */}
                         {debugMode && (
-                            <div className="mt-4 p-3 bg-zinc-800/50 rounded-lg text-xs">
-                                <div className="space-y-1">
-                                    <div>WebGL: {checkWebGL() ? '✅ Supported' : '❌ Not Supported'}</div>
+                            <div className="mt-2 p-2 bg-zinc-800/50 rounded text-[10px]">
+                                <div className="space-y-0.5">
+                                    <div>WebGL: {checkWebGL() ? '✅' : '❌'}</div>
                                     {lastError && <div className="text-red-400">Error: {lastError}</div>}
-                                    <div>Canvas elements: {typeof document !== 'undefined' ? document.querySelectorAll('canvas').length : 0}</div>
+                                    <div>Canvas: {typeof document !== 'undefined' ? document.querySelectorAll('canvas').length : 0}</div>
                                 </div>
                             </div>
                         )}
 
                         {/* Configuration Display Panel */}
-                        <div className="bg-zinc-900/30 rounded-xl p-4 border border-zinc-800/50">
-                            <h2 className="text-sm font-semibold text-zinc-200 mb-4 flex items-center gap-2">
-                                <svg className="w-3.5 h-3.5 text-zinc-400" style={{ width: '14px', height: '14px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="bg-zinc-900/30 rounded-lg p-2 border border-zinc-800/50">
+                            <h2 className="text-xs font-semibold text-zinc-200 mb-1 flex items-center gap-1">
+                                <svg className="w-3 h-3 text-zinc-400" style={{ width: '12px', height: '12px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                                 </svg>
-                                Configuration Code
+                                Code
                             </h2>
-                            <div className="bg-black/50 backdrop-blur-sm p-4 rounded-lg overflow-x-auto border border-zinc-800/50">
-                                <pre className="text-xs font-mono">
+                            <div className="bg-black/50 p-2 rounded overflow-x-auto border border-zinc-800/50">
+                                <pre className="text-[10px] font-mono leading-tight">
                                     <code>
                                         <span className="text-emerald-400">&lt;Warp</span>{'\n'}
                                         <span className="text-zinc-400">  color1="</span><span className="text-amber-400">{params.color1}</span><span className="text-zinc-400">"</span>{'\n'}
