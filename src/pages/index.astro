@@ -104,7 +104,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 		if (!container) return;
 
 		let hasScrolled = false;
-		let animationInProgress = false;
+		let animationTimeouts = []; // Store all timeout IDs for cancellation
 
 		// Professional animation timing configuration
 		const ANIMATION_CONFIG = {
@@ -117,14 +117,21 @@ import WarpBackground from "../components/ui/WarpBackground";
 			microAnimationDelay: 800 // Reduced from 1200
 		};
 
+		// Clear all pending animations
+		function clearAllAnimations() {
+			animationTimeouts.forEach(timeout => clearTimeout(timeout));
+			animationTimeouts = [];
+		}
+
 		function triggerAnimation() {
 			// Hide scroll indicator IMMEDIATELY, before any checks
 			const scrollIndicator = document.getElementById('scroll-indicator');
 			scrollIndicator?.classList.add('scroll-hidden');
 
-			if (hasScrolled || animationInProgress) return;
+			if (hasScrolled) return;
 
-			animationInProgress = true;
+			// Clear any pending animations from reset
+			clearAllAnimations();
 			hasScrolled = true;
 
 			const emergingContent = document.getElementById('emerging-content');
@@ -134,37 +141,37 @@ import WarpBackground from "../components/ui/WarpBackground";
 			sinthomeTitle?.classList.add('title-moved');
 
 			// Step 3: Start content animation sequence
-			setTimeout(() => {
+			animationTimeouts.push(setTimeout(() => {
 				emergingContent?.classList.add('content-visible');
-			}, ANIMATION_CONFIG.contentDelay);
+			}, ANIMATION_CONFIG.contentDelay));
 
 			// Step 4: Animate tagline
-			setTimeout(() => {
+			animationTimeouts.push(setTimeout(() => {
 				const tagline = document.querySelector('.tagline');
 				tagline?.classList.add('element-visible');
-			}, ANIMATION_CONFIG.taglineDelay);
+			}, ANIMATION_CONFIG.taglineDelay));
 
 			// Step 5: Animate tags with stagger
-			setTimeout(() => {
+			animationTimeouts.push(setTimeout(() => {
 				const tags = document.querySelectorAll('.tag-item');
 				tags.forEach((tag, index) => {
-					setTimeout(() => {
+					animationTimeouts.push(setTimeout(() => {
 						tag.classList.add('element-visible');
-					}, index * ANIMATION_CONFIG.staggerDelay);
+					}, index * ANIMATION_CONFIG.staggerDelay));
 				});
-			}, ANIMATION_CONFIG.tagsDelay);
+			}, ANIMATION_CONFIG.tagsDelay));
 
 			// Step 6: Animate buttons with stagger
-			setTimeout(() => {
+			animationTimeouts.push(setTimeout(() => {
 				const buttons = document.querySelectorAll('.cta-button');
 				buttons.forEach((button, index) => {
-					setTimeout(() => {
+					animationTimeouts.push(setTimeout(() => {
 						button.classList.add('element-visible');
-					}, index * ANIMATION_CONFIG.staggerDelay);
+					}, index * ANIMATION_CONFIG.staggerDelay));
 				});
 
 				// Step 7: Add subtle micro-animations after main sequence
-				setTimeout(() => {
+				animationTimeouts.push(setTimeout(() => {
 					// Add gentle floating animation to tags
 					const tags = document.querySelectorAll('.tag-item');
 					tags.forEach((tag, index) => {
@@ -174,20 +181,19 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 					// Add subtle pulse to buttons
 					buttons.forEach((button, index) => {
-						setTimeout(() => {
+						animationTimeouts.push(setTimeout(() => {
 							button.classList.add('micro-pulse');
-						}, index * 100);
+						}, index * 100));
 					});
-
-					animationInProgress = false;
-				}, ANIMATION_CONFIG.microAnimationDelay);
-			}, ANIMATION_CONFIG.buttonsDelay);
+				}, ANIMATION_CONFIG.microAnimationDelay));
+			}, ANIMATION_CONFIG.buttonsDelay));
 		}
 
 		function resetAnimation() {
-			if (!hasScrolled || animationInProgress) return;
+			if (!hasScrolled) return;
 
-			animationInProgress = true;
+			// Clear all pending animations immediately
+			clearAllAnimations();
 			hasScrolled = false;
 
 			const emergingContent = document.getElementById('emerging-content');
@@ -204,10 +210,6 @@ import WarpBackground from "../components/ui/WarpBackground";
 				el.classList.remove('element-visible', 'micro-float', 'micro-pulse');
 				(el as HTMLElement).style.animationDelay = '';
 			});
-
-			setTimeout(() => {
-				animationInProgress = false;
-			}, 100);
 		}
 
 		// Attach listeners ONLY to the homepage container, not window
