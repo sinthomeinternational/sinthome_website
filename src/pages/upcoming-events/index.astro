@@ -9,29 +9,36 @@ const lang = getCurrentLang();
 const t = getTranslations(lang);
 const pageContent = t.pages.upcomingEvents;
 
-// Get events data
-const events = [
-  { key: 'srtp', data: pageContent.events.srtp },
-  { key: 'onlineCommunity', data: pageContent.events.onlineCommunity },
-  { key: 'nyMedia', data: pageContent.events.nyMedia },
-  { key: 'hackathon', data: pageContent.events.hackathon },
-  { key: 'eslClass', data: pageContent.events.eslClass },
-];
+// Get events data with proper null checking
+const events = pageContent?.events ? [
+  { id: 'srtp', data: pageContent.events.srtp },
+  { id: 'onlineCommunity', data: pageContent.events.onlineCommunity },
+  { id: 'nyMedia', data: pageContent.events.nyMedia },
+  { id: 'hackathon', data: pageContent.events.hackathon },
+  { id: 'eslClass', data: pageContent.events.eslClass },
+] : [];
+
+// Get labels with defaults
+const labels = pageContent?.labels || {
+  location: 'Location',
+  schedule: 'Schedule',
+  format: 'Format',
+  type: 'Type',
+};
 ---
 
 <RootLayout>
   <InfoLayout>
-    <H1>{pageContent.title}</H1>
+    <H1>{pageContent?.title || 'Upcoming Events'}</H1>
 
     <div class="space-y-8 max-w-4xl">
-      {events.map(({ key, data }) => (
-        <section key={key}>
+      {events.map(({ id, data }) => (
+        <section>
           <div class="bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg p-6">
             <div class="flex items-center gap-3 mb-4">
               <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{data.title}</h2>
-              {data.tags.map((tag, index) => (
+              {data.tags.map((tag: string, index: number) => (
                 <span
-                  key={index}
                   class={`text-xs px-2 py-1 rounded ${
                     index === 0
                       ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
@@ -46,13 +53,13 @@ const events = [
             <div class="grid md:grid-cols-4 gap-4 mb-4">
               <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
                 <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">
-                  {pageContent.labels.location}
+                  {labels.location}
                 </h3>
                 <p class="text-gray-700 dark:text-zinc-300">{data.location}</p>
               </div>
               <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
                 <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">
-                  {pageContent.labels.schedule}
+                  {labels.schedule}
                 </h3>
                 <p class="text-gray-700 dark:text-zinc-300">
                   {data.schedule}
@@ -61,13 +68,13 @@ const events = [
               </div>
               <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
                 <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">
-                  {pageContent.labels.format}
+                  {labels.format}
                 </h3>
                 <p class="text-gray-700 dark:text-zinc-300">{data.format}</p>
               </div>
               <div class="bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-4">
                 <h3 class="text-blue-600 dark:text-blue-400 text-xs uppercase tracking-wide font-semibold mb-2">
-                  {pageContent.labels.type}
+                  {labels.type}
                 </h3>
                 <p class="text-gray-700 dark:text-zinc-300">{data.type}</p>
               </div>
