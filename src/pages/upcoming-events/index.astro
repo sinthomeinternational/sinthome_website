@@ -2,10 +2,10 @@
 import RootLayout from "../../layouts/RootLayout.astro";
 import InfoLayout from "../../layouts/InfoLayout.astro";
 import H1 from "../../components/ui/H1.astro";
-import { getTranslations, getCurrentLang } from "../../lib/translations";
+import { getTranslations, getLanguageFromURL } from "../../lib/translations";
 
-// Get current language and translations
-const lang = getCurrentLang();
+// Get current language from URL (SSR-compatible)
+const lang = getLanguageFromURL(Astro.url);
 const t = getTranslations(lang);
 const pageContent = t.pages.upcomingEvents;
 

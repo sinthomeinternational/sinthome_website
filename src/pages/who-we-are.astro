@@ -1,10 +1,10 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import H1 from "../components/ui/H1.astro";
-import { getTranslations, getCurrentLang } from "../lib/translations";
+import { getTranslations, getLanguageFromURL } from "../lib/translations";
 
-// Get current language and translations
-const lang = getCurrentLang();
+// Get current language from URL (SSR-compatible)
+const lang = getLanguageFromURL(Astro.url);
 const t = getTranslations(lang);
 const pageContent = t.pages.whoWeAre;
 ---
@@ -69,13 +69,13 @@ const pageContent = t.pages.whoWeAre;
             {pageContent.callToAction.buttons && (
               <>
                 <a
-                  href="/donate"
+                  href={`/donate${lang === 'zh' ? '?lang=zh' : ''}`}
                   class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                 >
                   {pageContent.callToAction.buttons.donate}
                 </a>
                 <a
-                  href="/contact"
+                  href={`/contact${lang === 'zh' ? '?lang=zh' : ''}`}
                   class="px-6 py-3 bg-gray-200 dark:bg-zinc-800 text-gray-900 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-zinc-700 transition-colors"
                 >
                   {pageContent.callToAction.buttons.getInvolved}

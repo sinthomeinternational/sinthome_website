@@ -1,10 +1,10 @@
 /**
  * Translation system utilities
- * Handles loading and accessing translations based on current language
+ * Handles loading and accessing translations based on URL parameters
+ * SSR-compatible implementation for Vercel deployment
  */
 
 import type { Language } from '../config/languages';
-import { getCurrentLanguage } from '../config/languages';
 
 // Import all translation files
 import enTranslations from '../content/translations/en/site';
@@ -17,22 +17,32 @@ const translations = {
 } as const;
 
 /**
- * Get translations for the current language
- * @param lang Optional language override
+ * Get language from URL parameters (SSR-compatible)
+ * @param url URL object from Astro context
+ * @returns Language code
+ */
+export function getLanguageFromURL(url: URL): Language {
+  const lang = url.searchParams.get('lang');
+  if (lang === 'zh') return 'zh';
+  return 'en'; // Default to English
+}
+
+/**
+ * Get translations for the specified language
+ * @param lang Language code
  * @returns Translation object for the specified language
  */
-export function getTranslations(lang?: Language) {
-  const language = lang || getCurrentLanguage();
-  return translations[language] || translations.en;
+export function getTranslations(lang: Language = 'en') {
+  return translations[lang] || translations.en;
 }
 
 /**
  * Get a specific translation by path
  * @param path Dot-separated path to translation (e.g., 'navigation.home')
- * @param lang Optional language override
+ * @param lang Language code
  * @returns The translation string or the path if not found
  */
-export function t(path: string, lang?: Language): string {
+export function t(path: string, lang: Language = 'en'): string {
   const translations = getTranslations(lang);
   const keys = path.split('.');
 
@@ -50,29 +60,75 @@ export function t(path: string, lang?: Language): string {
 }
 
 /**
- * Hook for React components to get translations
- * Re-renders when language changes
+ * Build URL with language parameter
+ * @param baseUrl Base URL or path
+ * @param lang Language code
+ * @param preserveParams Whether to preserve existing query parameters
+ * @returns URL with language parameter
  */
-export function useTranslations() {
-  if (typeof window === 'undefined') {
-    return getTranslations();
-  }
+export function buildLanguageURL(baseUrl: string, lang: Language, preserveParams: boolean = true): string {
+  try {
+    // Handle both absolute and relative URLs
+    const url = baseUrl.startsWith('http')
+      ? new URL(baseUrl)
+      : new URL(baseUrl, 'http://localhost'); // Dummy base for relative URLs
 
-  // In browser, get current language from localStorage
-  const lang = getCurrentLanguage();
-  return getTranslations(lang);
+    if (preserveParams) {
+      // Preserve existing parameters
+      url.searchParams.set('lang', lang);
+    } else {
+      // Clear parameters and set only language
+      const pathname = url.pathname;
+      url.search = '';
+      url.searchParams.set('lang', lang);
+    }
+
+    // Return appropriate format
+    return baseUrl.startsWith('http')
+      ? url.toString()
+      : `${url.pathname}${url.search}`;
+  } catch {
+    // Fallback for simple paths
+    const separator = baseUrl.includes('?') ? '&' : '?';
+    return `${baseUrl}${separator}lang=${lang}`;
+  }
 }
 
 /**
- * Get the current language from URL or localStorage
- * For SSR compatibility
+ * Get current language from URL or fallback
+ * For client-side React components
  */
-export function getCurrentLang(): Language {
-  // Check if we're in the browser
+export function getCurrentLanguageClient(): Language {
   if (typeof window !== 'undefined') {
-    return getCurrentLanguage();
+    const params = new URLSearchParams(window.location.search);
+    const lang = params.get('lang');
+    if (lang === 'zh') return 'zh';
+  }
+  return 'en';
+}
+
+/**
+ * Hook for React components to get translations
+ * Uses URL parameters for language detection
+ */
+export function useTranslations() {
+  if (typeof window === 'undefined') {
+    // SSR: return default translations
+    return getTranslations('en');
   }
 
-  // Default to English for SSR
-  return 'en';
+  // Client-side: get language from URL
+  const lang = getCurrentLanguageClient();
+  return getTranslations(lang);
+}
+
+// Deprecated functions for backward compatibility
+export function getCurrentLanguage(): Language {
+  console.warn('getCurrentLanguage() is deprecated. Use getLanguageFromURL() or getCurrentLanguageClient() instead.');
+  return getCurrentLanguageClient();
+}
+
+export function getCurrentLang(): Language {
+  console.warn('getCurrentLang() is deprecated. Use getLanguageFromURL() or getCurrentLanguageClient() instead.');
+  return getCurrentLanguageClient();
 }

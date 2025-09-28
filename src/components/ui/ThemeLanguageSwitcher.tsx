@@ -1,22 +1,21 @@
 /**
  * Theme and Language Switcher Component
- * Provides UI controls for switching between themes and languages
+ * Uses URL parameters for language switching (SSR-compatible)
+ * Themes are still stored in localStorage (client-side only)
  */
 
 import { useState, useEffect } from 'react';
 import type { Language } from '../../config/languages';
 import type { ThemeId } from '../../config/themes';
-import { getCurrentLanguage, toggleLanguage } from '../../config/languages';
+import { getCurrentLanguageClient } from '../../lib/translations';
 import { getStoredTheme, applyTheme } from '../../config/themes';
 
 interface ThemeLanguageSwitcherProps {
   className?: string;
-  showLabels?: boolean;
 }
 
 export default function ThemeLanguageSwitcher({
-  className = '',
-  showLabels = false
+  className = ''
 }: ThemeLanguageSwitcherProps) {
   const [currentTheme, setCurrentTheme] = useState<ThemeId>('dark');
   const [currentLang, setCurrentLang] = useState<Language>('en');
@@ -24,15 +23,14 @@ export default function ThemeLanguageSwitcher({
 
   useEffect(() => {
     setMounted(true);
-    // Get stored preferences
+    // Get stored theme preference
     const storedTheme = getStoredTheme() || 'dark';
-    const storedLang = getCurrentLanguage();
-
     setCurrentTheme(storedTheme);
-    setCurrentLang(storedLang);
-
-    // Apply initial theme
     applyTheme(storedTheme);
+
+    // Get current language from URL
+    const lang = getCurrentLanguageClient();
+    setCurrentLang(lang);
   }, []);
 
   const handleThemeToggle = () => {
@@ -42,10 +40,14 @@ export default function ThemeLanguageSwitcher({
   };
 
   const handleLanguageToggle = () => {
-    const newLang = toggleLanguage();
-    setCurrentLang(newLang);
-    // Reload the page to apply new language
-    window.location.reload();
+    const newLang = currentLang === 'en' ? 'zh' : 'en';
+
+    // Update URL with new language parameter
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', newLang);
+
+    // Navigate to the new URL (this will trigger a page reload)
+    window.location.href = url.toString();
   };
 
   if (!mounted) {

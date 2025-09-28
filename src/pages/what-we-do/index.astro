@@ -2,93 +2,128 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
 import ProjectCard from "../../components/shared/ProjectCard.astro";
+import { getTranslations, getLanguageFromURL } from "../../lib/translations";
 
-// Handle base path for GitHub Pages compatibility
+// Get current language from URL (SSR-compatible)
+const lang = getLanguageFromURL(Astro.url);
+const t = getTranslations(lang);
+const pageContent: any = t.pages?.whatWeDo || {}; // Using any type to handle missing fields
+
+// Handle base path for GitHub Pages compatibility with language
 const getFullPath = (path: string) => {
-  return path.startsWith('/') ? `${import.meta.env.BASE_URL}${path.slice(1)}` : path;
+  const basePath = path.startsWith('/') ? `${import.meta.env.BASE_URL}${path.slice(1)}` : path;
+  // Preserve language parameter in URLs
+  return lang === 'zh' ? `${basePath}${basePath.includes('?') ? '&' : '?'}lang=zh` : basePath;
+};
+
+// Define project type
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  category: string;
+}
+
+// Get projects data with fallbacks
+const projects: Project[] = pageContent.projects || [
+  {
+    id: 'aiHackathon',
+    title: 'AI Hackathon',
+    description: 'Annual event bringing together developers, designers, and innovators to create AI-powered solutions for social good. Participants work on real-world challenges with mentorship from industry experts.',
+    href: '/what-we-do/ai-hackathon/',
+    category: 'AI for Public Good'
+  },
+  {
+    id: 'workersAssist',
+    title: 'Workers Assist',
+    description: 'Supporting workers in transition with skills training, career counseling, and job placement assistance. We focus on emerging technologies and sustainable employment opportunities.',
+    href: '/what-we-do/workers-assist',
+    category: 'Workers Assist'
+  },
+  {
+    id: 'plantcoreAi',
+    title: 'Plantcore AI',
+    description: 'Using artificial intelligence to revolutionize sustainable agriculture and environmental conservation. Our AI models help farmers optimize crop yields while minimizing environmental impact.',
+    href: '/what-we-do/plantcore-ai',
+    category: 'Factory AI Solution'
+  },
+  {
+    id: 'srtp',
+    title: 'S.R.T.P.',
+    description: 'Student Research and Training Program connecting young minds with cutting-edge research opportunities. We provide mentorship, resources, and real-world project experience.',
+    href: '/what-we-do/srtp',
+    category: 'Public Lecture'
+  }
+];
+
+// Define impact stat type
+interface ImpactStat {
+  number: string;
+  label: string;
+}
+
+// Get impact stats with fallbacks
+const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
+  stats: [
+    { number: '500+', label: 'People Trained' },
+    { number: '50+', label: 'Projects Completed' },
+    { number: '20+', label: 'Partner Organizations' },
+    { number: '10+', label: 'Communities Served' }
+  ]
 };
 ---
 
 <PageLayout title="What We Do - Sinthome" useInfoLayout={true}>
-    <H1>What We Do</H1>
+    <H1>{pageContent.title || 'What We Do'}</H1>
 
     <div class="space-y-8 max-w-6xl">
       <!-- Introduction -->
       <section class="max-w-4xl">
-        <p class="text-lg text-zinc-300 leading-relaxed">
-          We are committed to leveraging technology and innovation to create positive social impact.
-          Through our various programs and initiatives, we work to address critical challenges in our community.
+        <p class="text-lg text-gray-600 dark:text-zinc-300 leading-relaxed">
+          {pageContent.subtitle || 'We are committed to leveraging technology and innovation to create positive social impact. Through our various programs and initiatives, we work to address critical challenges in our community.'}
         </p>
       </section>
 
       <!-- Projects Grid -->
       <section>
-        <h2 class="text-2xl font-bold text-white mb-6">Our Programs</h2>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">{pageContent.projectsTitle || 'Our Programs'}</h2>
         <div class="grid md:grid-cols-2 gap-6">
-          <ProjectCard
-            title="AI Hackathon"
-            description="Annual event bringing together developers, designers, and innovators to create AI-powered solutions for social good. Participants work on real-world challenges with mentorship from industry experts."
-            href="/what-we-do/ai-hackathon/"
-            category="AI for Public Good"
-          />
-
-          <ProjectCard
-            title="Workers Assist"
-            description="Supporting workers in transition with skills training, career counseling, and job placement assistance. We focus on emerging technologies and sustainable employment opportunities."
-            href="/what-we-do/workers-assist"
-            category="Workers Assist"
-          />
-
-          <ProjectCard
-            title="Plantcore AI"
-            description="Using artificial intelligence to revolutionize sustainable agriculture and environmental conservation. Our AI models help farmers optimize crop yields while minimizing environmental impact."
-            href="/what-we-do/plantcore-ai"
-            category="Factory AI Solution"
-          />
-
-          <ProjectCard
-            title="S.R.T.P."
-            description="Student Research and Training Program connecting young minds with cutting-edge research opportunities. We provide mentorship, resources, and real-world project experience."
-            href="/what-we-do/srtp"
-            category="Public Lecture"
-          />
+          {projects.map((project) => (
+            <ProjectCard
+              title={project.title}
+              description={project.description}
+              href={getFullPath(project.href)}
+              category={project.category}
+            />
+          ))}
         </div>
       </section>
 
       <!-- Impact Section -->
-      <section class="mt-12 p-8 bg-zinc-900/50 border border-zinc-800 rounded-lg">
-        <h2 class="text-2xl font-bold text-white mb-6 text-center">Our Impact</h2>
+      <section class="mt-12 p-8 bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{impact.title || 'Our Impact'}</h2>
         <div class="grid md:grid-cols-4 gap-6 text-center">
-          <div>
-            <div class="text-3xl font-bold text-red-500 mb-2">500+</div>
-            <div class="text-zinc-400">People Trained</div>
-          </div>
-          <div>
-            <div class="text-3xl font-bold text-red-500 mb-2">50+</div>
-            <div class="text-zinc-400">Projects Completed</div>
-          </div>
-          <div>
-            <div class="text-3xl font-bold text-red-500 mb-2">20+</div>
-            <div class="text-zinc-400">Partner Organizations</div>
-          </div>
-          <div>
-            <div class="text-3xl font-bold text-red-500 mb-2">10+</div>
-            <div class="text-zinc-400">Communities Served</div>
-          </div>
+          {impact.stats.map((stat) => (
+            <div>
+              <div class="text-3xl font-bold text-red-600 dark:text-red-500 mb-2">{stat.number}</div>
+              <div class="text-gray-600 dark:text-zinc-400">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </section>
 
       <!-- Call to Action -->
       <section class="text-center">
-        <h2 class="text-2xl font-bold text-white mb-4">Get Involved</h2>
-        <p class="text-zinc-300 mb-6">
-          Join us in making a difference. Whether you're a volunteer, partner, or supporter, there's a place for you.
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">{pageContent.callToAction?.title || 'Get Involved'}</h2>
+        <p class="text-gray-600 dark:text-zinc-300 mb-6">
+          {pageContent.callToAction?.description || "Join us in making a difference. Whether you're a volunteer, partner, or supporter, there's a place for you."}
         </p>
         <a
           href={getFullPath("/contact")}
           class="inline-block px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
         >
-          Learn How to Help
+          {pageContent.callToAction?.buttons?.learnMore || 'Learn How to Help'}
         </a>
       </section>
     </div>
