@@ -64,17 +64,17 @@ export default function WarpBackgroundTester() {
 
     const [params, setParams] = useState({
         color1: '#000000',
-        color2: '#5a0000',
-        color3: '#ff0000',
-        speed: 0.9,
+        color2: '#940000',
+        color3: '#000000',
+        speed: 0.2,
         swirl: 0.98,
-        swirlIterations: 25,
-        shapeScale: 0.12,
-        rotation: 0.85,
-        scale: 1.0,
+        swirlIterations: 29,
+        shapeScale: 0.04,
+        rotation: 0.55,
+        scale: 0.4,
         proportion: 1.0,
-        softness: 0.5,
-        distortion: 0.5
+        softness: 0,
+        distortion: 0
     });
 
     // Check WebGL support
@@ -190,34 +190,35 @@ export default function WarpBackgroundTester() {
     const resetToDefaults = () => {
         setParams({
             color1: '#000000',
-            color2: '#5a0000',
-            color3: '#ff0000',
-            speed: 0.9,
+            color2: '#940000',
+            color3: '#000000',
+            speed: 0.2,
             swirl: 0.98,
-            swirlIterations: 25,
-            shapeScale: 0.12,
-            rotation: 0.85,
-            scale: 1.0,
+            swirlIterations: 29,
+            shapeScale: 0.04,
+            rotation: 0.55,
+            scale: 0.4,
             proportion: 1.0,
-            softness: 0.5,
-            distortion: 0.5
+            softness: 0,
+            distortion: 0
         });
     };
 
     return (
-        <div className="relative min-h-screen bg-black text-white flex" style={{ backgroundColor: '#000000', color: 'white' }}>
+        <div className="relative min-h-screen bg-black text-white flex flex-row" style={{ backgroundColor: '#000000', color: 'white', display: 'flex', flexDirection: 'row' }}>
             {/* Left Panel - Controls (Fixed width, scrollable) */}
             <div
-                className="w-[450px] flex-shrink-0 h-screen overflow-y-auto bg-zinc-900/95 border-r border-zinc-800"
+                className="w-[450px] min-w-[450px] flex-shrink-0 h-screen overflow-y-auto bg-gradient-to-br from-zinc-900 to-black border-r border-zinc-700/50"
                 style={{
                     position: 'relative',
                     zIndex: 10,
-                    backgroundColor: 'rgba(24, 24, 27, 0.95)', // zinc-900 with 95% opacity
+                    backgroundColor: 'rgba(0, 0, 0, 0.95)',
                     color: 'white',
-                    borderRightColor: 'rgb(39, 39, 42)' // zinc-800
+                    borderRightColor: 'rgba(63, 63, 70, 0.5)',
+                    backdropFilter: 'blur(10px)'
                 }}>
-                <div className="p-6">
-                    <h1 className="text-2xl font-bold mb-6">
+                <div className="p-8">
+                    <h1 className="text-3xl font-bold mb-8 bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
                         Warp Background Tester
                     </h1>
 
@@ -232,47 +233,50 @@ export default function WarpBackgroundTester() {
                         {debugMode && ` | Renders: ${renderCount}`}
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                         {/* Color Controls */}
-                        <div className="space-y-3">
-                            <h2 className="text-lg font-semibold text-zinc-300">Colors</h2>
+                        <div className="space-y-3 p-5 bg-gradient-to-r from-zinc-800/20 to-zinc-900/20 rounded-xl border border-zinc-700/30 backdrop-blur-sm">
+                            <h2 className="text-sm font-bold text-zinc-200 uppercase tracking-wider flex items-center gap-2">
+                                <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                                Colors
+                            </h2>
 
-                            <div className="space-y-2">
-                                <div className="flex items-center gap-3">
-                                    <label className="w-20 text-sm">Color 1:</label>
+                            <div className="space-y-3">
+                                <div className="flex items-center gap-3 group hover:bg-zinc-800/20 p-2 rounded-lg transition-colors">
+                                    <label className="w-20 text-xs font-medium text-zinc-400">Color 1:</label>
                                     <input
                                         type="color"
                                         value={params.color1}
                                         onChange={(e) => updateParam('color1', e.target.value)}
-                                        className="flex-1 h-10 rounded cursor-pointer"
+                                        className="w-16 h-8 rounded border-2 border-zinc-700 hover:border-red-500 cursor-pointer transition-colors"
                                     />
-                                    <span className="text-xs font-mono bg-zinc-800 px-2 py-1 rounded">
+                                    <span className="text-xs font-mono bg-black/50 px-3 py-1.5 rounded-md border border-zinc-700/50">
                                         {params.color1}
                                     </span>
                                 </div>
 
-                                <div className="flex items-center gap-3">
-                                    <label className="w-20 text-sm">Color 2:</label>
+                                <div className="flex items-center gap-3 group hover:bg-zinc-800/20 p-2 rounded-lg transition-colors">
+                                    <label className="w-20 text-xs font-medium text-zinc-400">Color 2:</label>
                                     <input
                                         type="color"
                                         value={params.color2}
                                         onChange={(e) => updateParam('color2', e.target.value)}
-                                        className="flex-1 h-10 rounded cursor-pointer"
+                                        className="w-16 h-8 rounded border-2 border-zinc-700 hover:border-red-500 cursor-pointer transition-colors"
                                     />
-                                    <span className="text-xs font-mono bg-zinc-800 px-2 py-1 rounded">
+                                    <span className="text-xs font-mono bg-black/50 px-3 py-1.5 rounded-md border border-zinc-700/50">
                                         {params.color2}
                                     </span>
                                 </div>
 
-                                <div className="flex items-center gap-3">
-                                    <label className="w-20 text-sm">Color 3:</label>
+                                <div className="flex items-center gap-3 group hover:bg-zinc-800/20 p-2 rounded-lg transition-colors">
+                                    <label className="w-20 text-xs font-medium text-zinc-400">Color 3:</label>
                                     <input
                                         type="color"
                                         value={params.color3}
                                         onChange={(e) => updateParam('color3', e.target.value)}
-                                        className="flex-1 h-10 rounded cursor-pointer"
+                                        className="w-16 h-8 rounded border-2 border-zinc-700 hover:border-red-500 cursor-pointer transition-colors"
                                     />
-                                    <span className="text-xs font-mono bg-zinc-800 px-2 py-1 rounded">
+                                    <span className="text-xs font-mono bg-black/50 px-3 py-1.5 rounded-md border border-zinc-700/50">
                                         {params.color3}
                                     </span>
                                 </div>
@@ -280,8 +284,12 @@ export default function WarpBackgroundTester() {
                         </div>
 
                         {/* Parameter Controls */}
-                        <div className="space-y-3">
-                            <h2 className="text-lg font-semibold text-zinc-300">Parameters</h2>
+                        <div className="p-5 bg-gradient-to-r from-zinc-800/20 to-zinc-900/20 rounded-xl border border-zinc-700/30 backdrop-blur-sm">
+                            <h2 className="text-sm font-bold text-zinc-200 uppercase tracking-wider flex items-center gap-2 mb-4">
+                                <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+                                Parameters
+                            </h2>
+                            <div className="space-y-4">
 
                             {[
                                 { key: 'speed', label: 'Speed', min: 0, max: 2, step: 0.05 },
@@ -293,10 +301,10 @@ export default function WarpBackgroundTester() {
                                 { key: 'softness', label: 'Softness', min: 0, max: 1, step: 0.01 },
                                 { key: 'distortion', label: 'Distortion', min: 0, max: 1, step: 0.01 }
                             ].map(({ key, label, min, max, step }) => (
-                                <div key={key}>
-                                    <div className="flex justify-between mb-1">
-                                        <label className="text-sm">{label}</label>
-                                        <span className="text-sm font-mono bg-zinc-800 px-2 py-0.5 rounded">
+                                <div key={key} className="group hover:bg-zinc-800/20 p-2 rounded-lg transition-colors">
+                                    <div className="flex justify-between mb-2">
+                                        <label className="text-xs font-medium text-zinc-400 group-hover:text-zinc-200 transition-colors">{label}</label>
+                                        <span className="text-xs font-mono bg-black/50 px-2 py-1 rounded-md border border-zinc-700/50 text-red-400">
                                             {typeof params[key as keyof typeof params] === 'number'
                                                 ? (params[key as keyof typeof params] as number).toFixed(
                                                     step < 1 ? step.toString().split('.')[1]?.length || 2 : 0
@@ -315,6 +323,7 @@ export default function WarpBackgroundTester() {
                                     />
                                 </div>
                             ))}
+                            </div>
                         </div>
 
                         {/* Action Buttons */}
@@ -322,13 +331,13 @@ export default function WarpBackgroundTester() {
                             <div className="flex gap-3">
                                 <button
                                     onClick={copyConfig}
-                                    className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition font-medium"
+                                    className="flex-1 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-3 px-4 rounded-xl transition-all font-semibold shadow-lg hover:shadow-red-500/25 transform hover:-translate-y-0.5"
                                 >
                                     {copied ? '✓ Copied!' : 'Copy Config'}
                                 </button>
                                 <button
                                     onClick={resetToDefaults}
-                                    className="flex-1 bg-zinc-700 hover:bg-zinc-600 text-white py-2 px-4 rounded-lg transition font-medium"
+                                    className="flex-1 bg-gradient-to-r from-zinc-700 to-zinc-800 hover:from-zinc-600 hover:to-zinc-700 text-white py-3 px-4 rounded-xl transition-all font-semibold shadow-lg hover:shadow-zinc-500/25 transform hover:-translate-y-0.5"
                                 >
                                     Reset
                                 </button>
@@ -398,11 +407,13 @@ export default function WarpBackgroundTester() {
             </div>
 
             {/* Right Panel - Warp Animation (Flexible width) */}
-            <div className="flex-1 relative bg-black" style={{
+            <div className="flex-1 flex-grow relative bg-black h-screen" style={{
                 position: 'relative',
                 zIndex: 1,
                 backgroundColor: '#000000',
-                minHeight: '100vh'
+                minHeight: '100vh',
+                flexGrow: 1,
+                width: 'calc(100% - 450px)'
             }}>
                 {/* Warp Background */}
                 {warpStatus === 'loading' && <WarpLoader />}
