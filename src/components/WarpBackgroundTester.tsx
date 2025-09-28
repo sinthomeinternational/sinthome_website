@@ -64,17 +64,17 @@ export default function WarpBackgroundTester() {
 
     const [params, setParams] = useState({
         color1: '#000000',
-        color2: '#5a0000',
-        color3: '#ff0000',
-        speed: 0.9,
+        color2: '#940000',
+        color3: '#000000',
+        speed: 0.2,
         swirl: 0.98,
-        swirlIterations: 25,
-        shapeScale: 0.12,
-        rotation: 0.85,
-        scale: 1.0,
+        swirlIterations: 29,
+        shapeScale: 0.04,
+        rotation: 0.55,
+        scale: 0.4,
         proportion: 1.0,
-        softness: 0.5,
-        distortion: 0.5
+        softness: 0,
+        distortion: 0
     });
 
     // Check WebGL support
@@ -190,17 +190,17 @@ export default function WarpBackgroundTester() {
     const resetToDefaults = () => {
         setParams({
             color1: '#000000',
-            color2: '#5a0000',
-            color3: '#ff0000',
-            speed: 0.9,
+            color2: '#940000',
+            color3: '#000000',
+            speed: 0.2,
             swirl: 0.98,
-            swirlIterations: 25,
-            shapeScale: 0.12,
-            rotation: 0.85,
-            scale: 1.0,
+            swirlIterations: 29,
+            shapeScale: 0.04,
+            rotation: 0.55,
+            scale: 0.4,
             proportion: 1.0,
-            softness: 0.5,
-            distortion: 0.5
+            softness: 0,
+            distortion: 0
         });
     };
 
