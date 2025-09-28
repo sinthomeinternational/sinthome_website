@@ -208,75 +208,79 @@ export default function WarpBackgroundTester() {
         <div className="relative min-h-screen bg-black text-white flex flex-row" style={{ backgroundColor: '#000000', color: 'white', display: 'flex', flexDirection: 'row' }}>
             {/* Left Panel - Controls (Fixed width, scrollable) */}
             <div
-                className="w-[450px] min-w-[450px] flex-shrink-0 h-screen overflow-y-auto bg-gradient-to-br from-zinc-900 to-black border-r border-zinc-700/50"
+                className="w-[420px] min-w-[420px] flex-shrink-0 h-screen overflow-y-auto bg-zinc-950 border-r border-zinc-800"
                 style={{
                     position: 'relative',
                     zIndex: 10,
-                    backgroundColor: 'rgba(0, 0, 0, 0.95)',
+                    backgroundColor: 'rgb(9, 9, 11)',
                     color: 'white',
-                    borderRightColor: 'rgba(63, 63, 70, 0.5)',
-                    backdropFilter: 'blur(10px)'
+                    borderRightColor: 'rgb(39, 39, 42)'
                 }}>
-                <div className="p-8">
-                    <h1 className="text-3xl font-bold mb-8 bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
-                        Warp Background Tester
-                    </h1>
+                <div className="p-6">
+                    <div className="mb-8">
+                        <h1 className="text-2xl font-light text-white mb-2">
+                            Warp Background Tester
+                        </h1>
+                        <div className="h-0.5 bg-gradient-to-r from-red-600 to-transparent"></div>
+                    </div>
 
                     {/* Status Indicator */}
-                    <div className={`mb-4 text-center py-2 px-3 rounded text-sm font-medium ${
-                        warpStatus === 'loaded' ? 'bg-green-900/30 text-green-400' :
-                        warpStatus === 'error' ? 'bg-red-900/30 text-red-400' :
-                        warpStatus === 'fallback' ? 'bg-yellow-900/30 text-yellow-400' :
-                        'bg-blue-900/30 text-blue-400'
-                    }`}>
-                        Status: {warpStatus.toUpperCase()}
-                        {debugMode && ` | Renders: ${renderCount}`}
+                    <div className="mb-6 flex items-center gap-2 text-xs">
+                        <div className={`w-2 h-2 rounded-full ${
+                            warpStatus === 'loaded' ? 'bg-green-500' :
+                            warpStatus === 'error' ? 'bg-red-500' :
+                            warpStatus === 'fallback' ? 'bg-yellow-500' :
+                            'bg-blue-500'
+                        } animate-pulse`}></div>
+                        <span className="text-zinc-400 uppercase tracking-wider">
+                            Status: <span className="text-zinc-300 font-medium">{warpStatus}</span>
+                        </span>
+                        {debugMode && <span className="text-zinc-500">| Renders: {renderCount}</span>}
                     </div>
 
                     <div className="space-y-6">
                         {/* Color Controls */}
-                        <div className="space-y-3 p-5 bg-gradient-to-r from-zinc-800/20 to-zinc-900/20 rounded-xl border border-zinc-700/30 backdrop-blur-sm">
-                            <h2 className="text-sm font-bold text-zinc-200 uppercase tracking-wider flex items-center gap-2">
-                                <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                        <div>
+                            <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">
                                 Colors
                             </h2>
 
                             <div className="space-y-3">
-                                <div className="flex items-center gap-3 group hover:bg-zinc-800/20 p-2 rounded-lg transition-colors">
-                                    <label className="w-20 text-xs font-medium text-zinc-400">Color 1:</label>
+                                <div className="flex items-center gap-3">
+                                    <label className="w-16 text-xs text-zinc-500">Color 1</label>
                                     <input
                                         type="color"
                                         value={params.color1}
                                         onChange={(e) => updateParam('color1', e.target.value)}
-                                        className="w-16 h-8 rounded border-2 border-zinc-700 hover:border-red-500 cursor-pointer transition-colors"
+                                        className="w-10 h-8 rounded border border-zinc-700 cursor-pointer"
                                     />
-                                    <span className="text-xs font-mono bg-black/50 px-3 py-1.5 rounded-md border border-zinc-700/50">
+                                    <span className="text-xs font-mono text-zinc-400">
                                         {params.color1}
                                     </span>
                                 </div>
 
-                                <div className="flex items-center gap-3 group hover:bg-zinc-800/20 p-2 rounded-lg transition-colors">
-                                    <label className="w-20 text-xs font-medium text-zinc-400">Color 2:</label>
+                                <div className="flex items-center gap-3">
+                                    <label className="w-16 text-xs text-zinc-500">Color 2</label>
                                     <input
                                         type="color"
                                         value={params.color2}
                                         onChange={(e) => updateParam('color2', e.target.value)}
-                                        className="w-16 h-8 rounded border-2 border-zinc-700 hover:border-red-500 cursor-pointer transition-colors"
+                                        className="w-10 h-8 rounded border border-zinc-700 cursor-pointer"
                                     />
-                                    <span className="text-xs font-mono bg-black/50 px-3 py-1.5 rounded-md border border-zinc-700/50">
+                                    <span className="text-xs font-mono text-zinc-400">
                                         {params.color2}
                                     </span>
                                 </div>
 
-                                <div className="flex items-center gap-3 group hover:bg-zinc-800/20 p-2 rounded-lg transition-colors">
-                                    <label className="w-20 text-xs font-medium text-zinc-400">Color 3:</label>
+                                <div className="flex items-center gap-3">
+                                    <label className="w-16 text-xs text-zinc-500">Color 3</label>
                                     <input
                                         type="color"
                                         value={params.color3}
                                         onChange={(e) => updateParam('color3', e.target.value)}
-                                        className="w-16 h-8 rounded border-2 border-zinc-700 hover:border-red-500 cursor-pointer transition-colors"
+                                        className="w-10 h-8 rounded border border-zinc-700 cursor-pointer"
                                     />
-                                    <span className="text-xs font-mono bg-black/50 px-3 py-1.5 rounded-md border border-zinc-700/50">
+                                    <span className="text-xs font-mono text-zinc-400">
                                         {params.color3}
                                     </span>
                                 </div>
@@ -284,12 +288,11 @@ export default function WarpBackgroundTester() {
                         </div>
 
                         {/* Parameter Controls */}
-                        <div className="p-5 bg-gradient-to-r from-zinc-800/20 to-zinc-900/20 rounded-xl border border-zinc-700/30 backdrop-blur-sm">
-                            <h2 className="text-sm font-bold text-zinc-200 uppercase tracking-wider flex items-center gap-2 mb-4">
-                                <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+                        <div>
+                            <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">
                                 Parameters
                             </h2>
-                            <div className="space-y-4">
+                            <div className="space-y-3">
 
                             {[
                                 { key: 'speed', label: 'Speed', min: 0, max: 2, step: 0.05 },
@@ -301,10 +304,10 @@ export default function WarpBackgroundTester() {
                                 { key: 'softness', label: 'Softness', min: 0, max: 1, step: 0.01 },
                                 { key: 'distortion', label: 'Distortion', min: 0, max: 1, step: 0.01 }
                             ].map(({ key, label, min, max, step }) => (
-                                <div key={key} className="group hover:bg-zinc-800/20 p-2 rounded-lg transition-colors">
-                                    <div className="flex justify-between mb-2">
-                                        <label className="text-xs font-medium text-zinc-400 group-hover:text-zinc-200 transition-colors">{label}</label>
-                                        <span className="text-xs font-mono bg-black/50 px-2 py-1 rounded-md border border-zinc-700/50 text-red-400">
+                                <div key={key}>
+                                    <div className="flex justify-between mb-1">
+                                        <label className="text-xs text-zinc-500">{label}</label>
+                                        <span className="text-xs font-mono text-zinc-400">
                                             {typeof params[key as keyof typeof params] === 'number'
                                                 ? (params[key as keyof typeof params] as number).toFixed(
                                                     step < 1 ? step.toString().split('.')[1]?.length || 2 : 0
@@ -327,28 +330,28 @@ export default function WarpBackgroundTester() {
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="space-y-3 pt-4">
-                            <div className="flex gap-3">
+                        <div className="space-y-3 pt-4 border-t border-zinc-800">
+                            <div className="flex gap-2">
                                 <button
                                     onClick={copyConfig}
-                                    className="flex-1 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-3 px-4 rounded-xl transition-all font-semibold shadow-lg hover:shadow-red-500/25 transform hover:-translate-y-0.5"
+                                    className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white py-2 px-3 rounded text-xs font-medium transition-colors"
                                 >
-                                    {copied ? '✓ Copied!' : 'Copy Config'}
+                                    {copied ? '✓ Copied' : 'Copy Config'}
                                 </button>
                                 <button
                                     onClick={resetToDefaults}
-                                    className="flex-1 bg-gradient-to-r from-zinc-700 to-zinc-800 hover:from-zinc-600 hover:to-zinc-700 text-white py-3 px-4 rounded-xl transition-all font-semibold shadow-lg hover:shadow-zinc-500/25 transform hover:-translate-y-0.5"
+                                    className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white py-2 px-3 rounded text-xs font-medium transition-colors"
                                 >
                                     Reset
                                 </button>
                             </div>
 
                             {/* Debug Controls */}
-                            <div className="flex gap-2 text-sm flex-wrap">
+                            <div className="flex gap-2">
                                 <button
                                     onClick={() => setDebugMode(!debugMode)}
-                                    className={`px-3 py-1 rounded transition ${
-                                        debugMode ? 'bg-green-600/20 text-green-400' : 'bg-zinc-700 text-zinc-300'
+                                    className={`px-3 py-1.5 rounded text-xs transition-colors ${
+                                        debugMode ? 'bg-green-900/30 text-green-400' : 'bg-zinc-800 text-zinc-400'
                                     }`}
                                 >
                                     Debug {debugMode ? 'On' : 'Off'}
@@ -387,9 +390,9 @@ export default function WarpBackgroundTester() {
                         )}
 
                         {/* Config Display */}
-                        <div className="mt-4 p-3 bg-zinc-800/50 rounded-lg">
-                            <h3 className="text-sm font-semibold mb-2 text-zinc-400">Configuration:</h3>
-                            <pre className="text-xs overflow-x-auto text-zinc-300">
+                        <div className="mt-6 pt-4 border-t border-zinc-800">
+                            <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">Configuration</h3>
+                            <pre className="bg-black/30 border border-zinc-800 p-3 rounded text-xs overflow-x-auto text-zinc-500 font-mono">
 {`<Warp
   color1="${params.color1}"
   color2="${params.color2}"
@@ -413,7 +416,7 @@ export default function WarpBackgroundTester() {
                 backgroundColor: '#000000',
                 minHeight: '100vh',
                 flexGrow: 1,
-                width: 'calc(100% - 450px)'
+                width: 'calc(100% - 420px)'
             }}>
                 {/* Warp Background */}
                 {warpStatus === 'loading' && <WarpLoader />}
