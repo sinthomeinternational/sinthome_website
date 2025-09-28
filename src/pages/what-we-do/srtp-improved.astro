@@ -1,0 +1,656 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import H1 from "../../components/ui/H1.astro";
+import { Image } from 'astro:assets';
+
+// Import event images
+import nezhaPoster from "../../assets/srtp/nezha-poster.jpg";
+import nezhaEvent from "../../assets/srtp/nezha-event.png";
+import dialecticsPoster from "../../assets/srtp/dialectics-poster.png";
+import dialecticsEvent from "../../assets/srtp/dialectics-event.png";
+import deleuzePoster from "../../assets/srtp/deleuze-poster.png";
+import deleuzeEvent from "../../assets/srtp/deleuze-event.png";
+---
+
+<PageLayout title="S.R.T.P. - Sinthome" useContentLayout={true}>
+    <!-- Enhanced Title Structure -->
+    <div class="text-center mb-12">
+      <h1 class="text-6xl font-bold text-white mb-4 tracking-wider">S.R.T.P.</h1>
+      <h2 class="text-2xl text-red-400 font-medium tracking-wide">Sinthome Revolutionary Theoretical Practice</h2>
+      <div class="w-32 h-1 bg-gradient-to-r from-red-600 to-red-800 mx-auto mt-6"></div>
+    </div>
+
+    <!-- Quick Navigation -->
+    <nav class="sticky top-20 z-40 bg-zinc-900/95 backdrop-blur-sm border-y border-zinc-800 -mx-4 sm:-mx-6 lg:-mx-8 mb-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-center space-x-8 py-4">
+          <a href="#activities" class="text-zinc-400 hover:text-red-400 transition-colors text-sm font-medium">Activities</a>
+          <span class="text-zinc-600">•</span>
+          <a href="#past-events" class="text-zinc-400 hover:text-red-400 transition-colors text-sm font-medium">Past Events</a>
+          <span class="text-zinc-600">•</span>
+          <a href="#faq" class="text-zinc-400 hover:text-red-400 transition-colors text-sm font-medium">FAQ</a>
+          <span class="text-zinc-600">•</span>
+          <a href="#join" class="text-zinc-400 hover:text-red-400 transition-colors text-sm font-medium">Join Us</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="space-y-16">
+      <!-- Activities Section -->
+      <section id="activities">
+        <h2 class="text-3xl font-bold text-white mb-10 text-center">Activities</h2>
+
+        <!-- Enhanced Activities Card -->
+        <div class="relative group">
+          <!-- Background glow effect -->
+          <div class="absolute -inset-1 bg-gradient-to-r from-red-900/20 via-red-800/10 to-red-900/20 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
+
+          <!-- Main card -->
+          <div class="relative bg-gradient-to-br from-zinc-900/90 to-zinc-800/70 border border-zinc-700/50 rounded-xl p-8 backdrop-blur-sm">
+            <!-- Card header with icon -->
+            <div class="flex items-center mb-6">
+              <div class="w-3 h-3 bg-red-500 rounded-full mr-4"></div>
+              <h3 class="text-2xl font-semibold text-red-400">Lectures & Seminars in Boston</h3>
+            </div>
+
+            <!-- Schedule highlight -->
+            <div class="bg-zinc-800/60 border border-zinc-600/50 rounded-lg p-4 mb-8">
+              <div class="flex items-center">
+                <span class="text-red-400 font-bold text-lg mr-3">📅</span>
+                <span class="text-zinc-200 font-semibold text-xl">Every Saturday</span>
+              </div>
+              <p class="text-zinc-400 text-sm mt-1 ml-8">In-person gatherings for collective theoretical engagement</p>
+            </div>
+
+            <!-- Activities list -->
+            <div class="space-y-6 mb-8">
+              <p class="text-zinc-300 text-lg leading-8">
+                We come together for a series of in-person seminars featuring:
+              </p>
+
+              <div class="grid gap-4">
+                <div class="flex items-start group/item">
+                  <div class="w-2 h-2 bg-red-500 rounded-full mr-4 mt-3 group-hover/item:bg-red-400 transition-colors"></div>
+                  <div>
+                    <h4 class="text-zinc-200 font-medium mb-1">Philosophical Lectures</h4>
+                    <p class="text-zinc-400">Deep dives into philosophy, political economy, and related disciplines</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start group/item">
+                  <div class="w-2 h-2 bg-red-500 rounded-full mr-4 mt-3 group-hover/item:bg-red-400 transition-colors"></div>
+                  <div>
+                    <h4 class="text-zinc-200 font-medium mb-1">Textual Analysis</h4>
+                    <p class="text-zinc-400">Close readings of foundational theoretical texts</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start group/item">
+                  <div class="w-2 h-2 bg-red-500 rounded-full mr-4 mt-3 group-hover/item:bg-red-400 transition-colors"></div>
+                  <div>
+                    <h4 class="text-zinc-200 font-medium mb-1">Praxis Reflection</h4>
+                    <p class="text-zinc-400">Collective discussion on issues emerging from our practices</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mission statement -->
+            <div class="border-l-4 border-red-600/50 pl-6 py-4 bg-gradient-to-r from-zinc-800/30 to-transparent rounded-r-lg">
+              <p class="text-zinc-300 text-lg leading-8">
+                These gatherings aim to equip community members with a solid grounding in leftist theory, help build theoretical consensus, and cultivate new critical insights. Through this process, we seek to maintain a <span class="text-red-300 font-medium">dynamic and reciprocal relationship between theory and practice</span>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Past Events Section - Improved -->
+      <section id="past-events">
+        <h2 class="text-3xl font-bold text-white mb-4 text-center">Past Events</h2>
+        <p class="text-zinc-400 text-center mb-10 max-w-3xl mx-auto">
+          Explore our archive of lectures and seminars. Click on any event to expand for full details, recordings, and reading materials.
+        </p>
+
+        <!-- Event Summary Grid -->
+        <div class="grid md:grid-cols-3 gap-4 mb-12">
+          <a href="#event-nezha" class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 hover:border-red-600/50 transition-all group">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-red-400 font-bold">1</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white group-hover:text-red-400 transition-colors">The Suffering Body</h4>
+                <p class="text-xs text-zinc-500 mt-1">Nov 2024 • Philosophy</p>
+                <p class="text-xs text-zinc-400 mt-2">Merleau-Ponty, Nezha, Ethics</p>
+              </div>
+            </div>
+          </a>
+
+          <a href="#event-dialectics" class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 hover:border-red-600/50 transition-all group">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-red-400 font-bold">2</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white group-hover:text-red-400 transition-colors">Dialectical Materialism</h4>
+                <p class="text-xs text-zinc-500 mt-1">Oct 2024 • Reading Seminar</p>
+                <p class="text-xs text-zinc-400 mt-2">Marx, Hegel, Revolutionary Theory</p>
+              </div>
+            </div>
+          </a>
+
+          <a href="#event-deleuze" class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 hover:border-red-600/50 transition-all group">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-red-400 font-bold">3</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white group-hover:text-red-400 transition-colors">Space & Control</h4>
+                <p class="text-xs text-zinc-500 mt-1">Sep 2024 • Seminar</p>
+                <p class="text-xs text-zinc-400 mt-2">Deleuze, Lefebvre, Late Capitalism</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="space-y-8">
+          <!-- Event 1: The Suffering Body - Enhanced -->
+          <div id="event-nezha" class="scroll-mt-24">
+            <details class="group">
+              <summary class="cursor-pointer bg-gradient-to-br from-zinc-900/90 to-zinc-800/70 border border-zinc-700 rounded-lg p-6 hover:border-red-600/50 transition-all">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <!-- Event Metadata Bar -->
+                    <div class="flex flex-wrap gap-3 mb-3">
+                      <span class="inline-flex items-center px-2 py-1 bg-red-600/20 text-red-400 text-xs font-medium rounded">
+                        Philosophy Lecture
+                      </span>
+                      <span class="inline-flex items-center px-2 py-1 bg-zinc-800 text-zinc-400 text-xs rounded">
+                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        November 2024
+                      </span>
+                      <span class="inline-flex items-center px-2 py-1 bg-zinc-800 text-zinc-400 text-xs rounded">
+                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        Recording Available
+                      </span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white mb-2 group-open:text-red-400 transition-colors">
+                      The Suffering Body: From Merleau-Ponty to Nezha
+                    </h3>
+
+                    <!-- Abstract -->
+                    <p class="text-zinc-300 italic leading-relaxed">
+                      "Amid the contradictions in history and the 'debts' of the body, a new body and self emerge through the practice of justice."
+                    </p>
+                    <p class="text-zinc-500 text-sm mt-1">
+                      在历史的矛盾与身体的"债务"中，通过实践正义，重塑自我，生成全新的身体。
+                    </p>
+                  </div>
+
+                  <!-- Expand/Collapse Indicator -->
+                  <div class="ml-4">
+                    <svg class="w-6 h-6 text-zinc-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                  </div>
+                </div>
+              </summary>
+
+              <!-- Expanded Content -->
+              <div class="mt-6 space-y-6 animate-in slide-in-from-top-2">
+                <!-- Event Images -->
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div class="relative group">
+                    <Image src={nezhaPoster} alt="Nezha Event Poster" class="w-full rounded-lg" />
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span class="text-white text-sm font-medium">Event Poster</span>
+                    </div>
+                  </div>
+                  <div class="relative group">
+                    <Image src={nezhaEvent} alt="Nezha Event Photo" class="w-full rounded-lg" />
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span class="text-white text-sm font-medium">Event Photo</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Recording Link -->
+                <div class="flex items-center gap-4">
+                  <a href="https://www.bilibili.com/video/BV1Pj7kzWEPJ/" target="_blank" rel="noopener noreferrer"
+                     class="inline-flex items-center px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 transition">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/>
+                    </svg>
+                    Watch on Bilibili
+                  </a>
+                </div>
+
+                <!-- Full Description -->
+                <div class="bg-zinc-900/30 rounded-lg p-6 space-y-4">
+                  <h4 class="text-lg font-semibold text-white mb-4">Lecture Overview</h4>
+
+                  <div class="space-y-4 text-zinc-300 leading-relaxed">
+                    <p>
+                      When we talk about ethics, we often begin from the outside: duty, command, the face of the other. But this lecture begins elsewhere—with the suffering body.
+                    </p>
+
+                    <div class="border-l-4 border-red-600/30 pl-4 my-4">
+                      <p class="text-zinc-200 italic">
+                        "In Merleau-Ponty's phenomenology, the body is the stylist of our access to the world, the site where meaning sediments and the self comes into being."
+                      </p>
+                    </div>
+
+                    <p>
+                      Yet when suffering arrives, all of this is shattered: the body no longer organizes perception but becomes the fissure where perception collapses; the world is no longer inhabitable, and the body is no longer "me." In this rupture, ethics first appears—not as norm, duty, or response, but as the most urgent practical question: how can I, in the place of the unbearable, construct for myself a "body that can exist"?
+                    </p>
+
+                    <h5 class="text-white font-semibold mt-6 mb-2">The Story of Nezha</h5>
+                    <p>
+                      Here we turn to the story of Nezha: he does not sacrifice himself, but denies the body shaped by fate and bloodline, and in the fissure remakes a new body out of lotus flowers. He responds to "that which cannot be responded to" not with obedience, but with action—opening up a "revolutionary bodily ethics." Not repair, not compassion, but practice, creation, the reconstruction of form.
+                    </p>
+
+                    <h5 class="text-white font-semibold mt-6 mb-2">Contemporary Relevance</h5>
+                    <p>
+                      This is precisely the problem faced by communities today: we each carry pain, anxiety, the weight of identity and history. But can we, like Nezha, do more than endure these ruptures? Can we, in the fissures of body and life, use action to remake a new shared form?
+                    </p>
+
+                    <p class="text-zinc-400 italic mt-6">
+                      The lecture unfolds around the triadic structure of suffering—body—form, and invites us to reflect together: ethics is not just an idea; it may be the most urgent way of living for us today.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <!-- Event 2: Dialectical Materialism - Enhanced -->
+          <div id="event-dialectics" class="scroll-mt-24">
+            <details class="group">
+              <summary class="cursor-pointer bg-gradient-to-br from-zinc-900/90 to-zinc-800/70 border border-zinc-700 rounded-lg p-6 hover:border-red-600/50 transition-all">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <!-- Event Metadata Bar -->
+                    <div class="flex flex-wrap gap-3 mb-3">
+                      <span class="inline-flex items-center px-2 py-1 bg-red-600/20 text-red-400 text-xs font-medium rounded">
+                        Reading Seminar
+                      </span>
+                      <span class="inline-flex items-center px-2 py-1 bg-zinc-800 text-zinc-400 text-xs rounded">
+                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        October 2024
+                      </span>
+                      <span class="inline-flex items-center px-2 py-1 bg-zinc-800 text-zinc-400 text-xs rounded">
+                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        Recording Available
+                      </span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white mb-2 group-open:text-red-400 transition-colors">
+                      Dialectics: What is Marx's Dialectical Materialism?
+                    </h3>
+
+                    <!-- Abstract -->
+                    <p class="text-zinc-300 italic leading-relaxed">
+                      "If there is such a thing as a revolutionary theory, then it is dialectical materialism."
+                    </p>
+                    <p class="text-zinc-500 text-sm mt-1">
+                      如果有一种革命性理论，那么它是辩证唯物主义。
+                    </p>
+                  </div>
+
+                  <!-- Expand/Collapse Indicator -->
+                  <div class="ml-4">
+                    <svg class="w-6 h-6 text-zinc-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                  </div>
+                </div>
+              </summary>
+
+              <!-- Expanded Content -->
+              <div class="mt-6 space-y-6 animate-in slide-in-from-top-2">
+                <!-- Event Images -->
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div class="relative group">
+                    <Image src={dialecticsPoster} alt="Dialectics Event Poster" class="w-full rounded-lg" />
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span class="text-white text-sm font-medium">Event Poster</span>
+                    </div>
+                  </div>
+                  <div class="relative group">
+                    <Image src={dialecticsEvent} alt="Dialectics Event Photo" class="w-full rounded-lg" />
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span class="text-white text-sm font-medium">Event Photo</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Recording Link -->
+                <div class="flex items-center gap-4">
+                  <a href="https://www.bilibili.com/video/BV12ALvzwELV" target="_blank" rel="noopener noreferrer"
+                     class="inline-flex items-center px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 transition">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/>
+                    </svg>
+                    Watch on Bilibili
+                  </a>
+                </div>
+
+                <!-- Full Description -->
+                <div class="bg-zinc-900/30 rounded-lg p-6 space-y-4">
+                  <h4 class="text-lg font-semibold text-white mb-4">Seminar Overview</h4>
+
+                  <div class="space-y-4 text-zinc-300 leading-relaxed">
+                    <p>
+                      Theory always seems to concern what is already present, while the revolutionary points toward the future. How, then, can there be a revolutionary theory? The lecture answers: if there is one, it is dialectical materialism.
+                    </p>
+
+                    <h5 class="text-white font-semibold mt-6 mb-2">From Hegel to Marx</h5>
+                    <p>
+                      Although Marx himself never used this term, in Capital he explicitly declared the need to "invert" Hegel's dialectic and strip away its mystical shell. The lecture therefore begins with Hegel: his dialectic sought to bridge the gap between necessity and certainty, to reveal the mutual determination of form and content, thought and sensory experience, and through negation to arrive at new knowledge, ultimately culminating in "absolute knowledge."
+                    </p>
+
+                    <div class="border-l-4 border-red-600/30 pl-4 my-4">
+                      <p class="text-zinc-200 italic">
+                        "Marx's decisive turn lay in discarding Hegel's metaphysical presuppositions and examining every given phenomenon from the perspective of production and reproduction."
+                      </p>
+                    </div>
+
+                    <h5 class="text-white font-semibold mt-6 mb-2">Key Principles</h5>
+                    <p>
+                      Unlike Hegel, dialectical materialism does not search for an absolute starting point but begins from concrete phenomena and practices. No phenomenon is isolated; each is the result of multiple interacting processes, i.e. "overdetermined." Hence, what is given is not a static object but a relational whole, produced and reproduced in practice.
+                    </p>
+
+                    <p>
+                      In this view, thought itself is part of reality, operating within ideology and social relations. Crucially, dialectical materialism is not merely an epistemology or explanatory method, but a practice-oriented theory. In this sense, it constitutes the revolutionary methodology and intellectual weapon upon which Marxism rests.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <!-- Event 3: Deleuze and Lefebvre - Enhanced -->
+          <div id="event-deleuze" class="scroll-mt-24">
+            <details class="group">
+              <summary class="cursor-pointer bg-gradient-to-br from-zinc-900/90 to-zinc-800/70 border border-zinc-700 rounded-lg p-6 hover:border-red-600/50 transition-all">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <!-- Event Metadata Bar -->
+                    <div class="flex flex-wrap gap-3 mb-3">
+                      <span class="inline-flex items-center px-2 py-1 bg-red-600/20 text-red-400 text-xs font-medium rounded">
+                        Theory Seminar
+                      </span>
+                      <span class="inline-flex items-center px-2 py-1 bg-zinc-800 text-zinc-400 text-xs rounded">
+                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        September 2024
+                      </span>
+                      <span class="inline-flex items-center px-2 py-1 bg-zinc-800 text-zinc-400 text-xs rounded">
+                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        Recording Available
+                      </span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white mb-2 group-open:text-red-400 transition-colors">
+                      Deleuze and Lefebvre: Social Governance and the Production of Space
+                    </h3>
+
+                    <!-- Abstract -->
+                    <p class="text-zinc-300 italic leading-relaxed">
+                      "From disciplinary society to cybernetic governance—unpacking the apparatuses of late capitalism."
+                    </p>
+                    <p class="text-zinc-500 text-sm mt-1">
+                      德勒兹、列斐伏尔：社会管理和空间生产
+                    </p>
+                  </div>
+
+                  <!-- Expand/Collapse Indicator -->
+                  <div class="ml-4">
+                    <svg class="w-6 h-6 text-zinc-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                  </div>
+                </div>
+              </summary>
+
+              <!-- Expanded Content -->
+              <div class="mt-6 space-y-6 animate-in slide-in-from-top-2">
+                <!-- Event Images -->
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div class="relative group">
+                    <Image src={deleuzePoster} alt="Deleuze Event Poster" class="w-full rounded-lg" />
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span class="text-white text-sm font-medium">Event Poster</span>
+                    </div>
+                  </div>
+                  <div class="relative group">
+                    <Image src={deleuzeEvent} alt="Deleuze Event Photo" class="w-full rounded-lg" />
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span class="text-white text-sm font-medium">Event Photo</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Recording Link -->
+                <div class="flex items-center gap-4">
+                  <a href="https://www.bilibili.com/video/BV1kLVfzWECp/" target="_blank" rel="noopener noreferrer"
+                     class="inline-flex items-center px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 transition">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/>
+                    </svg>
+                    Watch on Bilibili
+                  </a>
+                </div>
+
+                <!-- Full Description -->
+                <div class="bg-zinc-900/30 rounded-lg p-6 space-y-4">
+                  <h4 class="text-lg font-semibold text-white mb-4">Seminar Overview</h4>
+
+                  <div class="space-y-4 text-zinc-300 leading-relaxed">
+                    <p>
+                      Imagine yourself on a speeding train. Outside the window, rows of factories, schools, and prisons stretch endlessly along the tracks. Within these institutions, people live atomized, homogenized lives. Just as you begin to question how this system operates, a voice over the intercom announces:
+                    </p>
+
+                    <div class="bg-zinc-800/50 border-l-4 border-red-600/30 rounded-r-lg p-4 my-4">
+                      <p class="text-zinc-200 italic">
+                        "Dear passengers, we have arrived at our current stop: the Disciplinary Society. The next and final destination of this train: Cybernetic Governance! Please prepare to disembark."
+                      </p>
+                    </div>
+
+                    <p>
+                      You wonder—why is this the final stop? Stepping off the train and looking back, you suddenly understand. Stamped boldly across the side of the train are five unmistakable characters: <span class="font-bold text-red-400">Late Capitalism</span>.
+                    </p>
+
+                    <p>
+                      This seminar invites you to join us in deconstructing late capitalism and its apparatuses of control. Together, we will examine how the spaces of our daily lives—and even our very bodies—are managed, governed, and shaped by the logic of late capitalist society.
+                    </p>
+                  </div>
+
+                  <!-- Reading List -->
+                  <div class="mt-8 space-y-4">
+                    <h4 class="text-lg font-semibold text-white">Reading List</h4>
+
+                    <div class="space-y-4">
+                      <div class="bg-zinc-800/30 rounded-lg p-4">
+                        <h5 class="font-semibold text-zinc-200 mb-2">The Emergence of the Control Society</h5>
+                        <ul class="space-y-1 text-zinc-400 text-sm">
+                          <li class="flex items-start">
+                            <span class="text-red-400 mr-2">•</span>
+                            Michel Foucault, <em>Discipline and Punish</em>
+                          </li>
+                          <li class="flex items-start">
+                            <span class="text-red-400 mr-2">•</span>
+                            Gilles Deleuze, <em>Postscript on the Societies of Control</em>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="bg-zinc-800/30 rounded-lg p-4">
+                        <h5 class="font-semibold text-zinc-200 mb-2">Biopolitics in Late Capitalism</h5>
+                        <ul class="space-y-1 text-zinc-400 text-sm">
+                          <li class="flex items-start">
+                            <span class="text-red-400 mr-2">•</span>
+                            Michel Foucault, <em>The Birth of Biopolitics</em>
+                          </li>
+                          <li class="flex items-start">
+                            <span class="text-red-400 mr-2">•</span>
+                            Antonio Negri & Michael Hardt, <em>Empire</em>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="bg-zinc-800/30 rounded-lg p-4">
+                        <h5 class="font-semibold text-zinc-200 mb-2">The Topology of Capitalist Space</h5>
+                        <ul class="space-y-1 text-zinc-400 text-sm">
+                          <li class="flex items-start">
+                            <span class="text-red-400 mr-2">•</span>
+                            Henri Lefebvre, <em>The Production of Space</em>
+                          </li>
+                          <li class="flex items-start">
+                            <span class="text-red-400 mr-2">•</span>
+                            David Harvey, <em>The Logic of the World</em>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq">
+        <h2 class="text-3xl font-bold text-white mb-10 text-center">Frequently Asked Questions</h2>
+
+        <div class="space-y-4 max-w-4xl mx-auto">
+          <!-- Q1 -->
+          <details class="group bg-zinc-900/30 border border-zinc-800 rounded-lg hover:border-red-600/50 transition-all">
+            <summary class="cursor-pointer p-6 flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-red-400">When are the lectures/seminars held?</h3>
+              <svg class="w-5 h-5 text-zinc-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 pt-0">
+              <p class="text-zinc-300 leading-relaxed">
+                Our in-person lectures/seminars in Boston take place in the spring (mid-January to mid-May) and fall (September to mid-December), every Saturday from 3:00–5:00 PM (EST).
+              </p>
+              <p class="text-zinc-300 leading-relaxed mt-3">
+                During the summer, we mainly host online lectures and in-person events in China. In the summer of 2025, for example, Sinthome organized lecture series such as The History of Leftist Organizations, History of Philosophy: Metaphysics, Parrhesia and Politics, and Lacan on Love, as well as in-person literature seminars in China.
+              </p>
+            </div>
+          </details>
+
+          <!-- Q2 -->
+          <details class="group bg-zinc-900/30 border border-zinc-800 rounded-lg hover:border-red-600/50 transition-all">
+            <summary class="cursor-pointer p-6 flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-red-400">Where are the in-person lectures in Boston held?</h3>
+              <svg class="w-5 h-5 text-zinc-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 pt-0">
+              <p class="text-zinc-300 leading-relaxed">
+                Address: 175 Washington St, Brighton, MA 02135.
+              </p>
+            </div>
+          </details>
+
+          <!-- Q3 -->
+          <details class="group bg-zinc-900/30 border border-zinc-800 rounded-lg hover:border-red-600/50 transition-all">
+            <summary class="cursor-pointer p-6 flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-red-400">Do I need to register in advance to attend?</h3>
+              <svg class="w-5 h-5 text-zinc-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 pt-0">
+              <p class="text-zinc-300 leading-relaxed">
+                No. You can simply come to the venue on the day of the lecture.
+              </p>
+            </div>
+          </details>
+
+          <!-- More FAQ items would continue in the same pattern... -->
+        </div>
+      </section>
+
+      <!-- Join Us Section -->
+      <section id="join" class="mt-16 p-8 bg-gradient-to-r from-red-600/10 to-red-700/10 rounded-xl border border-red-600/20">
+        <div class="text-center">
+          <h2 class="text-3xl font-bold text-white mb-4">Join Us</h2>
+          <p class="text-zinc-300 mb-6 max-w-2xl mx-auto">
+            Whether you're new to theoretical study or deeply engaged in leftist practice, S.R.T.P. welcomes all who seek to bridge theory and action.
+          </p>
+          <a
+            href="/contact"
+            class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-600/25"
+          >
+            Get Involved
+            <span class="ml-2">→</span>
+          </a>
+        </div>
+      </section>
+    </div>
+</PageLayout>
+
+<style>
+  /* Animation for collapsible content */
+  @keyframes slide-in-from-top {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-in {
+    animation: slide-in-from-top 0.3s ease-out;
+  }
+
+  .slide-in-from-top-2 {
+    --tw-enter-translate-y: -0.5rem;
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar for better aesthetics */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgb(24 24 27);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(63 63 70);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(82 82 91);
+  }
+</style>
