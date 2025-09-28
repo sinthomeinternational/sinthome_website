@@ -256,18 +256,18 @@ export default function WarpBackgroundTester() {
                                 Color Palette
                             </h2>
 
-                            {/* Enhanced color pickers with preview */}
-                            <div className="grid grid-cols-3 gap-2">
+                            {/* Enhanced color pickers with preview - all on one line */}
+                            <div className="flex items-center gap-3">
                                 {[
                                     { key: 'color1', label: 'C1', value: params.color1 },
                                     { key: 'color2', label: 'C2', value: params.color2 },
                                     { key: 'color3', label: 'C3', value: params.color3 }
                                 ].map(({ key, label, value }) => (
-                                    <div key={key} className="flex flex-col gap-1">
+                                    <div key={key} className="flex items-center gap-1.5">
                                         <label className="text-[10px] text-zinc-400 font-medium">{label}</label>
                                         <div className="relative group">
                                             <div
-                                                className="w-full h-8 rounded border border-zinc-700 cursor-pointer overflow-hidden hover:border-zinc-600 transition-colors"
+                                                className="w-12 h-6 rounded border border-zinc-700 cursor-pointer overflow-hidden hover:border-zinc-600 transition-colors"
                                                 style={{ backgroundColor: value }}
                                             >
                                                 <input
@@ -279,7 +279,7 @@ export default function WarpBackgroundTester() {
                                                 />
                                             </div>
                                         </div>
-                                        <span className="text-[9px] font-mono text-zinc-500 text-center">
+                                        <span className="text-[9px] font-mono text-zinc-500">
                                             {value.toUpperCase()}
                                         </span>
                                     </div>
