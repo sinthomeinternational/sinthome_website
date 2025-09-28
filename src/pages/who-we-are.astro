@@ -1,149 +1,89 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import H1 from "../components/ui/H1.astro";
+import { getTranslations, getCurrentLang } from "../lib/translations";
+
+// Get current language and translations
+const lang = getCurrentLang();
+const t = getTranslations(lang);
+const pageContent = t.pages.whoWeAre;
 ---
 
-<PageLayout title="Who We Are - Sinthome" useInfoLayout={true}>
-    <H1>Who We Are</H1>
+<PageLayout title={`${pageContent.title} - Sinthome`} useInfoLayout={true}>
+    <H1>{pageContent.title}</H1>
 
-    <div class="space-y-8 text-zinc-300 max-w-4xl">
-      <!-- Mission Section -->
-      <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Our Mission</h2>
-        <p class="leading-relaxed mb-4">
-          Founded on February 2, 2023, Sinthome is a public-interest community that reconstructs new relations of production through the integration of knowledge learning, theoretical critique, and social praxis (Knowledge—Critique—Praxis).
-        </p>
-        <p class="leading-relaxed">
-          We employ philosophy and psychoanalysis as tools of critique, turning academic knowledge into social practice. Sinthome is committed to creating opportunities for solidarity among all progressives, while advancing experiments and explorations at both economic and public-interest levels.
-        </p>
-      </section>
+    {pageContent.subtitle && (
+      <p class="text-xl text-gray-600 dark:text-zinc-400 mb-8 max-w-4xl">
+        {pageContent.subtitle}
+      </p>
+    )}
 
-      <!-- Current Practices Section -->
-      <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Our Current Practices</h2>
-        <p class="leading-relaxed mb-4">
-          At present, Sinthome's main practices include:
-        </p>
-        <ul class="space-y-3">
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Online and Offline Lectures:</strong> Educational programs bridging theoretical knowledge with practical application
-            </div>
-          </li>
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Public-Access Psychoanalysis:</strong> Making mental health support and psychoanalytic insights accessible to all
-            </div>
-          </li>
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Mutual Aid for Asian Migrant Workers:</strong> Direct solidarity and support for vulnerable communities
-            </div>
-          </li>
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Independent Fragrance Brand:</strong> Exploring alternative economic models through creative enterprise
-            </div>
-          </li>
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Industrial Vertical LLMs Research:</strong> Developing AI technologies for public good and specialized applications
-            </div>
-          </li>
-        </ul>
-      </section>
+    <div class="space-y-12 text-gray-700 dark:text-zinc-300 max-w-4xl">
+      {pageContent.sections?.map((section) => (
+        <section key={section.id}>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            {section.title}
+          </h2>
 
-      <!-- Values Section -->
-      <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Our Values</h2>
-        <ul class="space-y-3">
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Innovation:</strong> [Description of this value]
-            </div>
-          </li>
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Community:</strong> [Description of this value]
-            </div>
-          </li>
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Impact:</strong> [Description of this value]
-            </div>
-          </li>
-          <li class="flex items-start">
-            <span class="text-red-500 mr-2">•</span>
-            <div>
-              <strong class="text-white">Transparency:</strong> [Description of this value]
-            </div>
-          </li>
-        </ul>
-      </section>
+          {/* Handle content as string or array */}
+          {section.content && (
+            Array.isArray(section.content) ? (
+              section.content.map((paragraph, index) => (
+                <p key={index} class="leading-relaxed mb-4">
+                  {paragraph}
+                </p>
+              ))
+            ) : (
+              <p class="leading-relaxed mb-4">{section.content}</p>
+            )
+          )}
 
-      <!-- History Section -->
-      <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Our Story</h2>
-        <p class="leading-relaxed mb-4">
-          [Add your organization's founding story and history. When was it founded? By whom? What inspired its creation?]
-        </p>
-        <p class="leading-relaxed">
-          [Add key milestones and achievements throughout your history.]
-        </p>
-      </section>
+          {/* Handle items if present */}
+          {section.items && section.items.length > 0 && (
+            <div class="space-y-4 mt-4">
+              {section.items.map((item: any, index: number) => (
+                <div key={index} class="bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg p-6">
+                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    {item.name || item.title}
+                  </h3>
+                  <p class="text-gray-600 dark:text-zinc-400">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      ))}
 
-      <!-- Team Section -->
-      <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Our Team</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <!-- Team Member Card Example -->
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-white mb-2">[Name]</h3>
-            <p class="text-red-400 text-sm mb-3">[Title/Role]</p>
-            <p class="text-zinc-400 text-sm">
-              [Brief bio or description of role and expertise]
-            </p>
+      {/* Call to Action Section */}
+      {pageContent.callToAction && (
+        <section class="mt-12 p-8 bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg text-center">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            {pageContent.callToAction.title}
+          </h2>
+          <p class="text-gray-600 dark:text-zinc-300 mb-6">
+            {pageContent.callToAction.description}
+          </p>
+          <div class="flex flex-wrap gap-4 justify-center">
+            {pageContent.callToAction.buttons && (
+              <>
+                <a
+                  href="/donate"
+                  class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  {pageContent.callToAction.buttons.donate}
+                </a>
+                <a
+                  href="/contact"
+                  class="px-6 py-3 bg-gray-200 dark:bg-zinc-800 text-gray-900 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-zinc-700 transition-colors"
+                >
+                  {pageContent.callToAction.buttons.getInvolved}
+                </a>
+              </>
+            )}
           </div>
-
-          <!-- Add more team member cards as needed -->
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-white mb-2">[Name]</h3>
-            <p class="text-red-400 text-sm mb-3">[Title/Role]</p>
-            <p class="text-zinc-400 text-sm">
-              [Brief bio or description of role and expertise]
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Call to Action -->
-      <section class="mt-12 p-8 bg-zinc-900/50 border border-zinc-800 rounded-lg text-center">
-        <h2 class="text-2xl font-bold text-white mb-4">Join Our Mission</h2>
-        <p class="text-zinc-300 mb-6">
-          Be part of the change. There are many ways to get involved and support our cause.
-        </p>
-        <div class="flex flex-wrap gap-4 justify-center">
-          <a
-            href="/donate"
-            class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-          >
-            Donate
-          </a>
-          <a
-            href="/contact"
-            class="px-6 py-3 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-colors"
-          >
-            Get Involved
-          </a>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
 </PageLayout>

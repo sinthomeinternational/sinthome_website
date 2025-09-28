@@ -4,6 +4,7 @@
 
 export interface PageContent {
   title: string;
+  subtitle?: string;
   description?: string;
   hero?: {
     title: string;
@@ -38,14 +39,22 @@ export interface PageContent {
   labels?: {
     [key: string]: string;
   };
+  // For call to action sections
+  callToAction?: {
+    title: string;
+    description: string;
+    buttons?: {
+      [key: string]: string;
+    };
+  };
 }
 
 export interface ContentSection {
   id: string;
   title?: string;
   subtitle?: string;
-  content?: string;
-  items?: ContentItem[];
+  content?: string | string[];
+  items?: ContentItem[] | { name: string; description: string }[];
   type?: 'text' | 'grid' | 'list' | 'faq' | 'cta' | 'image' | 'form';
 }
 

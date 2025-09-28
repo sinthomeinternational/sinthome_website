@@ -115,19 +115,68 @@ export const enContent: SiteContent = {
     },
     whoWeAre: {
       title: 'Who We Are',
+      subtitle: 'A public-interest community that reconstructs new relations of production through the integration of knowledge learning, theoretical critique, and social praxis.',
       description: 'Learn about our mission, vision, and the team behind Sinthome',
       sections: [
         {
-          id: 'mission',
-          title: 'Our Mission',
-          content: 'We are dedicated to reconstructing new relations of production through the integration of knowledge learning, theoretical critique, and social praxis.',
+          id: 'history',
+          title: 'Our History',
+          content: [
+            'Founded on February 2, 2023, Sinthome is a public-interest community that reconstructs new relations of production through the integration of knowledge learning, theoretical critique, and social praxis (Knowledge—Critique—Praxis).',
+            'We employ philosophy and psychoanalysis as tools of critique, turning academic knowledge into social practice. Sinthome is committed to creating opportunities for solidarity among all progressives, while advancing experiments and explorations at both economic and public-interest levels.',
+          ],
         },
         {
-          id: 'vision',
-          title: 'Our Vision',
-          content: 'A world where technology and human values work together to create equitable and sustainable communities.',
+          id: 'platform',
+          title: 'Our Platform',
+          content: [
+            'Sinthome has evolved into an incubator-style public benefit platform that encourages members to apply critical theory to broader social domains, exploring new possibilities for production methods and social relations.',
+          ],
+        },
+        {
+          id: 'projects',
+          title: 'Current Practices',
+          items: [
+            {
+              name: 'Workers Assist',
+              description: 'A nonprofit organization established in Boston\'s Chinatown, focusing on community building and workers\' living conditions through mutual aid, education, and community activities.',
+            },
+            {
+              name: 'Online and Offline Lectures',
+              description: 'Educational programs bridging theoretical knowledge with practical application through S.R.T.P. (Sinthome Revolutionary Theoretical Practice).',
+            },
+            {
+              name: 'Public-Access Psychoanalysis',
+              description: 'Making mental health support and psychoanalytic insights accessible to all.',
+            },
+            {
+              name: 'Industrial Vertical LLMs Research',
+              description: 'Developing AI technologies for public good and specialized applications through PlantCore AI.',
+            },
+            {
+              name: 'Independent Fragrance Brand',
+              description: 'Exploring alternative economic models through creative enterprise with Idée Fixe.',
+            },
+          ],
+        },
+        {
+          id: 'philosophy',
+          title: 'Our Philosophy',
+          content: [
+            'These projects, while exploring different practical domains, all stem from S.R.T.P.\'s critical spirit and knowledge-practice methodology. They are not independent of each other, but together form an organic whole of Sinthome\'s knowledge-critique-practice.',
+            'Through combining theoretical critique and social practice, Sinthome is committed to rebuilding practical links between intellectuals and the working class, establishing experimental practice networks across multiple dimensions including labor, production, population reproduction, social relations, and knowledge production.',
+            'From its beginnings as a reading group, Sinthome\'s development embodies a process of starting from knowledge and nurturing multiple practical paths through theoretical learning and critique. Today, Sinthome is not only a center for knowledge learning and theoretical critique, but has also become an experimental public platform for exploring new production relations and reconstructing social practice.',
+          ],
         },
       ],
+      callToAction: {
+        title: 'Join Our Mission',
+        description: 'Be part of the change. There are many ways to get involved and support our cause.',
+        buttons: {
+          donate: 'Donate',
+          getInvolved: 'Get Involved',
+        },
+      },
     },
     whatWeDo: {
       title: 'What We Do',
