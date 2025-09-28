@@ -26,29 +26,29 @@ const getFullPath = (path: string) => {
         <h2 class="text-2xl font-bold text-white mb-6">Our Programs</h2>
         <div class="grid md:grid-cols-2 gap-6">
           <ProjectCard
-            title="AI Hackathon"
-            description="Annual event bringing together developers, designers, and innovators to create AI-powered solutions for social good. Participants work on real-world challenges with mentorship from industry experts."
+            title="Sinthome Hackathon"
+            description="Rooted in our experience running Workers Assist, we bring real-world challenges to AI practitioners and students, creating a space for mutual learning and developing practical solutions for social good."
             href="/what-we-do/ai-hackathon/"
             category="AI for Public Good"
           />
 
           <ProjectCard
             title="Workers Assist"
-            description="Supporting workers in transition with skills training, career counseling, and job placement assistance. We focus on emerging technologies and sustainable employment opportunities."
+            description="A nonprofit organization dedicated to fostering a mutual-support community for Asian labor workers in the Boston area."
             href="/what-we-do/workers-assist"
             category="Workers Assist"
           />
 
           <ProjectCard
             title="Plantcore AI"
-            description="Using artificial intelligence to revolutionize sustainable agriculture and environmental conservation. Our AI models help farmers optimize crop yields while minimizing environmental impact."
+            description="Building the first Industrial Vertical Large Language Model by deploying AI Agents that capture real-time Context-Decision-Outcome data from factory floors."
             href="/what-we-do/plantcore-ai"
             category="Factory AI Solution"
           />
 
           <ProjectCard
             title="S.R.T.P."
-            description="Student Research and Training Program connecting young minds with cutting-edge research opportunities. We provide mentorship, resources, and real-world project experience."
+            description="Interrogating praxis, until it unveils the future."
             href="/what-we-do/srtp"
             category="Public Lecture"
           />
@@ -60,132 +60,69 @@ const getFullPath = (path: string) => {
         <h2 class="text-3xl font-bold text-white mb-8">Building Collective Power</h2>
 
         <div class="space-y-8">
-          <!-- Introduction -->
+          <!-- Core Philosophy -->
           <div class="p-6 bg-zinc-900/30 border-l-4 border-red-600 rounded-r-lg">
             <p class="text-lg text-zinc-300 leading-relaxed">
-              Sinthome is not an organization that serves communities—we are a network of solidarity,
-              committed to transforming the conditions that create inequality and oppression. Our work
-              is a continuous process of collective liberation, where technology, labor, and knowledge
-              become tools for collective empowerment.
+              We don't measure impact through numbers, but through the strength of our solidarity networks.
+              Sinthome creates spaces where technology, labor, and knowledge become tools for collective
+              empowerment—not charity, but mutual aid in action.
             </p>
           </div>
 
-          <!-- Solidarity in Action -->
-          <div>
-            <h3 class="text-2xl font-semibold text-white mb-6">Solidarity in Action</h3>
-
-            <!-- Networks of Resistance -->
-            <div class="mb-8">
-              <h4 class="text-xl font-medium text-red-500 mb-3">Networks of Resistance</h4>
-              <p class="text-zinc-300 mb-4">
-                We don't measure impact through numbers, but through the strength of our connections.
-                Our programs create spaces where marginalized communities can build power, share knowledge,
-                and challenge systemic barriers.
+          <!-- Our Approach -->
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold text-red-500 mb-4">From the Ground Up</h3>
+              <p class="text-zinc-300">
+                Our work emerges from lived experience. Workers Assist began from the real struggles
+                of Asian labor workers in Boston. The Sinthome Hackathon brings these challenges
+                directly to technologists. We don't theorize about change—we build it together.
               </p>
             </div>
 
-            <!-- Testimonials Grid -->
-            <div class="grid md:grid-cols-2 gap-6 mb-8">
-              <!-- Tech Workers Coalition -->
-              <blockquote class="p-6 bg-zinc-900/50 border border-zinc-800 rounded-lg">
-                <p class="text-zinc-300 italic mb-4">
-                  "Sinthome isn't just supporting our struggle—they're creating infrastructures of
-                  mutual care that make our organizing possible."
-                </p>
-                <cite class="text-sm text-red-400 not-italic">
-                  — Maria Gonzalez, Tech Workers Coalition
-                </cite>
-              </blockquote>
-
-              <!-- Community Technology Collective -->
-              <blockquote class="p-6 bg-zinc-900/50 border border-zinc-800 rounded-lg">
-                <p class="text-zinc-300 italic mb-4">
-                  "This isn't about learning to code. It's about reclaiming technology as a tool
-                  of collective liberation."
-                </p>
-                <cite class="text-sm text-red-400 not-italic">
-                  — Alex Chen, Community Technology Collective
-                </cite>
-              </blockquote>
-
-              <!-- Warehouse Workers United -->
-              <blockquote class="p-6 bg-zinc-900/50 border border-zinc-800 rounded-lg">
-                <p class="text-zinc-300 italic mb-4">
-                  "Our power isn't in individual achievements, but in our ability to stand together
-                  and reimagine work itself."
-                </p>
-                <cite class="text-sm text-red-400 not-italic">
-                  — Roberto Martinez, Warehouse Workers United
-                </cite>
-              </blockquote>
-
-              <!-- Indigenous Environmental Network -->
-              <blockquote class="p-6 bg-zinc-900/50 border border-zinc-800 rounded-lg">
-                <p class="text-zinc-300 italic mb-4">
-                  "Technology isn't neutral. With Plantcore, we're showing how tech can be a tool
-                  for ecological solidarity."
-                </p>
-                <cite class="text-sm text-red-400 not-italic">
-                  — Dr. Aisha Williams, Indigenous Environmental Network
-                </cite>
-              </blockquote>
-            </div>
-
-            <!-- Program Principles -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              <div class="p-4 bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-lg">
-                <h5 class="font-semibold text-red-400 mb-2">Democratizing Technology</h5>
-                <p class="text-sm text-zinc-400">
-                  AI Hackathon creates collaborative spaces where innovation emerges from collective needs
-                </p>
-              </div>
-
-              <div class="p-4 bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-lg">
-                <h5 class="font-semibold text-red-400 mb-2">Reimagining Labor</h5>
-                <p class="text-sm text-zinc-400">
-                  Workers Assist builds networks where workers organize and challenge exploitative systems
-                </p>
-              </div>
-
-              <div class="p-4 bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-lg">
-                <h5 class="font-semibold text-red-400 mb-2">Ecological Commons</h5>
-                <p class="text-sm text-zinc-400">
-                  Plantcore AI develops technological commons for community-led environmental protection
-                </p>
-              </div>
-
-              <div class="p-4 bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-lg">
-                <h5 class="font-semibold text-red-400 mb-2">Liberating Knowledge</h5>
-                <p class="text-sm text-zinc-400">
-                  S.R.T.P. creates pathways for knowledge production outside institutional boundaries
-                </p>
-              </div>
-            </div>
-
-            <!-- Final Testimonial -->
-            <blockquote class="p-6 bg-zinc-900/50 border border-zinc-800 rounded-lg max-w-3xl mx-auto">
-              <p class="text-zinc-300 italic mb-4">
-                "Academic knowledge should belong to everyone. We're breaking down the walls that
-                keep learning locked away."
+            <div>
+              <h3 class="text-xl font-semibold text-red-500 mb-4">Technology as Liberation</h3>
+              <p class="text-zinc-300">
+                From factory floors to community centers, we deploy technology that serves collective
+                needs, not corporate profits. Plantcore AI captures worker knowledge. S.R.T.P.
+                interrogates praxis to unveil futures beyond capitalism.
               </p>
-              <cite class="text-sm text-red-400 not-italic">
-                — Jamal Thompson, Community Scholar Collective
-              </cite>
-            </blockquote>
+            </div>
+          </div>
+
+          <!-- Program Principles -->
+          <div class="mt-8">
+            <h3 class="text-xl font-semibold text-white mb-6">How We Work</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="p-4 bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-lg">
+                <h4 class="font-semibold text-red-400 mb-2">Mutual Aid</h4>
+                <p class="text-sm text-zinc-400">
+                  Building networks of support where communities share resources, knowledge, and power
+                </p>
+              </div>
+
+              <div class="p-4 bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-lg">
+                <h4 class="font-semibold text-red-400 mb-2">Worker Solidarity</h4>
+                <p class="text-sm text-zinc-400">
+                  Standing with labor movements to challenge exploitation and reimagine work itself
+                </p>
+              </div>
+
+              <div class="p-4 bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-lg">
+                <h4 class="font-semibold text-red-400 mb-2">Knowledge Liberation</h4>
+                <p class="text-sm text-zinc-400">
+                  Breaking down barriers that keep learning and technology locked away from communities
+                </p>
+              </div>
+            </div>
           </div>
 
           <!-- Our Commitment -->
           <div class="p-6 bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 rounded-lg">
-            <h3 class="text-xl font-semibold text-white mb-4">Our Commitment</h3>
             <p class="text-zinc-300 leading-relaxed">
-              We are not a solution. We are a process—continuously learning, adapting, and building
-              power alongside the communities we stand with. Our work is about creating infrastructures
-              of solidarity that amplify existing struggles for justice.
-            </p>
-            <p class="text-zinc-300 leading-relaxed mt-4">
-              Every program, every collaboration is a thread in a broader tapestry of collective
-              liberation. We move forward not by counting achievements, but by listening, supporting,
-              and creating spaces where collective power can flourish.
+              We are not here to save anyone. We are part of ongoing struggles for justice,
+              learning and building alongside communities. Every collaboration strengthens the
+              networks of resistance against systems of oppression.
             </p>
           </div>
         </div>
