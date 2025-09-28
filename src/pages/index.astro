@@ -108,13 +108,13 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 		// Professional animation timing configuration
 		const ANIMATION_CONFIG = {
-			titleMove: 400,
-			contentDelay: 150,
-			taglineDelay: 300,
-			tagsDelay: 450,
-			buttonsDelay: 700,
-			staggerDelay: 60,
-			microAnimationDelay: 1200 // Delay before micro-animations
+			titleMove: 300,        // Reduced from 400
+			contentDelay: 0,       // Immediate start (was 150)
+			taglineDelay: 100,     // Reduced from 300
+			tagsDelay: 200,        // Reduced from 450
+			buttonsDelay: 400,     // Reduced from 700
+			staggerDelay: 40,      // Reduced from 60
+			microAnimationDelay: 800 // Reduced from 1200
 		};
 
 		function triggerAnimation() {
@@ -272,9 +272,9 @@ import WarpBackground from "../components/ui/WarpBackground";
 <style>
 	/* CSS Variables for consistent animation timing */
 	:root {
-		--animation-duration-fast: 0.25s;
-		--animation-duration-medium: 0.45s;
-		--animation-duration-slow: 0.65s;
+		--animation-duration-fast: 0.2s;    /* Reduced from 0.25s */
+		--animation-duration-medium: 0.35s; /* Reduced from 0.45s */
+		--animation-duration-slow: 0.5s;    /* Reduced from 0.65s */
 		--animation-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Professional ease-out curve */
 		--animation-easing-entrance: cubic-bezier(0.16, 1, 0.3, 1); /* Smooth entrance */
 		--animation-easing-micro: cubic-bezier(0.4, 0, 0.2, 1); /* Subtle micro-animations */
