@@ -4,88 +4,228 @@ import WarpBackground from "../components/ui/WarpBackground";
 ---
 
 <RootLayout>
-	<main>
-		<div class="group relative w-full min-h-dvh flex items-center justify-center overflow-auto">
+	<main class="homepage-main">
+		<div id="homepage-container" class="group relative w-full h-dvh flex items-center justify-center overflow-hidden">
 			<div class="absolute w-full h-dvh -z-10">
-				{/* Keep the revolutionary turbulent background */}
+				{/* Zero softness configuration with sharper edges */}
 				<WarpBackground
 					color1="#000000"
-					color2="#5a0000"
-					color3="#ff0000"
-					speed={0.9}
+					color2="#a80000"
+					color3="#000000"
+					speed={0.3}
 					swirl={0.98}
-					swirlIterations={25}
-					shapeScale={0.12}
+					swirlIterations={31}
+					shapeScale={0.04}
 					rotation={0.85}
+					scale={0.1}
+					softness={0}
+					distortion={0}
 					client:load
 				/>
 			</div>
-        
-			<div class="p-4 sm:p-8 absolute w-full h-dvh flex flex-col justify-between z-10">
-				<!-- Clean, Brutalist Hero Section -->
-				<div class="flex-1 flex flex-col justify-center items-center text-center">
-					<!-- SINTHOME - Raw, Plain, Powerful -->
-					<h1 class="sinthome-title text-white font-black uppercase mb-0 px-12 sm:px-16 md:px-20 lg:px-24">
+
+			<div class="absolute w-full h-dvh flex flex-col justify-center items-center z-10">
+				<!-- Animated Content Container -->
+				<div id="hero-content" class="flex flex-col justify-center items-center text-center transition-all duration-700 ease-out">
+					<!-- SINTHOME - Starts Centered -->
+					<h1 id="sinthome-title" class="sinthome-title text-white font-black uppercase mb-0 transition-all duration-700 ease-out">
 						SINTHOME
 					</h1>
 
-					<!-- Straightforward Tagline -->
-					<p class="text-xl sm:text-2xl text-white font-semibold mb-6">
-						Knowledge — Critique — Praxis
-					</p>
+					<!-- Initially Hidden Elements -->
+					<div id="emerging-content" class="opacity-0 translate-y-8 transition-all duration-700 ease-out delay-100">
+						<!-- Straightforward Tagline -->
+						<p class="text-xl sm:text-2xl text-white font-semibold mb-6 mt-4">
+							Knowledge — Critique — Praxis
+						</p>
 
-					<!-- Direct Description -->
-					<p class="text-base text-white max-w-2xl mx-auto mb-10">
-						A public-interest community reconstructing new relations of production through the integration of knowledge learning, theoretical critique, and social praxis
-					</p>
+						<!-- Plain Practice Tags -->
+						<div class="flex flex-wrap justify-center gap-3 mb-10 max-w-3xl">
+							<span class="px-4 py-2 text-white border border-white rounded-full text-sm tag-item">
+								Public Lectures
+							</span>
+							<span class="px-4 py-2 text-white border border-white rounded-full text-sm tag-item">
+								Psychoanalysis
+							</span>
+							<span class="px-4 py-2 text-white border border-white rounded-full text-sm tag-item">
+								Workers Assist
+							</span>
+							<span class="px-4 py-2 text-white border border-white rounded-full text-sm tag-item">
+								AI for Public Good
+							</span>
+							<span class="px-4 py-2 text-white border border-white rounded-full text-sm tag-item">
+								Factory AI Solution
+							</span>
+						</div>
 
-					<!-- Plain Practice Tags -->
-					<div class="flex flex-wrap justify-center gap-3 mb-10 max-w-3xl">
-						<span class="px-4 py-2 text-white border border-white rounded-full text-sm">
-							Public Lectures
-						</span>
-						<span class="px-4 py-2 text-white border border-white rounded-full text-sm">
-							Psychoanalysis
-						</span>
-						<span class="px-4 py-2 text-white border border-white rounded-full text-sm">
-							Workers Assist
-						</span>
-						<span class="px-4 py-2 text-white border border-white rounded-full text-sm">
-							AI for Public Good
-						</span>
-						<span class="px-4 py-2 text-white border border-white rounded-full text-sm">
-							Factory AI Solution
-						</span>
+						<!-- Simple, Direct CTAs -->
+						<div class="flex flex-col sm:flex-row gap-4 button-group justify-center items-center">
+							<a
+								href="/who-we-are"
+								class="px-8 py-4 bg-white text-black font-bold hover:bg-gray-200 transition-colors cta-button"
+							>
+								ABOUT US
+							</a>
+							<a
+								href="/what-we-do"
+								class="px-8 py-4 bg-black text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors cta-button"
+							>
+								OUR PROJECTS
+							</a>
+							<a
+								href="/contact"
+								class="px-8 py-4 text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors cta-button"
+							>
+								JOIN US
+							</a>
+						</div>
 					</div>
-
-					<!-- Simple, Direct CTAs -->
-					<div class="flex flex-col sm:flex-row gap-4">
-						<a
-							href="/who-we-are"
-							class="px-8 py-4 bg-white text-black font-bold hover:bg-gray-200 transition-colors"
-						>
-							ABOUT US
-						</a>
-						<a
-							href="/what-we-do"
-							class="px-8 py-4 bg-black text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors"
-						>
-							OUR PROJECTS
-						</a>
-						<a
-							href="/contact"
-							class="px-8 py-4 text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors"
-						>
-							JOIN US
-						</a>
-					</div>
-
 				</div>
 
+				<!-- Scroll Indicator -->
+				<div id="scroll-indicator" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-100 transition-opacity duration-500">
+					<div class="animate-bounce text-white/50">
+						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+						</svg>
+					</div>
+				</div>
 			</div>
 		</div>
 	</main>
 </RootLayout>
+
+<script>
+	// Animation logic - scoped to homepage container only
+	document.addEventListener('DOMContentLoaded', () => {
+		const container = document.getElementById('homepage-container');
+
+		// Only proceed if we're on the homepage
+		if (!container) return;
+
+		let hasScrolled = false;
+
+		function triggerAnimation() {
+			const emergingContent = document.getElementById('emerging-content');
+			const sinthomeTitle = document.getElementById('sinthome-title');
+			const scrollIndicator = document.getElementById('scroll-indicator');
+
+			if (!hasScrolled) {
+				hasScrolled = true;
+
+				// Move SINTHOME up slightly
+				sinthomeTitle?.classList.add('-translate-y-12');
+
+				// Make content appear
+				emergingContent?.classList.remove('opacity-0', 'translate-y-8');
+				emergingContent?.classList.add('opacity-100', 'translate-y-0');
+
+				// Hide scroll indicator
+				scrollIndicator?.classList.remove('opacity-100');
+				scrollIndicator?.classList.add('opacity-0');
+
+				// Add staggered animation to tags
+				const tags = document.querySelectorAll('.tag-item');
+				tags.forEach((tag, index) => {
+					setTimeout(() => {
+						tag.classList.add('animate-fade-in');
+					}, index * 100);
+				});
+
+				// Add staggered animation to buttons
+				const buttons = document.querySelectorAll('.cta-button');
+				buttons.forEach((button, index) => {
+					setTimeout(() => {
+						button.classList.add('animate-fade-in');
+					}, 500 + (index * 100));
+				});
+			}
+		}
+
+		function resetAnimation() {
+			if (hasScrolled) {
+				hasScrolled = false;
+
+				const emergingContent = document.getElementById('emerging-content');
+				const sinthomeTitle = document.getElementById('sinthome-title');
+				const scrollIndicator = document.getElementById('scroll-indicator');
+
+				// Reset SINTHOME position
+				sinthomeTitle?.classList.remove('-translate-y-12');
+
+				// Hide content again
+				emergingContent?.classList.add('opacity-0', 'translate-y-8');
+				emergingContent?.classList.remove('opacity-100', 'translate-y-0');
+
+				// Show scroll indicator
+				scrollIndicator?.classList.add('opacity-100');
+				scrollIndicator?.classList.remove('opacity-0');
+
+				// Remove animation classes
+				document.querySelectorAll('.animate-fade-in').forEach(el => {
+					el.classList.remove('animate-fade-in');
+				});
+			}
+		}
+
+		// Attach listeners ONLY to the homepage container, not window
+		container.addEventListener('wheel', (e) => {
+			// Only prevent default within the homepage container
+			e.preventDefault();
+			e.stopPropagation();
+
+			if (e.deltaY > 0) {
+				triggerAnimation();
+			} else if (e.deltaY < 0) {
+				resetAnimation();
+			}
+		}, { passive: false });
+
+		// Touch support - also scoped to container
+		let touchStartY = 0;
+
+		container.addEventListener('touchstart', (e) => {
+			touchStartY = e.touches[0].clientY;
+		}, { passive: true });
+
+		container.addEventListener('touchmove', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+
+			const touchEndY = e.touches[0].clientY;
+			const deltaY = touchStartY - touchEndY;
+
+			if (deltaY > 30) {
+				triggerAnimation();
+			} else if (deltaY < -30) {
+				resetAnimation();
+			}
+		}, { passive: false });
+
+		// Keyboard support - only when homepage is focused
+		container.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowDown' || e.key === ' ') {
+				e.preventDefault();
+				e.stopPropagation();
+				triggerAnimation();
+			} else if (e.key === 'ArrowUp') {
+				e.preventDefault();
+				e.stopPropagation();
+				resetAnimation();
+			}
+		});
+
+		// Make container focusable for keyboard events
+		container.setAttribute('tabindex', '0');
+
+		// Cleanup function for when navigating away
+		document.addEventListener('astro:before-swap', () => {
+			// Remove all event listeners when navigating away
+			const newContainer = container.cloneNode(true);
+			container.parentNode?.replaceChild(newContainer, container);
+		});
+	});
+</script>
 
 <style>
 	/* SINTHOME title styling - League Spartan Bold */
@@ -104,4 +244,33 @@ import WarpBackground from "../components/ui/WarpBackground";
 		transform: scaleX(1);
 		transform-origin: center;
 	}
+
+	/* Prevent actual scrolling only on homepage */
+	.homepage-main {
+		height: 100vh;
+		overflow: hidden;
+	}
+
+	/* Custom fade-in animation */
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.animate-fade-in {
+		animation: fadeInUp 0.6s ease-out forwards;
+	}
+
+	/* Delay classes for staggered animations */
+	.delay-100 { animation-delay: 100ms; }
+	.delay-200 { animation-delay: 200ms; }
+	.delay-300 { animation-delay: 300ms; }
+	.delay-400 { animation-delay: 400ms; }
+	.delay-500 { animation-delay: 500ms; }
 </style>

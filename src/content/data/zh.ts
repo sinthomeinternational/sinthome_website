@@ -18,7 +18,7 @@ const content: SiteContent = {
           { label: 'AI 黑客松', href: '/what-we-do/ai-hackathon' },
           { label: '工友互助', href: '/what-we-do/workers-assist' },
           { label: 'Plantcore AI', href: '/what-we-do/plantcore-ai' },
-          { label: 'SRTP', href: '/what-we-do/srtp' },
+          { label: 'S.R.T.P.', href: '/what-we-do/srtp' },
         ]
       },
       { label: '近期活动', href: '/events' },
@@ -234,7 +234,7 @@ const content: SiteContent = {
     },
     {
       id: 'srtp',
-      title: 'SRTP',
+      title: 'S.R.T.P.',
       description: 'Sinthome革命理论实践 - 审问实践，直到它揭示未来',
       category: '研究与理论',
       featured: true,
