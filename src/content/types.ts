@@ -4,6 +4,7 @@
 
 export interface PageContent {
   title: string;
+  subtitle?: string;
   description?: string;
   hero?: {
     title: string;
@@ -21,14 +22,39 @@ export interface PageContent {
     keywords?: string[];
     ogImage?: string;
   };
+  // For upcoming events page
+  events?: {
+    [key: string]: {
+      title: string;
+      tags: string[];
+      location: string;
+      schedule: string;
+      scheduleFull?: string;
+      format: string;
+      type: string;
+      aboutTitle: string;
+      description: string;
+    };
+  };
+  labels?: {
+    [key: string]: string;
+  };
+  // For call to action sections
+  callToAction?: {
+    title: string;
+    description: string;
+    buttons?: {
+      [key: string]: string;
+    };
+  };
 }
 
 export interface ContentSection {
   id: string;
   title?: string;
   subtitle?: string;
-  content?: string;
-  items?: ContentItem[];
+  content?: string | string[];
+  items?: ContentItem[] | { name: string; description: string }[];
   type?: 'text' | 'grid' | 'list' | 'faq' | 'cta' | 'image' | 'form';
 }
 

@@ -183,12 +183,21 @@ export function generateThemeCSSVariables(theme: ThemeConfig): string {
 export function applyTheme(themeId: ThemeId): void {
   const theme = getTheme(themeId);
   const root = document.documentElement;
+  const body = document.body;
 
-  // Remove existing theme classes
+  // Remove existing theme classes from both html and body
   root.classList.remove('theme-dark', 'theme-light');
+  body.classList.remove('bg-zinc-950', 'text-white', 'bg-white', 'text-gray-900');
 
-  // Add new theme class
+  // Add new theme class to root
   root.classList.add(`theme-${themeId}`);
+
+  // Apply body classes based on theme
+  if (themeId === 'dark') {
+    body.classList.add('bg-zinc-950', 'text-white');
+  } else {
+    body.classList.add('bg-white', 'text-gray-900');
+  }
 
   // Apply CSS variables
   const cssVariables = generateThemeCSSVariables(theme);
