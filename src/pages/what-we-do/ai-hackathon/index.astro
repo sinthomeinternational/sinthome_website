@@ -44,8 +44,8 @@ import H1 from "../../../components/ui/H1.astro";
               </svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2">When</h3>
-            <p class="text-zinc-300 font-semibold">Spring 2025</p>
-            <p class="text-sm text-zinc-400 mt-2">Registration opens February 2025</p>
+            <p class="text-zinc-300 font-semibold">February 2025</p>
+            <p class="text-sm text-zinc-400 mt-2">48-hour hackathon event</p>
           </div>
 
           <!-- Where -->
@@ -180,50 +180,65 @@ import H1 from "../../../components/ui/H1.astro";
           <!-- Timeline line -->
           <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-zinc-700"></div>
 
+          <!-- Current Time Indicator -->
+          <div class="absolute left-0 flex items-center" style="top: 20px;">
+            <div class="bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded">NOW</div>
+            <div class="w-8 h-0.5 bg-yellow-500"></div>
+          </div>
+
           <!-- Timeline items -->
           <div class="space-y-8">
+            <!-- Current Status -->
+            <div class="relative flex items-start">
+              <div class="absolute left-8 w-4 h-4 bg-yellow-500 rounded-full transform -translate-x-1/2 animate-pulse"></div>
+              <div class="ml-20 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                <h3 class="font-bold text-yellow-400 mb-1">Planning Phase</h3>
+                <p class="text-sm text-zinc-400">Currently organizing partners and finalizing challenges</p>
+              </div>
+            </div>
+
             <!-- Registration -->
             <div class="relative flex items-start">
-              <div class="absolute left-8 w-4 h-4 bg-red-600 rounded-full transform -translate-x-1/2"></div>
+              <div class="absolute left-8 w-4 h-4 bg-zinc-600 rounded-full transform -translate-x-1/2"></div>
               <div class="ml-20 bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
                 <h3 class="font-bold text-white mb-1">Registration Opens</h3>
-                <p class="text-sm text-zinc-400">February 2025 - Sign up and form teams</p>
+                <p class="text-sm text-zinc-400">January 2025 - Sign up and form teams</p>
               </div>
             </div>
 
             <!-- Kickoff -->
             <div class="relative flex items-start">
-              <div class="absolute left-8 w-4 h-4 bg-red-600 rounded-full transform -translate-x-1/2"></div>
+              <div class="absolute left-8 w-4 h-4 bg-zinc-600 rounded-full transform -translate-x-1/2"></div>
               <div class="ml-20 bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
                 <h3 class="font-bold text-white mb-1">Kickoff Event</h3>
-                <p class="text-sm text-zinc-400">Day 1 - Opening ceremony, challenge presentations, team formation</p>
+                <p class="text-sm text-zinc-400">February 14, 2025 - Opening ceremony, challenge presentations</p>
               </div>
             </div>
 
             <!-- Workshops -->
             <div class="relative flex items-start">
-              <div class="absolute left-8 w-4 h-4 bg-red-600 rounded-full transform -translate-x-1/2"></div>
+              <div class="absolute left-8 w-4 h-4 bg-zinc-600 rounded-full transform -translate-x-1/2"></div>
               <div class="ml-20 bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
                 <h3 class="font-bold text-white mb-1">Workshops & Mentorship</h3>
-                <p class="text-sm text-zinc-400">Day 1-2 - Technical workshops, mentor office hours, API access</p>
+                <p class="text-sm text-zinc-400">February 14-15 - Technical workshops, mentor office hours</p>
               </div>
             </div>
 
             <!-- Hacking -->
             <div class="relative flex items-start">
-              <div class="absolute left-8 w-4 h-4 bg-red-600 rounded-full transform -translate-x-1/2"></div>
+              <div class="absolute left-8 w-4 h-4 bg-zinc-600 rounded-full transform -translate-x-1/2"></div>
               <div class="ml-20 bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
                 <h3 class="font-bold text-white mb-1">Hacking Period</h3>
-                <p class="text-sm text-zinc-400">48 hours - Build your solution with continuous mentor support</p>
+                <p class="text-sm text-zinc-400">February 15-16 - 48 hours of building with mentor support</p>
               </div>
             </div>
 
             <!-- Demo -->
             <div class="relative flex items-start">
-              <div class="absolute left-8 w-4 h-4 bg-red-600 rounded-full transform -translate-x-1/2"></div>
+              <div class="absolute left-8 w-4 h-4 bg-zinc-600 rounded-full transform -translate-x-1/2"></div>
               <div class="ml-20 bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
                 <h3 class="font-bold text-white mb-1">Demo & Judging</h3>
-                <p class="text-sm text-zinc-400">Final day - Present solutions, awards ceremony</p>
+                <p class="text-sm text-zinc-400">February 16, 2025 - Present solutions, awards ceremony</p>
               </div>
             </div>
           </div>
@@ -351,7 +366,7 @@ import H1 from "../../../components/ui/H1.astro";
             </a>
           </div>
           <p class="text-sm text-zinc-500 mt-6">
-            Registration for Spring 2025 hackathon opens in February. Join our mailing list to be notified.
+            Registration opens January 2025 for the February 14-16 hackathon. Join our mailing list to be notified.
           </p>
         </div>
       </section>
