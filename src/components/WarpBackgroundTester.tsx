@@ -416,18 +416,22 @@ export default function WarpBackgroundTester() {
                                 </svg>
                                 Configuration Code
                             </h2>
-                            <pre className="bg-black/50 backdrop-blur-sm p-4 rounded-lg text-xs overflow-x-auto font-mono border border-zinc-800/50">
-<code className="text-emerald-400">&lt;Warp</code>
-<code className="text-zinc-400">  color1="</code><code className="text-amber-400">{params.color1}</code><code className="text-zinc-400">"</code>
-<code className="text-zinc-400">  color2="</code><code className="text-amber-400">{params.color2}</code><code className="text-zinc-400">"</code>
-<code className="text-zinc-400">  color3="</code><code className="text-amber-400">{params.color3}</code><code className="text-zinc-400">"</code>
-<code className="text-zinc-400">  speed={{</code><code className="text-cyan-400">{params.speed}</code><code className="text-zinc-400">}}</code>
-<code className="text-zinc-400">  swirl={{</code><code className="text-cyan-400">{params.swirl}</code><code className="text-zinc-400">}}</code>
-<code className="text-zinc-400">  swirlIterations={{</code><code className="text-cyan-400">{params.swirlIterations}</code><code className="text-zinc-400">}}</code>
-<code className="text-zinc-400">  shapeScale={{</code><code className="text-cyan-400">{params.shapeScale}</code><code className="text-zinc-400">}}</code>
-<code className="text-zinc-400">  rotation={{</code><code className="text-cyan-400">{params.rotation}</code><code className="text-zinc-400">}}</code>
-<code className="text-emerald-400">/&gt;</code>
-                            </pre>
+                            <div className="bg-black/50 backdrop-blur-sm p-4 rounded-lg overflow-x-auto border border-zinc-800/50">
+                                <pre className="text-xs font-mono">
+                                    <code>
+                                        <span className="text-emerald-400">&lt;Warp</span>{'\n'}
+                                        <span className="text-zinc-400">  color1="</span><span className="text-amber-400">{params.color1}</span><span className="text-zinc-400">"</span>{'\n'}
+                                        <span className="text-zinc-400">  color2="</span><span className="text-amber-400">{params.color2}</span><span className="text-zinc-400">"</span>{'\n'}
+                                        <span className="text-zinc-400">  color3="</span><span className="text-amber-400">{params.color3}</span><span className="text-zinc-400">"</span>{'\n'}
+                                        <span className="text-zinc-400">  speed={'{'}</span><span className="text-cyan-400">{params.speed}</span><span className="text-zinc-400">{'}'}</span>{'\n'}
+                                        <span className="text-zinc-400">  swirl={'{'}</span><span className="text-cyan-400">{params.swirl}</span><span className="text-zinc-400">{'}'}</span>{'\n'}
+                                        <span className="text-zinc-400">  swirlIterations={'{'}</span><span className="text-cyan-400">{params.swirlIterations}</span><span className="text-zinc-400">{'}'}</span>{'\n'}
+                                        <span className="text-zinc-400">  shapeScale={'{'}</span><span className="text-cyan-400">{params.shapeScale}</span><span className="text-zinc-400">{'}'}</span>{'\n'}
+                                        <span className="text-zinc-400">  rotation={'{'}</span><span className="text-cyan-400">{params.rotation}</span><span className="text-zinc-400">{'}'}</span>{'\n'}
+                                        <span className="text-emerald-400">/&gt;</span>
+                                    </code>
+                                </pre>
+                            </div>
                         </div>
                     </div>
                 </div>
