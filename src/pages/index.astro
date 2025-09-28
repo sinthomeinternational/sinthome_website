@@ -97,11 +97,11 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 <script>
 	// Professional smooth animation logic - scoped to homepage container only
-	function initializeHomepageAnimations() {
+	function initializeHomepageAnimations(): (() => void) | null {
 		const container = document.getElementById('homepage-container');
 
 		// Only proceed if we're on the homepage
-		if (!container) return;
+		if (!container) return null;
 
 		let hasScrolled = false;
 		let animationTimeouts: NodeJS.Timeout[] = []; // Store all timeout IDs for cancellation
