@@ -216,7 +216,7 @@ export default function WarpBackgroundTester() {
                     color: 'white',
                     borderRightColor: 'rgb(39, 39, 42)'
                 }}>
-                <div className="p-6">
+                <div className="p-4">
                     <div className="mb-8">
                         <h1 className="text-2xl font-light text-white mb-2">
                             Warp Background Tester
@@ -238,52 +238,33 @@ export default function WarpBackgroundTester() {
                         {debugMode && <span className="text-zinc-500">| Renders: {renderCount}</span>}
                     </div>
 
-                    <div className="space-y-6">
+                    <div className="space-y-4">
                         {/* Color Controls */}
                         <div>
                             <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">
                                 Colors
                             </h2>
 
-                            <div className="space-y-3">
-                                <div className="flex items-center gap-3">
-                                    <label className="w-16 text-xs text-zinc-500">Color 1</label>
-                                    <input
-                                        type="color"
-                                        value={params.color1}
-                                        onChange={(e) => updateParam('color1', e.target.value)}
-                                        className="w-10 h-8 rounded border border-zinc-700 cursor-pointer"
-                                    />
-                                    <span className="text-xs font-mono text-zinc-400">
-                                        {params.color1}
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center gap-3">
-                                    <label className="w-16 text-xs text-zinc-500">Color 2</label>
-                                    <input
-                                        type="color"
-                                        value={params.color2}
-                                        onChange={(e) => updateParam('color2', e.target.value)}
-                                        className="w-10 h-8 rounded border border-zinc-700 cursor-pointer"
-                                    />
-                                    <span className="text-xs font-mono text-zinc-400">
-                                        {params.color2}
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center gap-3">
-                                    <label className="w-16 text-xs text-zinc-500">Color 3</label>
-                                    <input
-                                        type="color"
-                                        value={params.color3}
-                                        onChange={(e) => updateParam('color3', e.target.value)}
-                                        className="w-10 h-8 rounded border border-zinc-700 cursor-pointer"
-                                    />
-                                    <span className="text-xs font-mono text-zinc-400">
-                                        {params.color3}
-                                    </span>
-                                </div>
+                            {/* Grid layout for colors */}
+                            <div className="grid grid-cols-3 gap-2">
+                                {[
+                                    { key: 'color1', label: 'C1', value: params.color1 },
+                                    { key: 'color2', label: 'C2', value: params.color2 },
+                                    { key: 'color3', label: 'C3', value: params.color3 }
+                                ].map(({ key, label, value }) => (
+                                    <div key={key} className="flex flex-col items-center gap-1">
+                                        <label className="text-[11px] text-zinc-500 font-medium">{label}</label>
+                                        <input
+                                            type="color"
+                                            value={value}
+                                            onChange={(e) => updateParam(key, e.target.value)}
+                                            className="w-8 h-6 rounded border border-zinc-700 cursor-pointer"
+                                        />
+                                        <span className="text-[10px] font-mono text-zinc-400 truncate w-full text-center">
+                                            {value.substring(1)}
+                                        </span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
@@ -292,7 +273,7 @@ export default function WarpBackgroundTester() {
                             <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">
                                 Parameters
                             </h2>
-                            <div className="space-y-3">
+                            <div className="grid grid-cols-2 gap-x-3 gap-y-2">
 
                             {[
                                 { key: 'speed', label: 'Speed', min: 0, max: 2, step: 0.05 },
@@ -304,10 +285,10 @@ export default function WarpBackgroundTester() {
                                 { key: 'softness', label: 'Softness', min: 0, max: 1, step: 0.01 },
                                 { key: 'distortion', label: 'Distortion', min: 0, max: 1, step: 0.01 }
                             ].map(({ key, label, min, max, step }) => (
-                                <div key={key}>
-                                    <div className="flex justify-between mb-1">
-                                        <label className="text-xs text-zinc-500">{label}</label>
-                                        <span className="text-xs font-mono text-zinc-400">
+                                <div key={key} className="col-span-1">
+                                    <div className="flex justify-between items-center mb-1">
+                                        <label className="text-[11px] text-zinc-500 truncate">{label}</label>
+                                        <span className="text-[10px] font-mono text-zinc-400 min-w-0">
                                             {typeof params[key as keyof typeof params] === 'number'
                                                 ? (params[key as keyof typeof params] as number).toFixed(
                                                     step < 1 ? step.toString().split('.')[1]?.length || 2 : 0
@@ -322,7 +303,8 @@ export default function WarpBackgroundTester() {
                                         step={step}
                                         value={params[key as keyof typeof params] as number}
                                         onChange={(e) => updateParam(key, step < 1 ? parseFloat(e.target.value) : parseInt(e.target.value))}
-                                        className="w-full slider"
+                                        className="w-full slider-compact"
+                                        aria-label={`${label}: ${params[key as keyof typeof params]}`}
                                     />
                                 </div>
                             ))}
@@ -330,31 +312,32 @@ export default function WarpBackgroundTester() {
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="space-y-3 pt-4 border-t border-zinc-800">
-                            <div className="flex gap-2">
+                        <div className="space-y-2 pt-3 border-t border-zinc-800">
+                            <div className="grid grid-cols-2 gap-2">
                                 <button
                                     onClick={copyConfig}
-                                    className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white py-2 px-3 rounded text-xs font-medium transition-colors"
+                                    className="bg-zinc-800 hover:bg-zinc-700 text-white py-1.5 px-2 rounded text-[11px] font-medium transition-colors"
                                 >
-                                    {copied ? '✓ Copied' : 'Copy Config'}
+                                    {copied ? '✓ Copied' : 'Copy'}
                                 </button>
                                 <button
                                     onClick={resetToDefaults}
-                                    className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white py-2 px-3 rounded text-xs font-medium transition-colors"
+                                    className="bg-zinc-800 hover:bg-zinc-700 text-white py-1.5 px-2 rounded text-[11px] font-medium transition-colors"
                                 >
                                     Reset
                                 </button>
                             </div>
 
                             {/* Debug Controls */}
-                            <div className="flex gap-2">
+                            <div className="grid grid-cols-3 gap-1">
                                 <button
                                     onClick={() => setDebugMode(!debugMode)}
-                                    className={`px-3 py-1.5 rounded text-xs transition-colors ${
+                                    className={`px-2 py-1 rounded text-[10px] transition-colors ${
                                         debugMode ? 'bg-green-900/30 text-green-400' : 'bg-zinc-800 text-zinc-400'
                                     }`}
+                                    aria-label={`Debug mode ${debugMode ? 'on' : 'off'}`}
                                 >
-                                    Debug {debugMode ? 'On' : 'Off'}
+                                    Debug
                                 </button>
                                 <button
                                     onClick={() => {
@@ -365,15 +348,17 @@ export default function WarpBackgroundTester() {
                                             setWarpStatus('loaded');
                                         }, 500);
                                     }}
-                                    className="px-3 py-1 bg-blue-600/20 text-blue-400 rounded transition hover:bg-blue-600/30"
+                                    className="px-2 py-1 bg-blue-600/20 text-blue-400 rounded transition hover:bg-blue-600/30 text-[10px]"
+                                    aria-label="Force reload animation"
                                 >
-                                    Force Reload
+                                    Reload
                                 </button>
                                 <button
                                     onClick={() => setWarpStatus('fallback')}
-                                    className="px-3 py-1 bg-yellow-600/20 text-yellow-400 rounded transition hover:bg-yellow-600/30"
+                                    className="px-2 py-1 bg-yellow-600/20 text-yellow-400 rounded transition hover:bg-yellow-600/30 text-[10px]"
+                                    aria-label="Use fallback animation"
                                 >
-                                    Use Fallback
+                                    Fallback
                                 </button>
                             </div>
                         </div>
@@ -449,37 +434,52 @@ export default function WarpBackgroundTester() {
             </div>
 
             <style>{`
-                .slider {
+                .slider,
+                .slider-compact {
                     -webkit-appearance: none;
                     appearance: none;
-                    height: 6px;
-                    border-radius: 3px;
+                    height: 4px;
+                    border-radius: 2px;
                     background: #27272a;
                     outline: none;
                     opacity: 0.9;
                     transition: opacity 0.2s;
                 }
 
-                .slider:hover {
+                .slider:hover,
+                .slider-compact:hover {
                     opacity: 1;
                 }
 
-                .slider::-webkit-slider-thumb {
+                .slider::-webkit-slider-thumb,
+                .slider-compact::-webkit-slider-thumb {
                     -webkit-appearance: none;
                     appearance: none;
-                    width: 18px;
-                    height: 18px;
+                    width: 14px;
+                    height: 14px;
                     border-radius: 50%;
                     background: #dc2626;
                     cursor: pointer;
+                    border: 1px solid #000;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
                 }
 
-                .slider::-moz-range-thumb {
-                    width: 18px;
-                    height: 18px;
+                .slider::-moz-range-thumb,
+                .slider-compact::-moz-range-thumb {
+                    width: 14px;
+                    height: 14px;
                     border-radius: 50%;
                     background: #dc2626;
                     cursor: pointer;
+                    border: 1px solid #000;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                }
+
+                /* Improved focus indicators for accessibility */
+                .slider:focus-visible,
+                .slider-compact:focus-visible {
+                    outline: 2px solid #dc2626;
+                    outline-offset: 2px;
                 }
 
                 /* Custom scrollbar for controls panel */
