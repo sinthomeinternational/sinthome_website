@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="white"/>
+  <g>
+    <!-- Simple QR code pattern -->
+    <rect x="10" y="10" width="30" height="30" fill="black"/>
+    <rect x="55" y="10" width="10" height="10" fill="black"/>
+    <rect x="75" y="10" width="10" height="10" fill="black"/>
+    <rect x="95" y="10" width="10" height="10" fill="black"/>
+    <rect x="115" y="10" width="10" height="10" fill="black"/>
+    <rect x="135" y="10" width="10" height="10" fill="black"/>
+    <rect x="155" y="10" width="30" height="30" fill="black"/>
+
+    <rect x="10" y="55" width="10" height="10" fill="black"/>
+    <rect x="30" y="55" width="10" height="10" fill="black"/>
+    <rect x="65" y="55" width="30" height="30" fill="black"/>
+    <rect x="105" y="55" width="10" height="10" fill="black"/>
+    <rect x="125" y="55" width="10" height="10" fill="black"/>
+    <rect x="155" y="55" width="10" height="10" fill="black"/>
+    <rect x="175" y="55" width="10" height="10" fill="black"/>
+
+    <rect x="10" y="75" width="10" height="10" fill="black"/>
+    <rect x="30" y="75" width="10" height="10" fill="black"/>
+    <rect x="55" y="75" width="10" height="10" fill="black"/>
+    <rect x="75" y="75" width="10" height="10" fill="black"/>
+    <rect x="115" y="75" width="10" height="10" fill="black"/>
+    <rect x="135" y="75" width="10" height="10" fill="black"/>
+    <rect x="155" y="75" width="10" height="10" fill="black"/>
+    <rect x="175" y="75" width="10" height="10" fill="black"/>
+
+    <rect x="10" y="95" width="10" height="10" fill="black"/>
+    <rect x="30" y="95" width="10" height="10" fill="black"/>
+    <rect x="65" y="95" width="10" height="10" fill="black"/>
+    <rect x="85" y="95" width="10" height="10" fill="black"/>
+    <rect x="105" y="95" width="10" height="10" fill="black"/>
+    <rect x="125" y="95" width="10" height="10" fill="black"/>
+    <rect x="155" y="95" width="10" height="10" fill="black"/>
+    <rect x="175" y="95" width="10" height="10" fill="black"/>
+
+    <rect x="10" y="115" width="10" height="10" fill="black"/>
+    <rect x="30" y="115" width="10" height="10" fill="black"/>
+    <rect x="55" y="115" width="30" height="30" fill="black"/>
+    <rect x="105" y="115" width="30" height="30" fill="black"/>
+    <rect x="155" y="115" width="10" height="10" fill="black"/>
+    <rect x="175" y="115" width="10" height="10" fill="black"/>
+
+    <rect x="10" y="155" width="30" height="30" fill="black"/>
+    <rect x="55" y="155" width="10" height="10" fill="black"/>
+    <rect x="75" y="155" width="10" height="10" fill="black"/>
+    <rect x="95" y="155" width="10" height="10" fill="black"/>
+    <rect x="115" y="155" width="10" height="10" fill="black"/>
+    <rect x="135" y="155" width="10" height="10" fill="black"/>
+    <rect x="155" y="155" width="30" height="30" fill="black"/>
+  </g>
+  <text x="100" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#00a1d6">Bilibili QR Code</text>
+</svg>

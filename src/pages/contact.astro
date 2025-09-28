@@ -1,41 +1,96 @@
 ---
 import H1 from "../components/ui/H1.astro";
 import PageLayout from "../layouts/PageLayout.astro";
-import ExternalLink from "../components/ui/ExternalLink.astro";
+import ContactMethods from "../components/contact/ContactMethods";
 import { SITE_CONFIG } from "../config/site";
 ---
 
-<PageLayout title="Contact - Sinthome" useInfoLayout={true}>
-     <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh flex flex-col justify-between">
-
-          <div>
-               <H1 className="text-red-600">How can we help? </H1>
-               <p class="mt-4 md:mt-8 lg:mt-12 text-xl xl:text-2xl text-black text-balance">
-                    Interested in working together?
-                    Get in touch for new projects and collaboration opportunities.
+<PageLayout title="Contact - Sinthome" useContentLayout={true}>
+     <div class="min-h-dvh py-12 px-4 sm:px-6 lg:px-8">
+          <!-- Header Section -->
+          <div class="text-center mb-16">
+               <H1 className="text-red-600 mb-6">Get in Touch</H1>
+               <p class="text-xl text-zinc-300 max-w-2xl mx-auto">
+                    We're here to connect, collaborate, and create meaningful impact together.
+                    Reach out through your preferred platform.
                </p>
+          </div>
 
-               <div class="mt-6 sm:mt-12 flex flex-col gap-1">
-                    <a href={`mailto:${SITE_CONFIG.contact.email}`} class="mb-8 w-fit group flex items-center gap-1 text-base lg:text-xl text-black hover:text-gray-800">
-                         {SITE_CONFIG.contact.email}
-                         <svg xmlns="http://www.w3.org/2000/svg" class="-rotate-45 group-hover:rotate-0 transition-all duration-300 ease-in-out" width="24" height="24" viewBox="0 0 24 24">
-                              <title>Arrow Icon</title>
-                              <path fill="currentColor" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10" opacity=".5"/>
-                              <path fill="currentColor" d="M13.53 8.47a.75.75 0 1 0-1.06 1.06l1.72 1.72H8a.75.75 0 0 0 0 1.5h6.19l-1.72 1.72a.75.75 0 1 0 1.06 1.06l3-3a.75.75 0 0 0 0-1.06z"/>
-                         </svg>
-                    </a>
+          <!-- Contact Methods Component -->
+          <ContactMethods client:load />
 
-                    <ExternalLink href={SITE_CONFIG.urls.twitter}>Twitter</ExternalLink>
-                    <ExternalLink href={SITE_CONFIG.urls.instagram}>Instagram</ExternalLink>
-                    <ExternalLink href={SITE_CONFIG.urls.linkedin}>LinkedIn</ExternalLink>
-                    <ExternalLink href={SITE_CONFIG.urls.github}>GitHub</ExternalLink>
+          <!-- Office Information -->
+          <div class="mt-20 pt-12 border-t border-zinc-800">
+               <div class="max-w-4xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-12">
+                         <!-- Office Address -->
+                         <div>
+                              <h3 class="text-xl font-semibold text-white mb-4">Our Office</h3>
+                              <div class="space-y-2">
+                                   <p class="text-zinc-400">{SITE_CONFIG.contact.address.street}</p>
+                                   <p class="text-zinc-400">
+                                        {SITE_CONFIG.contact.address.city}, {SITE_CONFIG.contact.address.state} {SITE_CONFIG.contact.address.zip}
+                                   </p>
+                                   <p class="text-zinc-400">{SITE_CONFIG.contact.address.country}</p>
+                              </div>
+
+                              <!-- Office Hours -->
+                              <div class="mt-6">
+                                   <h4 class="text-sm font-semibold text-zinc-300 mb-2">Office Hours</h4>
+                                   <p class="text-zinc-500 text-sm">Monday - Friday: 9:00 AM - 6:00 PM EST</p>
+                                   <p class="text-zinc-500 text-sm">Saturday - Sunday: By appointment</p>
+                              </div>
+                         </div>
+
+                         <!-- Additional Info -->
+                         <div>
+                              <h3 class="text-xl font-semibold text-white mb-4">Connect & Collaborate</h3>
+                              <p class="text-zinc-400 mb-6">
+                                   Interested in working together? We welcome new projects,
+                                   collaboration opportunities, and partnerships that align with our mission.
+                              </p>
+
+                              <!-- Quick Links -->
+                              <div class="space-y-3">
+                                   <a
+                                        href="/what-we-do"
+                                        class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
+                                   >
+                                        <span class="mr-2">→</span>
+                                        Learn about our projects
+                                   </a>
+                                   <br/>
+                                   <a
+                                        href="/events"
+                                        class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
+                                   >
+                                        <span class="mr-2">→</span>
+                                        View upcoming events
+                                   </a>
+                                   <br/>
+                                   <a
+                                        href="/donate"
+                                        class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
+                                   >
+                                        <span class="mr-2">→</span>
+                                        Support our mission
+                                   </a>
+                              </div>
+                         </div>
+                    </div>
                </div>
           </div>
 
-          <div>
-               <p class="text-base text-gray-800">{SITE_CONFIG.contact.address.street}</p>
-               <p class="text-base text-gray-800">{SITE_CONFIG.contact.address.city}, {SITE_CONFIG.contact.address.state} {SITE_CONFIG.contact.address.zip}</p>
-               <p class="text-base text-gray-800">{SITE_CONFIG.contact.address.country}</p>
+          <!-- Footer Message -->
+          <div class="mt-20 text-center">
+               <div class="inline-block p-6 bg-gradient-to-r from-red-600/10 to-red-700/10 rounded-2xl border border-red-600/20">
+                    <p class="text-zinc-300 text-lg font-medium mb-2">
+                         Let's build something meaningful together
+                    </p>
+                    <p class="text-zinc-400 text-sm">
+                         Every connection starts with a conversation
+                    </p>
+               </div>
           </div>
      </div>
 </PageLayout>
