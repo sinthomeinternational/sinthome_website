@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useSpring, useMotionValue } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface NavItem {
   id: string;
@@ -88,20 +88,6 @@ export default function SideNavigation() {
   const [activeSection, setActiveSection] = useState('hero');
   const [isExpanded, setIsExpanded] = useState(true);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const mouseY = useMotionValue(0);
-
-  // Enhanced motion values for sophisticated animations
-  const progressY = useMotionValue(0);
-  const glowOpacity = useSpring(0, { stiffness: 400, damping: 30 });
-
-  // Magnetic effect on hover
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const y = e.clientY - rect.top;
-    mouseY.set(y);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -148,120 +134,43 @@ export default function SideNavigation() {
     <AnimatePresence>
       {isVisible && (
         <motion.nav
-          ref={containerRef}
-          initial={{ x: -320, opacity: 0, filter: 'blur(10px)' }}
-          animate={{ x: 0, opacity: 1, filter: 'blur(0px)' }}
-          exit={{ x: -320, opacity: 0, filter: 'blur(10px)' }}
+          initial={{ x: -320, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -320, opacity: 0 }}
           transition={{
             type: 'spring',
             stiffness: 300,
-            damping: 30,
-            mass: 0.8
+            damping: 30
           }}
-          className="fixed left-4 top-1/2 -translate-y-1/2 z-50 group"
+          className="fixed left-4 top-1/2 -translate-y-1/2 z-50"
         >
-          {/* Premium Container with Glass Morphism */}
-          <motion.div
+          {/* Clean Flat Container */}
+          <div
             className={`
-              relative overflow-hidden backdrop-blur-xl transition-all duration-500 ease-out
+              relative bg-black/95 backdrop-blur-sm border border-zinc-800 transition-all duration-300
               ${isExpanded ? 'w-64' : 'w-16'}
             `}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={() => mouseY.set(0)}
-            style={{
-              background: `
-                linear-gradient(120deg,
-                  rgba(13, 13, 15, 0.98) 0%,
-                  rgba(23, 23, 26, 0.95) 25%,
-                  rgba(31, 31, 35, 0.92) 50%,
-                  rgba(23, 23, 26, 0.95) 75%,
-                  rgba(13, 13, 15, 0.98) 100%
-                )
-              `,
-              border: '1px solid rgba(255, 255, 255, 0.03)',
-              borderRadius: '4px',
-              boxShadow: `
-                0 0 0 1px rgba(255, 255, 255, 0.02),
-                0 10px 40px rgba(0, 0, 0, 0.8),
-                0 2px 4px rgba(0, 0, 0, 0.5),
-                0 0 60px rgba(220, 38, 38, 0.05)
-              `
-            }}
           >
-            {/* Noise Texture Overlay */}
-            <div
-              className="absolute inset-0 opacity-[0.015] mix-blend-overlay pointer-events-none"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                backgroundSize: '100px 100px'
-              }}
-            />
+            {/* Accent Line */}
+            <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-red-600/40" />
 
-            {/* Spotlight Effect */}
-            <motion.div
-              className="absolute w-32 h-32 pointer-events-none"
-              style={{
-                background: 'radial-gradient(circle, rgba(220, 38, 38, 0.08) 0%, transparent 70%)',
-                x: -64,
-                y: mouseY,
-                translateY: '-50%'
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: hoveredItem ? 1 : 0 }}
-              transition={{ duration: 0.3 }}
-            />
-
-            {/* Accent Light Bar with Glow */}
-            <motion.div
-              className="absolute left-0 top-0 w-[1px]"
-              style={{
-                height: '100%',
-                background: 'linear-gradient(to bottom, rgba(220, 38, 38, 0.3), rgba(220, 38, 38, 0.6), rgba(220, 38, 38, 0.3))',
-                boxShadow: '0 0 10px rgba(220, 38, 38, 0.3)'
-              }}
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={{ opacity: 1, scaleY: 1 }}
-              transition={{ delay: 0.3, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-            />
-
-            {/* Enhanced Toggle Button */}
-            <motion.button
+            {/* Toggle Button */}
+            <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-12 group/toggle"
+              className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-12 bg-black/95 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
               aria-label={isExpanded ? "Collapse navigation" : "Expand navigation"}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
-              <div
-                className="w-full h-full backdrop-blur-xl transition-all duration-300 flex items-center justify-center"
-                style={{
-                  background: `
-                    linear-gradient(145deg,
-                      rgba(9, 9, 11, 0.95) 0%,
-                      rgba(39, 39, 42, 0.9) 50%,
-                      rgba(9, 9, 11, 0.95) 100%
-                    )
-                  `,
-                  border: '1px solid rgba(220, 38, 38, 0.08)',
-                  borderRadius: '2px 4px 4px 2px',
-                  boxShadow: `
-                    0 8px 16px rgba(0, 0, 0, 0.3),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.1)
-                  `
-                }}
+              <motion.svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                animate={{ rotate: isExpanded ? 180 : 0 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 25 }}
               >
-                <motion.svg
-                  className="w-4 h-4 text-zinc-400 group-hover/toggle:text-red-400 transition-colors duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  animate={{ rotate: isExpanded ? 180 : 0 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-                </motion.svg>
-              </div>
-            </motion.button>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+              </motion.svg>
+            </button>
 
             {/* Navigation Content */}
             <div className="relative py-6 px-1">
@@ -270,8 +179,8 @@ export default function SideNavigation() {
                 {navItems.map((item, index) => (
                   <motion.div
                     key={item.id}
-                    initial={{ opacity: 0, x: -30, filter: 'blur(4px)' }}
-                    animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{
                       delay: 0.1 + index * 0.04,
                       type: 'spring',
@@ -280,108 +189,62 @@ export default function SideNavigation() {
                     }}
                     className="relative"
                   >
-                    <motion.button
+                    <button
                       onClick={() => scrollToSection(item.href)}
                       onMouseEnter={() => setHoveredItem(item.id)}
                       onMouseLeave={() => setHoveredItem(null)}
                       className={`
                         relative w-full flex items-center px-3 py-3 group/item overflow-hidden
-                        transition-all duration-300 ease-out
-                        ${isExpanded ? 'rounded-sm mx-2' : 'rounded-sm mx-1 justify-center'}
+                        transition-all duration-200
+                        ${isExpanded ? 'mx-2' : 'mx-1 justify-center'}
                       `}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
                       title={!isExpanded ? item.label : undefined}
                     >
-                      {/* Item Background with Sophisticated States */}
-                      <motion.div
-                        className="absolute inset-0 rounded-sm"
+                      {/* Flat Background */}
+                      <div
+                        className="absolute inset-0"
                         style={{
                           background: activeSection === item.id
-                            ? `
-                                linear-gradient(135deg,
-                                  rgba(220, 38, 38, 0.15) 0%,
-                                  rgba(239, 68, 68, 0.1) 50%,
-                                  rgba(220, 38, 38, 0.15) 100%
-                                )
-                              `
+                            ? 'rgba(220, 38, 38, 0.1)'
                             : hoveredItem === item.id
-                            ? `
-                                linear-gradient(135deg,
-                                  rgba(255, 255, 255, 0.03) 0%,
-                                  rgba(255, 255, 255, 0.06) 50%,
-                                  rgba(255, 255, 255, 0.03) 100%
-                                )
-                              `
+                            ? 'rgba(255, 255, 255, 0.03)'
                             : 'transparent',
-                          border: activeSection === item.id
-                            ? '1px solid rgba(220, 38, 38, 0.2)'
-                            : hoveredItem === item.id
-                            ? '1px solid rgba(255, 255, 255, 0.1)'
-                            : '1px solid transparent'
+                          borderLeft: activeSection === item.id ? '2px solid rgb(220, 38, 38)' : 'none'
                         }}
-                        animate={{
-                          boxShadow: activeSection === item.id
-                            ? '0 4px 20px rgba(220, 38, 38, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                            : hoveredItem === item.id
-                            ? '0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
-                            : '0 0 0 rgba(0, 0, 0, 0)'
-                        }}
-                        transition={{ duration: 0.3 }}
                       />
 
-                      {/* Active Indicator Glow */}
-                      {activeSection === item.id && (
-                        <motion.div
-                          className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px]"
-                          style={{
-                            height: '60%',
-                            background: 'linear-gradient(to bottom, transparent, rgba(220, 38, 38, 0.9), transparent)',
-                            boxShadow: '0 0 6px rgba(220, 38, 38, 0.6)'
-                          }}
-                          initial={{ opacity: 0, scaleY: 0 }}
-                          animate={{ opacity: 1, scaleY: 1 }}
-                          transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-                        />
-                      )}
-
-                      {/* Icon with Enhanced Animation */}
-                      <motion.div
+                      {/* Icon */}
+                      <div
                         className={`
-                          relative flex-shrink-0 flex items-center justify-center
+                          relative flex-shrink-0 flex items-center justify-center transition-colors duration-200
                           ${isExpanded ? 'w-4 h-4' : 'w-5 h-5'}
-                        `}
-                        animate={{
-                          color: activeSection === item.id
-                            ? 'rgb(248, 113, 113)'
+                          ${activeSection === item.id
+                            ? 'text-red-400'
                             : hoveredItem === item.id
-                            ? 'rgb(255, 255, 255)'
-                            : 'rgb(161, 161, 170)'
-                        }}
-                        transition={{ duration: 0.2 }}
+                            ? 'text-white'
+                            : 'text-zinc-400'
+                          }
+                        `}
                       >
                         {item.icon}
-                      </motion.div>
+                      </div>
 
-                      {/* Label with Premium Typography */}
+                      {/* Label */}
                       <AnimatePresence>
                         {isExpanded && (
                           <motion.span
-                            initial={{ opacity: 0, width: 0, x: -10 }}
-                            animate={{ opacity: 1, width: 'auto', x: 0 }}
-                            exit={{ opacity: 0, width: 0, x: -10 }}
-                            transition={{
-                              duration: 0.3,
-                              ease: [0.23, 1, 0.320, 1]
-                            }}
+                            initial={{ opacity: 0, width: 0 }}
+                            animate={{ opacity: 1, width: 'auto' }}
+                            exit={{ opacity: 0, width: 0 }}
+                            transition={{ duration: 0.2 }}
                             className={`
-                              ml-3 text-sm font-medium tracking-tight whitespace-nowrap overflow-hidden
+                              ml-3 text-sm font-medium whitespace-nowrap overflow-hidden
                               transition-colors duration-200
                               ${activeSection === item.id
-                                ? 'text-red-200'
+                                ? 'text-red-300'
                                 : hoveredItem === item.id
                                 ? 'text-white'
-                                : 'text-zinc-300'
+                                : 'text-zinc-400'
                               }
                             `}
                           >
@@ -389,64 +252,26 @@ export default function SideNavigation() {
                           </motion.span>
                         )}
                       </AnimatePresence>
-                    </motion.button>
+                    </button>
                   </motion.div>
                 ))}
               </div>
 
-              {/* Premium CTA Button */}
+              {/* CTA Button */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.4 }}
                 className="mt-6 px-2"
               >
-                <motion.button
+                <button
                   onClick={() => scrollToSection('#contact')}
                   className={`
-                    relative w-full overflow-hidden group/cta
-                    ${isExpanded ? 'px-4 py-2.5 rounded' : 'p-2.5 rounded mx-auto flex justify-center'}
+                    relative w-full overflow-hidden bg-red-600 hover:bg-red-500 transition-colors duration-200
+                    ${isExpanded ? 'px-4 py-2.5' : 'p-2.5 flex justify-center'}
                   `}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
                   title={!isExpanded ? "Join Pilot" : undefined}
                 >
-                  {/* CTA Background with Gradient */}
-                  <div
-                    className="absolute inset-0 rounded transition-all duration-300"
-                    style={{
-                      background: `
-                        linear-gradient(135deg,
-                          rgba(220, 38, 38, 0.8) 0%,
-                          rgba(239, 68, 68, 0.9) 50%,
-                          rgba(220, 38, 38, 0.8) 100%
-                        )
-                      `,
-                      boxShadow: `
-                        0 4px 20px rgba(220, 38, 38, 0.25),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                        inset 0 -1px 0 rgba(0, 0, 0, 0.1)
-                      `
-                    }}
-                  />
-
-                  {/* Hover Glow Effect */}
-                  <motion.div
-                    className="absolute inset-0 rounded-lg"
-                    style={{
-                      background: `
-                        linear-gradient(135deg,
-                          rgba(255, 255, 255, 0.1) 0%,
-                          rgba(255, 255, 255, 0.2) 50%,
-                          rgba(255, 255, 255, 0.1) 100%
-                        )
-                      `
-                    }}
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-
                   <div className="relative flex items-center justify-center text-white">
                     <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -454,57 +279,33 @@ export default function SideNavigation() {
                     <AnimatePresence>
                       {isExpanded && (
                         <motion.span
-                          initial={{ opacity: 0, width: 0, x: -10 }}
-                          animate={{ opacity: 1, width: 'auto', x: 0 }}
-                          exit={{ opacity: 0, width: 0, x: -10 }}
-                          transition={{ duration: 0.3 }}
-                          className="ml-2 text-sm font-semibold tracking-tight whitespace-nowrap"
+                          initial={{ opacity: 0, width: 0 }}
+                          animate={{ opacity: 1, width: 'auto' }}
+                          exit={{ opacity: 0, width: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="ml-2 text-sm font-semibold whitespace-nowrap"
                         >
                           Join Pilot
                         </motion.span>
                       )}
                     </AnimatePresence>
                   </div>
-                </motion.button>
+                </button>
               </motion.div>
             </div>
 
-            {/* Sophisticated Progress Indicator */}
-            <div className="absolute left-0 top-0 bottom-0 w-[2px] overflow-hidden">
-              {/* Progress Track */}
-              <div
-                className="absolute inset-0 w-full"
-                style={{
-                  background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02))'
-                }}
-              />
-
-              {/* Progress Fill with Glow */}
+            {/* Progress Indicator */}
+            <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-zinc-800">
               <motion.div
-                className="absolute left-0 top-0 w-full"
-                style={{
-                  background: `
-                    linear-gradient(to bottom,
-                      rgba(239, 68, 68, 0.9) 0%,
-                      rgba(220, 38, 38, 1) 50%,
-                      rgba(185, 28, 28, 0.9) 100%
-                    )
-                  `,
-                  boxShadow: '0 0 8px rgba(220, 38, 38, 0.6), 0 0 16px rgba(220, 38, 38, 0.3)'
-                }}
+                className="w-full bg-red-600"
                 initial={{ height: 0 }}
                 animate={{
                   height: `${((navItems.findIndex(item => item.id === activeSection) + 1) / navItems.length) * 100}%`
                 }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 300,
-                  damping: 30,
-                  duration: 0.6
-                }}
+                transition={{ duration: 0.3 }}
               />
             </div>
-          </motion.div>
+          </div>
         </motion.nav>
       )}
     </AnimatePresence>
