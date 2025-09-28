@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import clsx from "clsx/lite";
+import ThemeLanguageSwitcher from "../ui/ThemeLanguageSwitcher";
 
 interface NavItem {
   label: string;
@@ -252,6 +253,7 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
                   handleMouseEnter={handleMouseEnter}
                   handleMouseLeave={handleMouseLeave}
                 />
+                <ThemeLanguageSwitcher />
               </div>
             </>
           ) : (
@@ -270,10 +272,13 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
                 />
               </div>
 
-              <Logo
-                href={getFullPath("/")}
-                className={linkClasses}
-              />
+              <div className="flex items-center gap-6">
+                <Logo
+                  href={getFullPath("/")}
+                  className={linkClasses}
+                />
+                <ThemeLanguageSwitcher />
+              </div>
             </>
           )}
 
