@@ -216,64 +216,87 @@ export default function WarpBackgroundTester() {
                     color: 'white',
                     borderRightColor: 'rgb(39, 39, 42)'
                 }}>
-                <div className="p-4">
-                    <div className="mb-8">
-                        <h1 className="text-2xl font-light text-white mb-2">
+                <div className="p-5">
+                    {/* Header */}
+                    <div className="mb-6">
+                        <h1 className="text-xl font-medium text-zinc-100 tracking-tight">
                             Warp Background Tester
                         </h1>
-                        <div className="h-0.5 bg-gradient-to-r from-red-600 to-transparent"></div>
+                        <p className="text-xs text-zinc-500 mt-1">Configure and test warp animation parameters</p>
                     </div>
 
-                    {/* Status Indicator */}
-                    <div className="mb-6 flex items-center gap-2 text-xs">
-                        <div className={`w-2 h-2 rounded-full ${
-                            warpStatus === 'loaded' ? 'bg-green-500' :
-                            warpStatus === 'error' ? 'bg-red-500' :
-                            warpStatus === 'fallback' ? 'bg-yellow-500' :
-                            'bg-blue-500'
-                        } animate-pulse`}></div>
-                        <span className="text-zinc-400 uppercase tracking-wider">
-                            Status: <span className="text-zinc-300 font-medium">{warpStatus}</span>
-                        </span>
-                        {debugMode && <span className="text-zinc-500">| Renders: {renderCount}</span>}
+                    {/* Status Indicator Panel */}
+                    <div className="bg-zinc-900/30 rounded-xl p-3 border border-zinc-800/50 mb-6">
+                        <div className="flex items-center gap-2">
+                            <div className={`w-2 h-2 rounded-full animate-pulse ${
+                                warpStatus === 'loaded' ? 'bg-green-500' :
+                                warpStatus === 'error' ? 'bg-red-500' :
+                                warpStatus === 'fallback' ? 'bg-yellow-500' :
+                                'bg-blue-500'
+                            }`}></div>
+                            <span className="text-xs font-medium text-zinc-300">
+                                Status: <span className={`font-semibold ${
+                                    warpStatus === 'loaded' ? 'text-green-400' :
+                                    warpStatus === 'error' ? 'text-red-400' :
+                                    warpStatus === 'fallback' ? 'text-yellow-400' :
+                                    'text-blue-400'
+                                }`}>{warpStatus.toUpperCase()}</span>
+                            </span>
+                            {debugMode && <span className="text-zinc-500 text-xs ml-auto">Renders: {renderCount}</span>}
+                        </div>
                     </div>
 
-                    <div className="space-y-4">
-                        {/* Color Controls */}
-                        <div>
-                            <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">
-                                Colors
+                    <div className="space-y-5">
+                        {/* Color Controls Panel */}
+                        <div className="bg-zinc-900/30 rounded-xl p-4 border border-zinc-800/50">
+                            <h2 className="text-sm font-semibold text-zinc-200 mb-4 flex items-center gap-2">
+                                <svg className="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                                </svg>
+                                Color Palette
                             </h2>
 
-                            {/* Grid layout for colors */}
-                            <div className="grid grid-cols-3 gap-2">
+                            {/* Enhanced color pickers with preview */}
+                            <div className="grid grid-cols-3 gap-4">
                                 {[
                                     { key: 'color1', label: 'C1', value: params.color1 },
                                     { key: 'color2', label: 'C2', value: params.color2 },
                                     { key: 'color3', label: 'C3', value: params.color3 }
                                 ].map(({ key, label, value }) => (
-                                    <div key={key} className="flex flex-col items-center gap-1">
-                                        <label className="text-[11px] text-zinc-500 font-medium">{label}</label>
-                                        <input
-                                            type="color"
-                                            value={value}
-                                            onChange={(e) => updateParam(key, e.target.value)}
-                                            className="w-8 h-6 rounded border border-zinc-700 cursor-pointer"
-                                        />
-                                        <span className="text-[10px] font-mono text-zinc-400 truncate w-full text-center">
-                                            {value.substring(1)}
+                                    <div key={key} className="flex flex-col gap-2">
+                                        <label className="text-xs text-zinc-400 font-medium">Color {label.replace('C', '')}</label>
+                                        <div className="relative group">
+                                            <div
+                                                className="w-full h-10 rounded-lg border border-zinc-700 cursor-pointer overflow-hidden hover:border-zinc-600 transition-colors"
+                                                style={{ backgroundColor: value }}
+                                            >
+                                                <input
+                                                    type="color"
+                                                    value={value}
+                                                    onChange={(e) => updateParam(key, e.target.value)}
+                                                    className="absolute inset-0 opacity-0 cursor-pointer"
+                                                    aria-label={`Color ${label.replace('C', '')}`}
+                                                />
+                                            </div>
+                                            <div className="absolute inset-0 rounded-lg pointer-events-none group-hover:ring-2 group-hover:ring-zinc-600 group-hover:ring-opacity-50"></div>
+                                        </div>
+                                        <span className="text-[11px] font-mono text-zinc-500 text-center">
+                                            {value.toUpperCase()}
                                         </span>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Parameter Controls */}
-                        <div>
-                            <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">
-                                Parameters
+                        {/* Parameter Controls Panel */}
+                        <div className="bg-zinc-900/30 rounded-xl p-4 border border-zinc-800/50">
+                            <h2 className="text-sm font-semibold text-zinc-200 mb-4 flex items-center gap-2">
+                                <svg className="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                                </svg>
+                                Animation Parameters
                             </h2>
-                            <div className="grid grid-cols-2 gap-x-3 gap-y-2">
+                            <div className="grid grid-cols-2 gap-x-3 gap-y-3">
 
                             {[
                                 { key: 'speed', label: 'Speed', min: 0, max: 2, step: 0.05 },
@@ -286,9 +309,9 @@ export default function WarpBackgroundTester() {
                                 { key: 'distortion', label: 'Distortion', min: 0, max: 1, step: 0.01 }
                             ].map(({ key, label, min, max, step }) => (
                                 <div key={key} className="col-span-1">
-                                    <div className="flex justify-between items-center mb-1">
-                                        <label className="text-[11px] text-zinc-500 truncate">{label}</label>
-                                        <span className="text-[10px] font-mono text-zinc-400 min-w-0">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <label className="text-xs font-medium text-zinc-300">{label}</label>
+                                        <span className="text-xs font-mono text-zinc-500">
                                             {typeof params[key as keyof typeof params] === 'number'
                                                 ? (params[key as keyof typeof params] as number).toFixed(
                                                     step < 1 ? step.toString().split('.')[1]?.length || 2 : 0
@@ -303,7 +326,13 @@ export default function WarpBackgroundTester() {
                                         step={step}
                                         value={params[key as keyof typeof params] as number}
                                         onChange={(e) => updateParam(key, step < 1 ? parseFloat(e.target.value) : parseInt(e.target.value))}
-                                        className="w-full slider-compact"
+                                        className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer
+                                            [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4
+                                            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-red-500
+                                            [&::-webkit-slider-thumb]:hover:bg-red-400 [&::-webkit-slider-thumb]:transition-colors
+                                            [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full
+                                            [&::-moz-range-thumb]:bg-red-500 [&::-moz-range-thumb]:hover:bg-red-400
+                                            [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:transition-colors"
                                         aria-label={`${label}: ${params[key as keyof typeof params]}`}
                                     />
                                 </div>
@@ -311,20 +340,25 @@ export default function WarpBackgroundTester() {
                             </div>
                         </div>
 
-                        {/* Action Buttons */}
-                        <div className="space-y-2 pt-3 border-t border-zinc-800">
-                            <div className="grid grid-cols-2 gap-2">
+                        {/* Action Buttons Panel */}
+                        <div className="bg-zinc-900/30 rounded-xl p-4 border border-zinc-800/50">
+                            <h2 className="text-sm font-semibold text-zinc-200 mb-4">Actions</h2>
+                            <div className="grid grid-cols-2 gap-2 mb-3">
                                 <button
                                     onClick={copyConfig}
-                                    className="bg-zinc-800 hover:bg-zinc-700 text-white py-1.5 px-2 rounded text-[11px] font-medium transition-colors"
+                                    className="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg
+                                        hover:bg-red-500 active:bg-red-700 transition-all duration-200
+                                        shadow-sm hover:shadow-md"
                                 >
-                                    {copied ? '✓ Copied' : 'Copy'}
+                                    {copied ? '✓ Copied!' : 'Copy Config'}
                                 </button>
                                 <button
                                     onClick={resetToDefaults}
-                                    className="bg-zinc-800 hover:bg-zinc-700 text-white py-1.5 px-2 rounded text-[11px] font-medium transition-colors"
+                                    className="px-4 py-2 bg-zinc-800 text-zinc-100 text-sm font-medium rounded-lg
+                                        hover:bg-zinc-700 active:bg-zinc-900 transition-all duration-200
+                                        shadow-sm hover:shadow-md"
                                 >
-                                    Reset
+                                    Reset Defaults
                                 </button>
                             </div>
 
@@ -374,20 +408,25 @@ export default function WarpBackgroundTester() {
                             </div>
                         )}
 
-                        {/* Config Display */}
-                        <div className="mt-6 pt-4 border-t border-zinc-800">
-                            <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">Configuration</h3>
-                            <pre className="bg-black/30 border border-zinc-800 p-3 rounded text-xs overflow-x-auto text-zinc-500 font-mono">
-{`<Warp
-  color1="${params.color1}"
-  color2="${params.color2}"
-  color3="${params.color3}"
-  speed={${params.speed}}
-  swirl={${params.swirl}}
-  swirlIterations={${params.swirlIterations}}
-  shapeScale={${params.shapeScale}}
-  rotation={${params.rotation}}
-/>`}
+                        {/* Configuration Display Panel */}
+                        <div className="bg-zinc-900/30 rounded-xl p-4 border border-zinc-800/50">
+                            <h2 className="text-sm font-semibold text-zinc-200 mb-4 flex items-center gap-2">
+                                <svg className="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                </svg>
+                                Configuration Code
+                            </h2>
+                            <pre className="bg-black/50 backdrop-blur-sm p-4 rounded-lg text-xs overflow-x-auto font-mono border border-zinc-800/50">
+<code className="text-emerald-400">&lt;Warp</code>
+<code className="text-zinc-400">  color1="</code><code className="text-amber-400">{params.color1}</code><code className="text-zinc-400">"</code>
+<code className="text-zinc-400">  color2="</code><code className="text-amber-400">{params.color2}</code><code className="text-zinc-400">"</code>
+<code className="text-zinc-400">  color3="</code><code className="text-amber-400">{params.color3}</code><code className="text-zinc-400">"</code>
+<code className="text-zinc-400">  speed={{</code><code className="text-cyan-400">{params.speed}</code><code className="text-zinc-400">}}</code>
+<code className="text-zinc-400">  swirl={{</code><code className="text-cyan-400">{params.swirl}</code><code className="text-zinc-400">}}</code>
+<code className="text-zinc-400">  swirlIterations={{</code><code className="text-cyan-400">{params.swirlIterations}</code><code className="text-zinc-400">}}</code>
+<code className="text-zinc-400">  shapeScale={{</code><code className="text-cyan-400">{params.shapeScale}</code><code className="text-zinc-400">}}</code>
+<code className="text-zinc-400">  rotation={{</code><code className="text-cyan-400">{params.rotation}</code><code className="text-zinc-400">}}</code>
+<code className="text-emerald-400">/&gt;</code>
                             </pre>
                         </div>
                     </div>
