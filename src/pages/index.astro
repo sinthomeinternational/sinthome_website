@@ -118,6 +118,10 @@ import WarpBackground from "../components/ui/WarpBackground";
 		};
 
 		function triggerAnimation() {
+			// Hide scroll indicator IMMEDIATELY, before any checks
+			const scrollIndicator = document.getElementById('scroll-indicator');
+			scrollIndicator?.classList.add('scroll-hidden');
+
 			if (hasScrolled || animationInProgress) return;
 
 			animationInProgress = true;
@@ -125,13 +129,9 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 			const emergingContent = document.getElementById('emerging-content');
 			const sinthomeTitle = document.getElementById('sinthome-title');
-			const scrollIndicator = document.getElementById('scroll-indicator');
 
 			// Step 1: Move SINTHOME title up smoothly
 			sinthomeTitle?.classList.add('title-moved');
-
-			// Step 2: Hide scroll indicator immediately
-			scrollIndicator?.classList.add('scroll-hidden');
 
 			// Step 3: Start content animation sequence
 			setTimeout(() => {
@@ -374,14 +374,15 @@ import WarpBackground from "../components/ui/WarpBackground";
 		box-shadow: 0 6px 20px rgba(168, 0, 0, 0.2);
 	}
 
-	/* Scroll indicator smooth hide */
+	/* Scroll indicator instant hide */
 	#scroll-indicator {
 		opacity: 1;
-		transition: opacity var(--animation-duration-fast) var(--animation-easing);
+		transition: opacity 0.15s ease-out; /* Even faster fade */
 	}
 
 	#scroll-indicator.scroll-hidden {
 		opacity: 0;
+		pointer-events: none; /* Prevent any interaction when hidden */
 	}
 
 	/* Performance optimizations */
