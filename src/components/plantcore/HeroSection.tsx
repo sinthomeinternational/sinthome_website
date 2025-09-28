@@ -93,10 +93,10 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
             className="flex flex-wrap justify-center gap-4 md:gap-8 text-zinc-400"
           >
             {[
-              { icon: "💰", text: "≥10% Cost Savings" },
-              { icon: "📊", text: "7% Inventory Reduction" },
-              { icon: "🚀", text: "Immediate ROI" },
-              { icon: "🏭", text: "Industry 4.0 Ready" }
+              { text: "≥10% Cost Savings" },
+              { text: "7% Inventory Reduction" },
+              { text: "Immediate ROI" },
+              { text: "Industry 4.0 Ready" }
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -105,7 +105,9 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
                 transition={{ delay: 1 + index * 0.1, duration: 0.5 }}
                 className="flex items-center gap-2 text-sm md:text-base"
               >
-                <span className="text-lg">{item.icon}</span>
+                <svg className="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
                 <span>{item.text}</span>
               </motion.div>
             ))}

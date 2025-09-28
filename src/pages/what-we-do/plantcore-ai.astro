@@ -10,16 +10,16 @@ import MissionSection from "../../components/plantcore/MissionSection";
 import MethodCards from "../../components/plantcore/MethodCards";
 import DataFlowDiagram from "../../components/plantcore/DataFlowDiagram";
 import ROIMetrics from "../../components/plantcore/ROIMetrics";
-import StickyNavigation from "../../components/plantcore/StickyNavigation";
+import SideNavigation from "../../components/plantcore/SideNavigation";
 
 // 导入工厂图片
 import factoryImage from "../../assets/plantcore-ai/factory.png";
 ---
 
-<PageLayout title="Plantcore.AI - Sinthome" showNavigation={false}>
+<PageLayout title="Plantcore.AI - Sinthome">
   <div class="relative bg-black min-h-screen">
-    <!-- Sticky Navigation -->
-    <StickyNavigation client:load />
+    <!-- Side Navigation -->
+    <SideNavigation client:load />
 
     <!-- Hero Section -->
     <HeroSection
