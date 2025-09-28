@@ -17,24 +17,9 @@ interface ThemeLanguageSwitcherProps {
 export default function ThemeLanguageSwitcher({
   className = ''
 }: ThemeLanguageSwitcherProps) {
-  // Initialize with values from browser to prevent mismatch
-  const getInitialTheme = (): ThemeId => {
-    if (typeof window !== 'undefined') {
-      return document.documentElement.classList.contains('theme-light') ? 'light' : 'dark';
-    }
-    return 'dark';
-  };
-
-  const getInitialLang = (): Language => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      return params.get('lang') === 'zh' ? 'zh' : 'en';
-    }
-    return 'en';
-  };
-
-  const [currentTheme, setCurrentTheme] = useState<ThemeId>(getInitialTheme);
-  const [currentLang, setCurrentLang] = useState<Language>(getInitialLang);
+  // Default to dark theme during SSR
+  const [currentTheme, setCurrentTheme] = useState<ThemeId>('dark');
+  const [currentLang, setCurrentLang] = useState<Language>('en');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -72,29 +57,22 @@ export default function ThemeLanguageSwitcher({
   if (!mounted) {
     // Render placeholder buttons to prevent layout shift
     // These will be replaced once React hydrates
+    // Default to dark theme appearance
     return (
       <div className={`flex items-center gap-2 ${className}`}>
         <button
-          className={`px-3 py-1.5 rounded-lg transition-colors text-sm font-medium ${
-            currentTheme === 'dark'
-              ? 'bg-zinc-800 text-white'
-              : 'bg-gray-200 text-gray-900'
-          } opacity-50 cursor-wait`}
+          className="px-3 py-1.5 rounded-lg transition-colors text-sm font-medium bg-zinc-800 text-white opacity-50 cursor-wait"
           aria-label="Loading theme switcher"
           disabled
         >
-          {currentTheme === 'dark' ? 'Light' : 'Dark'}
+          Light
         </button>
         <button
-          className={`px-3 py-1.5 rounded-lg transition-colors text-sm font-medium ${
-            currentTheme === 'dark'
-              ? 'bg-zinc-800 text-white'
-              : 'bg-gray-200 text-gray-900'
-          } opacity-50 cursor-wait`}
+          className="px-3 py-1.5 rounded-lg transition-colors text-sm font-medium bg-zinc-800 text-white opacity-50 cursor-wait"
           aria-label="Loading language switcher"
           disabled
         >
-          {currentLang === 'en' ? '中文' : 'EN'}
+          中文
         </button>
       </div>
     );
