@@ -1,7 +1,6 @@
 ---
 import RootLayout from "../layouts/RootLayout.astro";
 import WarpBackground from "../components/ui/WarpBackground";
-import "../styles/warp-drift.css";
 ---
 
 <RootLayout>
@@ -9,8 +8,7 @@ import "../styles/warp-drift.css";
 		<div id="homepage-container" class="group relative w-full h-dvh flex items-center justify-center overflow-hidden">
 			<div class="absolute w-full h-dvh -z-10 overflow-hidden">
 				{/* Enhanced Warp with directional movement */}
-				<div class="warp-drift-container">
-					<WarpBackground
+				<WarpBackground
 						color1="#000000"
 						color2="#940000"
 						color3="#000000"
@@ -23,8 +21,7 @@ import "../styles/warp-drift.css";
 						softness={0}
 						distortion={0}
 						client:load
-					/>
-				</div>
+				/>
 			</div>
 
 			<div class="absolute w-full h-dvh flex flex-col justify-center items-center z-10">
