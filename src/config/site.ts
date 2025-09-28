@@ -27,9 +27,9 @@ export const SITE_CONFIG = {
     youtube: import.meta.env.PUBLIC_YOUTUBE_URL || 'https://www.youtube.com/sinthome',
 
     // Chinese platforms
-    bilibili: import.meta.env.PUBLIC_BILIBILI_URL || 'https://bilibili.com',
-    wechat: import.meta.env.PUBLIC_WECHAT_URL || '#wechat',
-    xiaohongshu: import.meta.env.PUBLIC_XIAOHONGSHU_URL || 'https://xiaohongshu.com',
+    bilibili: import.meta.env.PUBLIC_BILIBILI_URL || 'https://space.bilibili.com/38423906',
+    wechat: import.meta.env.PUBLIC_WECHAT_URL || 'https://mp.weixin.qq.com/s/t-_H49ehMTsceQ7PZsse3A',
+    xiaohongshu: import.meta.env.PUBLIC_XIAOHONGSHU_URL || 'https://www.xiaohongshu.com/user/profile/628d9dad00000000210216c3',
   },
 
   // Payment and donation links

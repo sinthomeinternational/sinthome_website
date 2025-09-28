@@ -82,11 +82,20 @@ import WarpBackground from "../components/ui/WarpBackground";
 					</div>
 				</div>
 
-				<!-- Scroll Indicator -->
+				<!-- Enhanced Scroll Indicator -->
 				<div id="scroll-indicator" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-100 transition-opacity duration-500">
-					<div class="animate-bounce text-white/50">
-						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+					<div class="scroll-pulse-animation bg-white/20 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center border border-white/30 shadow-lg transition-all duration-300">
+						<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+						</svg>
+					</div>
+				</div>
+
+				<!-- Collapse Button (hidden by default, shown when content is visible) -->
+				<div id="collapse-button" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 pointer-events-none transition-all duration-300">
+					<div class="bg-black/40 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center border border-white/30 shadow-lg transition-all duration-300 hover:bg-black/50 hover:scale-110 cursor-pointer">
+						<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 11l7-7 7 7M5 19l7-7 7 7"></path>
 						</svg>
 					</div>
 				</div>
@@ -124,8 +133,9 @@ import WarpBackground from "../components/ui/WarpBackground";
 		}
 
 		function triggerAnimation() {
-			// Hide scroll indicator IMMEDIATELY, before any checks
+			// Hide scroll indicator and show collapse button
 			const scrollIndicator = document.getElementById('scroll-indicator');
+			const collapseButton = document.getElementById('collapse-button');
 			scrollIndicator?.classList.add('scroll-hidden');
 
 			if (hasScrolled) return;
@@ -139,6 +149,12 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 			// Step 1: Move SINTHOME title up smoothly
 			sinthomeTitle?.classList.add('title-moved');
+
+			// Show collapse button after a delay
+			animationTimeouts.push(setTimeout(() => {
+				collapseButton?.classList.remove('opacity-0', 'pointer-events-none');
+				collapseButton?.classList.add('opacity-100');
+			}, ANIMATION_CONFIG.buttonsDelay + 200));
 
 			// Step 3: Start content animation sequence
 			animationTimeouts.push(setTimeout(() => {
@@ -199,11 +215,16 @@ import WarpBackground from "../components/ui/WarpBackground";
 			const emergingContent = document.getElementById('emerging-content');
 			const sinthomeTitle = document.getElementById('sinthome-title');
 			const scrollIndicator = document.getElementById('scroll-indicator');
+			const collapseButton = document.getElementById('collapse-button');
 
 			// Remove all animation classes simultaneously for instant reset
 			sinthomeTitle?.classList.remove('title-moved');
 			emergingContent?.classList.remove('content-visible');
 			scrollIndicator?.classList.remove('scroll-hidden');
+
+			// Hide collapse button and show scroll indicator
+			collapseButton?.classList.add('opacity-0', 'pointer-events-none');
+			collapseButton?.classList.remove('opacity-100');
 
 			// Reset all child elements and micro-animations
 			document.querySelectorAll('.element-visible').forEach(el => {
@@ -257,6 +278,24 @@ import WarpBackground from "../components/ui/WarpBackground";
 			}
 		};
 
+		// Click handler for scroll indicator
+		const scrollIndicatorClickHandler = (e: Event) => {
+			e.preventDefault();
+			triggerAnimation();
+		};
+
+		// Click handler for collapse button
+		const collapseButtonClickHandler = (e: Event) => {
+			e.preventDefault();
+			resetAnimation();
+		};
+
+		// Add click listeners
+		const scrollIndicator = document.getElementById('scroll-indicator');
+		const collapseButton = document.getElementById('collapse-button');
+		scrollIndicator?.addEventListener('click', scrollIndicatorClickHandler);
+		collapseButton?.addEventListener('click', collapseButtonClickHandler);
+
 		// Attach listeners ONLY to the homepage container, not window
 		container.addEventListener('wheel', wheelHandler, { passive: false });
 		container.addEventListener('touchstart', touchStartHandler, { passive: true });
@@ -273,6 +312,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 			container.removeEventListener('touchstart', touchStartHandler);
 			container.removeEventListener('touchmove', touchMoveHandler);
 			container.removeEventListener('keydown', keydownHandler);
+			scrollIndicator?.removeEventListener('click', scrollIndicatorClickHandler);
+			collapseButton?.removeEventListener('click', collapseButtonClickHandler);
 		};
 	}
 
@@ -472,7 +513,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 		box-shadow: 0 6px 20px rgba(168, 0, 0, 0.2);
 	}
 
-	/* Scroll indicator instant hide */
+	/* Enhanced scroll indicator with pulsing circle */
 	#scroll-indicator {
 		opacity: 1;
 		transition: opacity 0.15s ease-out; /* Even faster fade */
@@ -481,6 +522,31 @@ import WarpBackground from "../components/ui/WarpBackground";
 	#scroll-indicator.scroll-hidden {
 		opacity: 0;
 		pointer-events: none; /* Prevent any interaction when hidden */
+	}
+
+	/* Custom pulse animation for scroll indicator */
+	@keyframes scrollPulse {
+		0%, 100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+		50% {
+			transform: scale(1.05);
+			opacity: 0.9;
+		}
+	}
+
+	.scroll-pulse-animation {
+		animation: scrollPulse 2s ease-in-out infinite;
+	}
+
+	/* Add hover effect for scroll indicator */
+	#scroll-indicator:hover .scroll-pulse-animation {
+		animation-play-state: paused;
+		transform: scale(1.1);
+		background-color: rgba(255, 255, 255, 0.25);
+		border-color: rgba(255, 255, 255, 0.4);
+		cursor: pointer;
 	}
 
 	/* Performance optimizations */

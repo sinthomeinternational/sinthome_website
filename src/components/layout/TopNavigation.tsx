@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import clsx from "clsx/lite";
+import ThemeLanguageSwitcher from "../ui/ThemeLanguageSwitcher";
+import { getCurrentLanguageClient } from "../../lib/translations";
 
 interface NavItem {
   label: string;
@@ -29,7 +31,7 @@ const navItems: NavItem[] = [
     ],
   },
   { label: "Contact", href: "/contact" },
-  { label: "Donate", href: "/donate" },
+  { label: "Support Us", href: "/donate" },
 ];
 
 interface TopNavigationProps {
@@ -48,7 +50,7 @@ const logoStyle = {
 
 // Logo component
 const Logo = ({ href, className }: { href: string; className: string }) => (
-  <a href={href} className={className} style={logoStyle}>
+  <a href={href} className={className} style={logoStyle} aria-label="SINTHOME homepage">
     SINTHOME
   </a>
 );
@@ -151,15 +153,31 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Handle base path for GitHub Pages and theme routing
+  // Get current language from URL
+  const [currentLang, setCurrentLang] = useState('en');
+
+  useEffect(() => {
+    const lang = getCurrentLanguageClient();
+    setCurrentLang(lang);
+  }, []);
+
+  // Handle base path for GitHub Pages, theme routing, and language parameter
   const getFullPath = (path: string) => {
     const basePath = import.meta.env.BASE_URL || "";
     const themePath = theme === 'redwhite' ? 'redwhite/' : '';
 
+    let fullPath: string;
     if (path.startsWith("/")) {
-      return `${basePath}${themePath}${path.slice(1)}`;
+      fullPath = `${basePath}${themePath}${path.slice(1)}`;
+    } else {
+      fullPath = path;
     }
-    return path;
+
+    // Preserve language parameter in all navigation links
+    if (currentLang === 'zh') {
+      return `${fullPath}${fullPath.includes('?') ? '&' : '?'}lang=zh`;
+    }
+    return fullPath;
   };
 
   const handleMouseEnter = (label: string) => {
@@ -252,6 +270,7 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
                   handleMouseEnter={handleMouseEnter}
                   handleMouseLeave={handleMouseLeave}
                 />
+                <ThemeLanguageSwitcher />
               </div>
             </>
           ) : (
@@ -270,10 +289,13 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
                 />
               </div>
 
-              <Logo
-                href={getFullPath("/")}
-                className={linkClasses}
-              />
+              <div className="flex items-center gap-6">
+                <Logo
+                  href={getFullPath("/")}
+                  className={linkClasses}
+                />
+                <ThemeLanguageSwitcher />
+              </div>
             </>
           )}
 

@@ -8,28 +8,46 @@ const {
   title,
   description,
   showNavigation = true,
-  useInfoLayout = false
+  useInfoLayout = false,
+  useContentLayout = false
 } = Astro.props;
 ---
 
 <RootLayout title={title} description={description}>
-  {showNavigation && !useInfoLayout && (
+  {showNavigation && !useInfoLayout && !useContentLayout && (
     <TopNavigation client:load />
     <div class="h-16"></div> <!-- Spacer for fixed nav -->
   )}
 
-  {useInfoLayout ? (
+  {useContentLayout ? (
+    <!-- Content-focused layout without warp animation for better readability -->
+    <div class="bg-black min-h-screen">
+      {showNavigation && (
+        <TopNavigation variant="static" client:load />
+      )}
+      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="[&_h1]:text-red-600 pt-8 pb-20 text-white">
+          <slot />
+        </div>
+      </main>
+      <Footer />
+    </div>
+  ) : useInfoLayout ? (
     <div class="flex relative gap-4 w-full max-w-screen-xl">
-      <nav class="relative w-4 md:min-w-[18rem] xl:min-w-[24rem] sm:min-h-screen sm:ml-4 sm:pb-4">
-        <div class="w-full h-full max-sm:w-4 md:max-w-[18rem] xl:max-w-[24rem] fixed -z-10 sm:bottom-4 sm:rounded-b-full overflow-hidden">
+      <!-- Bookmark-style warp animation -->
+      <nav class="relative w-4 md:min-w-[4rem] xl:min-w-[5rem] sm:min-h-screen sm:ml-8 sm:pb-4">
+        <div class="w-full h-[80vh] max-sm:w-4 md:max-w-[3rem] xl:max-w-[4rem] fixed top-[10vh] -z-10 sm:rounded-full overflow-hidden shadow-2xl">
           <WarpBackground
-            color1="#fca5a5"
-            color2="#ef4444"
-            color3="#b91c1c"
+            color1="#000000"
+            color2="#940000"
+            color3="#000000"
             speed={0.15}
-            swirl={1.5}
-            swirlIterations={10}
-            shapeScale={0.3}
+            swirl={0.98}
+            swirlIterations={20}
+            shapeScale={0.08}
+            rotation={0.55}
+            scale={0.3}
+            softness={0}
             client:load
           />
         </div>
@@ -39,7 +57,7 @@ const {
         {showNavigation && (
           <TopNavigation variant="static" client:load />
         )}
-        <div class="[&_h1]:text-red-600 pt-8 pb-20 text-white">
+        <div class="[&_h1]:text-red-600 pt-8 pb-20 text-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <slot />
         </div>
         <Footer />

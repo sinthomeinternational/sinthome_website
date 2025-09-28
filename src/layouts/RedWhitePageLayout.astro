@@ -39,7 +39,7 @@ const {
         {showNavigation && (
           <TopNavigation variant="static" theme="redwhite" client:load />
         )}
-        <div class="[&_h1]:text-red-600 pt-8 pb-20 text-black">
+        <div class="[&_h1]:text-red-600 pt-8 pb-20 text-black max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <slot />
         </div>
         <Footer />
@@ -47,7 +47,7 @@ const {
     </div>
   ) : (
     <main class="bg-white min-h-screen text-black">
-      <div class="container mx-auto px-4 py-8 [&_h1]:text-red-600">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 [&_h1]:text-red-600">
         <slot />
       </div>
       <Footer />
