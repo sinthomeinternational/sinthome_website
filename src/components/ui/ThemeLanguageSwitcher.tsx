@@ -23,10 +23,10 @@ export default function ThemeLanguageSwitcher({
 
   useEffect(() => {
     setMounted(true);
-    // Get stored theme preference
-    const storedTheme = getStoredTheme() || 'dark';
-    setCurrentTheme(storedTheme);
-    applyTheme(storedTheme);
+    // Get current theme from DOM (already applied by inline script)
+    const root = document.documentElement;
+    const currentThemeFromDOM = root.classList.contains('theme-light') ? 'light' : 'dark';
+    setCurrentTheme(currentThemeFromDOM);
 
     // Get current language from URL
     const lang = getCurrentLanguageClient();

@@ -44,8 +44,21 @@ const defaultDescription = "A public-interest community reconstructing new relat
 		<ClientRouter />
 		<LoadingIndicator color="#f4f4f5" height="2px" />
 
+		<!-- Inline script to prevent theme flash -->
+		<script is:inline>
+			(function() {
+				// Get stored theme or default to dark
+				const storedTheme = localStorage.getItem('theme') || 'dark';
+
+				// Apply theme classes to html element
+				document.documentElement.classList.add(`theme-${storedTheme}`);
+
+				// Apply data attribute for CSS targeting
+				document.documentElement.setAttribute('data-theme', storedTheme);
+			})();
+		</script>
 	</head>
-	<body class="font-sans min-h-screen bg-black">
+	<body class="font-sans min-h-screen">
 		<slot />
 	</body>
 </html>
