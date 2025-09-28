@@ -2,7 +2,7 @@
 
 A modern, responsive website for Sinthome - a public-interest community focused on reconstructing new relations of production through the integration of knowledge learning, theoretical critique, and social praxis.
 
-**Live Site**: Deployed on Vercel with automatic branch previews
+**Live Site**: [https://sinthome-website.vercel.app/](https://sinthome-website.vercel.app/) - Deployed on Vercel with automatic branch previews
 
 ## 🎯 Mission
 
