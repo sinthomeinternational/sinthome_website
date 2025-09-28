@@ -48,7 +48,7 @@ const logoStyle = {
 
 // Logo component
 const Logo = ({ href, className }: { href: string; className: string }) => (
-  <a href={href} className={className} style={logoStyle}>
+  <a href={href} className={className} style={logoStyle} aria-label="SINTHOME homepage">
     SINTHOME
   </a>
 );
