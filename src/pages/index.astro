@@ -97,7 +97,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 <script>
 	// Professional smooth animation logic - scoped to homepage container only
-	document.addEventListener('DOMContentLoaded', () => {
+	function initializeHomepageAnimations() {
 		const container = document.getElementById('homepage-container');
 
 		// Only proceed if we're on the homepage
@@ -212,8 +212,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 			});
 		}
 
-		// Attach listeners ONLY to the homepage container, not window
-		container.addEventListener('wheel', (e) => {
+		// Store event handler references for cleanup
+		const wheelHandler = (e: WheelEvent) => {
 			// Only prevent default within the homepage container
 			e.preventDefault();
 			e.stopPropagation();
@@ -223,16 +223,15 @@ import WarpBackground from "../components/ui/WarpBackground";
 			} else if (e.deltaY < 0) {
 				resetAnimation();
 			}
-		}, { passive: false });
+		};
 
-		// Touch support - also scoped to container
 		let touchStartY = 0;
 
-		container.addEventListener('touchstart', (e) => {
+		const touchStartHandler = (e: TouchEvent) => {
 			touchStartY = e.touches[0].clientY;
-		}, { passive: true });
+		};
 
-		container.addEventListener('touchmove', (e) => {
+		const touchMoveHandler = (e: TouchEvent) => {
 			e.preventDefault();
 			e.stopPropagation();
 
@@ -244,10 +243,9 @@ import WarpBackground from "../components/ui/WarpBackground";
 			} else if (deltaY < -30) {
 				resetAnimation();
 			}
-		}, { passive: false });
+		};
 
-		// Keyboard support - only when homepage is focused
-		container.addEventListener('keydown', (e) => {
+		const keydownHandler = (e: KeyboardEvent) => {
 			if (e.key === 'ArrowDown' || e.key === ' ') {
 				e.preventDefault();
 				e.stopPropagation();
@@ -257,17 +255,53 @@ import WarpBackground from "../components/ui/WarpBackground";
 				e.stopPropagation();
 				resetAnimation();
 			}
-		});
+		};
+
+		// Attach listeners ONLY to the homepage container, not window
+		container.addEventListener('wheel', wheelHandler, { passive: false });
+		container.addEventListener('touchstart', touchStartHandler, { passive: true });
+		container.addEventListener('touchmove', touchMoveHandler, { passive: false });
+		container.addEventListener('keydown', keydownHandler);
 
 		// Make container focusable for keyboard events
 		container.setAttribute('tabindex', '0');
 
-		// Cleanup function for when navigating away
-		document.addEventListener('astro:before-swap', () => {
-			// Remove all event listeners when navigating away
-			const newContainer = container.cloneNode(true);
-			container.parentNode?.replaceChild(newContainer, container);
-		});
+		// Return cleanup function
+		return () => {
+			clearAllAnimations();
+			container.removeEventListener('wheel', wheelHandler);
+			container.removeEventListener('touchstart', touchStartHandler);
+			container.removeEventListener('touchmove', touchMoveHandler);
+			container.removeEventListener('keydown', keydownHandler);
+		};
+	}
+
+	// Global variable to store cleanup function
+	let cleanupHomepageAnimations: (() => void) | null = null;
+
+	// Initialize on first load
+	document.addEventListener('DOMContentLoaded', () => {
+		cleanupHomepageAnimations = initializeHomepageAnimations();
+	});
+
+	// Re-initialize after Astro navigation
+	document.addEventListener('astro:after-swap', () => {
+		// Clean up previous instance if it exists
+		if (cleanupHomepageAnimations) {
+			cleanupHomepageAnimations();
+			cleanupHomepageAnimations = null;
+		}
+
+		// Initialize new instance if we're on the homepage
+		cleanupHomepageAnimations = initializeHomepageAnimations();
+	});
+
+	// Clean up before navigation
+	document.addEventListener('astro:before-swap', () => {
+		if (cleanupHomepageAnimations) {
+			cleanupHomepageAnimations();
+			cleanupHomepageAnimations = null;
+		}
 	});
 </script>
 
