@@ -29,7 +29,7 @@ const navItems: NavItem[] = [
     ],
   },
   { label: "Contact", href: "/contact" },
-  { label: "Donate", href: "/donate" },
+  { label: "Support Us", href: "/donate" },
 ];
 
 interface TopNavigationProps {
