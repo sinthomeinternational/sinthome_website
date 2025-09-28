@@ -392,18 +392,36 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 	/* Professional Animation System */
 
-	/* Initial hidden state for content */
-	.content-hidden {
-		opacity: 0;
-		transform: translateY(2rem);
-		transition: opacity var(--animation-duration-slow) var(--animation-easing),
-					transform var(--animation-duration-slow) var(--animation-easing);
+	/* Initial hidden state for content - desktop */
+	@media (min-width: 768px) {
+		.content-hidden.absolute-content {
+			opacity: 0;
+			transform: translateX(-50%) translateY(2rem);
+			transition: opacity var(--animation-duration-slow) var(--animation-easing),
+						transform var(--animation-duration-slow) var(--animation-easing);
+		}
+
+		/* Content visible state - desktop */
+		.content-hidden.content-visible.absolute-content {
+			opacity: 1;
+			transform: translateX(-50%) translateY(0);
+		}
 	}
 
-	/* Content visible state */
-	.content-hidden.content-visible {
-		opacity: 1;
-		transform: translateY(0);
+	/* Initial hidden state for content - mobile */
+	@media (max-width: 767px) {
+		.content-hidden {
+			opacity: 0;
+			transform: translateY(2rem);
+			transition: opacity var(--animation-duration-slow) var(--animation-easing),
+						transform var(--animation-duration-slow) var(--animation-easing);
+		}
+
+		/* Content visible state - mobile */
+		.content-hidden.content-visible {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	/* Individual element initial states */
