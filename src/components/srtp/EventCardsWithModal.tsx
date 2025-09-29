@@ -43,11 +43,11 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
             <div className="bg-black border border-zinc-800 rounded-lg overflow-hidden hover:border-red-600/50 transition-all duration-300 hover:shadow-2xl hover:shadow-red-900/20">
               {/* Event Poster */}
               {event.data.poster && (
-                <div className="relative h-64 overflow-hidden bg-black">
+                <div className="relative aspect-[3/4] overflow-hidden bg-black">
                   <img
                     src={typeof event.data.poster === 'string' ? event.data.poster : event.data.poster.src}
                     alt={`${event.data.title} poster`}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70" />
 
@@ -120,11 +120,11 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
 
             {/* Modal Header with Image */}
             {selectedEvent.data.poster && (
-              <div className="relative h-72 overflow-hidden bg-black">
+              <div className="relative h-96 overflow-hidden bg-black">
                 <img
                   src={typeof selectedEvent.data.poster === 'string' ? selectedEvent.data.poster : selectedEvent.data.poster.src}
                   alt={`${selectedEvent.data.title} poster`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
 
