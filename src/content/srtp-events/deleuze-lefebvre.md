@@ -2,7 +2,7 @@
 title: "From Deleuze to Lefebvre: The Production of Social Space"
 titleZh: "从德勒兹到列斐伏尔：社会空间的生产"
 type: "Philosophy Lecture"
-date: 2024-09-28
+date: 2025-04-12
 speaker: "S.R.T.P. Collective"
 location: "175 Washington St, Brighton, MA"
 duration: "2 hours"

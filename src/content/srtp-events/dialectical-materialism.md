@@ -2,7 +2,7 @@
 title: "Dialectics: What is Marx's Dialectical Materialism?"
 titleZh: "辩证法：什么是马克思的辩证唯物主义？"
 type: "Reading Seminar"
-date: 2024-10-19
+date: 2025-03-22
 speaker: "S.R.T.P. Collective"
 location: "175 Washington St, Brighton, MA"
 duration: "2 hours"
