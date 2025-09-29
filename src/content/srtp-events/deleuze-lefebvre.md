@@ -7,7 +7,7 @@ speaker: "S.R.T.P. Collective"
 location: "175 Washington St, Brighton, MA"
 duration: "2 hours"
 recordingUrl: "https://www.bilibili.com/video/BV1xUmMYSEnQ/"
-poster: "../../assets/srtp/deleuze-poster.jpg"
+poster: "../../assets/srtp/deleuze-poster.png"
 eventPhoto: "../../assets/srtp/deleuze-event.png"
 tags: ["Deleuze", "Lefebvre", "Space Theory", "Urban Studies", "Critical Theory"]
 featured: false
