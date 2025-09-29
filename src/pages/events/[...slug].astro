@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
 import H1 from '../../components/ui/H1.astro';
@@ -18,8 +18,10 @@ interface Props {
 }
 
 const { event } = Astro.props;
-const { Content } = await event.render();
 const lang = getLanguageFromURL(Astro.url);
+
+// Render the content if available
+const { Content } = event.rendered ? { Content: () => event.rendered?.Content } : await render(event);
 
 // Format date
 const formatDate = (date: Date) => {
@@ -125,7 +127,7 @@ const formatDate = (date: Date) => {
 
       <!-- Event Description -->
       <section class="prose prose-invert prose-zinc max-w-none">
-        <Content />
+        {Content && <Content />}
       </section>
 
       <!-- Tags -->
