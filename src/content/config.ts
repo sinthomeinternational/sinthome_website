@@ -20,4 +20,25 @@ const articles = defineCollection({
     }),
 });
 
-export const collections = { articles };
+const srtpEvents = defineCollection({
+    loader: glob({ pattern: "**/*.md", base: "./src/content/srtp-events" }),
+    schema: ({ image }) => z.object({
+        title: z.string(),
+        titleZh: z.string(),
+        type: z.enum(["Reading Seminar", "Philosophy Lecture", "Workshop", "Discussion"]),
+        date: z.coerce.date(),
+        speaker: z.string(),
+        location: z.string(),
+        duration: z.string(),
+        recordingUrl: z.string().url().optional(),
+        poster: z.string(),
+        eventPhoto: z.string().optional(),
+        tags: z.array(z.string()),
+        featured: z.boolean().default(false),
+        synopsis: z.string(),
+        synopsisZh: z.string(),
+        quote: z.string().optional(),
+    }),
+});
+
+export const collections = { articles, srtpEvents };
