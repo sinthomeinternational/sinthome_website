@@ -105,19 +105,7 @@ const lang = getLanguageFromURL(Astro.url);
         <!-- Event Cards with Modal -->
         <EventCardsWithModal events={sortedEvents} lang={lang} client:load />
 
-        <!-- OLD CONTENT TEMPORARILY HIDDEN -->
-        <div class="space-y-12 hidden">
-          <!-- Event 1: The Suffering Body -->
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-2xl font-bold text-red-400 mb-3">【Philosophy Lecture】The Suffering Body: From Merleau-Ponty to Nezha</h3>
-
-            <!-- Event Images -->
-            <div class="grid md:grid-cols-2 gap-4 mb-6">
-              <div>
-                <Image src={nezhaPoster} alt="Nezha Event Poster" class="w-full rounded-lg" />
-              </div>
-              <div>
-                <Image src={nezhaEvent} alt="Nezha Event Photo" class="w-full rounded-lg" />
+        <!-- OLD CONTENT REMOVED - Now using EventCardsWithModal component -->
               </div>
             </div>
 
@@ -162,10 +150,10 @@ const lang = getLanguageFromURL(Astro.url);
             <!-- Event Images -->
             <div class="grid md:grid-cols-2 gap-4 mb-6">
               <div>
-                <Image src={dialecticsPoster} alt="Dialectics Event Poster" class="w-full rounded-lg" />
+                <!-- Image removed - poster displayed in EventCardsWithModal -->
               </div>
               <div>
-                <Image src={dialecticsEvent} alt="Dialectics Event Photo" class="w-full rounded-lg" />
+                <!-- Image removed - event photo displayed in EventCardsWithModal -->
               </div>
             </div>
 
@@ -207,10 +195,10 @@ const lang = getLanguageFromURL(Astro.url);
             <!-- Event Images -->
             <div class="grid md:grid-cols-2 gap-4 mb-6">
               <div>
-                <Image src={deleuzePoster} alt="Deleuze Event Poster" class="w-full rounded-lg" />
+                <!-- Image removed - poster displayed in EventCardsWithModal -->
               </div>
               <div>
-                <Image src={deleuzeEvent} alt="Deleuze Event Photo" class="w-full rounded-lg" />
+                <!-- Image removed - event photo displayed in EventCardsWithModal -->
               </div>
             </div>
 
