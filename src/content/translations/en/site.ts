@@ -21,7 +21,7 @@ export const enContent: SiteContent = {
       },
       { label: 'Upcoming Events', href: '/events' },
       { label: 'Contact', href: '/contact' },
-      { label: 'Donate', href: '/donate' },
+      { label: 'Support Us', href: '/donate' },
     ],
     logo: {
       text: 'SINTHOME',

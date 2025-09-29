@@ -21,7 +21,7 @@ export const zhContent: SiteContent = {
       },
       { label: '活动', href: '/events' },
       { label: '联系我们', href: '/contact' },
-      { label: '捐赠', href: '/donate' },
+      { label: '支持我们', href: '/donate' },
     ],
     logo: {
       text: 'SINTHOME',
