@@ -76,6 +76,10 @@ export const zhContent: SiteContent = {
       cancel: '取消',
       back: '返回',
       next: '下一步',
+      themeLight: '浅色',
+      themeDark: '深色',
+      languageChinese: '中文',
+      languageEnglish: 'EN',
     },
     messages: {
       loading: '加载中...',

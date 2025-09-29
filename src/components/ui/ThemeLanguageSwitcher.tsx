@@ -7,7 +7,7 @@
 import { useState, useEffect } from 'react';
 import type { Language } from '../../config/languages';
 import type { ThemeId } from '../../config/themes';
-import { getCurrentLanguageClient } from '../../lib/translations';
+import { getCurrentLanguageClient, useTranslations } from '../../lib/translations';
 import { getStoredTheme, applyTheme } from '../../config/themes';
 
 interface ThemeLanguageSwitcherProps {
@@ -21,6 +21,9 @@ export default function ThemeLanguageSwitcher({
   const [currentTheme, setCurrentTheme] = useState<ThemeId>('dark');
   const [currentLang, setCurrentLang] = useState<Language>('en');
   const [mounted, setMounted] = useState(false);
+
+  // Get translations
+  const translations = useTranslations();
 
   useEffect(() => {
     setMounted(true);
@@ -66,6 +69,25 @@ export default function ThemeLanguageSwitcher({
     window.location.href = url.toString();
   };
 
+  // Get button labels from translations or use defaults
+  const getThemeButtonLabel = () => {
+    if (!translations?.common?.buttons) {
+      return currentTheme === 'dark' ? 'Light' : 'Dark';
+    }
+    return currentTheme === 'dark'
+      ? translations.common.buttons.themeLight
+      : translations.common.buttons.themeDark;
+  };
+
+  const getLanguageButtonLabel = () => {
+    if (!translations?.common?.buttons) {
+      return currentLang === 'en' ? '中文' : 'EN';
+    }
+    return currentLang === 'en'
+      ? translations.common.buttons.languageChinese
+      : translations.common.buttons.languageEnglish;
+  };
+
   if (!mounted) {
     // Render placeholder buttons to prevent layout shift
     // These will be replaced once React hydrates
@@ -102,7 +124,7 @@ export default function ThemeLanguageSwitcher({
         }`}
         aria-label={`Switch to ${currentTheme === 'dark' ? 'light' : 'dark'} theme`}
       >
-        {currentTheme === 'dark' ? 'Light' : 'Dark'}
+        {getThemeButtonLabel()}
       </button>
 
       {/* Language Switcher */}
@@ -115,7 +137,7 @@ export default function ThemeLanguageSwitcher({
         }`}
         aria-label={`Switch to ${currentLang === 'en' ? 'Chinese' : 'English'}`}
       >
-        {currentLang === 'en' ? '中文' : 'EN'}
+        {getLanguageButtonLabel()}
       </button>
     </div>
   );

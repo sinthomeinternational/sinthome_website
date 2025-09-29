@@ -76,6 +76,10 @@ export const enContent: SiteContent = {
       cancel: 'Cancel',
       back: 'Back',
       next: 'Next',
+      themeLight: 'Light',
+      themeDark: 'Dark',
+      languageChinese: '中文',
+      languageEnglish: 'EN',
     },
     messages: {
       loading: 'Loading...',
