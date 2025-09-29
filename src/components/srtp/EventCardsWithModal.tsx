@@ -76,12 +76,17 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                 </div>
 
                 {/* Speaker */}
-                <div className="flex items-center gap-2 text-sm text-zinc-500 mb-4">
+                <div className="flex items-center gap-2 text-sm text-zinc-500 mb-3">
                   <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                   <span className="line-clamp-1">{event.data.speaker}</span>
                 </div>
+
+                {/* Synopsis */}
+                <p className="text-sm text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
+                  {lang === 'zh' ? event.data.synopsisZh : event.data.synopsis}
+                </p>
 
                 {/* View Details Button */}
                 <div className="flex items-center gap-2 text-red-600 font-semibold group-hover:text-red-400 transition-colors">
