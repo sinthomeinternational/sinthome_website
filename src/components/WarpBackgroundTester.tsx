@@ -208,7 +208,7 @@ export default function WarpBackgroundTester() {
         <div className="relative min-h-screen bg-black text-white flex flex-row" style={{ backgroundColor: '#000000', color: 'white', display: 'flex', flexDirection: 'row' }}>
             {/* Left Panel - Controls (Fixed width, scrollable) */}
             <div
-                className="w-[420px] min-w-[420px] flex-shrink-0 h-screen overflow-y-auto bg-zinc-950 border-r border-zinc-800"
+                className="w-[420px] min-w-[420px] flex-shrink-0 h-screen overflow-y-auto bg-gradient-to-b from-zinc-900 via-zinc-950 to-black border-r border-zinc-800/50"
                 style={{
                     position: 'relative',
                     zIndex: 10,
@@ -226,7 +226,7 @@ export default function WarpBackgroundTester() {
                     </div>
 
                     {/* Status Indicator Panel */}
-                    <div className="bg-zinc-900/30 rounded-lg p-2 border border-zinc-800/50 mb-3">
+                    <div className="bg-gradient-to-r from-zinc-900/40 to-zinc-800/30 rounded-lg p-2 border border-zinc-700/30 mb-3 backdrop-blur-sm">
                         <div className="flex items-center gap-2">
                             <div className={`w-2 h-2 rounded-full animate-pulse ${
                                 warpStatus === 'loaded' ? 'bg-green-500' :
@@ -248,7 +248,7 @@ export default function WarpBackgroundTester() {
 
                     <div className="space-y-3">
                         {/* Color Controls Panel */}
-                        <div className="bg-zinc-900/30 rounded-lg p-3 border border-zinc-800/50">
+                        <div className="bg-gradient-to-br from-zinc-900/40 to-zinc-800/30 rounded-lg p-3 border border-zinc-700/30 backdrop-blur-sm shadow-lg shadow-black/20">
                             <h2 className="text-xs font-semibold text-zinc-200 mb-2 flex items-center gap-1">
                                 <svg className="w-3.5 h-3.5 text-zinc-400" style={{ width: '14px', height: '14px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
@@ -267,7 +267,7 @@ export default function WarpBackgroundTester() {
                                         <label className="text-[10px] text-zinc-400 font-medium">{label}</label>
                                         <div className="relative group">
                                             <div
-                                                className="w-12 h-6 rounded border border-zinc-700 cursor-pointer overflow-hidden hover:border-zinc-600 transition-colors"
+                                                className="w-12 h-6 rounded border-2 border-zinc-600 cursor-pointer overflow-hidden hover:border-red-500/50 transition-all duration-200 shadow-inner"
                                                 style={{ backgroundColor: value }}
                                             >
                                                 <input
@@ -288,7 +288,7 @@ export default function WarpBackgroundTester() {
                         </div>
 
                         {/* Parameter Controls Panel */}
-                        <div className="bg-zinc-900/30 rounded-lg p-3 border border-zinc-800/50">
+                        <div className="bg-gradient-to-br from-zinc-900/40 to-zinc-800/30 rounded-lg p-3 border border-zinc-700/30 backdrop-blur-sm shadow-lg shadow-black/20">
                             <h2 className="text-xs font-semibold text-zinc-200 mb-2 flex items-center gap-1">
                                 <svg className="w-3.5 h-3.5 text-zinc-400" style={{ width: '14px', height: '14px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
@@ -316,13 +316,15 @@ export default function WarpBackgroundTester() {
                                         step={step}
                                         value={params[key as keyof typeof params] as number}
                                         onChange={(e) => updateParam(key, step < 1 ? parseFloat(e.target.value) : parseInt(e.target.value))}
-                                        className="flex-1 h-1 bg-zinc-700 rounded appearance-none cursor-pointer
-                                            [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3
-                                            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-red-500
-                                            [&::-webkit-slider-thumb]:hover:bg-red-400 [&::-webkit-slider-thumb]:transition-colors
-                                            [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:rounded-full
-                                            [&::-moz-range-thumb]:bg-red-500 [&::-moz-range-thumb]:hover:bg-red-400
-                                            [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:transition-colors"
+                                        className="flex-1 h-1.5 bg-gradient-to-r from-zinc-700 to-zinc-600 rounded-full appearance-none cursor-pointer
+                                            [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3.5 [&::-webkit-slider-thumb]:h-3.5
+                                            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gradient-to-b [&::-webkit-slider-thumb]:from-red-400 [&::-webkit-slider-thumb]:to-red-600
+                                            [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:hover:from-red-300 [&::-webkit-slider-thumb]:hover:to-red-500
+                                            [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:duration-200
+                                            [&::-moz-range-thumb]:w-3.5 [&::-moz-range-thumb]:h-3.5 [&::-moz-range-thumb]:rounded-full
+                                            [&::-moz-range-thumb]:bg-gradient-to-b [&::-moz-range-thumb]:from-red-400 [&::-moz-range-thumb]:to-red-600
+                                            [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:hover:from-red-300 [&::-moz-range-thumb]:hover:to-red-500
+                                            [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:transition-all [&::-moz-range-thumb]:duration-200"
                                         aria-label={`${label}: ${params[key as keyof typeof params]}`}
                                     />
                                     <span className="text-[10px] font-mono text-zinc-500 min-w-[35px] text-right">
@@ -338,20 +340,22 @@ export default function WarpBackgroundTester() {
                         </div>
 
                         {/* Action Buttons Panel */}
-                        <div className="bg-zinc-900/30 rounded-lg p-2 border border-zinc-800/50">
+                        <div className="bg-gradient-to-br from-zinc-900/40 to-zinc-800/30 rounded-lg p-2.5 border border-zinc-700/30 backdrop-blur-sm shadow-lg shadow-black/20">
                             <h2 className="text-xs font-semibold text-zinc-200 mb-2">Actions</h2>
                             <div className="flex gap-1 mb-2">
                                 <button
                                     onClick={copyConfig}
-                                    className="flex-1 px-2 py-1.5 bg-red-600 text-white text-[11px] font-medium rounded
-                                        hover:bg-red-500 active:bg-red-700 transition-colors"
+                                    className="flex-1 px-3 py-1.5 bg-gradient-to-b from-red-500 to-red-600 text-white text-[11px] font-semibold rounded-md
+                                        hover:from-red-400 hover:to-red-500 active:from-red-600 active:to-red-700
+                                        transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-[1.02]"
                                 >
                                     {copied ? '✓ Copied' : 'Copy'}
                                 </button>
                                 <button
                                     onClick={resetToDefaults}
-                                    className="flex-1 px-2 py-1.5 bg-zinc-700 text-zinc-100 text-[11px] font-medium rounded
-                                        hover:bg-zinc-600 active:bg-zinc-800 transition-colors"
+                                    className="flex-1 px-3 py-1.5 bg-gradient-to-b from-zinc-600 to-zinc-700 text-zinc-100 text-[11px] font-semibold rounded-md
+                                        hover:from-zinc-500 hover:to-zinc-600 active:from-zinc-700 active:to-zinc-800
+                                        transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-[1.02]"
                                 >
                                     Reset
                                 </button>
@@ -361,9 +365,9 @@ export default function WarpBackgroundTester() {
                             <div className="flex gap-1">
                                 <button
                                     onClick={() => setDebugMode(!debugMode)}
-                                    className={`flex-1 px-2 py-1 rounded text-[10px] font-medium transition-colors ${
-                                        debugMode ? 'bg-green-600/20 text-green-400' : 'bg-zinc-800 text-zinc-400'
-                                    }`}
+                                    className={`flex-1 px-2 py-1 rounded-md text-[10px] font-medium transition-all duration-200 shadow-sm ${
+                                        debugMode ? 'bg-gradient-to-b from-green-600/30 to-green-700/30 text-green-400 shadow-green-900/20' : 'bg-gradient-to-b from-zinc-700 to-zinc-800 text-zinc-300'
+                                    } hover:shadow-md transform hover:scale-[1.02]`}
                                     aria-label={`Debug mode ${debugMode ? 'on' : 'off'}`}
                                 >
                                     Debug
@@ -377,14 +381,14 @@ export default function WarpBackgroundTester() {
                                             setWarpStatus('loaded');
                                         }, 500);
                                     }}
-                                    className="flex-1 px-2 py-1 bg-zinc-800 text-zinc-400 rounded hover:bg-zinc-700 text-[10px] font-medium transition-colors"
+                                    className="flex-1 px-2 py-1 bg-gradient-to-b from-zinc-700 to-zinc-800 text-zinc-300 rounded-md hover:from-zinc-600 hover:to-zinc-700 text-[10px] font-medium transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-[1.02]"
                                     aria-label="Force reload animation"
                                 >
                                     Reload
                                 </button>
                                 <button
                                     onClick={() => setWarpStatus('fallback')}
-                                    className="flex-1 px-2 py-1 bg-zinc-800 text-zinc-400 rounded hover:bg-zinc-700 text-[10px] font-medium transition-colors"
+                                    className="flex-1 px-2 py-1 bg-gradient-to-b from-zinc-700 to-zinc-800 text-zinc-300 rounded-md hover:from-zinc-600 hover:to-zinc-700 text-[10px] font-medium transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-[1.02]"
                                     aria-label="Use fallback animation"
                                 >
                                     Fallback
@@ -404,7 +408,7 @@ export default function WarpBackgroundTester() {
                         )}
 
                         {/* Configuration Display Panel */}
-                        <div className="bg-zinc-900/30 rounded-lg p-2 border border-zinc-800/50">
+                        <div className="bg-gradient-to-br from-zinc-900/40 to-zinc-800/30 rounded-lg p-2 border border-zinc-700/30 backdrop-blur-sm shadow-lg shadow-black/20">
                             <h2 className="text-xs font-semibold text-zinc-200 mb-1 flex items-center gap-1">
                                 <svg className="w-3 h-3 text-zinc-400" style={{ width: '12px', height: '12px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
