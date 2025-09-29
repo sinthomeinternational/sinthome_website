@@ -96,7 +96,7 @@ export const SITE_CONFIG = {
       },
       { label: 'Upcoming Events', href: '/events' },
       { label: 'Contact', href: '/contact' },
-      { label: 'Donate', href: '/donate' },
+      { label: 'Support Us', href: '/donate' },
     ],
     footer: [
       { label: 'Privacy Policy', href: '/privacy' },

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import clsx from "clsx/lite";
 import type { NavigationContent, Language, Theme } from "../../content/types";
