@@ -1,0 +1,254 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import H1 from '../../components/ui/H1.astro';
+import { getLanguageFromURL } from '../../lib/translations';
+
+export async function getStaticPaths() {
+  const events = await getCollection('srtpEvents');
+  return events.map((event) => ({
+    params: { slug: event.id },
+    props: { event },
+  }));
+}
+
+interface Props {
+  event: CollectionEntry<'srtpEvents'>;
+}
+
+const { event } = Astro.props;
+const { Content } = await event.render();
+const lang = getLanguageFromURL(Astro.url);
+
+// Format date
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+---
+
+<PageLayout
+  title={`${event.data.title} - S.R.T.P. - Sinthome`}
+  description={event.data.synopsis}
+>
+  <!-- Back Navigation -->
+  <nav class="mb-8">
+    <a
+      href="/what-we-do/srtp-collection"
+      class="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      Back to S.R.T.P. Events
+    </a>
+  </nav>
+
+  <!-- Event Header -->
+  <header class="mb-12">
+    <!-- Event Type Badge -->
+    <span class="inline-block px-3 py-1 text-sm font-medium bg-red-600/20 text-red-400 rounded-full mb-4">
+      {event.data.type}
+    </span>
+
+    <!-- Title (bilingual) -->
+    <H1>{lang === 'zh' ? event.data.titleZh : event.data.title}</H1>
+
+    {lang !== 'zh' && event.data.titleZh && (
+      <p class="text-lg text-zinc-500 mt-2">{event.data.titleZh}</p>
+    )}
+
+    <!-- Event Metadata -->
+    <div class="flex flex-wrap gap-4 mt-6 text-zinc-400">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+        <span>{formatDate(event.data.date)}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span>{event.data.duration}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+        <span>{event.data.location}</span>
+      </div>
+    </div>
+
+    <!-- Recording Link -->
+    {event.data.recordingUrl && (
+      <div class="mt-6">
+        <a
+          href={event.data.recordingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
+          </svg>
+          Watch Recording
+        </a>
+      </div>
+    )}
+  </header>
+
+  <!-- Main Content Grid -->
+  <div class="grid lg:grid-cols-3 gap-12">
+    <!-- Left Column: Main Content -->
+    <div class="lg:col-span-2">
+      <!-- Synopsis -->
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-white mb-4">Synopsis</h2>
+        <p class="text-lg text-zinc-300 leading-relaxed">
+          {lang === 'zh' ? event.data.synopsisZh : event.data.synopsis}
+        </p>
+      </section>
+
+      <!-- Quote -->
+      {event.data.quote && (
+        <blockquote class="pl-6 border-l-4 border-red-600 text-xl text-zinc-400 italic mb-8">
+          "{event.data.quote}"
+        </blockquote>
+      )}
+
+      <!-- Event Description -->
+      <section class="prose prose-invert prose-zinc max-w-none">
+        <Content />
+      </section>
+
+      <!-- Tags -->
+      <section class="mt-12">
+        <h3 class="text-lg font-semibold text-white mb-4">Topics Covered</h3>
+        <div class="flex flex-wrap gap-2">
+          {event.data.tags.map((tag) => (
+            <span class="px-4 py-2 bg-zinc-900 text-zinc-400 rounded-lg text-sm">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Column: Sidebar -->
+    <aside class="lg:col-span-1">
+      <!-- Event Info Card -->
+      <div class="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 mb-6 sticky top-24">
+        <h3 class="text-lg font-semibold text-white mb-4">Event Details</h3>
+
+        <dl class="space-y-4 text-sm">
+          <div>
+            <dt class="text-zinc-500 mb-1">Speaker</dt>
+            <dd class="text-white font-medium">{event.data.speaker}</dd>
+          </div>
+
+          <div>
+            <dt class="text-zinc-500 mb-1">Date</dt>
+            <dd class="text-white">{formatDate(event.data.date)}</dd>
+          </div>
+
+          <div>
+            <dt class="text-zinc-500 mb-1">Duration</dt>
+            <dd class="text-white">{event.data.duration}</dd>
+          </div>
+
+          <div>
+            <dt class="text-zinc-500 mb-1">Location</dt>
+            <dd class="text-white">{event.data.location}</dd>
+          </div>
+
+          {event.data.recordingUrl && (
+            <div>
+              <dt class="text-zinc-500 mb-1">Recording</dt>
+              <dd>
+                <a
+                  href={event.data.recordingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-red-400 hover:text-red-300 underline"
+                >
+                  Available on Bilibili
+                </a>
+              </dd>
+            </div>
+          )}
+        </dl>
+
+        <!-- CTA Section -->
+        <div class="mt-6 pt-6 border-t border-zinc-800">
+          <h4 class="text-sm font-semibold text-white mb-3">Join Our Next Session</h4>
+          <p class="text-xs text-zinc-400 mb-4">
+            S.R.T.P. events are free and open to all. Join us every Saturday!
+          </p>
+          <a
+            href="/contact"
+            class="block w-full text-center px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition"
+          >
+            Get Updates
+          </a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Related Events -->
+  <section class="mt-16 pt-12 border-t border-zinc-800">
+    <h2 class="text-2xl font-bold text-white mb-6">More S.R.T.P. Events</h2>
+    <div class="flex gap-4">
+      <a
+        href="/what-we-do/srtp-collection"
+        class="px-6 py-3 bg-zinc-900 text-white font-medium rounded-lg hover:bg-zinc-800 transition"
+      >
+        View All Events
+      </a>
+      <a
+        href="/what-we-do/srtp-collection#join"
+        class="px-6 py-3 border border-zinc-700 text-zinc-300 font-medium rounded-lg hover:bg-zinc-900 transition"
+      >
+        Join Our Community
+      </a>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  /* Prose customization for event content */
+  .prose h2 {
+    @apply text-xl font-bold text-white mt-8 mb-4;
+  }
+
+  .prose h3 {
+    @apply text-lg font-semibold text-white mt-6 mb-3;
+  }
+
+  .prose p {
+    @apply text-zinc-300 leading-relaxed mb-4;
+  }
+
+  .prose ul {
+    @apply list-disc list-inside text-zinc-300 space-y-2 mb-4;
+  }
+
+  .prose li {
+    @apply pl-2;
+  }
+
+  .prose strong {
+    @apply text-white font-semibold;
+  }
+
+  .prose em {
+    @apply text-zinc-400 italic;
+  }
+</style>
