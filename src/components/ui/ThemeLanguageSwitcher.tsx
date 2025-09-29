@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import type { Language } from '../../config/languages';
 import type { ThemeId } from '../../config/themes';
 import { getCurrentLanguageClient, useTranslations } from '../../lib/translations';
-import { getStoredTheme, applyTheme } from '../../config/themes';
+import { applyTheme } from '../../config/themes';
 
 interface ThemeLanguageSwitcherProps {
   className?: string;
