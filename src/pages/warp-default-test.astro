@@ -1,0 +1,36 @@
+---
+import RootLayout from "../layouts/RootLayout.astro";
+import WarpBackground from "../components/ui/WarpBackground";
+---
+
+<RootLayout title="Warp Default Test">
+    <div class="min-h-screen bg-black relative">
+        <!-- Left side warp animation with default parameters -->
+        <div class="fixed left-0 top-0 w-64 h-full overflow-hidden border-r border-red-900/20">
+            <WarpBackground client:load />
+        </div>
+
+        <!-- Content area -->
+        <div class="ml-64 p-8 text-white">
+            <h1 class="text-3xl font-bold mb-4 text-red-500">Warp Default Test</h1>
+            <p class="mb-4">This page uses the WarpBackground component with default parameters.</p>
+
+            <div class="bg-zinc-900/50 p-4 rounded-lg">
+                <h2 class="text-xl font-semibold mb-2">Default Parameters:</h2>
+                <ul class="space-y-1 font-mono text-sm">
+                    <li>color1: #000000 (black)</li>
+                    <li>color2: #940000 (dark red - same as homepage)</li>
+                    <li>color3: #000000 (black)</li>
+                    <li>speed: 0.3</li>
+                    <li>swirl: 0.98</li>
+                    <li>swirlIterations: 41</li>
+                    <li>shapeScale: 0.7</li>
+                    <li>rotation: 0.55</li>
+                    <li>scale: 0.5</li>
+                    <li>softness: 0</li>
+                    <li>distortion: 0</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</RootLayout>
