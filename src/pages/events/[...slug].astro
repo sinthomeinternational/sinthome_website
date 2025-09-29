@@ -7,21 +7,26 @@ import { getLanguageFromURL } from '../../lib/translations';
 
 export async function getStaticPaths() {
   const events = await getCollection('srtpEvents');
-  return events.map((event) => ({
-    params: { slug: event.id },
-    props: { event },
-  }));
+  const eventsWithContent = await Promise.all(
+    events.map(async (event) => ({
+      params: { slug: event.id },
+      props: {
+        event,
+        content: await render(event)
+      },
+    }))
+  );
+  return eventsWithContent;
 }
 
 interface Props {
   event: CollectionEntry<'srtpEvents'>;
+  content: Awaited<ReturnType<typeof render>>;
 }
 
-const { event } = Astro.props;
+const { event, content } = Astro.props;
+const { Content } = content;
 const lang = getLanguageFromURL(Astro.url);
-
-// Render the content if available
-const { Content } = event.rendered ? { Content: () => event.rendered?.Content } : await render(event);
 
 // Format date
 const formatDate = (date: Date) => {
