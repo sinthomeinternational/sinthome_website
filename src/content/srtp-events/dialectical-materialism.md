@@ -4,7 +4,7 @@ titleZh: "辩证法：什么是马克思的辩证唯物主义？"
 type: "Reading Seminar"
 date: 2025-03-22
 speaker: "S.R.T.P. Collective"
-location: "175 Washington St, Brighton, MA"
+location: "40 Kirkland St, Cambridge, MA"
 duration: "2 hours"
 recordingUrl: "https://www.bilibili.com/video/BV12ALvzwELV"
 poster: "../../assets/srtp/dialectics-poster.png"

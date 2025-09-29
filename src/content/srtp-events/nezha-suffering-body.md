@@ -4,7 +4,7 @@ titleZh: "哪吒的受苦身体：从梅洛-庞蒂到哪吒"
 type: "Philosophy Lecture"
 date: 2025-05-17
 speaker: "S.R.T.P. Collective"
-location: "175 Washington St, Brighton, MA"
+location: "40 Kirkland St, Cambridge, MA"
 duration: "2 hours"
 recordingUrl: "https://www.bilibili.com/video/BV1Pj7kzWEPJ/"
 poster: "../../assets/srtp/nezha-poster.jpg"

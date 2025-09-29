@@ -4,7 +4,7 @@ titleZh: "从德勒兹到列斐伏尔：社会空间的生产"
 type: "Philosophy Lecture"
 date: 2025-04-12
 speaker: "S.R.T.P. Collective"
-location: "175 Washington St, Brighton, MA"
+location: "40 Kirkland St, Cambridge, MA"
 duration: "2 hours"
 recordingUrl: "https://www.bilibili.com/video/BV1xUmMYSEnQ/"
 poster: "../../assets/srtp/deleuze-poster.png"
