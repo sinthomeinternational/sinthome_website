@@ -105,6 +105,15 @@ import WarpBackground from "../components/ui/WarpBackground";
 </RootLayout>
 
 <script>
+	import { initializePreserveParams } from '../lib/preserveUrlParams';
+
+	// Initialize URL parameter preservation for all links
+	if (typeof window !== 'undefined') {
+		document.addEventListener('DOMContentLoaded', () => {
+			initializePreserveParams();
+		});
+	}
+
 	// Professional smooth animation logic - scoped to homepage container only
 	function initializeHomepageAnimations(): (() => void) | null {
 		const container = document.getElementById('homepage-container');

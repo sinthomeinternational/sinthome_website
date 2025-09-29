@@ -50,12 +50,20 @@ const defaultDescription = "A public-interest community reconstructing new relat
 				// Remove any existing theme classes first
 				document.documentElement.classList.remove('theme-light', 'theme-dark');
 
-				// Check if user has explicitly set a theme preference
+				// Check URL parameters first
+				const urlParams = new URLSearchParams(window.location.search);
+				const urlTheme = urlParams.get('theme');
+
+				// Check if user has explicitly set a theme preference in localStorage
 				const storedTheme = localStorage.getItem('theme');
 
-				// Determine which theme to use
+				// Determine which theme to use (priority: URL > localStorage > default)
 				let theme;
-				if (storedTheme === 'light') {
+				if (urlTheme === 'light' || urlTheme === 'dark') {
+					theme = urlTheme;
+					// Save URL theme to localStorage for future visits
+					localStorage.setItem('theme', theme);
+				} else if (storedTheme === 'light') {
 					theme = 'light';
 				} else {
 					// Default to dark for any other case (including null, undefined, or invalid values)

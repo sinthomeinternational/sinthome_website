@@ -15,11 +15,13 @@ interface UniversalNavigationProps {
 const Logo = ({
   text,
   href,
-  theme
+  theme,
+  language
 }: {
   text: string;
   href: string;
   theme: Theme;
+  language?: Language;
 }) => {
   const themeConfig = getTheme(theme);
   const logoClasses = theme === 'light'
@@ -33,8 +35,31 @@ const Logo = ({
     letterSpacing: "0.01em",
   };
 
+  // Build URL with parameters
+  const buildLogoUrl = () => {
+    const basePath = import.meta.env.BASE_URL || '/';
+    const fullPath = `${basePath}${href.startsWith('/') ? href.slice(1) : href}`;
+
+    // Get current URL parameters (only in browser)
+    let currentTheme = theme;
+    let currentLang = language || 'en';
+
+    if (typeof window !== 'undefined') {
+      const currentParams = new URLSearchParams(window.location.search);
+      currentTheme = (currentParams.get('theme') as Theme) || theme;
+      currentLang = (currentParams.get('lang') as Language) || language || 'en';
+    }
+
+    const params = new URLSearchParams();
+    if (currentLang !== 'en') params.set('lang', currentLang);
+    if (currentTheme) params.set('theme', currentTheme);
+
+    const queryString = params.toString();
+    return queryString ? `${fullPath}?${queryString}` : fullPath;
+  };
+
   return (
-    <a href={href} className={clsx("transition-colors", logoClasses)} style={logoStyle}>
+    <a href={buildLogoUrl()} className={clsx("transition-colors", logoClasses)} style={logoStyle}>
       {text}
     </a>
   );
@@ -84,11 +109,31 @@ const NavItem = ({
     }, 150);
   };
 
-  // Build language-aware URLs
+  // Build URLs with language and theme parameters
   const buildUrl = (href: string) => {
     if (href.startsWith('http')) return href;
-    const cleanHref = href.startsWith('/') ? href.slice(1) : href;
-    return `${basePath}${language}/${theme}/${cleanHref}`;
+
+    // Start with the base path and href
+    const cleanHref = href.startsWith('/') ? href : `/${href}`;
+    const fullPath = `${basePath}${cleanHref.slice(1)}`;
+
+    // Get current URL parameters (only in browser)
+    let currentTheme = theme;
+    let currentLang = language;
+
+    if (typeof window !== 'undefined') {
+      const currentParams = new URLSearchParams(window.location.search);
+      currentTheme = (currentParams.get('theme') as Theme) || theme;
+      currentLang = (currentParams.get('lang') as Language) || language;
+    }
+
+    // Add language and theme as URL parameters
+    const params = new URLSearchParams();
+    if (currentLang !== 'en') params.set('lang', currentLang);
+    if (currentTheme) params.set('theme', currentTheme);
+
+    const queryString = params.toString();
+    return queryString ? `${fullPath}?${queryString}` : fullPath;
   };
 
   const hasDropdown = item.dropdown && item.dropdown.length > 0;
@@ -259,6 +304,7 @@ export default function UniversalNavigation({
             text={navigation.logo?.text || 'SINTHOME'}
             href={navigation.logo?.href || '/'}
             theme={theme}
+            language={language}
           />
 
           {/* Desktop Navigation */}
