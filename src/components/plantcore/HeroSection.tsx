@@ -9,14 +9,7 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionProps) {
-  const [dataFlow, setDataFlow] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDataFlow(prev => (prev + 1) % 100);
-    }, 100);
-    return () => clearInterval(interval);
-  }, []);
+  // Removed fake data flow counter
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -93,8 +86,8 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
             style={{ clipPath: 'polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)' }}
           >
             <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
-            INDUSTRIAL LLM PROTOCOL
-            <div className="text-xs bg-red-600/20 px-2 py-1 ml-2">V1.0</div>
+            PORTFOLIO SHOWCASE
+            <div className="text-xs bg-red-600/20 px-2 py-1 ml-2">CONCEPT</div>
           </motion.div>
 
           {/* Main Heading with Dynamic Data Integration */}
@@ -109,18 +102,10 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
               <br />
               <span className="relative inline-block">
                 INTELLIGENCE
-                {/* Dynamic data indicator */}
-                <motion.div
-                  className="absolute -top-2 -right-4 text-xs text-red-400 font-mono"
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  [{String(dataFlow).padStart(3, '0')}%]
-                </motion.div>
               </span>
               <br />
               <span className="text-red-500 relative">
-                DEPLOYED
+                DESIGNED
                 {/* Live indicator */}
                 <motion.div
                   className="absolute -bottom-1 left-0 w-full h-1 bg-red-500"
@@ -160,10 +145,10 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-black/60 border border-zinc-800 p-6">
               {[
-                { label: "COST REDUCTION", value: "≥10%", unit: "MIN", color: "text-green-400" },
-                { label: "INVENTORY OPT", value: "7%", unit: "AVG", color: "text-blue-400" },
-                { label: "ROI TIMELINE", value: "D1", unit: "START", color: "text-yellow-400" },
-                { label: "INDUSTRY VER", value: "4.0", unit: "READY", color: "text-red-400" }
+                { label: "COST TARGET", value: "≥10%", unit: "GOAL", color: "text-green-400" },
+                { label: "INVENTORY OPT", value: "7%", unit: "DESIGN", color: "text-blue-400" },
+                { label: "PROJECT PHASE", value: "CONCEPT", unit: "STATUS", color: "text-yellow-400" },
+                { label: "TECH STACK", value: "REACT", unit: "BUILT", color: "text-red-400" }
               ].map((metric, index) => (
                 <motion.div
                   key={index}
@@ -209,7 +194,7 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
                     transition={{ duration: 1.5, repeat: Infinity }}
                   />
                 </div>
-                REQUEST DEMO
+                VIEW PROJECT
               </div>
               <div className="absolute -bottom-1 left-4 right-4 h-px bg-white/50 group-hover:bg-white transition-colors" />
             </motion.button>
@@ -224,7 +209,7 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
             >
               <div className="flex items-center gap-3">
                 <div className="w-4 h-4 border border-current" />
-                PILOT PROGRAM
+                LEARN MORE
               </div>
               <div className="absolute -bottom-1 left-4 right-4 h-px bg-zinc-600 group-hover:bg-white transition-colors" />
             </motion.button>
@@ -240,17 +225,17 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
             <div className="inline-flex items-center gap-4 bg-black/40 border border-zinc-800 px-6 py-3">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-xs text-zinc-400 font-mono">SYSTEM OPERATIONAL</span>
+                <span className="text-xs text-zinc-400 font-mono">PROJECT SHOWCASE</span>
               </div>
               <div className="w-px h-4 bg-zinc-700" />
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-                <span className="text-xs text-zinc-400 font-mono">AGENTS DEPLOYED</span>
+                <span className="text-xs text-zinc-400 font-mono">CONCEPT DESIGN</span>
               </div>
               <div className="w-px h-4 bg-zinc-700" />
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-                <span className="text-xs text-zinc-400 font-mono">LLM TRAINING</span>
+                <span className="text-xs text-zinc-400 font-mono">PORTFOLIO PIECE</span>
               </div>
             </div>
           </motion.div>

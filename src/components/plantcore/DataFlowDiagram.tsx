@@ -15,7 +15,7 @@ const processingNodes: ProcessingNode[] = [
   {
     id: 'capture-layer',
     title: 'CAPTURE LAYER',
-    description: 'REAL-TIME DECISION EXTRACTION',
+    description: 'DESIGNED FOR DECISION EXTRACTION',
     systemCode: 'CAP-001',
     throughput: 95,
     dataType: 'RAW_DECISIONS',
@@ -79,29 +79,16 @@ const processingNodes: ProcessingNode[] = [
 
 export default function DataFlowDiagram() {
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
-  const [dataStreams, setDataStreams] = useState<{ [key: string]: number }>({});
+  // Static throughput values - no fake updates
+  const dataStreams: { [key: string]: number } = {
+    'capture-layer': 95,
+    'processing-layer': 87,
+    'intelligence-layer': 78
+  };
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
 
-  // Initialize data streams and canvas animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDataStreams(prev => {
-        const newStreams: { [key: string]: number } = {};
-        processingNodes.forEach(node => {
-          newStreams[node.id] = Math.max(
-            20,
-            node.throughput + (Math.random() - 0.5) * 20
-          );
-        });
-        return newStreams;
-      });
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Canvas-based fluid pipeline visualization
+  // Static visual pipeline - no fake data flow animation
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -113,68 +100,27 @@ export default function DataFlowDiagram() {
     canvas.height = canvas.offsetHeight * 2;
     ctx.scale(2, 2);
 
-    let particles: Array<{
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      opacity: number;
-      size: number;
-      color: string;
-    }> = [];
+    // Draw static pipeline visualization
+    const drawPipeline = () => {
+      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
 
-    const createParticle = (stage: number) => {
-      const colors = ['#dc2626', '#f59e0b', '#10b981'];
-      const stageX = (stage / 2) * canvas.offsetWidth;
+      // Draw static connection lines
+      ctx.strokeStyle = 'rgba(220, 38, 38, 0.3)';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5, 5]);
 
-      return {
-        x: stageX + (Math.random() - 0.5) * 40,
-        y: canvas.offsetHeight / 2 + (Math.random() - 0.5) * 60,
-        vx: 0.5 + Math.random() * 1,
-        vy: (Math.random() - 0.5) * 0.3,
-        opacity: 0.8,
-        size: 1 + Math.random() * 2,
-        color: colors[stage] || '#dc2626'
-      };
-    };
-
-    const animate = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-
-      // Add new particles
-      if (Math.random() < 0.1) {
-        particles.push(createParticle(Math.floor(Math.random() * 3)));
+      const nodePositions = [0.2, 0.5, 0.8];
+      for (let i = 0; i < nodePositions.length - 1; i++) {
+        ctx.beginPath();
+        ctx.moveTo(nodePositions[i] * canvas.offsetWidth, canvas.offsetHeight / 2);
+        ctx.lineTo(nodePositions[i + 1] * canvas.offsetWidth, canvas.offsetHeight / 2);
+        ctx.stroke();
       }
 
-      // Update and draw particles
-      particles = particles.filter(particle => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-        particle.opacity *= 0.995;
-
-        if (particle.opacity > 0.01 && particle.x < canvas.offsetWidth + 50) {
-          ctx.globalAlpha = particle.opacity;
-          ctx.fillStyle = particle.color;
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-          ctx.fill();
-          return true;
-        }
-        return false;
-      });
-
-      ctx.globalAlpha = 1;
-      animationRef.current = requestAnimationFrame(animate);
+      ctx.setLineDash([]);
     };
 
-    animate();
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
+    drawPipeline();
   }, []);
 
   const handleNodeInteraction = (nodeId: string) => {
@@ -276,8 +222,8 @@ export default function DataFlowDiagram() {
                 {/* Throughput Meter */}
                 <div className="mb-4">
                   <div className="flex items-center justify-between text-xs text-zinc-500 mb-2">
-                    <span>THROUGHPUT</span>
-                    <span className="font-mono">{Math.round(dataStreams[node.id] || node.throughput)}%</span>
+                    <span>DESIGNED CAPACITY</span>
+                    <span className="font-mono">{dataStreams[node.id] || node.throughput}%</span>
                   </div>
                   <div className="relative h-2 bg-zinc-800 overflow-hidden">
                     <motion.div
@@ -304,7 +250,7 @@ export default function DataFlowDiagram() {
                       animate={{ opacity: [0.5, 1, 0.5] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     />
-                    <span className="text-zinc-500 font-mono">OPERATIONAL</span>
+                    <span className="text-zinc-500 font-mono">CAPABILITY</span>
                   </div>
                   <div className="text-zinc-600 font-mono">
                     NODE-{String(index + 1).padStart(2, '0')}
@@ -354,15 +300,15 @@ export default function DataFlowDiagram() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
           <div>
             <div className="text-2xl font-bold text-red-400 font-mono mb-1">150K+</div>
-            <div className="text-sm text-zinc-400">DECISION POINTS</div>
+            <div className="text-sm text-zinc-400">MAPPED TOUCHPOINTS</div>
           </div>
           <div>
             <div className="text-2xl font-bold text-yellow-400 font-mono mb-1">100M+</div>
-            <div className="text-sm text-zinc-400">DATA SAMPLES</div>
+            <div className="text-sm text-zinc-400">DESIGN CAPACITY</div>
           </div>
           <div>
             <div className="text-2xl font-bold text-green-400 font-mono mb-1">24/7</div>
-            <div className="text-sm text-zinc-400">CONTINUOUS OPS</div>
+            <div className="text-sm text-zinc-400">ARCHITECTURE DESIGN</div>
           </div>
         </div>
       </motion.div>

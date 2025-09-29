@@ -20,11 +20,11 @@ const industrialMetrics: IndustrialMetric[] = [
     id: 'cost-efficiency',
     value: '≥10%',
     label: 'COST EFFICIENCY',
-    description: 'PROCUREMENT OPTIMIZATION THROUGH AI DECISION INTELLIGENCE',
+    description: 'PROJECTED PROCUREMENT OPTIMIZATION THROUGH AI DECISION INTELLIGENCE',
     color: '#10b981',
     animatedValue: 12,
     suffix: '%',
-    unit: 'REDUCTION',
+    unit: 'POTENTIAL',
     gaugeMax: 15,
     category: 'FINANCIAL',
     icon: (
@@ -47,13 +47,13 @@ const industrialMetrics: IndustrialMetric[] = [
     id: 'inventory-optimization',
     value: '~7%',
     label: 'INVENTORY OPTIMIZATION',
-    description: 'PREDICTIVE ANALYTICS FOR STOCK MANAGEMENT EFFICIENCY',
+    description: 'DESIGNED PREDICTIVE ANALYTICS FOR STOCK MANAGEMENT',
     color: '#3b82f6',
     animatedValue: 7,
     suffix: '%',
-    unit: 'SHRINKAGE',
+    unit: 'TARGET',
     gaugeMax: 10,
-    category: 'OPERATIONAL',
+    category: 'CAPABILITY',
     icon: (
       <div className="relative w-8 h-8">
         <div className="absolute inset-0 border-2 border-current" />
@@ -74,14 +74,14 @@ const industrialMetrics: IndustrialMetric[] = [
   {
     id: 'agent-deployment',
     value: '150K+',
-    label: 'AGENT DEPLOYMENT',
-    description: 'DECISION CAPTURE POINTS ACROSS GLOBAL MANUFACTURING NETWORK',
+    label: 'DECISION POINTS',
+    description: 'MAPPED DECISION TOUCHPOINTS IN MANUFACTURING ANALYSIS',
     color: '#dc2626',
     animatedValue: 150,
     suffix: 'K+',
-    unit: 'NODES',
+    unit: 'ANALYZED',
     gaugeMax: 200,
-    category: 'COVERAGE',
+    category: 'RESEARCH',
     icon: (
       <div className="relative w-8 h-8">
         <div className="absolute inset-0 border-2 border-current" />
@@ -107,14 +107,14 @@ const industrialMetrics: IndustrialMetric[] = [
   {
     id: 'data-volume',
     value: '100M+',
-    label: 'DATA VOLUME',
-    description: 'VALIDATED DECISION SAMPLES FOR INDUSTRIAL LLM TRAINING',
+    label: 'DATA CAPACITY',
+    description: 'DESIGNED SYSTEM CAPACITY FOR DECISION PROCESSING',
     color: '#8b5cf6',
     animatedValue: 100,
     suffix: 'M+',
-    unit: 'SAMPLES',
+    unit: 'SCALE',
     gaugeMax: 150,
-    category: 'INTELLIGENCE',
+    category: 'ARCHITECTURE',
     icon: (
       <div className="relative w-8 h-8">
         <div className="absolute inset-0 border-2 border-current" />
@@ -255,12 +255,12 @@ export default function ROIMetrics() {
         <div className="inline-flex items-center gap-3 mb-6">
           <div className="w-8 h-px bg-red-500" />
           <h3 className="text-3xl font-black text-white tracking-wide uppercase">
-            OPERATIONAL METRICS
+            PROJECT CAPABILITIES
           </h3>
           <div className="w-8 h-px bg-red-500" />
         </div>
         <p className="text-lg text-zinc-400 font-mono max-w-3xl mx-auto">
-          // REAL-TIME PERFORMANCE INDICATORS FROM DEPLOYED SYSTEMS
+          // DESIGNED SYSTEM CAPABILITIES AND PROJECTED IMPACT
         </p>
       </motion.div>
 
@@ -384,15 +384,15 @@ export default function ROIMetrics() {
                 animate={{ opacity: [0.5, 1, 0.5] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
-              <span className="text-sm font-mono text-zinc-400">ALL SYSTEMS OPERATIONAL</span>
+              <span className="text-sm font-mono text-zinc-400">PROJECT SHOWCASE</span>
             </div>
             <div className="w-px h-4 bg-zinc-700" />
             <div className="text-sm font-mono text-zinc-500">
-              UPTIME: 99.97% | LATENCY: &lt;50MS
+              CONCEPT DESIGN | PORTFOLIO PIECE
             </div>
           </div>
           <div className="text-xs font-mono text-zinc-600">
-            LAST UPDATED: REAL-TIME
+            STATUS: DEMONSTRATION
           </div>
         </div>
       </motion.div>

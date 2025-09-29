@@ -19,10 +19,10 @@ const methods: MethodCard[] = [
     shortDescription: 'FACTORY FLOOR INTELLIGENCE CAPTURE',
     longDescription: 'Autonomous agents deployed at critical decision points throughout manufacturing operations. Real-time capture of human choices, process variations, and operational contexts that traditional ERP systems cannot reach.',
     benefits: [
-      'PROCUREMENT COST REDUCTION: ≥10%',
-      'DECISION COVERAGE: 150K+ POINTS',
-      'ROI REALIZATION: DAY-1 IMPACT',
-      'ERP INTEGRATION: SEAMLESS API'
+      'PROJECTED COST REDUCTION: ≥10%',
+      'DECISION MAPPING: 150K+ TOUCHPOINTS',
+      'IMPLEMENTATION TIMELINE: PHASED APPROACH',
+      'INTEGRATION DESIGN: API ARCHITECTURE'
     ],
     dataFlow: [23, 67, 89, 45, 78, 34, 90, 56],
     systemCode: 'AG-001',
@@ -41,10 +41,10 @@ const methods: MethodCard[] = [
     shortDescription: 'DECISION LEDGER ARCHITECTURE',
     longDescription: 'Context-Decision-Outcome processing engine that transforms raw decision streams into structured industrial intelligence. Governed data architecture enabling cross-factory knowledge synthesis and compliance verification.',
     benefits: [
-      'DECISION STRUCTURING: REAL-TIME',
-      'GOVERNANCE LAYER: ISO COMPLIANT',
-      'KNOWLEDGE TRANSFER: GLOBAL SCALE',
-      'ANALYTICS ENGINE: PREDICTIVE AI'
+      'DATA STRUCTURING: DESIGNED CDO MODEL',
+      'GOVERNANCE FRAMEWORK: COMPLIANCE-READY',
+      'KNOWLEDGE ARCHITECTURE: SCALABLE DESIGN',
+      'ANALYTICS CAPABILITY: AI-POWERED'
     ],
     dataFlow: [45, 78, 23, 90, 67, 89, 34, 56],
     systemCode: 'CDO-002',
@@ -64,10 +64,10 @@ const methods: MethodCard[] = [
     shortDescription: 'MANUFACTURING INTELLIGENCE OS',
     longDescription: 'Vertical large language model trained exclusively on validated industrial decision data. The cognitive engine that transforms historical context into predictive guidance, scaling human expertise across global operations.',
     benefits: [
-      'PREDICTIVE GUIDANCE: ML-POWERED',
-      'KNOWLEDGE SCALING: EXPONENTIAL',
-      'DECISION OPTIMIZATION: AUTOMATED',
-      'INDUSTRY 4.0: FOUNDATION LAYER'
+      'PREDICTIVE SYSTEM: ML ARCHITECTURE',
+      'KNOWLEDGE MODEL: SCALABLE DESIGN',
+      'OPTIMIZATION ENGINE: CONCEPTUAL FRAMEWORK',
+      'INDUSTRY 4.0: STRATEGIC VISION'
     ],
     dataFlow: [90, 34, 78, 56, 89, 45, 67, 23],
     systemCode: 'LLM-003',
@@ -85,20 +85,12 @@ const methods: MethodCard[] = [
 
 export default function MethodCards() {
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
-  const [dataFlows, setDataFlows] = useState<{ [key: string]: number }>({});
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      methods.forEach(method => {
-        setDataFlows(prev => ({
-          ...prev,
-          [method.id]: method.dataFlow[Math.floor(Math.random() * method.dataFlow.length)]
-        }));
-      });
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, []);
+  // Static display values - no fake data updates
+  const dataFlows: { [key: string]: number } = {
+    'ai-agents': 85,
+    'cdo-platform': 75,
+    'industrial-llm': 90
+  };
 
   const handleCardInteraction = (cardId: string) => {
     setSelectedCard(selectedCard === cardId ? null : cardId);
@@ -142,7 +134,7 @@ export default function MethodCards() {
                   animate={{ opacity: [0.3, 1, 0.3] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
-                <span className="text-xs font-mono text-zinc-500">ONLINE</span>
+                <span className="text-xs font-mono text-zinc-500">METHOD</span>
               </div>
             </div>
 
@@ -158,8 +150,8 @@ export default function MethodCards() {
               {/* Data Flow Visualization */}
               <div className="mb-4">
                 <div className="flex items-center justify-between text-xs text-zinc-500 mb-2">
-                  <span>DATA THROUGHPUT</span>
-                  <span className="font-mono">{dataFlows[method.id] || 0}%</span>
+                  <span>CAPABILITY DESIGN</span>
+                  <span className="font-mono">{dataFlows[method.id] || 75}%</span>
                 </div>
                 <div className="w-full h-1 bg-zinc-800 relative overflow-hidden">
                   <motion.div
@@ -192,7 +184,7 @@ export default function MethodCards() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {selectedCard === method.id ? 'SYSTEM ACTIVE' : 'ACCESS DETAILS'}
+                {selectedCard === method.id ? 'HIDE DETAILS' : 'VIEW DETAILS'}
               </motion.button>
             </div>
 
