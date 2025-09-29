@@ -14,7 +14,6 @@ export default function IndustrialWarpBackground() {
           speed={0.15}        // Slow, deliberate movement
           swirl={0.95}        // High swirl for organic flow
           swirlIterations={35} // Complex patterns
-          sharpness={0}       // Zero sharpness for maximum fluidity (like homepage)
           scale={0.8}         // Larger fluid patterns
           distortion={0.08}   // Subtle industrial distortion
         />

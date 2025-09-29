@@ -81,7 +81,7 @@ export default function DataFlowDiagram() {
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [dataStreams, setDataStreams] = useState<{ [key: string]: number }>({});
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number>(0);
 
   // Initialize data streams and canvas animation
   useEffect(() => {
