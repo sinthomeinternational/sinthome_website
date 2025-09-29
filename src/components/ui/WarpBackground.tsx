@@ -13,7 +13,6 @@ export default function WarpBackground(props: WarpProps) {
         shapeScale: 0.7,
         rotation: 0.55,
         scale: 0.5,
-        proportion: 1.0,
         softness: 0,
         distortion: 0,
         style: { width: '100%', height: '100%' }
