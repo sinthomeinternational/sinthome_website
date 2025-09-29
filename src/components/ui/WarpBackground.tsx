@@ -3,9 +3,9 @@ import { Warp, type WarpProps } from '@paper-design/shaders-react';
 export default function WarpBackground(props: WarpProps) {
 
     const defaultProps = {
-        color0: '#000000',
-        color1: '#940000',
-        color2: '#000000',
+        color1: '#000000',
+        color2: '#940000',
+        color3: '#000000',
         speed: 0.2,
         swirl: 0.98,
         swirlIterations: 41,
