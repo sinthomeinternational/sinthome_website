@@ -5,17 +5,20 @@ import { motion } from 'motion/react';
 export default function IndustrialWarpBackground() {
   return (
     <>
-      {/* Fluid Warp Background with Zero Sharpness - Like Homepage */}
+      {/* Fluid Warp Background - Same as Homepage */}
       <div className="fixed inset-0 z-0">
         <WarpBackground
-          color1="#000000"    // Deep black base
-          color2="#7f1d1d"    // Dark industrial red
-          color3="#0a0a0a"    // Near black for depth
-          speed={0.15}        // Slow, deliberate movement
-          swirl={0.95}        // High swirl for organic flow
-          swirlIterations={35} // Complex patterns
-          scale={0.8}         // Larger fluid patterns
-          distortion={0.08}   // Subtle industrial distortion
+          color1="#000000"
+          color2="#940000"
+          color3="#000000"
+          speed={0.2}
+          swirl={0.98}
+          swirlIterations={29}
+          shapeScale={0.04}
+          rotation={0.55}
+          scale={0.4}
+          softness={0}
+          distortion={0}
         />
       </div>
 
