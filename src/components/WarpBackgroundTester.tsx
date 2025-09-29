@@ -12,7 +12,7 @@ function WarpLoader() {
         <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900 to-black flex items-center justify-center">
             <div className="text-center text-white">
                 <div className="animate-spin rounded-full h-8 w-8 border-2 border-red-600 border-t-transparent mx-auto mb-4"></div>
-                <p className="text-zinc-400">Loading Warp Shader...</p>
+                <p className="text-zinc-400">Loading Warp Shader... (Updated)</p>
             </div>
         </div>
     );
@@ -206,90 +206,151 @@ export default function WarpBackgroundTester() {
 
     return (
         <div className="relative min-h-screen bg-black text-white flex flex-row" style={{ backgroundColor: '#000000', color: 'white', display: 'flex', flexDirection: 'row' }}>
-            {/* Left Panel - Controls (Fixed width, scrollable) */}
+
+            {/* Left Panel - Controls (FLAT DESIGN) */}
             <div
-                className="w-[450px] min-w-[450px] flex-shrink-0 h-screen overflow-y-auto bg-gradient-to-br from-zinc-900 to-black border-r border-zinc-700/50"
+                className="w-[320px] min-w-[320px] flex-shrink-0 h-screen overflow-y-auto"
                 style={{
                     position: 'relative',
                     zIndex: 10,
-                    backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                    color: 'white',
-                    borderRightColor: 'rgba(63, 63, 70, 0.5)',
+                    width: '320px',
+                    minWidth: '320px',
+                    height: '100vh',
+                    overflowY: 'auto',
+                    backgroundColor: 'rgba(10, 10, 10, 0.95)',
+                    borderRight: '1px solid rgba(220, 38, 38, 0.2)',
                     backdropFilter: 'blur(10px)'
                 }}>
-                <div className="p-8">
-                    <h1 className="text-3xl font-bold mb-8 bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
-                        Warp Background Tester
-                    </h1>
-
-                    {/* Status Indicator */}
-                    <div className={`mb-4 text-center py-2 px-3 rounded text-sm font-medium ${
-                        warpStatus === 'loaded' ? 'bg-green-900/30 text-green-400' :
-                        warpStatus === 'error' ? 'bg-red-900/30 text-red-400' :
-                        warpStatus === 'fallback' ? 'bg-yellow-900/30 text-yellow-400' :
-                        'bg-blue-900/30 text-blue-400'
-                    }`}>
-                        Status: {warpStatus.toUpperCase()}
-                        {debugMode && ` | Renders: ${renderCount}`}
+                <div className="p-2" style={{ padding: '8px' }}>
+                    {/* Header - FLAT COMPACT */}
+                    <div className="mb-2" style={{ marginBottom: '8px' }}>
+                        <h1 className="text-sm font-semibold text-red-400 tracking-tight" style={{ fontSize: '13px', fontWeight: '600', color: '#ef4444' }}>
+                            Warp Controls
+                        </h1>
+                        <p className="text-[9px] text-zinc-500" style={{ fontSize: '9px', color: '#71717a' }}>Adjust parameters in real-time</p>
                     </div>
 
-                    <div className="space-y-6">
-                        {/* Color Controls */}
-                        <div className="space-y-3 p-5 bg-gradient-to-r from-zinc-800/20 to-zinc-900/20 rounded-xl border border-zinc-700/30 backdrop-blur-sm">
-                            <h2 className="text-sm font-bold text-zinc-200 uppercase tracking-wider flex items-center gap-2">
-                                <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                    {/* Status Indicator Panel - FLAT */}
+                    <div style={{
+                        backgroundColor: 'rgba(39, 39, 42, 0.5)',
+                        borderRadius: '4px',
+                        padding: '6px 8px',
+                        border: '1px solid rgba(63, 63, 70, 0.3)',
+                        marginBottom: '8px'
+                    }}>
+                        <div className="flex items-center gap-2">
+                            <div className={`w-2 h-2 rounded-full animate-pulse ${
+                                warpStatus === 'loaded' ? 'bg-green-500' :
+                                warpStatus === 'error' ? 'bg-red-500' :
+                                warpStatus === 'fallback' ? 'bg-yellow-500' :
+                                'bg-blue-500'
+                            }`}></div>
+                            <span className="text-xs font-medium text-zinc-300">
+                                Status: <span className={`font-semibold ${
+                                    warpStatus === 'loaded' ? 'text-green-400' :
+                                    warpStatus === 'error' ? 'text-red-400' :
+                                    warpStatus === 'fallback' ? 'text-yellow-400' :
+                                    'text-blue-400'
+                                }`}>{warpStatus.toUpperCase()}</span>
+                            </span>
+                            {debugMode && <span className="text-zinc-500 text-xs ml-auto">Renders: {renderCount}</span>}
+                        </div>
+                    </div>
+
+                    <div className="space-y-2" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                        {/* Color Controls Panel - FLAT */}
+                        <div style={{
+                            backgroundColor: 'rgba(24, 24, 27, 0.5)',
+                            borderRadius: '4px',
+                            padding: '8px',
+                            border: '1px solid rgba(63, 63, 70, 0.3)'
+                        }}>
+                            <h2 style={{
+                                fontSize: '10px',
+                                fontWeight: '700',
+                                color: '#e4e4e7',
+                                marginBottom: '4px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '3px',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em'
+                            }}>
+                                <svg style={{ width: '10px', height: '10px', color: '#ef4444' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                                </svg>
                                 Colors
                             </h2>
 
-                            <div className="space-y-3">
-                                <div className="flex items-center gap-3 group hover:bg-zinc-800/20 p-2 rounded-lg transition-colors">
-                                    <label className="w-20 text-xs font-medium text-zinc-400">Color 1:</label>
-                                    <input
-                                        type="color"
-                                        value={params.color1}
-                                        onChange={(e) => updateParam('color1', e.target.value)}
-                                        className="w-16 h-8 rounded border-2 border-zinc-700 hover:border-red-500 cursor-pointer transition-colors"
-                                    />
-                                    <span className="text-xs font-mono bg-black/50 px-3 py-1.5 rounded-md border border-zinc-700/50">
-                                        {params.color1}
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center gap-3 group hover:bg-zinc-800/20 p-2 rounded-lg transition-colors">
-                                    <label className="w-20 text-xs font-medium text-zinc-400">Color 2:</label>
-                                    <input
-                                        type="color"
-                                        value={params.color2}
-                                        onChange={(e) => updateParam('color2', e.target.value)}
-                                        className="w-16 h-8 rounded border-2 border-zinc-700 hover:border-red-500 cursor-pointer transition-colors"
-                                    />
-                                    <span className="text-xs font-mono bg-black/50 px-3 py-1.5 rounded-md border border-zinc-700/50">
-                                        {params.color2}
-                                    </span>
-                                </div>
-
-                                <div className="flex items-center gap-3 group hover:bg-zinc-800/20 p-2 rounded-lg transition-colors">
-                                    <label className="w-20 text-xs font-medium text-zinc-400">Color 3:</label>
-                                    <input
-                                        type="color"
-                                        value={params.color3}
-                                        onChange={(e) => updateParam('color3', e.target.value)}
-                                        className="w-16 h-8 rounded border-2 border-zinc-700 hover:border-red-500 cursor-pointer transition-colors"
-                                    />
-                                    <span className="text-xs font-mono bg-black/50 px-3 py-1.5 rounded-md border border-zinc-700/50">
-                                        {params.color3}
-                                    </span>
-                                </div>
+                            {/* ULTRA COMPACT COLOR PICKERS - ONE LINE */}
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                gap: '6px',
+                                padding: '2px 0'
+                            }}>
+                                {[
+                                    { key: 'color1', label: 'C1', value: params.color1 },
+                                    { key: 'color2', label: 'C2', value: params.color2 },
+                                    { key: 'color3', label: 'C3', value: params.color3 }
+                                ].map(({ key, label, value }) => (
+                                    <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                                        <label style={{ fontSize: '9px', color: '#a1a1aa', fontWeight: '600' }}>{label}:</label>
+                                        <div className="relative group">
+                                            <div
+                                                style={{
+                                                    width: '24px',
+                                                    height: '24px',
+                                                    borderRadius: '3px',
+                                                    border: '1px solid rgba(113, 113, 122, 0.3)',
+                                                    cursor: 'pointer',
+                                                    overflow: 'hidden',
+                                                    transition: 'border-color 0.2s',
+                                                    backgroundColor: value
+                                                }}
+                                            >
+                                                <input
+                                                    type="color"
+                                                    value={value}
+                                                    onChange={(e) => updateParam(key, e.target.value)}
+                                                    className="absolute inset-0 opacity-0 cursor-pointer"
+                                                    aria-label={`Color ${label.replace('C', '')}`}
+                                                />
+                                            </div>
+                                        </div>
+                                        <span style={{ fontSize: '8px', fontFamily: 'monospace', color: '#71717a' }}>
+                                            {value.substring(1, 4).toUpperCase()}
+                                        </span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
-                        {/* Parameter Controls */}
-                        <div className="p-5 bg-gradient-to-r from-zinc-800/20 to-zinc-900/20 rounded-xl border border-zinc-700/30 backdrop-blur-sm">
-                            <h2 className="text-sm font-bold text-zinc-200 uppercase tracking-wider flex items-center gap-2 mb-4">
-                                <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+                        {/* Parameter Controls Panel - FLAT */}
+                        <div style={{
+                            backgroundColor: 'rgba(24, 24, 27, 0.5)',
+                            borderRadius: '4px',
+                            padding: '8px',
+                            border: '1px solid rgba(63, 63, 70, 0.3)'
+                        }}>
+                            <h2 style={{
+                                fontSize: '10px',
+                                fontWeight: '700',
+                                color: '#e4e4e7',
+                                marginBottom: '4px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '3px',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em'
+                            }}>
+                                <svg style={{ width: '10px', height: '10px', color: '#ef4444' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                                </svg>
                                 Parameters
                             </h2>
-                            <div className="space-y-4">
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
 
                             {[
                                 { key: 'speed', label: 'Speed', min: 0, max: 2, step: 0.05 },
@@ -301,17 +362,8 @@ export default function WarpBackgroundTester() {
                                 { key: 'softness', label: 'Softness', min: 0, max: 1, step: 0.01 },
                                 { key: 'distortion', label: 'Distortion', min: 0, max: 1, step: 0.01 }
                             ].map(({ key, label, min, max, step }) => (
-                                <div key={key} className="group hover:bg-zinc-800/20 p-2 rounded-lg transition-colors">
-                                    <div className="flex justify-between mb-2">
-                                        <label className="text-xs font-medium text-zinc-400 group-hover:text-zinc-200 transition-colors">{label}</label>
-                                        <span className="text-xs font-mono bg-black/50 px-2 py-1 rounded-md border border-zinc-700/50 text-red-400">
-                                            {typeof params[key as keyof typeof params] === 'number'
-                                                ? (params[key as keyof typeof params] as number).toFixed(
-                                                    step < 1 ? step.toString().split('.')[1]?.length || 2 : 0
-                                                )
-                                                : params[key as keyof typeof params]}
-                                        </span>
-                                    </div>
+                                <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '4px', height: '20px' }}>
+                                    <label style={{ fontSize: '9px', fontWeight: '500', color: '#a1a1aa', minWidth: '60px', textAlign: 'right' }}>{label}</label>
                                     <input
                                         type="range"
                                         min={min}
@@ -319,39 +371,94 @@ export default function WarpBackgroundTester() {
                                         step={step}
                                         value={params[key as keyof typeof params] as number}
                                         onChange={(e) => updateParam(key, step < 1 ? parseFloat(e.target.value) : parseInt(e.target.value))}
-                                        className="w-full slider"
+                                        className="flex-1 h-1 bg-zinc-800 rounded-full appearance-none cursor-pointer
+                                            [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3
+                                            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-red-500
+                                            [&::-webkit-slider-thumb]:hover:bg-red-400
+                                            [&::-webkit-slider-thumb]:transition-colors [&::-webkit-slider-thumb]:duration-200
+                                            [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:rounded-full
+                                            [&::-moz-range-thumb]:bg-red-500 [&::-moz-range-thumb]:hover:bg-red-400
+                                            [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:transition-colors [&::-moz-range-thumb]:duration-200"
+                                        style={{
+                                            background: '#27272a',
+                                            height: '4px'
+                                        }}
+                                        aria-label={`${label}: ${params[key as keyof typeof params]}`}
                                     />
+                                    <span className="text-[10px] font-mono text-zinc-500 min-w-[35px] text-right">
+                                        {typeof params[key as keyof typeof params] === 'number'
+                                            ? (params[key as keyof typeof params] as number).toFixed(
+                                                step < 1 ? step.toString().split('.')[1]?.length || 2 : 0
+                                            )
+                                            : params[key as keyof typeof params]}
+                                    </span>
                                 </div>
                             ))}
                             </div>
                         </div>
 
-                        {/* Action Buttons */}
-                        <div className="space-y-3 pt-4">
-                            <div className="flex gap-3">
+                        {/* Action Buttons Panel - FLAT */}
+                        <div style={{
+                            backgroundColor: 'rgba(24, 24, 27, 0.5)',
+                            borderRadius: '4px',
+                            padding: '8px',
+                            border: '1px solid rgba(63, 63, 70, 0.3)'
+                        }}>
+                            <h2 className="text-xs font-semibold text-zinc-200 mb-2">Actions</h2>
+                            <div className="flex gap-1 mb-2">
                                 <button
                                     onClick={copyConfig}
-                                    className="flex-1 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-3 px-4 rounded-xl transition-all font-semibold shadow-lg hover:shadow-red-500/25 transform hover:-translate-y-0.5"
+                                    className="flex-1 px-3 py-1.5 bg-red-600 text-white text-[11px] font-medium rounded
+                                        hover:bg-red-500 active:bg-red-700
+                                        transition-colors duration-200"
+                                    style={{
+                                        backgroundColor: '#dc2626',
+                                        color: 'white',
+                                        fontSize: '11px',
+                                        padding: '6px 12px',
+                                        borderRadius: '3px',
+                                        border: 'none',
+                                        cursor: 'pointer'
+                                    }}
                                 >
-                                    {copied ? '✓ Copied!' : 'Copy Config'}
+                                    {copied ? '✓ Copied' : 'Copy'}
                                 </button>
                                 <button
                                     onClick={resetToDefaults}
-                                    className="flex-1 bg-gradient-to-r from-zinc-700 to-zinc-800 hover:from-zinc-600 hover:to-zinc-700 text-white py-3 px-4 rounded-xl transition-all font-semibold shadow-lg hover:shadow-zinc-500/25 transform hover:-translate-y-0.5"
+                                    className="flex-1 px-3 py-1.5 bg-zinc-700 text-zinc-100 text-[11px] font-medium rounded
+                                        hover:bg-zinc-600 active:bg-zinc-800
+                                        transition-colors duration-200"
+                                    style={{
+                                        backgroundColor: '#3f3f46',
+                                        color: '#f4f4f5',
+                                        fontSize: '11px',
+                                        padding: '6px 12px',
+                                        borderRadius: '3px',
+                                        border: 'none',
+                                        cursor: 'pointer'
+                                    }}
                                 >
                                     Reset
                                 </button>
                             </div>
 
                             {/* Debug Controls */}
-                            <div className="flex gap-2 text-sm flex-wrap">
+                            <div className="flex gap-1">
                                 <button
                                     onClick={() => setDebugMode(!debugMode)}
-                                    className={`px-3 py-1 rounded transition ${
-                                        debugMode ? 'bg-green-600/20 text-green-400' : 'bg-zinc-700 text-zinc-300'
-                                    }`}
+                                    className="flex-1 px-2 py-1 rounded text-[10px] font-medium transition-colors duration-200"
+                                    style={{
+                                        backgroundColor: debugMode ? 'rgba(34, 197, 94, 0.2)' : '#3f3f46',
+                                        color: debugMode ? '#4ade80' : '#a1a1aa',
+                                        fontSize: '10px',
+                                        padding: '4px 8px',
+                                        borderRadius: '3px',
+                                        border: debugMode ? '1px solid rgba(34, 197, 94, 0.3)' : 'none',
+                                        cursor: 'pointer'
+                                    }}
+                                    aria-label={`Debug mode ${debugMode ? 'on' : 'off'}`}
                                 >
-                                    Debug {debugMode ? 'On' : 'Off'}
+                                    Debug
                                 </button>
                                 <button
                                     onClick={() => {
@@ -362,45 +469,85 @@ export default function WarpBackgroundTester() {
                                             setWarpStatus('loaded');
                                         }, 500);
                                     }}
-                                    className="px-3 py-1 bg-blue-600/20 text-blue-400 rounded transition hover:bg-blue-600/30"
+                                    className="flex-1 px-2 py-1 bg-zinc-700 text-zinc-300 rounded text-[10px] font-medium transition-colors duration-200 hover:bg-zinc-600"
+                                    style={{
+                                        backgroundColor: '#3f3f46',
+                                        color: '#a1a1aa',
+                                        fontSize: '10px',
+                                        padding: '4px 8px',
+                                        borderRadius: '3px',
+                                        border: 'none',
+                                        cursor: 'pointer'
+                                    }}
+                                    aria-label="Force reload animation"
                                 >
-                                    Force Reload
+                                    Reload
                                 </button>
                                 <button
                                     onClick={() => setWarpStatus('fallback')}
-                                    className="px-3 py-1 bg-yellow-600/20 text-yellow-400 rounded transition hover:bg-yellow-600/30"
+                                    className="flex-1 px-2 py-1 bg-zinc-700 text-zinc-300 rounded text-[10px] font-medium transition-colors duration-200 hover:bg-zinc-600"
+                                    style={{
+                                        backgroundColor: '#3f3f46',
+                                        color: '#a1a1aa',
+                                        fontSize: '10px',
+                                        padding: '4px 8px',
+                                        borderRadius: '3px',
+                                        border: 'none',
+                                        cursor: 'pointer'
+                                    }}
+                                    aria-label="Use fallback animation"
                                 >
-                                    Use Fallback
+                                    Fallback
                                 </button>
                             </div>
                         </div>
 
                         {/* Debug Info */}
                         {debugMode && (
-                            <div className="mt-4 p-3 bg-zinc-800/50 rounded-lg text-xs">
-                                <div className="space-y-1">
-                                    <div>WebGL: {checkWebGL() ? '✅ Supported' : '❌ Not Supported'}</div>
+                            <div className="mt-2 p-2 bg-zinc-800/50 rounded text-[10px]">
+                                <div className="space-y-0.5">
+                                    <div>WebGL: {checkWebGL() ? '✅' : '❌'}</div>
                                     {lastError && <div className="text-red-400">Error: {lastError}</div>}
-                                    <div>Canvas elements: {typeof document !== 'undefined' ? document.querySelectorAll('canvas').length : 0}</div>
+                                    <div>Canvas: {typeof document !== 'undefined' ? document.querySelectorAll('canvas').length : 0}</div>
                                 </div>
                             </div>
                         )}
 
-                        {/* Config Display */}
-                        <div className="mt-4 p-3 bg-zinc-800/50 rounded-lg">
-                            <h3 className="text-sm font-semibold mb-2 text-zinc-400">Configuration:</h3>
-                            <pre className="text-xs overflow-x-auto text-zinc-300">
-{`<Warp
-  color1="${params.color1}"
-  color2="${params.color2}"
-  color3="${params.color3}"
-  speed={${params.speed}}
-  swirl={${params.swirl}}
-  swirlIterations={${params.swirlIterations}}
-  shapeScale={${params.shapeScale}}
-  rotation={${params.rotation}}
-/>`}
-                            </pre>
+                        {/* Configuration Display Panel - FLAT */}
+                        <div style={{
+                            backgroundColor: 'rgba(24, 24, 27, 0.5)',
+                            borderRadius: '4px',
+                            padding: '8px',
+                            border: '1px solid rgba(63, 63, 70, 0.3)'
+                        }}>
+                            <h2 className="text-xs font-semibold text-zinc-200 mb-1 flex items-center gap-1">
+                                <svg className="w-3 h-3 text-zinc-400" style={{ width: '12px', height: '12px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                </svg>
+                                Code
+                            </h2>
+                            <div style={{
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                padding: '8px',
+                                borderRadius: '3px',
+                                overflowX: 'auto',
+                                border: '1px solid rgba(63, 63, 70, 0.2)'
+                            }}>
+                                <pre className="text-[10px] font-mono leading-tight">
+                                    <code>
+                                        <span className="text-emerald-400">&lt;Warp</span>{'\n'}
+                                        <span className="text-zinc-400">  color1="</span><span className="text-amber-400">{params.color1}</span><span className="text-zinc-400">"</span>{'\n'}
+                                        <span className="text-zinc-400">  color2="</span><span className="text-amber-400">{params.color2}</span><span className="text-zinc-400">"</span>{'\n'}
+                                        <span className="text-zinc-400">  color3="</span><span className="text-amber-400">{params.color3}</span><span className="text-zinc-400">"</span>{'\n'}
+                                        <span className="text-zinc-400">  speed={'{'}</span><span className="text-cyan-400">{params.speed}</span><span className="text-zinc-400">{'}'}</span>{'\n'}
+                                        <span className="text-zinc-400">  swirl={'{'}</span><span className="text-cyan-400">{params.swirl}</span><span className="text-zinc-400">{'}'}</span>{'\n'}
+                                        <span className="text-zinc-400">  swirlIterations={'{'}</span><span className="text-cyan-400">{params.swirlIterations}</span><span className="text-zinc-400">{'}'}</span>{'\n'}
+                                        <span className="text-zinc-400">  shapeScale={'{'}</span><span className="text-cyan-400">{params.shapeScale}</span><span className="text-zinc-400">{'}'}</span>{'\n'}
+                                        <span className="text-zinc-400">  rotation={'{'}</span><span className="text-cyan-400">{params.rotation}</span><span className="text-zinc-400">{'}'}</span>{'\n'}
+                                        <span className="text-emerald-400">/&gt;</span>
+                                    </code>
+                                </pre>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -413,7 +560,7 @@ export default function WarpBackgroundTester() {
                 backgroundColor: '#000000',
                 minHeight: '100vh',
                 flexGrow: 1,
-                width: 'calc(100% - 450px)'
+                width: 'calc(100% - 420px)'
             }}>
                 {/* Warp Background */}
                 {warpStatus === 'loading' && <WarpLoader />}
@@ -446,37 +593,52 @@ export default function WarpBackgroundTester() {
             </div>
 
             <style>{`
-                .slider {
+                .slider,
+                .slider-compact {
                     -webkit-appearance: none;
                     appearance: none;
-                    height: 6px;
-                    border-radius: 3px;
+                    height: 4px;
+                    border-radius: 2px;
                     background: #27272a;
                     outline: none;
                     opacity: 0.9;
                     transition: opacity 0.2s;
                 }
 
-                .slider:hover {
+                .slider:hover,
+                .slider-compact:hover {
                     opacity: 1;
                 }
 
-                .slider::-webkit-slider-thumb {
+                .slider::-webkit-slider-thumb,
+                .slider-compact::-webkit-slider-thumb {
                     -webkit-appearance: none;
                     appearance: none;
-                    width: 18px;
-                    height: 18px;
+                    width: 14px;
+                    height: 14px;
                     border-radius: 50%;
                     background: #dc2626;
                     cursor: pointer;
+                    border: 1px solid #000;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
                 }
 
-                .slider::-moz-range-thumb {
-                    width: 18px;
-                    height: 18px;
+                .slider::-moz-range-thumb,
+                .slider-compact::-moz-range-thumb {
+                    width: 14px;
+                    height: 14px;
                     border-radius: 50%;
                     background: #dc2626;
                     cursor: pointer;
+                    border: 1px solid #000;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                }
+
+                /* Improved focus indicators for accessibility */
+                .slider:focus-visible,
+                .slider-compact:focus-visible {
+                    outline: 2px solid #dc2626;
+                    outline-offset: 2px;
                 }
 
                 /* Custom scrollbar for controls panel */
