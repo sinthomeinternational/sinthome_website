@@ -2,16 +2,21 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
 import EventCardsWithModal from "../../components/srtp/EventCardsWithModal";
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { getLanguageFromURL } from "../../lib/translations";
 
 // Get all SRTP events from content collection
 const srtpEvents = await getCollection('srtpEvents');
 
-// Sort events by date (most recent first)
-const sortedEvents = srtpEvents.sort((a, b) => {
-  return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
-});
+// Sort events by date (most recent first) and include body content
+const sortedEvents = srtpEvents
+  .map(event => ({
+    ...event,
+    body: event.body || '' // Include the markdown body content
+  }))
+  .sort((a, b) => {
+    return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+  });
 
 // Get current language
 const lang = getLanguageFromURL(Astro.url);

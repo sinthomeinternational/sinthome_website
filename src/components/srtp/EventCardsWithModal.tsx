@@ -189,6 +189,35 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                 </div>
               )}
 
+              {/* Full Event Details */}
+              {(selectedEvent as any).body && (
+                <div className="mb-8">
+                  <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wide">
+                    Full Details
+                  </h3>
+                  <div className="text-zinc-400 leading-relaxed space-y-4 whitespace-pre-wrap">
+                    {((selectedEvent as any).body as string)
+                      .split('\n\n')
+                      .map((paragraph, idx) => {
+                        // Check if it's a heading (starts with ##)
+                        if (paragraph.startsWith('## ')) {
+                          return (
+                            <h4 key={idx} className="text-lg font-semibold text-white mt-6 mb-3">
+                              {paragraph.replace('## ', '')}
+                            </h4>
+                          );
+                        }
+                        // Regular paragraph
+                        return paragraph.trim() ? (
+                          <p key={idx} className="text-zinc-300">
+                            {paragraph}
+                          </p>
+                        ) : null;
+                      })}
+                  </div>
+                </div>
+              )}
+
               {/* Tags */}
               <div className="mb-8">
                 <h3 className="text-lg font-bold text-white mb-3 uppercase tracking-wide">Topics</h3>
