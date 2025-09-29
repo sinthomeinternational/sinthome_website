@@ -15,15 +15,17 @@ const {
 
 <RootLayout title={title} description={description}>
   {showNavigation && !useInfoLayout && !useContentLayout && (
-    <TopNavigation client:load />
-    <div class="h-16"></div> <!-- Spacer for fixed nav -->
+    <>
+      <TopNavigation client:idle />
+      <div class="h-16"></div> <!-- Spacer for fixed nav -->
+    </>
   )}
 
   {useContentLayout ? (
     <!-- Content-focused layout without warp animation for better readability -->
     <div class="bg-black min-h-screen">
       {showNavigation && (
-        <TopNavigation variant="static" client:load />
+        <TopNavigation variant="static" client:idle />
       )}
       <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="[&_h1]:text-red-600 pt-8 pb-20 text-white">
@@ -55,7 +57,7 @@ const {
 
       <main class="relative bg-black flex-1">
         {showNavigation && (
-          <TopNavigation variant="static" client:load />
+          <TopNavigation variant="static" client:idle />
         )}
         <div class="[&_h1]:text-red-600 pt-8 pb-20 text-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <slot />

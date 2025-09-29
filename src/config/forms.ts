@@ -82,3 +82,39 @@ export type FormConfig = typeof FORMS;
 export type MainFormKey = keyof typeof FORMS;
 export type ProjectFormKey = keyof typeof FORMS.projects;
 export type EventFormKey = keyof typeof FORMS.events;
+
+// Validation function to check for placeholder IDs
+export function validateFormId(formId: string): boolean {
+  const placeholderPatterns = [
+    'YOUR_',
+    'PLACEHOLDER',
+    'EXAMPLE',
+    'TEST',
+    'DEMO'
+  ];
+
+  return !placeholderPatterns.some(pattern =>
+    formId.toUpperCase().includes(pattern)
+  );
+}
+
+// Development warning for placeholder IDs
+if (typeof window !== 'undefined' && import.meta.env.DEV) {
+  const checkForms = (forms: any, path: string = '') => {
+    Object.entries(forms).forEach(([key, value]: [string, any]) => {
+      const currentPath = path ? `${path}.${key}` : key;
+
+      if (value && typeof value === 'object') {
+        if (value.id && typeof value.id === 'string') {
+          if (!validateFormId(value.id)) {
+            console.warn(`⚠️ Placeholder form ID detected at FORMS.${currentPath}.id: "${value.id}"`);
+          }
+        } else {
+          checkForms(value, currentPath);
+        }
+      }
+    });
+  };
+
+  checkForms(FORMS);
+}

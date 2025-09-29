@@ -31,6 +31,7 @@ const platformInfo = {
 
 export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QRCodeModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const previousOverflowRef = useRef<string>('');
   const info = platformInfo[platform];
 
   // Handle click outside
@@ -43,13 +44,15 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QR
 
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
-      // Prevent body scroll when modal is open
+      // Store the previous overflow value and prevent body scroll when modal is open
+      previousOverflowRef.current = document.body.style.overflow || '';
       document.body.style.overflow = 'hidden';
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'unset';
+      // Restore the previous overflow value
+      document.body.style.overflow = previousOverflowRef.current;
     };
   }, [isOpen, onClose]);
 
