@@ -34,16 +34,14 @@ export default function GoogleForm({
           src={formUrl}
           width="100%"
           height={height}
-          frameBorder="0"
-          marginHeight={0}
-          marginWidth={0}
-          title={title}
-          onLoad={() => setIsLoading(false)}
-          className="rounded-lg bg-white"
           style={{
+            border: 0,
             display: isLoading ? 'none' : 'block',
             minHeight: height
           }}
+          title={title}
+          onLoad={() => setIsLoading(false)}
+          className="rounded-lg bg-white"
         >
           Loading…
         </iframe>

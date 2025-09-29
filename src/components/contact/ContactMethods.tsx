@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ContactCard from './ContactCard';
 import QRCodeModal from './QRCodeModal';
 
@@ -80,7 +80,7 @@ export default function ContactMethods() {
 
       {/* Contact Cards Grid */}
       <div className="grid gap-4 sm:grid-cols-2">
-        {contactMethods.map((method, index) => (
+        {contactMethods.map((method) => (
           <ContactCard
             key={method.id}
             title={method.title}
