@@ -12,7 +12,7 @@ function WarpLoader() {
         <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900 to-black flex items-center justify-center">
             <div className="text-center text-white">
                 <div className="animate-spin rounded-full h-8 w-8 border-2 border-red-600 border-t-transparent mx-auto mb-4"></div>
-                <p className="text-zinc-400">Loading Warp Shader...</p>
+                <p className="text-zinc-400">Loading Warp Shader... (Updated)</p>
             </div>
         </div>
     );
@@ -206,27 +206,38 @@ export default function WarpBackgroundTester() {
 
     return (
         <div className="relative min-h-screen bg-black text-white flex flex-row" style={{ backgroundColor: '#000000', color: 'white', display: 'flex', flexDirection: 'row' }}>
-            {/* Left Panel - Controls (Fixed width, scrollable) */}
+
+            {/* Left Panel - Controls (FLAT DESIGN) */}
             <div
-                className="w-[420px] min-w-[420px] flex-shrink-0 h-screen overflow-y-auto bg-gradient-to-b from-zinc-900 via-zinc-950 to-black border-r border-zinc-800/50"
+                className="w-[320px] min-w-[320px] flex-shrink-0 h-screen overflow-y-auto"
                 style={{
                     position: 'relative',
                     zIndex: 10,
-                    backgroundColor: 'rgb(9, 9, 11)',
-                    color: 'white',
-                    borderRightColor: 'rgb(39, 39, 42)'
+                    width: '320px',
+                    minWidth: '320px',
+                    height: '100vh',
+                    overflowY: 'auto',
+                    backgroundColor: 'rgba(10, 10, 10, 0.95)',
+                    borderRight: '1px solid rgba(220, 38, 38, 0.2)',
+                    backdropFilter: 'blur(10px)'
                 }}>
-                <div className="p-3">
-                    {/* Header */}
-                    <div className="mb-3">
-                        <h1 className="text-lg font-medium text-zinc-100 tracking-tight">
-                            Warp Background Tester
+                <div className="p-2" style={{ padding: '8px' }}>
+                    {/* Header - FLAT COMPACT */}
+                    <div className="mb-2" style={{ marginBottom: '8px' }}>
+                        <h1 className="text-sm font-semibold text-red-400 tracking-tight" style={{ fontSize: '13px', fontWeight: '600', color: '#ef4444' }}>
+                            Warp Controls
                         </h1>
-                        <p className="text-[11px] text-zinc-500">Configure and test warp animation parameters</p>
+                        <p className="text-[9px] text-zinc-500" style={{ fontSize: '9px', color: '#71717a' }}>Adjust parameters in real-time</p>
                     </div>
 
-                    {/* Status Indicator Panel */}
-                    <div className="bg-gradient-to-r from-zinc-900/40 to-zinc-800/30 rounded-lg p-2 border border-zinc-700/30 mb-3 backdrop-blur-sm">
+                    {/* Status Indicator Panel - FLAT */}
+                    <div style={{
+                        backgroundColor: 'rgba(39, 39, 42, 0.5)',
+                        borderRadius: '4px',
+                        padding: '6px 8px',
+                        border: '1px solid rgba(63, 63, 70, 0.3)',
+                        marginBottom: '8px'
+                    }}>
                         <div className="flex items-center gap-2">
                             <div className={`w-2 h-2 rounded-full animate-pulse ${
                                 warpStatus === 'loaded' ? 'bg-green-500' :
@@ -246,29 +257,58 @@ export default function WarpBackgroundTester() {
                         </div>
                     </div>
 
-                    <div className="space-y-3">
-                        {/* Color Controls Panel */}
-                        <div className="bg-gradient-to-br from-zinc-900/40 to-zinc-800/30 rounded-lg p-3 border border-zinc-700/30 backdrop-blur-sm shadow-lg shadow-black/20">
-                            <h2 className="text-xs font-semibold text-zinc-200 mb-2 flex items-center gap-1">
-                                <svg className="w-3.5 h-3.5 text-zinc-400" style={{ width: '14px', height: '14px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="space-y-2" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                        {/* Color Controls Panel - FLAT */}
+                        <div style={{
+                            backgroundColor: 'rgba(24, 24, 27, 0.5)',
+                            borderRadius: '4px',
+                            padding: '8px',
+                            border: '1px solid rgba(63, 63, 70, 0.3)'
+                        }}>
+                            <h2 style={{
+                                fontSize: '10px',
+                                fontWeight: '700',
+                                color: '#e4e4e7',
+                                marginBottom: '4px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '3px',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em'
+                            }}>
+                                <svg style={{ width: '10px', height: '10px', color: '#ef4444' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                                 </svg>
-                                Color Palette
+                                Colors
                             </h2>
 
-                            {/* Enhanced color pickers with preview - all on one line */}
-                            <div className="flex flex-row items-center gap-3" style={{ display: 'flex', flexDirection: 'row' }}>
+                            {/* ULTRA COMPACT COLOR PICKERS - ONE LINE */}
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                gap: '6px',
+                                padding: '2px 0'
+                            }}>
                                 {[
                                     { key: 'color1', label: 'C1', value: params.color1 },
                                     { key: 'color2', label: 'C2', value: params.color2 },
                                     { key: 'color3', label: 'C3', value: params.color3 }
                                 ].map(({ key, label, value }) => (
-                                    <div key={key} className="flex flex-row items-center gap-1.5" style={{ display: 'flex', flexDirection: 'row' }}>
-                                        <label className="text-[10px] text-zinc-400 font-medium">{label}</label>
+                                    <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                                        <label style={{ fontSize: '9px', color: '#a1a1aa', fontWeight: '600' }}>{label}:</label>
                                         <div className="relative group">
                                             <div
-                                                className="w-12 h-6 rounded border-2 border-zinc-600 cursor-pointer overflow-hidden hover:border-red-500/50 transition-all duration-200 shadow-inner"
-                                                style={{ backgroundColor: value }}
+                                                style={{
+                                                    width: '24px',
+                                                    height: '24px',
+                                                    borderRadius: '3px',
+                                                    border: '1px solid rgba(113, 113, 122, 0.3)',
+                                                    cursor: 'pointer',
+                                                    overflow: 'hidden',
+                                                    transition: 'border-color 0.2s',
+                                                    backgroundColor: value
+                                                }}
                                             >
                                                 <input
                                                     type="color"
@@ -279,23 +319,38 @@ export default function WarpBackgroundTester() {
                                                 />
                                             </div>
                                         </div>
-                                        <span className="text-[9px] font-mono text-zinc-500">
-                                            {value.toUpperCase()}
+                                        <span style={{ fontSize: '8px', fontFamily: 'monospace', color: '#71717a' }}>
+                                            {value.substring(1, 4).toUpperCase()}
                                         </span>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Parameter Controls Panel */}
-                        <div className="bg-gradient-to-br from-zinc-900/40 to-zinc-800/30 rounded-lg p-3 border border-zinc-700/30 backdrop-blur-sm shadow-lg shadow-black/20">
-                            <h2 className="text-xs font-semibold text-zinc-200 mb-2 flex items-center gap-1">
-                                <svg className="w-3.5 h-3.5 text-zinc-400" style={{ width: '14px', height: '14px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {/* Parameter Controls Panel - FLAT */}
+                        <div style={{
+                            backgroundColor: 'rgba(24, 24, 27, 0.5)',
+                            borderRadius: '4px',
+                            padding: '8px',
+                            border: '1px solid rgba(63, 63, 70, 0.3)'
+                        }}>
+                            <h2 style={{
+                                fontSize: '10px',
+                                fontWeight: '700',
+                                color: '#e4e4e7',
+                                marginBottom: '4px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '3px',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em'
+                            }}>
+                                <svg style={{ width: '10px', height: '10px', color: '#ef4444' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                                 </svg>
-                                Animation Parameters
+                                Parameters
                             </h2>
-                            <div className="space-y-1">
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
 
                             {[
                                 { key: 'speed', label: 'Speed', min: 0, max: 2, step: 0.05 },
@@ -307,8 +362,8 @@ export default function WarpBackgroundTester() {
                                 { key: 'softness', label: 'Softness', min: 0, max: 1, step: 0.01 },
                                 { key: 'distortion', label: 'Distortion', min: 0, max: 1, step: 0.01 }
                             ].map(({ key, label, min, max, step }) => (
-                                <div key={key} className="flex items-center gap-2">
-                                    <label className="text-[10px] font-medium text-zinc-400 min-w-[70px]">{label}</label>
+                                <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '4px', height: '20px' }}>
+                                    <label style={{ fontSize: '9px', fontWeight: '500', color: '#a1a1aa', minWidth: '60px', textAlign: 'right' }}>{label}</label>
                                     <input
                                         type="range"
                                         min={min}
@@ -316,15 +371,18 @@ export default function WarpBackgroundTester() {
                                         step={step}
                                         value={params[key as keyof typeof params] as number}
                                         onChange={(e) => updateParam(key, step < 1 ? parseFloat(e.target.value) : parseInt(e.target.value))}
-                                        className="flex-1 h-1.5 bg-gradient-to-r from-zinc-700 to-zinc-600 rounded-full appearance-none cursor-pointer
-                                            [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3.5 [&::-webkit-slider-thumb]:h-3.5
-                                            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gradient-to-b [&::-webkit-slider-thumb]:from-red-400 [&::-webkit-slider-thumb]:to-red-600
-                                            [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:hover:from-red-300 [&::-webkit-slider-thumb]:hover:to-red-500
-                                            [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:duration-200
-                                            [&::-moz-range-thumb]:w-3.5 [&::-moz-range-thumb]:h-3.5 [&::-moz-range-thumb]:rounded-full
-                                            [&::-moz-range-thumb]:bg-gradient-to-b [&::-moz-range-thumb]:from-red-400 [&::-moz-range-thumb]:to-red-600
-                                            [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:hover:from-red-300 [&::-moz-range-thumb]:hover:to-red-500
-                                            [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:transition-all [&::-moz-range-thumb]:duration-200"
+                                        className="flex-1 h-1 bg-zinc-800 rounded-full appearance-none cursor-pointer
+                                            [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3
+                                            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-red-500
+                                            [&::-webkit-slider-thumb]:hover:bg-red-400
+                                            [&::-webkit-slider-thumb]:transition-colors [&::-webkit-slider-thumb]:duration-200
+                                            [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:rounded-full
+                                            [&::-moz-range-thumb]:bg-red-500 [&::-moz-range-thumb]:hover:bg-red-400
+                                            [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:transition-colors [&::-moz-range-thumb]:duration-200"
+                                        style={{
+                                            background: '#27272a',
+                                            height: '4px'
+                                        }}
                                         aria-label={`${label}: ${params[key as keyof typeof params]}`}
                                     />
                                     <span className="text-[10px] font-mono text-zinc-500 min-w-[35px] text-right">
@@ -339,23 +397,46 @@ export default function WarpBackgroundTester() {
                             </div>
                         </div>
 
-                        {/* Action Buttons Panel */}
-                        <div className="bg-gradient-to-br from-zinc-900/40 to-zinc-800/30 rounded-lg p-2.5 border border-zinc-700/30 backdrop-blur-sm shadow-lg shadow-black/20">
+                        {/* Action Buttons Panel - FLAT */}
+                        <div style={{
+                            backgroundColor: 'rgba(24, 24, 27, 0.5)',
+                            borderRadius: '4px',
+                            padding: '8px',
+                            border: '1px solid rgba(63, 63, 70, 0.3)'
+                        }}>
                             <h2 className="text-xs font-semibold text-zinc-200 mb-2">Actions</h2>
                             <div className="flex gap-1 mb-2">
                                 <button
                                     onClick={copyConfig}
-                                    className="flex-1 px-3 py-1.5 bg-gradient-to-b from-red-500 to-red-600 text-white text-[11px] font-semibold rounded-md
-                                        hover:from-red-400 hover:to-red-500 active:from-red-600 active:to-red-700
-                                        transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-[1.02]"
+                                    className="flex-1 px-3 py-1.5 bg-red-600 text-white text-[11px] font-medium rounded
+                                        hover:bg-red-500 active:bg-red-700
+                                        transition-colors duration-200"
+                                    style={{
+                                        backgroundColor: '#dc2626',
+                                        color: 'white',
+                                        fontSize: '11px',
+                                        padding: '6px 12px',
+                                        borderRadius: '3px',
+                                        border: 'none',
+                                        cursor: 'pointer'
+                                    }}
                                 >
                                     {copied ? '✓ Copied' : 'Copy'}
                                 </button>
                                 <button
                                     onClick={resetToDefaults}
-                                    className="flex-1 px-3 py-1.5 bg-gradient-to-b from-zinc-600 to-zinc-700 text-zinc-100 text-[11px] font-semibold rounded-md
-                                        hover:from-zinc-500 hover:to-zinc-600 active:from-zinc-700 active:to-zinc-800
-                                        transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-[1.02]"
+                                    className="flex-1 px-3 py-1.5 bg-zinc-700 text-zinc-100 text-[11px] font-medium rounded
+                                        hover:bg-zinc-600 active:bg-zinc-800
+                                        transition-colors duration-200"
+                                    style={{
+                                        backgroundColor: '#3f3f46',
+                                        color: '#f4f4f5',
+                                        fontSize: '11px',
+                                        padding: '6px 12px',
+                                        borderRadius: '3px',
+                                        border: 'none',
+                                        cursor: 'pointer'
+                                    }}
                                 >
                                     Reset
                                 </button>
@@ -365,9 +446,16 @@ export default function WarpBackgroundTester() {
                             <div className="flex gap-1">
                                 <button
                                     onClick={() => setDebugMode(!debugMode)}
-                                    className={`flex-1 px-2 py-1 rounded-md text-[10px] font-medium transition-all duration-200 shadow-sm ${
-                                        debugMode ? 'bg-gradient-to-b from-green-600/30 to-green-700/30 text-green-400 shadow-green-900/20' : 'bg-gradient-to-b from-zinc-700 to-zinc-800 text-zinc-300'
-                                    } hover:shadow-md transform hover:scale-[1.02]`}
+                                    className="flex-1 px-2 py-1 rounded text-[10px] font-medium transition-colors duration-200"
+                                    style={{
+                                        backgroundColor: debugMode ? 'rgba(34, 197, 94, 0.2)' : '#3f3f46',
+                                        color: debugMode ? '#4ade80' : '#a1a1aa',
+                                        fontSize: '10px',
+                                        padding: '4px 8px',
+                                        borderRadius: '3px',
+                                        border: debugMode ? '1px solid rgba(34, 197, 94, 0.3)' : 'none',
+                                        cursor: 'pointer'
+                                    }}
                                     aria-label={`Debug mode ${debugMode ? 'on' : 'off'}`}
                                 >
                                     Debug
@@ -381,14 +469,32 @@ export default function WarpBackgroundTester() {
                                             setWarpStatus('loaded');
                                         }, 500);
                                     }}
-                                    className="flex-1 px-2 py-1 bg-gradient-to-b from-zinc-700 to-zinc-800 text-zinc-300 rounded-md hover:from-zinc-600 hover:to-zinc-700 text-[10px] font-medium transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-[1.02]"
+                                    className="flex-1 px-2 py-1 bg-zinc-700 text-zinc-300 rounded text-[10px] font-medium transition-colors duration-200 hover:bg-zinc-600"
+                                    style={{
+                                        backgroundColor: '#3f3f46',
+                                        color: '#a1a1aa',
+                                        fontSize: '10px',
+                                        padding: '4px 8px',
+                                        borderRadius: '3px',
+                                        border: 'none',
+                                        cursor: 'pointer'
+                                    }}
                                     aria-label="Force reload animation"
                                 >
                                     Reload
                                 </button>
                                 <button
                                     onClick={() => setWarpStatus('fallback')}
-                                    className="flex-1 px-2 py-1 bg-gradient-to-b from-zinc-700 to-zinc-800 text-zinc-300 rounded-md hover:from-zinc-600 hover:to-zinc-700 text-[10px] font-medium transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-[1.02]"
+                                    className="flex-1 px-2 py-1 bg-zinc-700 text-zinc-300 rounded text-[10px] font-medium transition-colors duration-200 hover:bg-zinc-600"
+                                    style={{
+                                        backgroundColor: '#3f3f46',
+                                        color: '#a1a1aa',
+                                        fontSize: '10px',
+                                        padding: '4px 8px',
+                                        borderRadius: '3px',
+                                        border: 'none',
+                                        cursor: 'pointer'
+                                    }}
                                     aria-label="Use fallback animation"
                                 >
                                     Fallback
@@ -407,15 +513,26 @@ export default function WarpBackgroundTester() {
                             </div>
                         )}
 
-                        {/* Configuration Display Panel */}
-                        <div className="bg-gradient-to-br from-zinc-900/40 to-zinc-800/30 rounded-lg p-2 border border-zinc-700/30 backdrop-blur-sm shadow-lg shadow-black/20">
+                        {/* Configuration Display Panel - FLAT */}
+                        <div style={{
+                            backgroundColor: 'rgba(24, 24, 27, 0.5)',
+                            borderRadius: '4px',
+                            padding: '8px',
+                            border: '1px solid rgba(63, 63, 70, 0.3)'
+                        }}>
                             <h2 className="text-xs font-semibold text-zinc-200 mb-1 flex items-center gap-1">
                                 <svg className="w-3 h-3 text-zinc-400" style={{ width: '12px', height: '12px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                                 </svg>
                                 Code
                             </h2>
-                            <div className="bg-black/50 p-2 rounded overflow-x-auto border border-zinc-800/50">
+                            <div style={{
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                padding: '8px',
+                                borderRadius: '3px',
+                                overflowX: 'auto',
+                                border: '1px solid rgba(63, 63, 70, 0.2)'
+                            }}>
                                 <pre className="text-[10px] font-mono leading-tight">
                                     <code>
                                         <span className="text-emerald-400">&lt;Warp</span>{'\n'}
