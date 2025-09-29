@@ -41,8 +41,9 @@ const defaultDescription = "A public-interest community reconstructing new relat
 		<meta name="twitter:description" content={defaultDescription} />
 		<meta name="twitter:image" content={assets.socialImage} />
 
-		<ClientRouter />
-		<LoadingIndicator color="#dc2626" height="2px" />
+		<!-- Removing ClientRouter to maintain static site benefits and avoid SPA behavior -->
+		<!-- <ClientRouter /> -->
+		<!-- <LoadingIndicator color="#dc2626" height="2px" /> -->
 
 	</head>
 	<body class="font-sans min-h-screen bg-white text-black">

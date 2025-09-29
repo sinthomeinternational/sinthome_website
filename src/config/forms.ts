@@ -10,29 +10,38 @@
  * Example: https://docs.google.com/forms/d/e/[FORM_ID]/viewform
  */
 
+// Use environment variables with fallback to placeholders
+const getFormId = (envKey: string, fallback: string = 'YOUR_FORM_ID') => {
+  return import.meta.env[envKey] || fallback;
+};
+
+const getFormUrl = (envKey: string, fallback: string = 'https://forms.gle/YOUR_LINK') => {
+  return import.meta.env[envKey] || fallback;
+};
+
 export const FORMS = {
   // Main forms
   contact: {
-    id: "YOUR_CONTACT_FORM_ID", // Replace with actual form ID
-    url: "https://forms.gle/YOUR_FORM_LINK", // Replace with short URL
+    id: getFormId('PUBLIC_CONTACT_FORM_ID', 'YOUR_CONTACT_FORM_ID'),
+    url: getFormUrl('PUBLIC_CONTACT_FORM_URL'),
     title: "Contact Us",
     height: "800px"
   },
   volunteer: {
-    id: "YOUR_VOLUNTEER_FORM_ID",
-    url: "https://forms.gle/YOUR_FORM_LINK",
+    id: getFormId('PUBLIC_VOLUNTEER_FORM_ID', 'YOUR_VOLUNTEER_FORM_ID'),
+    url: getFormUrl('PUBLIC_VOLUNTEER_FORM_URL'),
     title: "Volunteer Sign-up",
     height: "1000px"
   },
   newsletter: {
-    id: "YOUR_NEWSLETTER_FORM_ID",
-    url: "https://forms.gle/YOUR_FORM_LINK",
+    id: getFormId('PUBLIC_NEWSLETTER_FORM_ID', 'YOUR_NEWSLETTER_FORM_ID'),
+    url: getFormUrl('PUBLIC_NEWSLETTER_FORM_URL'),
     title: "Newsletter Subscription",
     height: "400px"
   },
   donation: {
-    id: "YOUR_DONATION_FORM_ID",
-    url: "https://forms.gle/YOUR_FORM_LINK",
+    id: getFormId('PUBLIC_DONATION_FORM_ID', 'YOUR_DONATION_FORM_ID'),
+    url: getFormUrl('PUBLIC_DONATION_FORM_URL'),
     title: "Donation Interest",
     height: "600px"
   },
@@ -40,26 +49,26 @@ export const FORMS = {
   // Project-specific forms
   projects: {
     aiHackathon: {
-      id: "YOUR_AI_HACKATHON_FORM_ID",
-      url: "https://forms.gle/YOUR_FORM_LINK",
+      id: getFormId('PUBLIC_AI_HACKATHON_FORM_ID', 'YOUR_AI_HACKATHON_FORM_ID'),
+      url: getFormUrl('PUBLIC_AI_HACKATHON_FORM_URL'),
       title: "AI Hackathon Registration",
       height: "900px"
     },
     workersAssist: {
-      id: "YOUR_WORKERS_ASSIST_FORM_ID",
-      url: "https://forms.gle/YOUR_FORM_LINK",
+      id: getFormId('PUBLIC_WORKERS_ASSIST_FORM_ID', 'YOUR_WORKERS_ASSIST_FORM_ID'),
+      url: getFormUrl('PUBLIC_WORKERS_ASSIST_FORM_URL'),
       title: "Workers Assist Program",
       height: "800px"
     },
     plantcoreAI: {
-      id: "YOUR_PLANTCORE_FORM_ID",
-      url: "https://forms.gle/YOUR_FORM_LINK",
+      id: getFormId('PUBLIC_PLANTCORE_FORM_ID', 'YOUR_PLANTCORE_FORM_ID'),
+      url: getFormUrl('PUBLIC_PLANTCORE_FORM_URL'),
       title: "Plantcore AI Interest",
       height: "700px"
     },
     srtp: {
-      id: "YOUR_S.R.T.P._FORM_ID",
-      url: "https://forms.gle/YOUR_FORM_LINK",
+      id: getFormId('PUBLIC_SRTP_FORM_ID', 'YOUR_SRTP_FORM_ID'),
+      url: getFormUrl('PUBLIC_SRTP_FORM_URL'),
       title: "S.R.T.P. Program Application",
       height: "900px"
     }

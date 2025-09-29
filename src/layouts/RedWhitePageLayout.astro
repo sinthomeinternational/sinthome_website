@@ -14,8 +14,10 @@ const {
 
 <RedWhiteRootLayout title={title} description={description}>
   {showNavigation && !useInfoLayout && (
-    <TopNavigation client:load variant="fixed" theme="redwhite" />
-    <div class="h-16"></div> <!-- Spacer for fixed nav -->
+    <>
+      <TopNavigation client:idle variant="fixed" theme="redwhite" />
+      <div class="h-16"></div> <!-- Spacer for fixed nav -->
+    </>
   )}
 
   {useInfoLayout ? (
@@ -37,7 +39,7 @@ const {
 
       <main class="relative bg-white flex-1">
         {showNavigation && (
-          <TopNavigation variant="static" theme="redwhite" client:load />
+          <TopNavigation variant="static" theme="redwhite" client:idle />
         )}
         <div class="[&_h1]:text-red-600 pt-8 pb-20 text-black max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <slot />
