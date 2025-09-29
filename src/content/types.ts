@@ -148,6 +148,10 @@ export interface CommonContent {
     cancel: string;
     back: string;
     next: string;
+    themeLight: string;
+    themeDark: string;
+    languageChinese: string;
+    languageEnglish: string;
   };
   messages: {
     loading: string;

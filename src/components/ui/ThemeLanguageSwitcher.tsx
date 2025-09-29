@@ -7,8 +7,8 @@
 import { useState, useEffect } from 'react';
 import type { Language } from '../../config/languages';
 import type { ThemeId } from '../../config/themes';
-import { getCurrentLanguageClient } from '../../lib/translations';
-import { getStoredTheme, applyTheme } from '../../config/themes';
+import { getCurrentLanguageClient, useTranslations } from '../../lib/translations';
+import { applyTheme } from '../../config/themes';
 
 interface ThemeLanguageSwitcherProps {
   className?: string;
@@ -17,16 +17,32 @@ interface ThemeLanguageSwitcherProps {
 export default function ThemeLanguageSwitcher({
   className = ''
 }: ThemeLanguageSwitcherProps) {
+  // Default to dark theme during SSR
   const [currentTheme, setCurrentTheme] = useState<ThemeId>('dark');
   const [currentLang, setCurrentLang] = useState<Language>('en');
   const [mounted, setMounted] = useState(false);
 
+  // Get translations
+  const translations = useTranslations();
+
   useEffect(() => {
     setMounted(true);
-    // Get stored theme preference
-    const storedTheme = getStoredTheme() || 'dark';
-    setCurrentTheme(storedTheme);
-    applyTheme(storedTheme);
+    // Get current theme from localStorage first, then fallback to DOM
+    const storedTheme = localStorage.getItem('theme') as ThemeId;
+    const root = document.documentElement;
+
+    // Check multiple sources for theme
+    let currentThemeFromDOM: ThemeId;
+    if (storedTheme === 'light' || storedTheme === 'dark') {
+      currentThemeFromDOM = storedTheme;
+    } else if (root.classList.contains('theme-light')) {
+      currentThemeFromDOM = 'light';
+    } else {
+      // Default to dark if nothing else is set
+      currentThemeFromDOM = 'dark';
+    }
+
+    setCurrentTheme(currentThemeFromDOM);
 
     // Get current language from URL
     const lang = getCurrentLanguageClient();
@@ -42,6 +58,9 @@ export default function ThemeLanguageSwitcher({
   const handleLanguageToggle = () => {
     const newLang = currentLang === 'en' ? 'zh' : 'en';
 
+    // Store the scroll position to restore it after reload
+    sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+
     // Update URL with new language parameter
     const url = new URL(window.location.href);
     url.searchParams.set('lang', newLang);
@@ -50,9 +69,47 @@ export default function ThemeLanguageSwitcher({
     window.location.href = url.toString();
   };
 
+  // Get button labels from translations or use defaults
+  const getThemeButtonLabel = () => {
+    if (!translations?.common?.buttons) {
+      return currentTheme === 'dark' ? 'Light' : 'Dark';
+    }
+    return currentTheme === 'dark'
+      ? translations.common.buttons.themeLight
+      : translations.common.buttons.themeDark;
+  };
+
+  const getLanguageButtonLabel = () => {
+    if (!translations?.common?.buttons) {
+      return currentLang === 'en' ? '中文' : 'EN';
+    }
+    return currentLang === 'en'
+      ? translations.common.buttons.languageChinese
+      : translations.common.buttons.languageEnglish;
+  };
+
   if (!mounted) {
-    // Prevent hydration mismatch
-    return null;
+    // Render placeholder buttons to prevent layout shift
+    // These will be replaced once React hydrates
+    // Default to dark theme appearance
+    return (
+      <div className={`flex items-center gap-2 ${className}`}>
+        <button
+          className="px-3 py-1.5 rounded-lg transition-colors text-sm font-medium bg-zinc-800 text-white opacity-50 cursor-wait"
+          aria-label="Loading theme switcher"
+          disabled
+        >
+          Light
+        </button>
+        <button
+          className="px-3 py-1.5 rounded-lg transition-colors text-sm font-medium bg-zinc-800 text-white opacity-50 cursor-wait"
+          aria-label="Loading language switcher"
+          disabled
+        >
+          中文
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -67,7 +124,7 @@ export default function ThemeLanguageSwitcher({
         }`}
         aria-label={`Switch to ${currentTheme === 'dark' ? 'light' : 'dark'} theme`}
       >
-        {currentTheme === 'dark' ? 'Light' : 'Dark'}
+        {getThemeButtonLabel()}
       </button>
 
       {/* Language Switcher */}
@@ -80,7 +137,7 @@ export default function ThemeLanguageSwitcher({
         }`}
         aria-label={`Switch to ${currentLang === 'en' ? 'Chinese' : 'English'}`}
       >
-        {currentLang === 'en' ? '中文' : 'EN'}
+        {getLanguageButtonLabel()}
       </button>
     </div>
   );

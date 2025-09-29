@@ -44,9 +44,51 @@ const defaultDescription = "A public-interest community reconstructing new relat
 		<ClientRouter />
 		<LoadingIndicator color="#f4f4f5" height="2px" />
 
+		<!-- Inline script to prevent theme flash -->
+		<script is:inline>
+			(function() {
+				// Remove any existing theme classes first
+				document.documentElement.classList.remove('theme-light', 'theme-dark');
+
+				// Check if user has explicitly set a theme preference
+				const storedTheme = localStorage.getItem('theme');
+
+				// Determine which theme to use
+				let theme;
+				if (storedTheme === 'light') {
+					theme = 'light';
+				} else {
+					// Default to dark for any other case (including null, undefined, or invalid values)
+					theme = 'dark';
+					// Ensure localStorage is set to dark if it wasn't already
+					if (storedTheme !== 'dark') {
+						localStorage.setItem('theme', 'dark');
+					}
+				}
+
+				// Apply theme classes to html element
+				document.documentElement.classList.add(`theme-${theme}`);
+
+				// Apply data attribute for CSS targeting
+				document.documentElement.setAttribute('data-theme', theme);
+			})();
+		</script>
 	</head>
-	<body class="font-sans min-h-screen bg-black">
+	<body class="font-sans min-h-screen">
 		<slot />
+
+		<!-- Script to restore scroll position after language switch -->
+		<script>
+			// Restore scroll position if this was a language switch
+			const scrollPosition = sessionStorage.getItem('scrollPosition');
+			if (scrollPosition) {
+				// Use requestAnimationFrame to ensure DOM is ready
+				requestAnimationFrame(() => {
+					window.scrollTo(0, parseInt(scrollPosition));
+					sessionStorage.removeItem('scrollPosition');
+				});
+			}
+		</script>
 	</body>
 </html>
 
