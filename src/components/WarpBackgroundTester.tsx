@@ -257,13 +257,13 @@ export default function WarpBackgroundTester() {
                             </h2>
 
                             {/* Enhanced color pickers with preview - all on one line */}
-                            <div className="flex items-center gap-3">
+                            <div className="flex flex-row items-center gap-3" style={{ display: 'flex', flexDirection: 'row' }}>
                                 {[
                                     { key: 'color1', label: 'C1', value: params.color1 },
                                     { key: 'color2', label: 'C2', value: params.color2 },
                                     { key: 'color3', label: 'C3', value: params.color3 }
                                 ].map(({ key, label, value }) => (
-                                    <div key={key} className="flex items-center gap-1.5">
+                                    <div key={key} className="flex flex-row items-center gap-1.5" style={{ display: 'flex', flexDirection: 'row' }}>
                                         <label className="text-[10px] text-zinc-400 font-medium">{label}</label>
                                         <div className="relative group">
                                             <div
