@@ -86,8 +86,8 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
             style={{ clipPath: 'polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)' }}
           >
             <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
-            PORTFOLIO SHOWCASE
-            <div className="text-xs bg-red-600/20 px-2 py-1 ml-2">CONCEPT</div>
+            INDUSTRIAL VERTICAL LLM
+            <div className="text-xs bg-red-600/20 px-2 py-1 ml-2">LIVE</div>
           </motion.div>
 
           {/* Main Heading with Dynamic Data Integration */}
@@ -98,14 +98,14 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
             className="relative"
           >
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tight">
-              DECISION
+              INDUSTRIAL
               <br />
               <span className="relative inline-block">
-                INTELLIGENCE
+                VERTICAL
               </span>
               <br />
               <span className="text-red-500 relative">
-                DESIGNED
+                LLM
                 {/* Live indicator */}
                 <motion.div
                   className="absolute -bottom-1 left-0 w-full h-1 bg-red-500"
@@ -125,13 +125,16 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
           >
             <div className="border-l-4 border-red-500 pl-6 text-left inline-block">
               <p className="text-lg md:text-xl text-zinc-200 leading-relaxed font-medium">
-                MANUFACTURING REVOLUTION THROUGH
+                Building the first Industrial Vertical Large Language Model
               </p>
               <p className="text-xl md:text-2xl text-white leading-relaxed font-bold">
-                AUTHENTIC DECISION INTELLIGENCE
+                by deploying AI Agents that capture real-time
+              </p>
+              <p className="text-xl md:text-2xl text-white leading-relaxed font-bold">
+                Context-Decision-Outcome (CDO) data from factory floors
               </p>
               <div className="mt-2 text-sm text-red-400 font-mono">
-                // Real-time AI agents capturing factory-floor decisions
+                // Transforming manufacturing through intelligent decision-making
               </div>
             </div>
           </motion.div>
@@ -145,10 +148,10 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-black/60 border border-zinc-800 p-6">
               {[
-                { label: "COST TARGET", value: "≥10%", unit: "GOAL", color: "text-green-400" },
-                { label: "INVENTORY OPT", value: "7%", unit: "DESIGN", color: "text-blue-400" },
-                { label: "PROJECT PHASE", value: "CONCEPT", unit: "STATUS", color: "text-yellow-400" },
-                { label: "TECH STACK", value: "REACT", unit: "BUILT", color: "text-red-400" }
+                { label: "PROCUREMENT", value: "≥10%", unit: "SAVINGS", color: "text-green-400" },
+                { label: "INVENTORY", value: "~7%", unit: "REDUCTION", color: "text-blue-400" },
+                { label: "FACTORIES", value: "10K", unit: "BY 2030", color: "text-yellow-400" },
+                { label: "AI AGENTS", value: "150K+", unit: "DEPLOYED", color: "text-red-400" }
               ].map((metric, index) => (
                 <motion.div
                   key={index}
@@ -194,7 +197,7 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
                     transition={{ duration: 1.5, repeat: Infinity }}
                   />
                 </div>
-                VIEW PROJECT
+                REQUEST DEMO
               </div>
               <div className="absolute -bottom-1 left-4 right-4 h-px bg-white/50 group-hover:bg-white transition-colors" />
             </motion.button>
@@ -209,7 +212,7 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
             >
               <div className="flex items-center gap-3">
                 <div className="w-4 h-4 border border-current" />
-                LEARN MORE
+                JOIN PILOT
               </div>
               <div className="absolute -bottom-1 left-4 right-4 h-px bg-zinc-600 group-hover:bg-white transition-colors" />
             </motion.button>
@@ -225,17 +228,17 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
             <div className="inline-flex items-center gap-4 bg-black/40 border border-zinc-800 px-6 py-3">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-xs text-zinc-400 font-mono">PROJECT SHOWCASE</span>
+                <span className="text-xs text-zinc-400 font-mono">SYSTEM ACTIVE</span>
               </div>
               <div className="w-px h-4 bg-zinc-700" />
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-                <span className="text-xs text-zinc-400 font-mono">CONCEPT DESIGN</span>
+                <span className="text-xs text-zinc-400 font-mono">AGENTS DEPLOYED</span>
               </div>
               <div className="w-px h-4 bg-zinc-700" />
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-                <span className="text-xs text-zinc-400 font-mono">PORTFOLIO PIECE</span>
+                <span className="text-xs text-zinc-400 font-mono">CDO DATA CAPTURE</span>
               </div>
             </div>
           </motion.div>

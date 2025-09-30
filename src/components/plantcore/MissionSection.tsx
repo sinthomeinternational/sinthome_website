@@ -60,11 +60,11 @@ export default function MissionSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Our Mission
+            Mission — Reshaping the Future of Industry
           </h2>
           <p className="text-xl text-zinc-300 max-w-4xl mx-auto leading-relaxed">
-            Building the world's first Industrial Vertical Large Language Model to drive
-            a fundamental transformation in manufacturing through intelligent decision-making
+            Plantcore.AI is committed to building the world's first Industrial Vertical Large Language Model (LLM)
+            to drive a fundamental transformation in manufacturing.
           </p>
         </motion.div>
 
@@ -85,9 +85,10 @@ export default function MissionSection() {
               <h3 className="text-2xl font-bold text-white">Core Vision</h3>
             </div>
             <p className="text-lg text-zinc-300 leading-relaxed max-w-3xl mx-auto">
-              We believe the future of industry lies not in automated execution, but in the
+              We believe the future of industry is not limited to automated execution but lies in the
               <span className="text-red-400 font-semibold"> intelligent and collective structuring of decision-making</span>.
               Every act of production is shaped by countless judgments and choices—decisions that are the true drivers of industry.
+              Plantcore.AI begins from this reality, aiming to construct a new industrial intelligence system grounded in real-world decision data.
             </p>
           </div>
         </motion.div>
@@ -128,12 +129,14 @@ export default function MissionSection() {
         >
           <div className="bg-zinc-900/30 border border-zinc-800/50 rounded-xl p-8">
             <h3 className="text-xl font-semibold text-white mb-4">
-              The Challenge We're Solving
+              Method — Starting from Decisions
             </h3>
             <p className="text-zinc-300 leading-relaxed max-w-4xl mx-auto">
               Current ERP systems record transactions and processes but fail to capture the on-the-ground
               choices made by workers and managers in real time. This blind spot prevents the accumulation
               of experiential data and blocks the path toward genuine intelligent decision-making.
+              Plantcore.AI addresses this gap by deploying AI Agents directly on the factory floor to capture
+              Context–Decision–Outcome (CDO) data.
             </p>
           </div>
         </motion.div>
