@@ -104,12 +104,18 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
       {/* Modal Overlay */}
       {isModalOpen && selectedEvent && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm animate-fadeIn"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-opacity duration-200"
+          style={{
+            animation: 'fadeIn 0.2s ease-out'
+          }}
           onClick={closeModal}
         >
           {/* Modal Content */}
           <div
-            className="relative w-full max-w-4xl max-h-[90vh] bg-zinc-950 border border-zinc-800 rounded-lg shadow-2xl overflow-hidden animate-slideUp"
+            className="relative w-full max-w-4xl max-h-[90vh] bg-zinc-950 border border-zinc-800 rounded-lg shadow-2xl overflow-hidden"
+            style={{
+              animation: 'slideUp 0.3s ease-out'
+            }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -253,50 +259,6 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
           </div>
         </div>
       )}
-
-      <style>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        @keyframes slideUp {
-          from {
-            transform: translateY(20px);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-
-        .animate-fadeIn {
-          animation: fadeIn 0.2s ease-out;
-        }
-
-        .animate-slideUp {
-          animation: slideUp 0.3s ease-out;
-        }
-
-        .line-clamp-1 {
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 1;
-          -webkit-box-orient: vertical;
-        }
-
-        .line-clamp-2 {
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-        }
-      `}</style>
     </>
   );
 }
