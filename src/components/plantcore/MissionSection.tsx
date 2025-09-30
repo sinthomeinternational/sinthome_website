@@ -59,8 +59,8 @@ export default function MissionSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Mission — Reshaping the Future of Industry
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Mission: Reshaping the Future of Industry
           </h2>
           <p className="text-xl text-zinc-300 max-w-4xl mx-auto leading-relaxed">
             Plantcore.AI is committed to building the world's first Industrial Vertical Large Language Model (LLM)
@@ -101,7 +101,7 @@ export default function MissionSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-              className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 transition-all duration-300 group"
+              className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 hover:bg-zinc-900/70 transition-all duration-300 group"
             >
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 p-3 bg-gradient-to-r from-red-600/20 to-red-700/10 border border-red-600/30 rounded-lg text-red-400 group-hover:text-red-300 transition-colors duration-300">
@@ -129,7 +129,7 @@ export default function MissionSection() {
         >
           <div className="bg-zinc-900/30 border border-zinc-800/50 rounded-xl p-8">
             <h3 className="text-xl font-semibold text-white mb-4">
-              Method — Starting from Decisions
+              Method: Starting from Decisions
             </h3>
             <p className="text-zinc-300 leading-relaxed max-w-4xl mx-auto">
               Current ERP systems record transactions and processes but fail to capture the on-the-ground

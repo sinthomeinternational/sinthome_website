@@ -14,13 +14,13 @@ import SideNavigation from "../../components/plantcore/SideNavigation";
 import IndustrialWarpBackground from "../../components/plantcore/IndustrialWarpBackground";
 import ProjectContext from "../../components/plantcore/ProjectContext";
 
-// 导入工厂图片
+// Import factory image
 import factoryImage from "../../assets/plantcore-ai/factory.png";
 ---
 
 <PageLayout title="Plantcore.AI - Sinthome">
   <div class="relative bg-black min-h-screen">
-    <!-- Industrial Warp Background -->
+    <!-- Warp Background -->
     <IndustrialWarpBackground client:load />
 
     <!-- Side Navigation -->
@@ -49,33 +49,28 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
     <!-- Method Section -->
     <section id="method" class="relative py-20 bg-black/90 z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Industrial Section Header */}
+        {/* Section Header */}
         <div class="text-center mb-16">
-          <div class="inline-flex items-center gap-4 mb-8">
-            <div class="w-12 h-px bg-red-500"></div>
-            <h2 class="text-3xl md:text-4xl font-black text-white tracking-wide uppercase">
-              THREE-LAYER ARCHITECTURE
-            </h2>
-            <div class="w-12 h-px bg-red-500"></div>
-          </div>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Three-Layer Architecture
+          </h2>
 
           <div class="max-w-4xl mx-auto mb-12">
-            <div class="border-l-4 border-red-500 pl-6 text-left inline-block">
-              <p class="text-lg text-zinc-300 leading-relaxed font-medium mb-4">
+            <div class="bg-zinc-900/40 border-l-4 border-red-500 pl-6 py-6 text-left rounded-r-lg">
+              <p class="text-lg text-zinc-300 leading-relaxed mb-4">
                 AI Agents generate direct value and cover decision points where ERP cannot reach.
                 These agents deliver immediate ROI (≥10% procurement savings, ~7% inventory shrinkage reduction)
                 while simultaneously creating a sustainable stream of decision assets.
               </p>
-              <div class="text-sm text-red-400 font-mono">
-                // Building a three-layer architecture: AI Agents → CDO Data Platform → Industrial Vertical LLM
-              </div>
+              <p class="text-sm text-red-400">
+                Building a three-layer architecture: AI Agents → CDO Data Platform → Industrial Vertical LLM
+              </p>
             </div>
           </div>
 
-          {/* Industrial Factory Display */}
+          {/* Factory Image */}
           <div class="relative my-16">
-            <div class="relative overflow-hidden max-w-5xl mx-auto border-2 border-zinc-800"
-                 style="clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)">
+            <div class="relative overflow-hidden max-w-5xl mx-auto border-2 border-zinc-800 rounded-2xl">
               <Image
                 src={factoryImage}
                 alt="Factory floor showing industrial AI implementation"
@@ -87,23 +82,22 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
                 class="w-full h-auto object-cover opacity-80"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
-              <div class="absolute bottom-6 left-6 bg-black/80 border border-red-500/60 px-6 py-3"
-                   style="clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))">
-                <span class="text-sm font-bold text-red-400 tracking-wide">凡事都有开端</span>
-                <div class="text-xs text-zinc-400 font-mono">EVERYTHING HAS A BEGINNING</div>
+              <div class="absolute bottom-6 left-6 bg-black/80 border border-red-500/60 px-6 py-3 rounded-lg backdrop-blur-sm">
+                <span class="text-sm font-semibold text-red-400">凡事都有开端</span>
+                <div class="text-xs text-zinc-400">Everything has a beginning</div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Industrial Method Cards */}
+        {/* Method Cards */}
         <MethodCards client:load />
 
-        {/* Summary Section */}
+        {/* Summary */}
         <div class="mt-16 text-center">
-          <div class="max-w-4xl mx-auto bg-zinc-900/40 border border-zinc-800 p-8">
-            <p class="text-lg text-zinc-300 leading-relaxed font-mono">
-              // This systematic approach creates a foundation for industrial knowledge accumulation,
+          <div class="max-w-4xl mx-auto bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-8">
+            <p class="text-lg text-zinc-300 leading-relaxed">
+              This systematic approach creates a foundation for industrial knowledge accumulation,
               transfer, and amplification across global manufacturing networks.
             </p>
           </div>
@@ -115,15 +109,11 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
     <section id="data-flow" class="relative py-20 bg-zinc-950/80 z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <div class="inline-flex items-center gap-4 mb-8">
-            <div class="w-12 h-px bg-red-500"></div>
-            <h2 class="text-3xl md:text-4xl font-black text-white tracking-wide uppercase">
-              THREE-LAYER PIPELINE ARCHITECTURE
-            </h2>
-            <div class="w-12 h-px bg-red-500"></div>
-          </div>
-          <p class="text-lg text-zinc-400 font-mono max-w-4xl mx-auto leading-relaxed">
-            // SYSTEMATIC TRANSFORMATION: RAW DECISIONS → STRUCTURED INTELLIGENCE → PREDICTIVE GUIDANCE
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Three-Layer Pipeline Architecture
+          </h2>
+          <p class="text-lg text-zinc-400 max-w-4xl mx-auto leading-relaxed">
+            Systematic transformation: Raw decisions → Structured intelligence → Predictive guidance
           </p>
         </div>
 
@@ -140,37 +130,31 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
     <section id="vision" class="relative py-20 bg-zinc-950/80 z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-6xl mx-auto text-center">
-          <div class="inline-flex items-center gap-4 mb-12">
-            <div class="w-12 h-px bg-red-500"></div>
-            <h2 class="text-3xl md:text-4xl font-black text-white tracking-wide uppercase">
-              OUR VISION: 2030 ROADMAP
-            </h2>
-            <div class="w-12 h-px bg-red-500"></div>
-          </div>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-12">
+            Our Vision: 2030 Roadmap
+          </h2>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <div class="bg-black border-2 border-blue-600/40 p-8"
-                 style="clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))">
-              <div class="text-5xl font-black text-blue-400 mb-4 font-mono">10,000</div>
-              <div class="text-lg font-bold text-white mb-3 tracking-wide">FACTORIES CONNECTED</div>
-              <p class="text-zinc-400 text-sm font-mono leading-relaxed">
-                GLOBAL MANUFACTURING NETWORK WITH COMPREHENSIVE DECISION INTELLIGENCE COVERAGE
+            <div class="bg-black border-2 border-blue-600/40 rounded-xl p-8">
+              <div class="text-5xl font-bold text-blue-400 mb-4">10,000</div>
+              <div class="text-lg font-semibold text-white mb-3">Factories Connected</div>
+              <p class="text-zinc-400 text-sm leading-relaxed">
+                Global manufacturing network with comprehensive decision intelligence coverage
               </p>
             </div>
 
-            <div class="bg-black border-2 border-green-600/40 p-8"
-                 style="clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))">
-              <div class="text-5xl font-black text-green-400 mb-4 font-mono">150K+</div>
-              <div class="text-lg font-bold text-white mb-3 tracking-wide">AI AGENTS DESIGNED</div>
-              <p class="text-zinc-400 text-sm font-mono leading-relaxed">
-                COMPREHENSIVE DECISION CAPTURE POINTS ACROSS ALL INDUSTRIAL PROCESSES
+            <div class="bg-black border-2 border-green-600/40 rounded-xl p-8">
+              <div class="text-5xl font-bold text-green-400 mb-4">150K+</div>
+              <div class="text-lg font-semibold text-white mb-3">AI Agents Designed</div>
+              <p class="text-zinc-400 text-sm leading-relaxed">
+                Comprehensive decision capture points across all industrial processes
               </p>
             </div>
           </div>
 
-          <div class="max-w-5xl mx-auto bg-zinc-900/60 border border-zinc-800 p-12">
-            <p class="text-xl text-zinc-300 leading-relaxed font-mono mb-8">
-              // Our vision is to build, within the next five years, a decision-data-driven industrial intelligence network
+          <div class="max-w-5xl mx-auto bg-zinc-900/60 border border-zinc-800 rounded-xl p-12">
+            <p class="text-xl text-zinc-300 leading-relaxed mb-8">
+              Our vision is to build, within the next five years, a decision-data-driven industrial intelligence network
               through continuous agent deployment and CDO data collection.
             </p>
             <p class="text-lg text-zinc-400 leading-relaxed mb-6">
@@ -190,16 +174,11 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
     <section class="relative py-20 bg-black/90 z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-6xl mx-auto text-center">
-          <div class="bg-zinc-900/60 border-2 border-red-600/30 p-16"
-               style="clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)">
-            <div class="inline-flex items-center gap-4 mb-8">
-              <div class="w-8 h-px bg-red-500"></div>
-              <h2 class="text-3xl font-black text-white tracking-wide uppercase">CORE BELIEF</h2>
-              <div class="w-8 h-px bg-red-500"></div>
-            </div>
+          <div class="bg-zinc-900/60 border-2 border-red-600/30 rounded-2xl p-16">
+            <h2 class="text-3xl font-bold text-white mb-8">Core Belief</h2>
             <div class="max-w-4xl mx-auto">
-              <p class="text-xl text-zinc-300 leading-relaxed font-mono mb-6">
-                // THE TRUE INDUSTRIAL REVOLUTION
+              <p class="text-xl text-zinc-300 leading-relaxed mb-6">
+                The True Industrial Revolution
               </p>
               <p class="text-lg text-zinc-400 leading-relaxed">
                 At Plantcore.AI, we believe the true industrial revolution is not the replacement of workers by machines,
@@ -216,49 +195,44 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
     <section id="contact" class="relative py-20 bg-zinc-950/80 z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-5xl mx-auto text-center mb-16">
-          <div class="inline-flex items-center gap-4 mb-8">
-            <div class="w-12 h-px bg-red-500"></div>
-            <h2 class="text-3xl md:text-4xl font-black text-white tracking-wide uppercase">
-              GET IN TOUCH
-            </h2>
-            <div class="w-12 h-px bg-red-500"></div>
-          </div>
-          <p class="text-lg text-zinc-400 font-mono leading-relaxed mb-12">
-            // READY TO TRANSFORM YOUR MANUFACTURING OPERATIONS? CONTACT PLANTCORE.AI
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Get in Touch
+          </h2>
+          <p class="text-lg text-zinc-400 leading-relaxed mb-12">
+            Ready to transform your manufacturing operations? Contact Plantcore.AI
           </p>
 
-          <!-- Industrial Action Panel -->
+          {/* Action Buttons */}
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
             <a href="#contact-form"
-               class="group relative bg-red-600 border-2 border-red-500 text-white p-6 font-bold tracking-wide uppercase transition-all duration-300 hover:bg-red-700"
-               style="clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))">
-              <div class="flex items-center justify-center gap-3">
-                <div class="w-4 h-4 border-2 border-current relative">
-                  <div class="absolute inset-1 bg-current"></div>
-                </div>
-                REQUEST DEMO
+               class="group bg-red-600 border-2 border-red-500 text-white px-8 py-6 font-semibold rounded-lg hover:bg-red-700 transition-all duration-300 flex items-center justify-center gap-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <div>
+                <div class="text-lg">Request Demo</div>
+                <div class="text-xs text-red-200">Schedule a demonstration</div>
               </div>
-              <div class="text-xs font-mono mt-2">SCHEDULE A DEMO</div>
             </a>
 
             <a href="#contact-form"
-               class="group relative bg-transparent border-2 border-zinc-400 text-zinc-300 p-6 font-bold tracking-wide uppercase transition-all duration-300 hover:border-white hover:text-white"
-               style="clip-path: polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%, 0 16px)">
-              <div class="flex items-center justify-center gap-3">
-                <div class="w-4 h-4 border border-current"></div>
-                JOIN PILOT
+               class="group bg-transparent border-2 border-zinc-400 text-zinc-300 px-8 py-6 font-semibold rounded-lg hover:border-white hover:text-white transition-all duration-300 flex items-center justify-center gap-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <div>
+                <div class="text-lg">Join Pilot</div>
+                <div class="text-xs text-zinc-400 group-hover:text-zinc-300">Pilot program</div>
               </div>
-              <div class="text-xs font-mono mt-2">PILOT PROGRAM</div>
             </a>
           </div>
         </div>
 
-        <div id="contact-form" class="bg-black/80 border-2 border-zinc-800 p-8"
-             style="clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)">
-          {/* Contact form can be integrated here when FORMS config is available */}
+        <div id="contact-form" class="bg-black/80 border-2 border-zinc-800 rounded-2xl p-8">
+          {/* Contact form placeholder */}
           <div class="text-center py-12">
-            <p class="text-zinc-400 font-mono">CONTACT FORM</p>
-            <p class="text-sm text-zinc-500 mt-2">// Contact Plantcore.AI for demo and pilot program inquiries</p>
+            <p class="text-zinc-400 text-lg">Contact Form</p>
+            <p class="text-sm text-zinc-500 mt-2">Contact Plantcore.AI for demo and pilot program inquiries</p>
           </div>
         </div>
       </div>
