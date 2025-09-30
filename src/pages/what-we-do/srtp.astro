@@ -35,63 +35,111 @@ const lang = getLanguageFromURL(Astro.url);
       <section>
         <h2 class="text-2xl font-bold text-white mb-6 text-center">Activities</h2>
 
-        <!-- Compact Activities Card -->
+        <!-- Enhanced Activities Card -->
         <div class="relative group">
           <!-- Background glow effect -->
-          <div class="absolute -inset-0.5 bg-gradient-to-r from-red-900/10 via-red-800/5 to-red-900/10 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
+          <div class="absolute -inset-1 bg-gradient-to-r from-red-900/20 via-red-800/10 to-red-900/20 rounded-xl blur opacity-50 group-hover:opacity-100 transition duration-500"></div>
 
-          <!-- Main card -->
-          <div class="relative bg-gradient-to-br from-zinc-900/90 to-zinc-800/70 border border-zinc-700/50 rounded-lg p-6 backdrop-blur-sm">
-            <!-- Card header with schedule inline -->
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
-              <div class="flex items-center mb-2 sm:mb-0">
-                <div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                <h3 class="text-xl font-semibold text-red-400">Lectures & Seminars in Boston</h3>
+          <!-- Main card with gradient background -->
+          <div class="relative bg-gradient-to-br from-zinc-900/95 to-zinc-800/85 border border-zinc-700/50 rounded-xl p-6 backdrop-blur-md group-hover:shadow-2xl group-hover:shadow-red-900/20 transition-all duration-300">
+
+            <!-- Enhanced header with icon and badge -->
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-5">
+              <div class="flex items-center mb-3 sm:mb-0">
+                <!-- Academic icon -->
+                <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center mr-3 shadow-lg shadow-red-900/50">
+                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-white">Lectures & Seminars</h3>
+                  <div class="flex items-center mt-1">
+                    <svg class="w-3 h-3 text-zinc-500 mr-1.5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span class="text-zinc-400 text-xs">Boston • In-person gatherings</span>
+                  </div>
+                </div>
               </div>
-              <div class="flex items-center text-sm">
-                <span class="text-red-400 font-bold mr-2">📅</span>
-                <span class="text-zinc-200 font-semibold">Every Saturday</span>
-                <span class="text-zinc-400 ml-2 hidden sm:inline">• In-person gatherings</span>
+
+              <!-- Enhanced schedule badge -->
+              <div class="bg-gradient-to-r from-red-900/30 to-red-800/20 border border-red-700/50 rounded-full px-4 py-1.5 backdrop-blur-sm">
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mr-2 animate-pulse"></div>
+                  <span class="text-red-300 font-bold text-xs uppercase tracking-wider">Every Saturday</span>
+                </div>
               </div>
             </div>
 
-            <!-- Intro text -->
-            <p class="text-zinc-300 text-sm mb-4">
-              We come together for a series of in-person seminars featuring:
-            </p>
+            <!-- Visual divider -->
+            <div class="w-full h-px bg-gradient-to-r from-transparent via-zinc-600/30 to-transparent mb-4"></div>
 
-            <!-- Compact Activities list -->
+            <!-- Enhanced Activities grid with cards -->
             <div class="grid gap-3 mb-5">
-              <div class="flex items-start group/item">
-                <div class="w-1.5 h-1.5 bg-red-500 rounded-full mr-3 mt-1.5 flex-shrink-0 group-hover/item:bg-red-400 transition-colors"></div>
-                <div>
-                  <span class="text-zinc-200 font-medium">Philosophical Lectures:</span>
-                  <span class="text-zinc-400 text-sm ml-1">Deep dives into philosophy, political economy, and related disciplines</span>
+              <!-- Philosophical Lectures -->
+              <div class="group/item bg-zinc-800/30 rounded-lg p-3 border border-zinc-700/30 hover:border-red-700/50 hover:bg-zinc-800/50 hover:translate-x-1 transition-all duration-300">
+                <div class="flex items-start">
+                  <div class="w-8 h-8 bg-gradient-to-br from-amber-500/20 to-amber-600/10 rounded-md flex items-center justify-center mr-3 mt-0.5 group-hover/item:from-amber-500/30 group-hover/item:to-amber-600/20 transition-colors">
+                    <span class="text-amber-400 text-base">📚</span>
+                  </div>
+                  <div class="flex-1">
+                    <div class="text-zinc-200 font-semibold text-sm mb-1">Philosophical Lectures</div>
+                    <div class="text-zinc-400 text-xs leading-relaxed">Deep dives into philosophy, political economy, and related disciplines</div>
+                  </div>
                 </div>
               </div>
 
-              <div class="flex items-start group/item">
-                <div class="w-1.5 h-1.5 bg-red-500 rounded-full mr-3 mt-1.5 flex-shrink-0 group-hover/item:bg-red-400 transition-colors"></div>
-                <div>
-                  <span class="text-zinc-200 font-medium">Textual Analysis:</span>
-                  <span class="text-zinc-400 text-sm ml-1">Close readings of foundational theoretical texts</span>
+              <!-- Textual Analysis -->
+              <div class="group/item bg-zinc-800/30 rounded-lg p-3 border border-zinc-700/30 hover:border-red-700/50 hover:bg-zinc-800/50 hover:translate-x-1 transition-all duration-300">
+                <div class="flex items-start">
+                  <div class="w-8 h-8 bg-gradient-to-br from-blue-500/20 to-blue-600/10 rounded-md flex items-center justify-center mr-3 mt-0.5 group-hover/item:from-blue-500/30 group-hover/item:to-blue-600/20 transition-colors">
+                    <span class="text-blue-400 text-base">🔍</span>
+                  </div>
+                  <div class="flex-1">
+                    <div class="text-zinc-200 font-semibold text-sm mb-1">Textual Analysis</div>
+                    <div class="text-zinc-400 text-xs leading-relaxed">Close readings of foundational theoretical texts</div>
+                  </div>
                 </div>
               </div>
 
-              <div class="flex items-start group/item">
-                <div class="w-1.5 h-1.5 bg-red-500 rounded-full mr-3 mt-1.5 flex-shrink-0 group-hover/item:bg-red-400 transition-colors"></div>
-                <div>
-                  <span class="text-zinc-200 font-medium">Praxis Reflection:</span>
-                  <span class="text-zinc-400 text-sm ml-1">Collective discussion on issues emerging from our practices</span>
+              <!-- Praxis Reflection -->
+              <div class="group/item bg-zinc-800/30 rounded-lg p-3 border border-zinc-700/30 hover:border-red-700/50 hover:bg-zinc-800/50 hover:translate-x-1 transition-all duration-300">
+                <div class="flex items-start">
+                  <div class="w-8 h-8 bg-gradient-to-br from-green-500/20 to-green-600/10 rounded-md flex items-center justify-center mr-3 mt-0.5 group-hover/item:from-green-500/30 group-hover/item:to-green-600/20 transition-colors">
+                    <span class="text-green-400 text-base">💭</span>
+                  </div>
+                  <div class="flex-1">
+                    <div class="text-zinc-200 font-semibold text-sm mb-1">Praxis Reflection</div>
+                    <div class="text-zinc-400 text-xs leading-relaxed">Collective discussion on issues emerging from our practices</div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Compact Mission statement -->
-            <div class="border-l-3 border-red-600/50 pl-4 py-2 bg-gradient-to-r from-zinc-800/20 to-transparent rounded-r">
-              <p class="text-zinc-300 text-sm leading-6">
-                These gatherings aim to equip community members with a solid grounding in leftist theory, help build theoretical consensus, and cultivate new critical insights. Through this process, we seek to maintain a <span class="text-red-300 font-medium">dynamic and reciprocal relationship between theory and practice</span>.
-              </p>
+            <!-- Decorative divider -->
+            <div class="flex items-center my-4">
+              <div class="flex-1 h-px bg-gradient-to-r from-zinc-700/50 to-red-600/30"></div>
+              <div class="px-3">
+                <div class="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+              </div>
+              <div class="flex-1 h-px bg-gradient-to-l from-zinc-700/50 to-red-600/30"></div>
+            </div>
+
+            <!-- Enhanced Mission statement with quote styling -->
+            <div class="relative">
+              <!-- Opening quote -->
+              <div class="absolute -left-1 -top-1 text-red-600/30 text-2xl font-serif">"</div>
+
+              <div class="bg-gradient-to-r from-red-900/20 via-red-800/10 to-transparent rounded-lg p-4 border-l-2 border-red-600/60">
+                <p class="text-zinc-300 text-sm leading-relaxed italic pl-2">
+                  These gatherings aim to equip community members with a solid grounding in leftist theory, help build theoretical consensus, and cultivate new critical insights. Through this process, we seek to maintain a
+                  <span class="text-red-300 font-semibold not-italic">dynamic and reciprocal relationship between theory and practice</span>.
+                </p>
+              </div>
+
+              <!-- Closing quote -->
+              <div class="absolute -right-1 -bottom-1 text-red-600/30 text-2xl font-serif">"</div>
             </div>
           </div>
         </div>
