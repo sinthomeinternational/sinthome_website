@@ -80,7 +80,7 @@ const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
     <div class="space-y-8">
       <!-- Introduction -->
       <section class="max-w-4xl">
-        <p class="text-lg text-gray-600 dark:text-zinc-300 leading-relaxed">
+        <p class="text-lg text-gray-700 dark:text-zinc-300 leading-relaxed">
           {pageContent.subtitle || 'We are committed to leveraging technology and innovation to create positive social impact. Through our various programs and initiatives, we work to address critical challenges in our community.'}
         </p>
       </section>
@@ -107,7 +107,7 @@ const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
           {impact.stats.map((stat) => (
             <div>
               <div class="text-3xl font-bold text-red-600 dark:text-red-500 mb-2">{stat.number}</div>
-              <div class="text-gray-600 dark:text-zinc-400">{stat.label}</div>
+              <div class="text-gray-700 dark:text-zinc-400">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -116,7 +116,7 @@ const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
       <!-- Call to Action -->
       <section class="text-center">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">{pageContent.callToAction?.title || 'Get Involved'}</h2>
-        <p class="text-gray-600 dark:text-zinc-300 mb-6">
+        <p class="text-gray-700 dark:text-zinc-300 mb-6">
           {pageContent.callToAction?.description || "Join us in making a difference. Whether you're a volunteer, partner, or supporter, there's a place for you."}
         </p>
         <a

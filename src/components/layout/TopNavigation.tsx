@@ -128,6 +128,7 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('dark');
 
   // Get current language from URL
   const [currentLang, setCurrentLang] = useState('en');
@@ -140,6 +141,28 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
     const lang = getCurrentLanguageClient();
     setCurrentLang(lang);
 
+    // Detect current theme from DOM
+    const detectTheme = () => {
+      const root = document.documentElement;
+      if (root.classList.contains('theme-light')) {
+        setCurrentTheme('light');
+      } else {
+        setCurrentTheme('dark');
+      }
+    };
+
+    detectTheme();
+
+    // Watch for theme changes
+    const observer = new MutationObserver(() => {
+      detectTheme();
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
     // Filter out "Home" from navigation items and map dropdown correctly
     if (translations?.navigation?.items) {
       const filteredItems = translations.navigation.items
@@ -151,6 +174,10 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
         }));
       setNavItems(filteredItems);
     }
+
+    return () => {
+      observer.disconnect();
+    };
   }, [translations]);
 
   // Handle base path for GitHub Pages, theme routing, and language parameter
@@ -194,49 +221,49 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
     };
   }, []);
 
-  // Style variations based on variant and theme
-  const isRedWhite = theme === 'redwhite';
+  // Style variations based on variant and detected theme
+  const isLightTheme = currentTheme === 'light';
 
   const navClasses = variant === 'fixed'
     ? clsx(
-        "fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b",
-        isRedWhite ? "bg-white/95 border-gray-200" : "bg-black/90 border-white/10"
+        "fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b transition-colors",
+        isLightTheme ? "bg-white/95 border-gray-200" : "bg-black/90 border-white/10"
       )
     : clsx(
-        "w-full border-b sticky top-0 z-50",
-        isRedWhite ? "bg-white border-gray-200" : "bg-black border-white/10"
+        "w-full border-b sticky top-0 z-50 transition-colors",
+        isLightTheme ? "bg-white border-gray-200" : "bg-black border-white/10"
       );
 
   const containerClasses = variant === 'static'
     ? "px-4 sm:px-8"
     : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
 
-  const linkClasses = isRedWhite
-    ? "text-red-600 hover:text-red-800 transition-colors"
+  const linkClasses = isLightTheme
+    ? "text-gray-900 hover:text-red-600 transition-colors"
     : "text-white hover:text-red-500 transition-colors";
 
-  const dropdownBgClasses = isRedWhite
-    ? "bg-white border-gray-200"
+  const dropdownBgClasses = isLightTheme
+    ? "bg-white border-gray-200 shadow-lg"
     : "bg-zinc-900 border-white/10";
 
-  const dropdownLinkClasses = isRedWhite
-    ? "block px-4 py-3 text-sm text-black hover:bg-red-600 hover:text-white transition-colors"
+  const dropdownLinkClasses = isLightTheme
+    ? "block px-4 py-3 text-sm text-gray-900 hover:bg-red-600 hover:text-white transition-colors"
     : "block px-4 py-3 text-sm text-white hover:bg-red-600 hover:text-white transition-colors";
 
-  const mobileBgClasses = isRedWhite
+  const mobileBgClasses = isLightTheme
     ? "bg-white border-gray-200"
     : "bg-zinc-900 border-white/10";
 
-  const mobileLinkClasses = isRedWhite
-    ? "text-black hover:text-red-600"
+  const mobileLinkClasses = isLightTheme
+    ? "text-gray-900 hover:text-red-600"
     : "text-white hover:text-red-500";
 
-  const mobileSubLinkClasses = isRedWhite
+  const mobileSubLinkClasses = isLightTheme
     ? "text-gray-600 hover:text-red-600"
     : "text-zinc-400 hover:text-red-500";
 
-  const buttonClasses = isRedWhite
-    ? "text-black hover:bg-gray-100"
+  const buttonClasses = isLightTheme
+    ? "text-gray-900 hover:bg-gray-100"
     : "text-white hover:bg-white/10";
 
   return (
