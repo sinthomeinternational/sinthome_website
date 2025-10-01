@@ -23,7 +23,7 @@ export const zhContent: SiteContent = {
           { label: 'AI 黑客马拉松', href: '/what-we-do/ai-hackathon' },
           { label: '工人援助', href: '/what-we-do/workers-assist' },
           { label: '工厂 AI 解决方案', href: '/what-we-do/plantcore-ai' },
-          { label: 'S.R.T.P.', href: '/what-we-do/srtp' },
+          { label: '公开讲座', href: '/what-we-do/public-lectures' },
         ],
       },
       { label: '活动', href: '/events' },
