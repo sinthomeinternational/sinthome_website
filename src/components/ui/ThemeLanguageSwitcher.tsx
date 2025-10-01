@@ -82,8 +82,10 @@ export default function ThemeLanguageSwitcher({
     url.searchParams.set('lang', newLang);
     url.searchParams.set('theme', currentTheme);
 
-    // Navigate to the new URL (this will trigger a page reload)
-    window.location.href = url.toString();
+    // Use history.pushState to preserve scroll position and focus
+    // Then reload to ensure language changes take effect
+    window.history.pushState({}, '', url.toString());
+    window.location.reload();
   };
 
   // Get button labels from translations or use defaults
