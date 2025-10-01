@@ -72,29 +72,29 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-5xl mx-auto"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-black/40 border border-zinc-800 rounded-xl p-6 backdrop-blur-sm">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 bg-zinc-950/80 border border-zinc-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-md shadow-xl shadow-red-900/10">
               {[
-                { label: "Procurement", value: "≥10%", unit: "Savings", color: "text-green-400" },
-                { label: "Inventory", value: "~7%", unit: "Reduction", color: "text-blue-400" },
-                { label: "Factories", value: "10K", unit: "By 2030", color: "text-yellow-400" },
-                { label: "AI Agents", value: "150K+", unit: "Deployed", color: "text-red-400" }
+                { label: "Procurement", value: "≥10%", unit: "Savings" },
+                { label: "Inventory", value: "~7%", unit: "Reduction" },
+                { label: "Factories", value: "10K", unit: "By 2030" },
+                { label: "AI Agents", value: "150K+", unit: "Deployed" }
               ].map((metric, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1 + index * 0.1, duration: 0.5 }}
-                  className="text-center"
+                  className="text-center p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/40 hover:border-red-600/30 transition-colors duration-300"
                 >
-                  <div className={`text-2xl md:text-3xl font-bold ${metric.color} mb-1`}>
+                  <div className="text-3xl md:text-4xl font-black text-red-500 mb-2 tracking-tight">
                     {metric.value}
                   </div>
-                  <div className="text-xs text-zinc-400 font-semibold">
+                  <div className="text-xs md:text-sm text-zinc-200 font-bold uppercase tracking-wide mb-1">
                     {metric.label}
                   </div>
-                  <div className="text-xs text-zinc-600">
+                  <div className="text-xs text-zinc-400 font-medium">
                     {metric.unit}
                   </div>
                 </motion.div>
@@ -107,13 +107,13 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-10"
           >
             <Button
               onClick={onRequestDemo}
               variant="primary"
               size="lg"
-              className="min-w-[200px]"
+              className="min-w-[220px] shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30 hover:scale-105 active:scale-100 transition-all duration-200"
             >
               Request Demo
             </Button>
@@ -122,7 +122,7 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
               onClick={onJoinPilot}
               variant="outline"
               size="lg"
-              className="min-w-[200px]"
+              className="min-w-[220px] backdrop-blur-sm bg-zinc-900/20 hover:bg-zinc-900/40 shadow-lg shadow-black/20 hover:scale-105 active:scale-100 transition-all duration-200"
             >
               Join Pilot Program
             </Button>
@@ -135,51 +135,45 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.6, duration: 0.8 }}
-          className="absolute bottom-0 left-0 right-0 pb-8"
+          className="absolute bottom-0 left-0 right-0 pb-8 px-4"
         >
           {/* Scroll Indicator */}
-          <div className="text-center mb-4">
+          <div className="text-center mb-6">
             <motion.div
-              animate={{ y: [0, 8, 0] }}
+              animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="inline-flex flex-col items-center"
+              className="inline-flex flex-col items-center gap-2"
             >
-              <span className="text-sm text-zinc-300 mb-2 font-medium">Scroll to explore</span>
-              <svg className="w-5 h-5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
+              <span className="text-sm md:text-base text-zinc-200 font-semibold tracking-wide">Scroll to explore</span>
+              <div className="w-8 h-12 border-2 border-zinc-500 rounded-full flex items-start justify-center p-2">
+                <motion.div
+                  animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-1.5 h-1.5 bg-red-500 rounded-full"
+                />
+              </div>
             </motion.div>
           </div>
 
           {/* System Status Bar */}
           <div className="flex justify-center">
-            <div className="flex items-center gap-8 px-8 py-2 bg-black/60 backdrop-blur-sm rounded-full border border-zinc-800/50">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 px-6 md:px-10 py-3 md:py-4 bg-zinc-950/90 backdrop-blur-md rounded-2xl border border-zinc-800/60 shadow-xl shadow-black/20">
+              <div className="flex items-center gap-2.5">
                 <div className="relative">
-                  <div className="w-2 h-2 bg-green-500 rounded-full" />
-                  <div className="absolute inset-0 w-2 h-2 bg-green-500 rounded-full animate-ping" />
+                  <div className="w-2.5 h-2.5 bg-red-500 rounded-full" />
+                  <div className="absolute inset-0 w-2.5 h-2.5 bg-red-500 rounded-full animate-ping" />
                 </div>
-                <span className="text-xs text-zinc-300 font-medium">System Active</span>
+                <span className="text-xs md:text-sm text-zinc-100 font-semibold">System Online</span>
               </div>
 
-              <div className="w-px h-3 bg-zinc-700/50" />
+              <div className="w-px h-4 bg-zinc-700" />
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <div className="relative">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                  <div className="absolute inset-0 w-2 h-2 bg-blue-500 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
+                  <div className="w-2.5 h-2.5 bg-red-500 rounded-full" />
+                  <div className="absolute inset-0 w-2.5 h-2.5 bg-red-500 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
                 </div>
-                <span className="text-xs text-zinc-300 font-medium">Agents Deployed</span>
-              </div>
-
-              <div className="w-px h-3 bg-zinc-700/50" />
-
-              <div className="flex items-center gap-2">
-                <div className="relative">
-                  <div className="w-2 h-2 bg-amber-500 rounded-full" />
-                  <div className="absolute inset-0 w-2 h-2 bg-amber-500 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
-                </div>
-                <span className="text-xs text-zinc-300 font-medium">CDO Data Capture</span>
+                <span className="text-xs md:text-sm text-zinc-100 font-semibold">150K+ Agents</span>
               </div>
             </div>
           </div>
