@@ -2,14 +2,11 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 
-// Import event images
-import nezhaPoster from "../../assets/srtp/nezha-poster.jpg";
-import nezhaEvent from "../../assets/srtp/nezha-event.png";
-import dialecticsPoster from "../../assets/srtp/dialectics-poster.png";
-import dialecticsEvent from "../../assets/srtp/dialectics-event.png";
-import deleuzePoster from "../../assets/srtp/deleuze-poster.png";
-import deleuzeEvent from "../../assets/srtp/deleuze-event.png";
+// Get SRTP events from content collection
+const srtpEvents = await getCollection('srtpEvents');
+const sortedEvents = srtpEvents.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <PageLayout title="S.R.T.P. - Sinthome" useContentLayout={true}>
@@ -95,168 +92,72 @@ import deleuzeEvent from "../../assets/srtp/deleuze-event.png";
         <h2 class="text-3xl font-bold text-white mb-10 text-center">Past Events</h2>
 
         <div class="space-y-12">
-          <!-- Event 1: The Suffering Body -->
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-2xl font-bold text-red-400 mb-3">【Philosophy Lecture】The Suffering Body: From Merleau-Ponty to Nezha</h3>
+          {sortedEvents.map((event) => (
+            <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
+              <h3 class="text-2xl font-bold text-red-400 mb-3">{event.data.title}</h3>
 
-            <!-- Event Images -->
-            <div class="grid md:grid-cols-2 gap-4 mb-6">
-              <div>
-                <Image src={nezhaPoster} alt="Nezha Event Poster" class="w-full rounded-lg" />
-              </div>
-              <div>
-                <Image src={nezhaEvent} alt="Nezha Event Photo" class="w-full rounded-lg" />
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <a href="https://www.bilibili.com/video/BV1Pj7kzWEPJ/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-red-400 transition">
-                Recording: Bilibili →
-              </a>
-            </div>
-
-            <div class="mb-4">
-              <p class="text-zinc-300 italic mb-2">
-                Amid the contradictions in history and the "debts" of the body, a new body and self emerge through the practice of justice.
-              </p>
-              <p class="text-zinc-500 text-sm">
-                在历史的矛盾与身体的"债务"中，通过实践正义，重塑自我，生成全新的身体。
-              </p>
-            </div>
-
-            <div class="space-y-4 text-zinc-300 leading-relaxed">
-              <p>
-                When we talk about ethics, we often begin from the outside: duty, command, the face of the other. But this lecture begins elsewhere—with the suffering body.
-              </p>
-              <p>
-                In Merleau-Ponty's phenomenology, the body is the stylist of our access to the world, the site where meaning sediments and the self comes into being. Yet when suffering arrives, all of this is shattered: the body no longer organizes perception but becomes the fissure where perception collapses; the world is no longer inhabitable, and the body is no longer "me." In this rupture, ethics first appears—not as norm, duty, or response, but as the most urgent practical question: how can I, in the place of the unbearable, construct for myself a "body that can exist"?
-              </p>
-              <p>
-                Here we turn to the story of Nezha: he does not sacrifice himself, but denies the body shaped by fate and bloodline, and in the fissure remakes a new body out of lotus flowers. He responds to "that which cannot be responded to" not with obedience, but with action—opening up a "revolutionary bodily ethics." Not repair, not compassion, but practice, creation, the reconstruction of form.
-              </p>
-              <p>
-                This is precisely the problem faced by communities today: we each carry pain, anxiety, the weight of identity and history. But can we, like Nezha, do more than endure these ruptures? Can we, in the fissures of body and life, use action to remake a new shared form?
-              </p>
-              <p>
-                The lecture unfolds around the triadic structure of suffering—body—form, and invites us to reflect together: ethics is not just an idea; it may be the most urgent way of living for us today.
-              </p>
-            </div>
-          </div>
-
-          <!-- Event 2: Dialectical Materialism -->
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-2xl font-bold text-red-400 mb-3">【Reading Seminar】Dialectics: What is Marx's Dialectical Materialism?</h3>
-
-            <!-- Event Images -->
-            <div class="grid md:grid-cols-2 gap-4 mb-6">
-              <div>
-                <Image src={dialecticsPoster} alt="Dialectics Event Poster" class="w-full rounded-lg" />
-              </div>
-              <div>
-                <Image src={dialecticsEvent} alt="Dialectics Event Photo" class="w-full rounded-lg" />
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <a href="https://www.bilibili.com/video/BV12ALvzwELV" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-red-400 transition">
-                Recording: Bilibili →
-              </a>
-            </div>
-
-            <div class="mb-4">
-              <p class="text-zinc-300 italic">
-                If there is such a thing as a revolutionary theory, then it is dialectical materialism.
-              </p>
-              <p class="text-zinc-500 text-sm">
-                如果有一种革命性理论，那么它是辩证唯物主义。
-              </p>
-            </div>
-
-            <div class="space-y-4 text-zinc-300 leading-relaxed">
-              <p>
-                Theory always seems to concern what is already present, while the revolutionary points toward the future. How, then, can there be a revolutionary theory? The lecture answers: if there is one, it is dialectical materialism.
-              </p>
-              <p>
-                Although Marx himself never used this term, in Capital he explicitly declared the need to "invert" Hegel's dialectic and strip away its mystical shell. The lecture therefore begins with Hegel: his dialectic sought to bridge the gap between necessity and certainty, to reveal the mutual determination of form and content, thought and sensory experience, and through negation to arrive at new knowledge, ultimately culminating in "absolute knowledge." The distinctive feature of Hegel's dialectic is that it treats the production of knowledge as the unfolding of the Idea itself, imbued with theological and metaphysical presuppositions.
-              </p>
-              <p>
-                The lecturer pointed out that Marx's decisive turn lay in discarding Hegel's metaphysical presuppositions and examining every given phenomenon from the perspective of production and reproduction, thereby laying the foundation for dialectical materialism.
-              </p>
-              <p>
-                Unlike Hegel, dialectical materialism does not search for an absolute starting point but begins from concrete phenomena and practices. No phenomenon is isolated; each is the result of multiple interacting processes, i.e. "overdetermined." Hence, what is given is not a static object but a relational whole, produced and reproduced in practice. In this view, thought itself is part of reality, operating within ideology and social relations. Crucially, dialectical materialism is not merely an epistemology or explanatory method, but a practice-oriented theory. In this sense, it constitutes the revolutionary methodology and intellectual weapon upon which Marxism rests.
-              </p>
-            </div>
-          </div>
-
-          <!-- Event 3: Deleuze and Lefebvre -->
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-2xl font-bold text-red-400 mb-3">Deleuze and Lefebvre: Social Governance and the Production of Space</h3>
-
-            <!-- Event Images -->
-            <div class="grid md:grid-cols-2 gap-4 mb-6">
-              <div>
-                <Image src={deleuzePoster} alt="Deleuze Event Poster" class="w-full rounded-lg" />
-              </div>
-              <div>
-                <Image src={deleuzeEvent} alt="Deleuze Event Photo" class="w-full rounded-lg" />
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <a href="https://www.bilibili.com/video/BV1kLVfzWECp/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-red-400 transition">
-                Recording: Bilibili →
-              </a>
-            </div>
-
-            <div class="mb-4">
-              <p class="text-zinc-500 text-sm">
-                德勒兹、列斐伏尔：社会管理和空间生产
-              </p>
-            </div>
-
-            <div class="space-y-4 text-zinc-300 leading-relaxed">
-              <p>
-                Imagine yourself on a speeding train. Outside the window, rows of factories, schools, and prisons stretch endlessly along the tracks. Within these institutions, people live atomized, homogenized lives. Just as you begin to question how this system operates, a voice over the intercom announces:
-              </p>
-              <p class="italic">
-                "Dear passengers, we have arrived at our current stop: the Disciplinary Society. The next and final destination of this train: Cybernetic Governance! Please prepare to disembark."
-              </p>
-              <p>
-                You wonder—why is this the final stop? Stepping off the train and looking back, you suddenly understand. Stamped boldly across the side of the train are five unmistakable characters: Late Capitalism.
-              </p>
-              <p>
-                This seminar invites you to join us in deconstructing late capitalism and its apparatuses of control. Together, we will examine how the spaces of our daily lives—and even our very bodies—are managed, governed, and shaped by the logic of late capitalist society.
-              </p>
-
-              <h4 class="text-lg font-semibold text-white mt-6 mb-3">Topics and Texts:</h4>
-
-              <div class="space-y-4">
-                <div>
-                  <h5 class="font-semibold text-zinc-200">The Emergence of the Control Society under Late Capitalism</h5>
-                  <ul class="ml-6 mt-2 text-zinc-400">
-                    <li>• Michel Foucault, Discipline and Punish</li>
-                    <li>• Gilles Deleuze, Postscript on the Societies of Control</li>
-                  </ul>
+              <!-- Event Images -->
+              {(event.data.poster || event.data.eventPhoto) && (
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                  {event.data.poster && (
+                    <div>
+                      <Image src={event.data.poster} alt={`${event.data.title} Poster`} class="w-full rounded-lg" />
+                    </div>
+                  )}
+                  {event.data.eventPhoto && (
+                    <div>
+                      <Image src={event.data.eventPhoto} alt={`${event.data.title} Event Photo`} class="w-full rounded-lg" />
+                    </div>
+                  )}
                 </div>
+              )}
 
-                <div>
-                  <h5 class="font-semibold text-zinc-200">Biopolitics in Late Capitalism</h5>
-                  <ul class="ml-6 mt-2 text-zinc-400">
-                    <li>• Michel Foucault, The Birth of Biopolitics</li>
-                    <li>• Antonio Negri & Michael Hardt, Empire</li>
-                  </ul>
+              {event.data.recordingUrl && (
+                <div class="mb-4">
+                  <a href={event.data.recordingUrl} target="__blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-red-400 transition">
+                    Recording: Bilibili →
+                  </a>
                 </div>
+              )}
 
-                <div>
-                  <h5 class="font-semibold text-zinc-200">The Topology of Capitalist Space</h5>
-                  <ul class="ml-6 mt-2 text-zinc-400">
-                    <li>• Henri Lefebvre, The Production of Space</li>
-                    <li>• David Harvey, The Logic of the World</li>
-                  </ul>
+              {(event.data.quote || event.data.quoteTranslation) && (
+                <div class="mb-4">
+                  {event.data.quote && (
+                    <p class="text-zinc-300 italic mb-2">
+                      {event.data.quote}
+                    </p>
+                  )}
+                  {event.data.quoteTranslation && (
+                    <p class="text-zinc-500 text-sm">
+                      {event.data.quoteTranslation}
+                    </p>
+                  )}
                 </div>
-              </div>
+              )}
+
+              <div class="space-y-4 text-zinc-300 leading-relaxed" set:html={event.body} />
+
+              {event.data.topics && event.data.topics.length > 0 && (
+                <>
+                  <h4 class="text-lg font-semibold text-white mt-6 mb-3">Topics and Texts:</h4>
+                  <div class="space-y-4">
+                    {event.data.topics.map((topic) => (
+                      <div>
+                        <h5 class="font-semibold text-zinc-200">{topic.title}</h5>
+                        {topic.readings && (
+                          <ul class="ml-6 mt-2 text-zinc-400">
+                            {topic.readings.map((reading) => (
+                              <li>• {reading}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
-          </div>
+          ))}
         </div>
       </section>
 

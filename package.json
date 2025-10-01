@@ -26,7 +26,8 @@
     "dev:debug": "astro dev --verbose",
     "dev:fresh": "pnpm run clean:cache && pnpm run dev",
     "build:analyze": "astro build --verbose",
-    "test": "echo \"No tests specified\" && exit 0",
+    "test": "npm run test:content",
+    "test:content": "node scripts/validate-content.js",
     "fix-shader": "./clear-vite-cache.sh"
   },
   "dependencies": {
@@ -53,8 +54,10 @@
     "@typescript-eslint/parser": "^7.0.0",
     "eslint": "^8.56.0",
     "eslint-plugin-astro": "^0.31.4",
+    "glob": "^11.0.3",
     "prettier": "^3.2.4",
     "prettier-plugin-astro": "^0.12.3",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "yaml": "^2.8.1"
   }
 }
