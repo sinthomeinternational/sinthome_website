@@ -79,31 +79,8 @@ export const SITE_CONFIG = {
     instagram: 'sinthome'
   },
 
-  // Navigation items
-  navigation: {
-    main: [
-      { label: 'Home', href: '/' },
-      { label: 'Who We Are', href: '/who-we-are' },
-      {
-        label: 'What We Do',
-        href: '/what-we-do',
-        dropdown: [
-          { label: 'AI Hackathon', href: '/what-we-do/ai-hackathon' },
-          { label: 'Workers Assist', href: '/what-we-do/workers-assist' },
-          { label: 'Plantcore AI', href: '/what-we-do/plantcore-ai' },
-          { label: 'S.R.T.P.', href: '/what-we-do/srtp' },
-        ]
-      },
-      { label: 'Upcoming Events', href: '/events' },
-      { label: 'Contact', href: '/contact' },
-      { label: 'Support Us', href: '/donate' },
-    ],
-    footer: [
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms of Service', href: '/terms' },
-      { label: 'Sitemap', href: '/sitemap' },
-    ]
-  },
+  // Navigation items are now managed in translation files
+  // See src/content/translations/[lang]/site.ts for navigation configuration
 
   // Feature flags
   features: {
@@ -116,4 +93,3 @@ export const SITE_CONFIG = {
 
 // Type exports for TypeScript
 export type SiteConfig = typeof SITE_CONFIG;
-export type NavigationItem = typeof SITE_CONFIG.navigation.main[number];
