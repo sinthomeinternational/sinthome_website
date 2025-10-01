@@ -128,49 +128,61 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
             </Button>
           </motion.div>
 
-          {/* System Status */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.6, duration: 0.8 }}
-            className="pt-8"
-          >
-            <div className="inline-flex items-center gap-4 bg-black/40 border border-zinc-800 rounded-full px-6 py-3 backdrop-blur-sm">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-xs text-zinc-400 font-medium">System Active</span>
-              </div>
-              <div className="w-px h-4 bg-zinc-700" />
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-                <span className="text-xs text-zinc-400 font-medium">Agents Deployed</span>
-              </div>
-              <div className="w-px h-4 bg-zinc-700" />
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-                <span className="text-xs text-zinc-400 font-medium">CDO Data Capture</span>
-              </div>
-            </div>
-          </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
+        {/* Bottom Section - Scroll & Status */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.6, duration: 0.8 }}
+          className="absolute bottom-0 left-0 right-0 pb-8"
         >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center text-zinc-400"
-          >
-            <span className="text-xs mb-2">Scroll to explore</span>
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </motion.div>
+          {/* Scroll Indicator */}
+          <div className="text-center mb-4">
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="inline-flex flex-col items-center"
+            >
+              <span className="text-sm text-zinc-300 mb-2 font-medium">Scroll to explore</span>
+              <svg className="w-5 h-5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </motion.div>
+          </div>
+
+          {/* System Status Bar */}
+          <div className="flex justify-center">
+            <div className="flex items-center gap-8 px-8 py-2 bg-black/60 backdrop-blur-sm rounded-full border border-zinc-800/50">
+              <div className="flex items-center gap-2">
+                <div className="relative">
+                  <div className="w-2 h-2 bg-green-500 rounded-full" />
+                  <div className="absolute inset-0 w-2 h-2 bg-green-500 rounded-full animate-ping" />
+                </div>
+                <span className="text-xs text-zinc-300 font-medium">System Active</span>
+              </div>
+
+              <div className="w-px h-3 bg-zinc-700/50" />
+
+              <div className="flex items-center gap-2">
+                <div className="relative">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                  <div className="absolute inset-0 w-2 h-2 bg-blue-500 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
+                </div>
+                <span className="text-xs text-zinc-300 font-medium">Agents Deployed</span>
+              </div>
+
+              <div className="w-px h-3 bg-zinc-700/50" />
+
+              <div className="flex items-center gap-2">
+                <div className="relative">
+                  <div className="w-2 h-2 bg-amber-500 rounded-full" />
+                  <div className="absolute inset-0 w-2 h-2 bg-amber-500 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
+                </div>
+                <span className="text-xs text-zinc-300 font-medium">CDO Data Capture</span>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
