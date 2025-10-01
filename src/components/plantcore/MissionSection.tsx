@@ -2,45 +2,34 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 
 interface Benefit {
-  icon: React.ReactNode;
+  label: string;
+  number: string;
   title: string;
   description: string;
 }
 
 const benefits: Benefit[] = [
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+    label: "Intelligence",
+    number: "01",
     title: "Real-World Decision Intelligence",
     description: "Capture and analyze the countless micro-decisions that truly drive industrial operations, beyond what traditional ERP systems can see"
   },
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
+    label: "Impact",
+    number: "02",
     title: "Immediate ROI Generation",
     description: "Deliver ≥10% procurement savings and ~7% inventory reduction from day one while building long-term intelligence assets"
   },
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-      </svg>
-    ),
+    label: "Scale",
+    number: "03",
     title: "Scalable Intelligence Network",
     description: "Build toward 150,000 AI Agents across 10,000 factories by 2030, creating the world's largest industrial decision dataset"
   },
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-      </svg>
-    ),
+    label: "Synergy",
+    number: "04",
     title: "Human-AI Collaboration",
     description: "Enhance rather than replace human expertise, creating an intelligent decision network that amplifies collective industrial knowledge"
   }
@@ -94,27 +83,43 @@ export default function MissionSection() {
         </motion.div>
 
         {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-              className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 hover:bg-zinc-900/70 transition-all duration-300 group"
+              className="relative bg-zinc-900/80 border border-zinc-800/80 rounded-lg overflow-hidden hover:border-red-600/30 hover:bg-zinc-900 transition-all duration-300 group"
             >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 p-3 bg-gradient-to-r from-red-600/20 to-red-700/10 border border-red-600/30 rounded-lg text-red-400 group-hover:text-red-300 transition-colors duration-300">
-                  {benefit.icon}
+              {/* Red accent bar */}
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-600 to-red-700 opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+
+              {/* Card content */}
+              <div className="p-8 pl-10">
+                {/* Header section with label and number */}
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    {/* Label badge */}
+                    <span className="px-3 py-1 text-xs font-semibold tracking-wider uppercase bg-zinc-800/60 text-zinc-400 rounded border border-zinc-700/50 group-hover:text-red-400 group-hover:border-red-600/30 transition-all duration-300">
+                      {benefit.label}
+                    </span>
+                  </div>
+                  {/* Sequence number */}
+                  <div className="text-5xl font-bold text-zinc-800/40 group-hover:text-red-600/20 transition-colors duration-300">
+                    {benefit.number}
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <h4 className="text-lg font-semibold text-white mb-3 group-hover:text-red-100 transition-colors duration-300">
-                    {benefit.title}
-                  </h4>
-                  <p className="text-zinc-300 leading-relaxed group-hover:text-zinc-200 transition-colors duration-300">
-                    {benefit.description}
-                  </p>
-                </div>
+
+                {/* Title */}
+                <h4 className="text-xl font-semibold text-white mb-4 leading-tight group-hover:text-white transition-colors duration-300">
+                  {benefit.title}
+                </h4>
+
+                {/* Description */}
+                <p className="text-zinc-400 leading-relaxed text-sm group-hover:text-zinc-300 transition-colors duration-300">
+                  {benefit.description}
+                </p>
               </div>
             </motion.div>
           ))}
