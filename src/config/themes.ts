@@ -31,6 +31,10 @@ export interface ThemeColors {
   warning: string;
   error: string;
   info: string;
+
+  // Tag colors
+  tagBg: string;
+  tagText: string;
 }
 
 export interface ThemeConfig {
@@ -82,6 +86,10 @@ export const darkTheme: ThemeConfig = {
     warning: '#f59e0b',
     error: '#ef4444',
     info: '#3b82f6',
+
+    // Tags
+    tagBg: 'rgba(220, 38, 38, 0.2)',
+    tagText: '#fca5a5',
   },
   classes: {
     body: 'bg-[#0a0a0a] text-white',
@@ -127,6 +135,10 @@ export const lightTheme: ThemeConfig = {
     warning: '#f59e0b',
     error: '#ef4444',
     info: '#3b82f6',
+
+    // Tags - subtle light theme styling
+    tagBg: '#f3f4f6',
+    tagText: '#6b7280',
   },
   classes: {
     body: 'bg-white text-gray-900',

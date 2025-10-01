@@ -62,6 +62,8 @@ const lightThemeConfig = getTheme('light');
 			'theme-accent-hover-dark': darkThemeConfig.colors.accentHover,
 			'theme-border-dark': darkThemeConfig.colors.border,
 			'theme-border-hover-dark': darkThemeConfig.colors.borderHover,
+			'theme-tag-bg-dark': darkThemeConfig.colors.tagBg,
+			'theme-tag-text-dark': darkThemeConfig.colors.tagText,
 			'theme-bg-primary-light': lightThemeConfig.colors.bgPrimary,
 			'theme-bg-secondary-light': lightThemeConfig.colors.bgSecondary,
 			'theme-bg-tertiary-light': lightThemeConfig.colors.bgTertiary,
@@ -73,6 +75,8 @@ const lightThemeConfig = getTheme('light');
 			'theme-accent-hover-light': lightThemeConfig.colors.accentHover,
 			'theme-border-light': lightThemeConfig.colors.border,
 			'theme-border-hover-light': lightThemeConfig.colors.borderHover,
+			'theme-tag-bg-light': lightThemeConfig.colors.tagBg,
+			'theme-tag-text-light': lightThemeConfig.colors.tagText,
 		}}>
 			:root {
 				/* Dark theme variables (default) */
@@ -87,6 +91,8 @@ const lightThemeConfig = getTheme('light');
 				--theme-accent-hover: var(--theme-accent-hover-dark);
 				--theme-border: var(--theme-border-dark);
 				--theme-border-hover: var(--theme-border-hover-dark);
+				--theme-tag-bg: var(--theme-tag-bg-dark);
+				--theme-tag-text: var(--theme-tag-text-dark);
 			}
 
 			/* Light theme variables */
@@ -102,6 +108,8 @@ const lightThemeConfig = getTheme('light');
 				--theme-accent-hover: var(--theme-accent-hover-light);
 				--theme-border: var(--theme-border-light);
 				--theme-border-hover: var(--theme-border-hover-light);
+				--theme-tag-bg: var(--theme-tag-bg-light);
+				--theme-tag-text: var(--theme-tag-text-light);
 			}
 		</style>
 
