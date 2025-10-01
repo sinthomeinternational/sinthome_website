@@ -88,7 +88,7 @@ export const SITE_CONFIG = {
         href: '/who-we-are',
         dropdown: [
           { label: 'About Us', href: '/who-we-are' },
-          { label: 'S.R.T.P.', href: '/who-we-are/srtp' },
+          { label: 'Public Lectures', href: '/what-we-do/public-lectures' },
         ]
       },
       {

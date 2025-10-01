@@ -14,7 +14,7 @@ const content: SiteContent = {
         href: '/who-we-are',
         dropdown: [
           { label: 'About Us', href: '/who-we-are' },
-          { label: 'S.R.T.P.', href: '/who-we-are/srtp' },
+          { label: 'Public Lectures', href: '/what-we-do/public-lectures' },
         ]
       },
       {
@@ -298,7 +298,7 @@ const content: SiteContent = {
     },
     {
       id: 'srtp',
-      title: 'S.R.T.P.',
+      title: 'Public Lectures',
       description: 'Sinthome Revolutionary Theory Practice - Interrogating praxis, until it unveils the future',
       category: 'Research & Theory',
       featured: true,

@@ -18,7 +18,7 @@ const content: SiteContent = {
           { label: 'AI 黑客松', href: '/what-we-do/ai-hackathon' },
           { label: '工友互助', href: '/what-we-do/workers-assist' },
           { label: 'Plantcore AI', href: '/what-we-do/plantcore-ai' },
-          { label: 'S.R.T.P.', href: '/what-we-do/srtp' },
+          { label: '公开讲座', href: '/what-we-do/public-lectures' },
         ]
       },
       { label: '近期活动', href: '/events' },
