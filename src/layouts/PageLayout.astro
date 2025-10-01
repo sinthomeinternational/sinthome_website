@@ -9,11 +9,12 @@ const {
   description,
   showNavigation = true,
   useInfoLayout = false,
-  useContentLayout = false
+  useContentLayout = false,
+  theme = 'dark'
 } = Astro.props;
 ---
 
-<RootLayout title={title} description={description}>
+<RootLayout title={title} description={description} theme={theme}>
   {showNavigation && !useInfoLayout && !useContentLayout && (
     <TopNavigation client:load />
     <div class="h-16"></div> <!-- Spacer for fixed nav -->
@@ -21,12 +22,12 @@ const {
 
   {useContentLayout ? (
     <!-- Content-focused layout without warp animation for better readability -->
-    <div class="bg-black min-h-screen">
+    <div class="min-h-screen" style="background-color: var(--theme-bg-primary); color: var(--theme-text-primary);">
       {showNavigation && (
         <TopNavigation variant="static" client:load />
       )}
       <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="[&_h1]:text-red-600 pt-8 pb-20 text-white">
+        <div class="[&_h1]:text-red-600 pt-8 pb-20" style="color: var(--theme-text-primary);">
           <slot />
         </div>
       </main>
@@ -41,11 +42,11 @@ const {
         </div>
       </nav>
 
-      <main class="relative bg-black flex-1">
+      <main class="relative flex-1" style="background-color: var(--theme-bg-primary); color: var(--theme-text-primary);">
         {showNavigation && (
           <TopNavigation variant="static" client:load />
         )}
-        <div class="[&_h1]:text-red-600 pt-8 pb-20 text-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="[&_h1]:text-red-600 pt-8 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="color: var(--theme-text-primary);">
           <slot />
         </div>
         <Footer />

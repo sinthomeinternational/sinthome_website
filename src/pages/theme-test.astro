@@ -1,17 +1,21 @@
 ---
 import RootLayout from "../layouts/RootLayout.astro";
 import TopNavigation from "../components/layout/TopNavigation";
+import ThemeLanguageSwitcher from "../components/ui/ThemeLanguageSwitcher";
 ---
 
 <RootLayout title="Theme Test">
     <TopNavigation client:load variant="fixed" />
     <main class="pt-20 px-8">
         <div class="max-w-4xl mx-auto space-y-8">
-            <h1 class="text-4xl font-bold">Theme Test Page</h1>
+            <div class="flex items-center justify-between">
+                <h1 class="text-4xl font-bold">Theme Test Page</h1>
+                <ThemeLanguageSwitcher client:load />
+            </div>
 
             <div class="p-6 rounded-lg border">
                 <h2 class="text-2xl font-semibold mb-4">Current Theme</h2>
-                <p class="mb-4">This page should respond to theme changes. Use the theme switcher button in the navigation.</p>
+                <p class="mb-4">This page responds to theme changes. Use the theme switcher button above or try the URL parameter links below.</p>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div class="p-4 bg-white text-black dark:bg-zinc-900 dark:text-white rounded">
@@ -19,9 +23,9 @@ import TopNavigation from "../components/layout/TopNavigation";
                         <p>This box changes based on theme</p>
                     </div>
 
-                    <div class="p-4 theme-light:bg-gray-100 theme-light:text-gray-900 theme-dark:bg-zinc-800 theme-dark:text-white rounded">
-                        <h3 class="font-semibold mb-2">Theme-specific Box</h3>
-                        <p>Uses theme-light and theme-dark classes</p>
+                    <div class="p-4 rounded" style="background-color: var(--theme-bg-secondary, #18181b); color: var(--theme-text-primary, #ffffff);">
+                        <h3 class="font-semibold mb-2">CSS Variables Box</h3>
+                        <p>Uses CSS variables from theme config</p>
                     </div>
                 </div>
             </div>
@@ -48,15 +52,29 @@ import TopNavigation from "../components/layout/TopNavigation";
             const html = document.documentElement;
             const info = document.getElementById('theme-info');
             if (info) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const urlTheme = urlParams.get('theme');
+                const computedStyles = getComputedStyle(document.body);
+                const bgColor = computedStyles.backgroundColor;
+                const textColor = computedStyles.color;
+
                 info.innerHTML = `
-                    <p>HTML classes: ${html.className || 'none'}</p>
-                    <p>Data-theme: ${html.getAttribute('data-theme') || 'none'}</p>
-                    <p>LocalStorage theme: ${localStorage.getItem('theme') || 'none'}</p>
-                    <p>Body classes: ${document.body.className || 'none'}</p>
+                    <p><strong>URL theme param:</strong> ${urlTheme || 'none'}</p>
+                    <p><strong>HTML classes:</strong> ${html.className || 'none'}</p>
+                    <p><strong>Data-theme:</strong> ${html.getAttribute('data-theme') || 'none'}</p>
+                    <p><strong>LocalStorage theme:</strong> ${localStorage.getItem('theme') || 'none'}</p>
+                    <p><strong>Body classes:</strong> ${document.body.className || 'none'}</p>
+                    <p><strong>Computed body bg:</strong> ${bgColor}</p>
+                    <p><strong>Computed body color:</strong> ${textColor}</p>
+                    <p><strong>CSS Variables:</strong>
+                        bg-primary: ${getComputedStyle(html).getPropertyValue('--theme-bg-primary') || 'not set'},
+                        text-primary: ${getComputedStyle(html).getPropertyValue('--theme-text-primary') || 'not set'}
+                    </p>
                 `;
             }
         }
 
+        // Initial update
         updateThemeInfo();
 
         // Update when theme changes
@@ -65,5 +83,9 @@ import TopNavigation from "../components/layout/TopNavigation";
             attributes: true,
             attributeFilter: ['class', 'data-theme']
         });
+
+        // Also listen for theme change events
+        document.addEventListener('DOMContentLoaded', updateThemeInfo);
+        window.addEventListener('load', updateThemeInfo);
     </script>
 </RootLayout>

@@ -2,18 +2,23 @@
 import "../styles/global.css";
 import { ClientRouter } from 'astro:transitions';
 import LoadingIndicator from "astro-loading-indicator/component";
+import { getTheme } from "../config/themes";
 
 // 导入资源管理模块
 import { assets } from "../lib/assets";
 
-const { title, description } = Astro.props;
+const { title, description, theme = 'dark' } = Astro.props;
 
 const defaultTitle = "Sinthome - Knowledge, Critique, Praxis";
 const defaultDescription = "A public-interest community reconstructing new relations of production through the integration of knowledge learning, theoretical critique, and social praxis.";
+
+// Get theme configurations for CSS variables (default to dark theme)
+const darkThemeConfig = getTheme('dark');
+const lightThemeConfig = getTheme('light');
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class={`theme-${theme}`} data-theme={theme}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -43,6 +48,62 @@ const defaultDescription = "A public-interest community reconstructing new relat
 
 		<ClientRouter />
 		<LoadingIndicator color="#f4f4f5" height="2px" />
+
+		<!-- Theme CSS Variables -->
+		<style define:vars={{
+			'theme-bg-primary-dark': darkThemeConfig.colors.bgPrimary,
+			'theme-bg-secondary-dark': darkThemeConfig.colors.bgSecondary,
+			'theme-bg-tertiary-dark': darkThemeConfig.colors.bgTertiary,
+			'theme-bg-card-dark': darkThemeConfig.colors.bgCard,
+			'theme-text-primary-dark': darkThemeConfig.colors.textPrimary,
+			'theme-text-secondary-dark': darkThemeConfig.colors.textSecondary,
+			'theme-text-muted-dark': darkThemeConfig.colors.textMuted,
+			'theme-accent-dark': darkThemeConfig.colors.accent,
+			'theme-accent-hover-dark': darkThemeConfig.colors.accentHover,
+			'theme-border-dark': darkThemeConfig.colors.border,
+			'theme-border-hover-dark': darkThemeConfig.colors.borderHover,
+			'theme-bg-primary-light': lightThemeConfig.colors.bgPrimary,
+			'theme-bg-secondary-light': lightThemeConfig.colors.bgSecondary,
+			'theme-bg-tertiary-light': lightThemeConfig.colors.bgTertiary,
+			'theme-bg-card-light': lightThemeConfig.colors.bgCard,
+			'theme-text-primary-light': lightThemeConfig.colors.textPrimary,
+			'theme-text-secondary-light': lightThemeConfig.colors.textSecondary,
+			'theme-text-muted-light': lightThemeConfig.colors.textMuted,
+			'theme-accent-light': lightThemeConfig.colors.accent,
+			'theme-accent-hover-light': lightThemeConfig.colors.accentHover,
+			'theme-border-light': lightThemeConfig.colors.border,
+			'theme-border-hover-light': lightThemeConfig.colors.borderHover,
+		}}>
+			:root {
+				/* Dark theme variables (default) */
+				--theme-bg-primary: var(--theme-bg-primary-dark);
+				--theme-bg-secondary: var(--theme-bg-secondary-dark);
+				--theme-bg-tertiary: var(--theme-bg-tertiary-dark);
+				--theme-bg-card: var(--theme-bg-card-dark);
+				--theme-text-primary: var(--theme-text-primary-dark);
+				--theme-text-secondary: var(--theme-text-secondary-dark);
+				--theme-text-muted: var(--theme-text-muted-dark);
+				--theme-accent: var(--theme-accent-dark);
+				--theme-accent-hover: var(--theme-accent-hover-dark);
+				--theme-border: var(--theme-border-dark);
+				--theme-border-hover: var(--theme-border-hover-dark);
+			}
+
+			/* Light theme variables */
+			html.theme-light {
+				--theme-bg-primary: var(--theme-bg-primary-light);
+				--theme-bg-secondary: var(--theme-bg-secondary-light);
+				--theme-bg-tertiary: var(--theme-bg-tertiary-light);
+				--theme-bg-card: var(--theme-bg-card-light);
+				--theme-text-primary: var(--theme-text-primary-light);
+				--theme-text-secondary: var(--theme-text-secondary-light);
+				--theme-text-muted: var(--theme-text-muted-light);
+				--theme-accent: var(--theme-accent-light);
+				--theme-accent-hover: var(--theme-accent-hover-light);
+				--theme-border: var(--theme-border-light);
+				--theme-border-hover: var(--theme-border-hover-light);
+			}
+		</style>
 
 		<!-- Inline script to prevent theme flash -->
 		<script is:inline>
