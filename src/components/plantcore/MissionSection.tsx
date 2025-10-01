@@ -19,7 +19,7 @@ const benefits: Benefit[] = [
     label: "Impact",
     number: "02",
     title: "Immediate ROI Generation",
-    description: "Deliver ≥10% procurement savings and ~7% inventory reduction from day one while building long-term intelligence assets"
+    description: "Target ≥10% procurement savings and ~7% inventory reduction while building long-term intelligence assets"
   },
   {
     label: "Scale",

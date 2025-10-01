@@ -31,7 +31,7 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
           >
             <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
             Industrial Vertical LLM
-            <div className="text-xs bg-red-600/20 px-2 py-1 rounded-full">Live</div>
+            <div className="text-xs bg-red-600/20 px-2 py-1 rounded-full">In Development</div>
           </motion.div>
 
           {/* Main Heading */}
@@ -61,9 +61,6 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
               <p className="text-base md:text-lg text-zinc-300 leading-relaxed">
                 by deploying AI Agents that capture real-time Context-Decision-Outcome (CDO) data from factory floors
               </p>
-              <p className="text-sm text-red-400 mt-4">
-                Transforming manufacturing through intelligent decision-making
-              </p>
             </div>
           </motion.div>
 
@@ -76,10 +73,10 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 bg-zinc-950/80 border border-zinc-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-md shadow-xl shadow-red-900/10">
               {[
-                { label: "Procurement", value: "≥10%", unit: "Savings" },
-                { label: "Inventory", value: "~7%", unit: "Reduction" },
-                { label: "Factories", value: "10K", unit: "By 2030" },
-                { label: "AI Agents", value: "150K+", unit: "Deployed" }
+                { label: "Procurement", value: "≥10%", unit: "Target Savings" },
+                { label: "Inventory", value: "~7%", unit: "Target Reduction" },
+                { label: "Factories", value: "10K", unit: "Target by 2030" },
+                { label: "AI Agents", value: "150K+", unit: "Target by 2030" }
               ].map((metric, index) => (
                 <motion.div
                   key={index}
@@ -155,25 +152,25 @@ export default function HeroSection({ onRequestDemo, onJoinPilot }: HeroSectionP
             </motion.div>
           </div>
 
-          {/* System Status Bar */}
+          {/* Vision Metrics */}
           <div className="flex justify-center">
             <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 px-6 md:px-10 py-3 md:py-4 bg-zinc-950/90 backdrop-blur-md rounded-2xl border border-zinc-800/60 shadow-xl shadow-black/20">
               <div className="flex items-center gap-2.5">
                 <div className="relative">
-                  <div className="w-2.5 h-2.5 bg-red-500 rounded-full" />
-                  <div className="absolute inset-0 w-2.5 h-2.5 bg-red-500 rounded-full animate-ping" />
+                  <div className="w-2.5 h-2.5 bg-blue-500 rounded-full" />
+                  <div className="absolute inset-0 w-2.5 h-2.5 bg-blue-500 rounded-full animate-ping" />
                 </div>
-                <span className="text-xs md:text-sm text-zinc-100 font-semibold">System Online</span>
+                <span className="text-xs md:text-sm text-zinc-100 font-semibold">2030 Vision</span>
               </div>
 
               <div className="w-px h-4 bg-zinc-700" />
 
               <div className="flex items-center gap-2.5">
                 <div className="relative">
-                  <div className="w-2.5 h-2.5 bg-red-500 rounded-full" />
-                  <div className="absolute inset-0 w-2.5 h-2.5 bg-red-500 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
+                  <div className="w-2.5 h-2.5 bg-blue-500 rounded-full" />
+                  <div className="absolute inset-0 w-2.5 h-2.5 bg-blue-500 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
                 </div>
-                <span className="text-xs md:text-sm text-zinc-100 font-semibold">150K+ Agents</span>
+                <span className="text-xs md:text-sm text-zinc-100 font-semibold">10K Factories • 150K+ Agents</span>
               </div>
             </div>
           </div>
