@@ -9,7 +9,14 @@ const content: SiteContent = {
   navigation: {
     items: [
       { label: 'Home', href: '/' },
-      { label: 'Who We Are', href: '/who-we-are' },
+      {
+        label: 'Who We Are',
+        href: '/who-we-are',
+        dropdown: [
+          { label: 'About Us', href: '/who-we-are' },
+          { label: 'S.R.T.P.', href: '/who-we-are/srtp' },
+        ]
+      },
       {
         label: 'What We Do',
         href: '/what-we-do',
@@ -17,7 +24,7 @@ const content: SiteContent = {
           { label: 'AI Hackathon', href: '/what-we-do/ai-hackathon' },
           { label: 'Workers Assist', href: '/what-we-do/workers-assist' },
           { label: 'Plantcore AI', href: '/what-we-do/plantcore-ai' },
-          { label: 'S.R.T.P.', href: '/what-we-do/srtp' },
+          { label: 'Public Lectures', href: '/what-we-do/public-lectures' },
         ]
       },
       { label: 'Upcoming Events', href: '/events' },
@@ -295,7 +302,7 @@ const content: SiteContent = {
       description: 'Sinthome Revolutionary Theory Practice - Interrogating praxis, until it unveils the future',
       category: 'Research & Theory',
       featured: true,
-      href: '/what-we-do/srtp',
+      href: '/what-we-do/public-lectures',
       status: 'active',
       content: [
         {
