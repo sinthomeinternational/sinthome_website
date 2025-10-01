@@ -192,10 +192,24 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
       fullPath = path;
     }
 
-    // Preserve language parameter in all navigation links
-    if (currentLang === 'zh') {
-      return `${fullPath}${fullPath.includes('?') ? '&' : '?'}lang=zh`;
+    // Preserve both theme and language parameters in all navigation links
+    const params = new URLSearchParams();
+
+    // Add theme parameter if it's light theme (dark is default, no param needed)
+    if (currentTheme === 'light') {
+      params.set('theme', 'light');
     }
+
+    // Add language parameter if it's Chinese
+    if (currentLang === 'zh') {
+      params.set('lang', 'zh');
+    }
+
+    // Append parameters if any exist
+    if (params.toString()) {
+      return `${fullPath}${fullPath.includes('?') ? '&' : '?'}${params.toString()}`;
+    }
+
     return fullPath;
   };
 

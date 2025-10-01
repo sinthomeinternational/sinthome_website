@@ -3,17 +3,20 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
 import ProjectCard from "../../components/shared/ProjectCard.astro";
 import { getTranslations, getLanguageFromURL } from "../../lib/translations";
+import { getServerTheme, buildUrlWithParams } from "../../lib/theme-utils";
 
 // Get current language from URL (SSR-compatible)
 const lang = getLanguageFromURL(Astro.url);
 const t = getTranslations(lang);
 const pageContent: any = t.pages?.whatWeDo || {}; // Using any type to handle missing fields
 
-// Handle base path for GitHub Pages compatibility with language
+// Get current theme from URL parameters using utility function
+const currentTheme = getServerTheme(Astro.url);
+
+// Handle base path for GitHub Pages compatibility with language and theme
 const getFullPath = (path: string) => {
   const basePath = path.startsWith('/') ? `${import.meta.env.BASE_URL}${path.slice(1)}` : path;
-  // Preserve language parameter in URLs
-  return lang === 'zh' ? `${basePath}${basePath.includes('?') ? '&' : '?'}lang=zh` : basePath;
+  return buildUrlWithParams(basePath, currentTheme, lang);
 };
 
 // Define project type
@@ -74,7 +77,7 @@ const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
 };
 ---
 
-<PageLayout title="What We Do - Sinthome" useInfoLayout={true}>
+<PageLayout title="What We Do - Sinthome" useInfoLayout={true} theme={currentTheme}>
     <H1>{pageContent.title || 'What We Do'}</H1>
 
     <div class="space-y-8">
