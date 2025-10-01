@@ -58,7 +58,7 @@ The WarpBackgroundTester component was experiencing several issues:
 ### 5. Cache Management Tools
 
 **Scripts:**
-- ✅ `clear-vite-cache.sh` - Complete cache reset
+- ✅ `scripts/clear-vite-cache.sh` - Complete cache reset
 - ✅ `pnpm run clean:cache` - Clean Vite/Astro cache
 - ✅ `pnpm run dev:fresh` - Clean cache + start dev
 - ✅ `pnpm run fix-shader` - Run cache clearing script
@@ -98,7 +98,7 @@ Navigate to: `http://localhost:4322/sinthome_website/warp-test`
 **"504 Outdated Optimize Dep":**
 1. Run `pnpm run clean:cache`
 2. Restart dev server
-3. If persistent: run `./clear-vite-cache.sh`
+3. If persistent: run `./scripts/clear-vite-cache.sh`
 
 **"Module fetch failed":**
 1. Check network connectivity
@@ -129,7 +129,7 @@ src/
 └── ...
 
 astro.config.mjs                   # Vite optimizations
-clear-vite-cache.sh               # Cache clearing script
+scripts/clear-vite-cache.sh       # Cache clearing script
 ```
 
 ## Debug Console Output

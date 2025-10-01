@@ -250,7 +250,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Issues**: [GitHub Issues](https://github.com/Yiluo-pHoton/sinthome_website/issues)
 - **Email**: contact@sinthome.org
-- **Documentation**: See [CLAUDE.md](CLAUDE.md) for detailed development guide
+- **Documentation**: See [CLAUDE.md](docs/CLAUDE.md) for detailed development guide
 
 ## 🙏 Acknowledgments
 

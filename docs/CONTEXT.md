@@ -27,7 +27,7 @@ Non-profit website with turbulent background animations and "Knowledge—Critiqu
 - Ready to commit once design finalized
 
 ## Key Files
-- `CLAUDE.md` - Development documentation
+- `docs/CLAUDE.md` - Development documentation
 - `astro.config.mjs` - GitHub Pages configuration
 - Test pages in `src/pages/turbulent-*.astro`
 
