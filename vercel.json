@@ -1,13 +1,9 @@
 {
-  "buildCommand": "npm run build:vercel",
+  "buildCommand": "pnpm run build:vercel",
   "outputDirectory": "dist",
-  "installCommand": "npm install",
+  "installCommand": "pnpm install",
   "framework": "astro",
   "rewrites": [
-    {
-      "source": "/redwhite",
-      "destination": "/redwhite"
-    },
     {
       "source": "/(.*)",
       "destination": "/$1"

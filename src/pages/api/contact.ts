@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 
-export const prerender = true; // Disabled for static build
+// Note: API routes are only available in SSR mode (Vercel config)
+// Remove prerender flag for static builds
 
 export const POST: APIRoute = async ({ request }) => {
   try {
