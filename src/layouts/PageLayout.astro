@@ -31,7 +31,7 @@ const {
       <Footer />
     </div>
   ) : useInfoLayout ? (
-    <div class="flex relative gap-4 w-full max-w-screen-xl">
+    <div class="flex relative gap-4 w-full max-w-screen-xl mx-auto">
       <!-- Bookmark-style warp animation -->
       <nav class="relative w-4 md:min-w-[4rem] xl:min-w-[5rem] sm:min-h-screen sm:ml-8 sm:pb-4">
         <div class="w-full h-[80vh] max-sm:w-4 md:max-w-[3rem] xl:max-w-[4rem] fixed top-[10vh] -z-10 sm:rounded-full overflow-hidden shadow-2xl">
@@ -73,7 +73,7 @@ const {
           <div class="h-16"></div> <!-- Spacer for fixed nav -->
         </>
       )}
-      <main>
+      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <slot />
       </main>
       <Footer />
