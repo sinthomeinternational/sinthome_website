@@ -28,7 +28,7 @@
     "build:analyze": "astro build --verbose",
     "test": "npm run test:content",
     "test:content": "node scripts/validate-content.js",
-    "fix-shader": "./clear-vite-cache.sh"
+    "fix-shader": "./scripts/clear-vite-cache.sh"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.5",
