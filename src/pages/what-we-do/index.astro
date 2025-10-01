@@ -80,14 +80,14 @@ const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
     <div class="space-y-8">
       <!-- Introduction -->
       <section class="max-w-4xl">
-        <p class="text-lg text-gray-700 dark:text-zinc-300 leading-relaxed">
+        <p class="text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
           {pageContent.subtitle || 'We are committed to leveraging technology and innovation to create positive social impact. Through our various programs and initiatives, we work to address critical challenges in our community.'}
         </p>
       </section>
 
       <!-- Projects Grid -->
       <section>
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">{pageContent.projectsTitle || 'Our Programs'}</h2>
+        <h2 class="text-2xl font-bold mb-6" style="color: var(--theme-text-primary);">{pageContent.projectsTitle || 'Our Programs'}</h2>
         <div class="grid md:grid-cols-2 gap-6">
           {projects.map((project) => (
             <ProjectCard
@@ -101,13 +101,13 @@ const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
       </section>
 
       <!-- Impact Section -->
-      <section class="mt-12 p-8 bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{impact.title || 'Our Impact'}</h2>
+      <section class="mt-12 p-8 rounded-lg" style="background-color: var(--theme-bg-card); border: 1px solid var(--theme-border)">
+        <h2 class="text-2xl font-bold mb-6 text-center" style="color: var(--theme-text-primary);">{impact.title || 'Our Impact'}</h2>
         <div class="grid md:grid-cols-4 gap-6 text-center">
           {impact.stats.map((stat) => (
             <div>
               <div class="text-3xl font-bold text-red-600 dark:text-red-500 mb-2">{stat.number}</div>
-              <div class="text-gray-700 dark:text-zinc-400">{stat.label}</div>
+              <div style="color: var(--theme-text-secondary);">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -115,8 +115,8 @@ const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
 
       <!-- Call to Action -->
       <section class="text-center">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">{pageContent.callToAction?.title || 'Get Involved'}</h2>
-        <p class="text-gray-700 dark:text-zinc-300 mb-6">
+        <h2 class="text-2xl font-bold mb-4" style="color: var(--theme-text-primary);">{pageContent.callToAction?.title || 'Get Involved'}</h2>
+        <p class="mb-6" style="color: var(--theme-text-secondary);">
           {pageContent.callToAction?.description || "Join us in making a difference. Whether you're a volunteer, partner, or supporter, there's a place for you."}
         </p>
         <a
