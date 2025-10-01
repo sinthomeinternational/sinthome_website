@@ -74,18 +74,17 @@ export default function ThemeLanguageSwitcher({
   const handleLanguageToggle = () => {
     const newLang = currentLang === 'en' ? 'zh' : 'en';
 
-    // Store the scroll position to restore it after reload
+    // Store the scroll position and active element to restore after reload
     sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+    sessionStorage.setItem('languageSwitchTimestamp', Date.now().toString());
 
     // Update URL with new language parameter and preserve theme
     const url = new URL(window.location.href);
     url.searchParams.set('lang', newLang);
     url.searchParams.set('theme', currentTheme);
 
-    // Use history.pushState to preserve scroll position and focus
-    // Then reload to ensure language changes take effect
-    window.history.pushState({}, '', url.toString());
-    window.location.reload();
+    // Navigate to new URL (causes page reload for SSR language switch)
+    window.location.href = url.toString();
   };
 
   // Get button labels from translations or use defaults

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="white"/>
+  <g>
+    <!-- Simple QR code pattern -->
+    <rect x="10" y="10" width="30" height="30" fill="black"/>
+    <rect x="50" y="10" width="10" height="10" fill="black"/>
+    <rect x="70" y="10" width="10" height="10" fill="black"/>
+    <rect x="90" y="10" width="10" height="10" fill="black"/>
+    <rect x="110" y="10" width="10" height="10" fill="black"/>
+    <rect x="130" y="10" width="10" height="10" fill="black"/>
+    <rect x="150" y="10" width="30" height="30" fill="black"/>
+
+    <rect x="10" y="50" width="10" height="10" fill="black"/>
+    <rect x="30" y="50" width="10" height="10" fill="black"/>
+    <rect x="70" y="50" width="30" height="30" fill="black"/>
+    <rect x="110" y="50" width="10" height="10" fill="black"/>
+    <rect x="150" y="50" width="10" height="10" fill="black"/>
+    <rect x="170" y="50" width="10" height="10" fill="black"/>
+
+    <rect x="10" y="70" width="10" height="10" fill="black"/>
+    <rect x="30" y="70" width="10" height="10" fill="black"/>
+    <rect x="50" y="70" width="10" height="10" fill="black"/>
+    <rect x="110" y="70" width="10" height="10" fill="black"/>
+    <rect x="130" y="70" width="10" height="10" fill="black"/>
+    <rect x="150" y="70" width="10" height="10" fill="black"/>
+    <rect x="170" y="70" width="10" height="10" fill="black"/>
+
+    <rect x="10" y="90" width="10" height="10" fill="black"/>
+    <rect x="30" y="90" width="10" height="10" fill="black"/>
+    <rect x="70" y="90" width="10" height="10" fill="black"/>
+    <rect x="90" y="90" width="10" height="10" fill="black"/>
+    <rect x="110" y="90" width="10" height="10" fill="black"/>
+    <rect x="130" y="90" width="10" height="10" fill="black"/>
+    <rect x="150" y="90" width="10" height="10" fill="black"/>
+    <rect x="170" y="90" width="10" height="10" fill="black"/>
+
+    <rect x="10" y="110" width="10" height="10" fill="black"/>
+    <rect x="30" y="110" width="10" height="10" fill="black"/>
+    <rect x="50" y="110" width="30" height="30" fill="black"/>
+    <rect x="110" y="110" width="30" height="30" fill="black"/>
+    <rect x="150" y="110" width="10" height="10" fill="black"/>
+    <rect x="170" y="110" width="10" height="10" fill="black"/>
+
+    <rect x="10" y="150" width="30" height="30" fill="black"/>
+    <rect x="50" y="150" width="10" height="10" fill="black"/>
+    <rect x="70" y="150" width="10" height="10" fill="black"/>
+    <rect x="90" y="150" width="10" height="10" fill="black"/>
+    <rect x="110" y="150" width="10" height="10" fill="black"/>
+    <rect x="130" y="150" width="10" height="10" fill="black"/>
+    <rect x="150" y="150" width="30" height="30" fill="black"/>
+  </g>
+  <text x="100" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#07c160">WeChat QR Code</text>
+</svg>
