@@ -28,32 +28,32 @@ import WarpBackground from "../components/ui/WarpBackground";
 				<!-- Animated Content Container -->
 				<div id="hero-content" class="flex flex-col justify-center items-center text-center transition-all duration-700 ease-out w-full">
 					<!-- SINTHOME - Starts Centered with responsive positioning -->
-					<h1 id="sinthome-title" class="sinthome-title text-white font-black uppercase mb-0 transition-all duration-700 ease-out sinthome-centered">
+					<h1 id="sinthome-title" class="sinthome-title font-black uppercase mb-0 transition-all duration-700 ease-out sinthome-centered" style="color: var(--theme-text-primary);">
 						SINTHOME
 					</h1>
 
 					<!-- Initially Hidden Elements -->
 					<div id="emerging-content" class="content-hidden absolute-content">
 						<!-- Straightforward Tagline -->
-						<p class="tagline text-xl sm:text-2xl text-white font-semibold mb-6 mt-4 text-center">
+						<p class="tagline text-xl sm:text-2xl font-semibold mb-6 mt-4 text-center" style="color: var(--theme-text-primary);">
 							Knowledge — Critique — Praxis
 						</p>
 
 						<!-- Plain Practice Tags -->
 						<div class="tags-container flex flex-wrap justify-center gap-3 mb-10 max-w-3xl mx-auto">
-							<span class="tag-item px-4 py-2 text-white border border-white rounded-full text-sm">
+							<span class="tag-item px-4 py-2 rounded-full text-sm" style="color: var(--theme-text-primary); border: 1px solid var(--theme-border);">
 								Public Lectures
 							</span>
-							<span class="tag-item px-4 py-2 text-white border border-white rounded-full text-sm">
+							<span class="tag-item px-4 py-2 rounded-full text-sm" style="color: var(--theme-text-primary); border: 1px solid var(--theme-border);">
 								Psychoanalysis
 							</span>
-							<span class="tag-item px-4 py-2 text-white border border-white rounded-full text-sm">
+							<span class="tag-item px-4 py-2 rounded-full text-sm" style="color: var(--theme-text-primary); border: 1px solid var(--theme-border);">
 								Workers Assist
 							</span>
-							<span class="tag-item px-4 py-2 text-white border border-white rounded-full text-sm">
+							<span class="tag-item px-4 py-2 rounded-full text-sm" style="color: var(--theme-text-primary); border: 1px solid var(--theme-border);">
 								AI for Public Good
 							</span>
-							<span class="tag-item px-4 py-2 text-white border border-white rounded-full text-sm">
+							<span class="tag-item px-4 py-2 rounded-full text-sm" style="color: var(--theme-text-primary); border: 1px solid var(--theme-border);">
 								Factory AI Solution
 							</span>
 						</div>
@@ -62,19 +62,19 @@ import WarpBackground from "../components/ui/WarpBackground";
 						<div class="buttons-container flex flex-col sm:flex-row gap-4 justify-center items-center">
 							<a
 								href="/who-we-are"
-								class="cta-button px-8 py-4 bg-white text-black font-bold hover:bg-gray-200 transition-colors"
+								class="cta-button px-8 py-4 font-bold transition-colors" style="background-color: var(--theme-bg-primary); color: var(--theme-text-primary); border: 2px solid var(--theme-border);"
 							>
 								ABOUT US
 							</a>
 							<a
 								href="/what-we-do"
-								class="cta-button px-8 py-4 bg-black text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors"
+								class="cta-button px-8 py-4 font-bold border-2 transition-colors hover:bg-red-600 hover:text-white" style="background-color: var(--theme-bg-secondary); color: var(--theme-text-primary); border-color: var(--theme-border);"
 							>
 								OUR PROJECTS
 							</a>
 							<a
 								href="/contact"
-								class="cta-button px-8 py-4 text-white font-bold border-2 border-white hover:bg-white hover:text-black transition-colors"
+								class="cta-button px-8 py-4 font-bold border-2 transition-colors hover:bg-red-600 hover:text-white" style="color: var(--theme-text-primary); border-color: var(--theme-border); background-color: transparent;"
 							>
 								JOIN US
 							</a>
@@ -84,8 +84,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 				<!-- Enhanced Scroll Indicator -->
 				<div id="scroll-indicator" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-100 transition-opacity duration-500">
-					<div class="scroll-pulse-animation bg-white/20 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center border border-white/30 shadow-lg transition-all duration-300">
-						<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<div class="scroll-pulse-animation backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition-all duration-300" style="background-color: var(--theme-bg-card); border: 1px solid var(--theme-border);">
+						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--theme-text-secondary);">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
 						</svg>
 					</div>
@@ -93,8 +93,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 				<!-- Collapse Button (hidden by default, shown when content is visible) -->
 				<div id="collapse-button" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 pointer-events-none transition-all duration-300">
-					<div class="bg-black/40 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center border border-white/30 shadow-lg transition-all duration-300 hover:bg-black/50 hover:scale-110 cursor-pointer">
-						<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<div class="backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 cursor-pointer" style="background-color: var(--theme-bg-card); border: 1px solid var(--theme-border);">
+						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--theme-text-secondary);">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 11l7-7 7 7M5 19l7-7 7 7"></path>
 						</svg>
 					</div>
@@ -377,7 +377,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 		text-rendering: optimizeLegibility;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		color: white;
+		color: var(--theme-text-primary);
 		/* No horizontal compression - natural width */
 		transform: scaleX(1);
 		transform-origin: center;
@@ -502,8 +502,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 	}
 
 	.tag-item.element-visible:hover {
-		background-color: rgba(255, 255, 255, 0.1);
-		border-color: rgba(255, 255, 255, 0.8);
+		background-color: var(--theme-bg-secondary);
+		border-color: var(--theme-border-hover);
 	}
 
 	/* Professional button transitions */
@@ -553,8 +553,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 	#scroll-indicator:hover .scroll-pulse-animation {
 		animation-play-state: paused;
 		transform: scale(1.1);
-		background-color: rgba(255, 255, 255, 0.25);
-		border-color: rgba(255, 255, 255, 0.4);
+		background-color: var(--theme-bg-secondary);
+		border-color: var(--theme-border-hover);
 		cursor: pointer;
 	}
 

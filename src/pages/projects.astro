@@ -31,8 +31,8 @@ const projects = [
                     <li>
                          <Image src={project.image} alt={project.title} class="aspect-[1/1.33] object-center object-cover rounded-lg shadow-lg mb-4 sm:mb-0 sm:mr-4" />
                          <div class="p-1 sm:p-2">
-                              <h2 class="text-base text-black font-semibold">{project.title}</h2>
-                              <p class="text-sm text-gray-800 text-balance">{project.description}</p>
+                              <h2 class="text-base font-semibold" style="color: var(--theme-text-primary);">{project.title}</h2>
+                              <p class="text-sm text-balance" style="color: var(--theme-text-secondary);">{project.description}</p>
                          </div>
                     </li>
                ))}
