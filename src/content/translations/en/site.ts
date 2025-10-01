@@ -16,7 +16,7 @@ export const enContent: SiteContent = {
           { label: 'AI Hackathon', href: '/what-we-do/ai-hackathon' },
           { label: 'Workers Assist', href: '/what-we-do/workers-assist' },
           { label: 'Plantcore AI', href: '/what-we-do/plantcore-ai' },
-          { label: 'S.R.T.P.', href: '/what-we-do/srtp' },
+          { label: 'Public Lectures', href: '/what-we-do/public-lectures' },
         ],
       },
       { label: 'Upcoming Events', href: '/events' },
@@ -45,7 +45,7 @@ export const enContent: SiteContent = {
         items: [
           { label: 'AI Hackathon', href: '/what-we-do/ai-hackathon' },
           { label: 'Workers Assist', href: '/what-we-do/workers-assist' },
-          { label: 'S.R.T.P.', href: '/what-we-do/srtp' },
+          { label: 'Public Lectures', href: '/what-we-do/public-lectures' },
           { label: 'All Projects', href: '/what-we-do' },
         ],
       },
