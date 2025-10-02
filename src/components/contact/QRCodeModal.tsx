@@ -135,7 +135,7 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QR
                     <img
                       src={qrCodeUrl}
                       alt={`${info.title} QR Code`}
-                      className="w-48 h-48 sm:w-56 sm:h-56 object-contain"
+                      className="w-44 h-44 sm:w-52 sm:h-52 object-contain"
                     />
                   </div>
                 </div>
