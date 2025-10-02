@@ -2,11 +2,16 @@ import { useState } from 'react';
 import ContactCard from './ContactCard';
 import QRCodeModal from './QRCodeModal';
 
+// Helper function to get public assets with correct base path
+function getPublicAsset(path: string): string {
+  return `${import.meta.env.BASE_URL}${path.startsWith('/') ? path.slice(1) : path}`;
+}
+
 // QR code URLs
 const QR_CODES = {
-  wechat: '/qr-codes/wechat-qr.svg',
-  rednote: '/qr-codes/rednote-qr.svg',
-  bilibili: '/qr-codes/bilibili-qr.svg'
+  wechat: getPublicAsset('/qr-codes/wechat-qr.svg'),
+  rednote: getPublicAsset('/qr-codes/rednote-qr-new.png'),
+  bilibili: getPublicAsset('/qr-codes/bilibili-qr.svg')
 };
 
 export default function ContactMethods() {
