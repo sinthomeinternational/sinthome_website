@@ -9,7 +9,7 @@ function getPublicAsset(path: string): string {
 
 // QR code URLs
 const QR_CODES = {
-  wechat: getPublicAsset('/qr-codes/wechat-qr-new.png'),
+  wechat: getPublicAsset('/qr-codes/wechat-qr-latest.png'),
   rednote: getPublicAsset('/qr-codes/rednote-qr-cropped.png'),
   bilibili: getPublicAsset('/qr-codes/bilibili-qr.svg')
 };
