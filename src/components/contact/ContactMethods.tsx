@@ -4,7 +4,7 @@ import QRCodeModal from './QRCodeModal';
 
 // QR code URLs
 const QR_CODES = {
-  wechat: '/qr-codes/wechat-qr.svg',
+  wechat: '/qr-codes/wechat-qr-new.png',
   rednote: '/qr-codes/rednote-qr.svg',
   bilibili: '/qr-codes/bilibili-qr.svg'
 };
