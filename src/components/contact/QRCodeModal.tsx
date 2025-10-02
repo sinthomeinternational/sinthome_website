@@ -132,7 +132,7 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QR
                     style={{ background: `radial-gradient(circle, ${info.color}, transparent)` }}
                   />
                   <div className={`relative bg-white rounded-xl flex items-center justify-center ${
-                    platform === 'rednote' ? 'p-1' : 'p-4'
+                    platform === 'rednote' ? 'p-0' : 'p-4'
                   }`}>
                     <img
                       src={qrCodeUrl}
