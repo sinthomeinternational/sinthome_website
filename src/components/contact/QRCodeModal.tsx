@@ -135,7 +135,11 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QR
                     <img
                       src={qrCodeUrl}
                       alt={`${info.title} QR Code`}
-                      className="w-44 h-44 sm:w-52 sm:h-52 object-contain"
+                      className={`object-contain ${
+                        platform === 'rednote' 
+                          ? 'w-36 h-36 sm:w-44 sm:h-44' 
+                          : 'w-44 h-44 sm:w-52 sm:h-52'
+                      }`}
                     />
                   </div>
                 </div>
