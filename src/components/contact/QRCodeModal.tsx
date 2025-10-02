@@ -131,7 +131,7 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QR
                     className="absolute inset-0 rounded-xl opacity-50 blur-xl transition-all duration-500 group-hover:opacity-70"
                     style={{ background: `radial-gradient(circle, ${info.color}, transparent)` }}
                   />
-                  <div className="relative bg-white p-4 rounded-xl flex items-center justify-center">
+                  <div className="relative bg-white p-2 rounded-xl flex items-center justify-center">
                     <img
                       src={qrCodeUrl}
                       alt={`${info.title} QR Code`}
