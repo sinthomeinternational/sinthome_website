@@ -11,7 +11,7 @@ function getPublicAsset(path: string): string {
 const QR_CODES = {
   wechat: getPublicAsset('/qr-codes/wechat-qr-latest.png'),
   rednote: getPublicAsset('/qr-codes/rednote-qr-latest.png'),
-  bilibili: getPublicAsset('/qr-codes/bilibili-qr.svg')
+  bilibili: getPublicAsset('/qr-codes/bilibili-qr-latest.png')
 };
 
 export default function ContactMethods() {
