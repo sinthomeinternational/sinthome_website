@@ -157,64 +157,58 @@ export default function WarpBackground(props: WarpBackgroundProps) {
     const isDebugMode = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === '1';
 
     try {
-        return (
-            <div ref={rootRef} style={{ width: '100%', height: '100%', position: 'relative' }}>
-                {/* WebGL Warp Component */}
-                <Warp {...warpProps} />
+        const debugHUD = isDebugMode && mounted ? React.createElement('div', {
+            style: {
+                position: 'absolute',
+                top: '10px',
+                left: '10px',
+                background: 'rgba(0, 0, 0, 0.8)',
+                color: 'lime',
+                padding: '8px',
+                fontSize: '12px',
+                fontFamily: 'monospace',
+                pointerEvents: 'none',
+                zIndex: 9999,
+                borderRadius: '4px',
+                border: '1px solid lime',
+                maxWidth: '300px'
+            }
+        }, [
+            React.createElement('div', { key: 'title' }, '🔍 Debug Mode Active'),
+            React.createElement('div', { key: 'props' }, `Props: speed=${warpProps.speed}, scale=${warpProps.shapeScale}`),
+            React.createElement('div', { key: 'distortion' }, `Distortion: ${warpProps.distortion}, Color2: ${warpProps.color2}`),
+            React.createElement('div', { key: 'webgl' }, `WebGL: ${typeof window !== 'undefined' ? 'Available' : 'Unknown'}`),
+            React.createElement('div', { key: 'dvh' }, `DVH: ${typeof CSS !== 'undefined' && CSS.supports('height', '100dvh') ? 'Yes' : 'No'}`)
+        ]) : null;
 
-                {/* Debug HUD */}
-                {isDebugMode && mounted && (
-                    <div
-                        style={{
-                            position: 'absolute',
-                            top: '10px',
-                            left: '10px',
-                            background: 'rgba(0, 0, 0, 0.8)',
-                            color: 'lime',
-                            padding: '8px',
-                            fontSize: '12px',
-                            fontFamily: 'monospace',
-                            pointerEvents: 'none',
-                            zIndex: 9999,
-                            borderRadius: '4px',
-                            border: '1px solid lime',
-                            maxWidth: '300px'
-                        }}
-                    >
-                        <div>🔍 Debug Mode Active</div>
-                        <div>Props: speed={warpProps.speed}, scale={warpProps.shapeScale}</div>
-                        <div>Distortion: {warpProps.distortion}, Color2: {warpProps.color2}</div>
-                        <div>WebGL: {typeof window !== 'undefined' ? 'Available' : 'Unknown'}</div>
-                        <div>DVH: {typeof CSS !== 'undefined' && CSS.supports('height', '100dvh') ? 'Yes' : 'No'}</div>
-                    </div>
-                )}
+        const debugOverlay = isDebugMode && mounted ? React.createElement('div', {
+            style: {
+                position: 'absolute',
+                inset: '0',
+                background: 'rgba(255, 0, 0, 0.1)',
+                pointerEvents: 'none',
+                zIndex: -1,
+                border: '2px dashed red'
+            }
+        }) : null;
 
-                {/* Debug background overlay */}
-                {isDebugMode && mounted && (
-                    <div
-                        style={{
-                            position: 'absolute',
-                            inset: '0',
-                            background: 'rgba(255, 0, 0, 0.1)',
-                            pointerEvents: 'none',
-                            zIndex: -1,
-                            border: '2px dashed red'
-                        }}
-                    />
-                )}
-
-                {/* Fallback hidden - only shows if CSS forces it */}
-                <div
-                    className="warp-background-fallback"
-                    style={fallbackStyle}
-                />
-            </div>
-        );
+        return React.createElement('div', {
+            ref: rootRef,
+            style: { width: '100%', height: '100%', position: 'relative' }
+        }, [
+            React.createElement(Warp, { key: 'warp', ...warpProps }),
+            debugHUD,
+            debugOverlay,
+            React.createElement('div', {
+                key: 'fallback',
+                className: 'warp-background-fallback',
+                style: fallbackStyle
+            })
+        ]);
     } catch (error) {
         console.error('WarpBackground error:', error);
-        // Fallback to static gradient if Warp fails
-        return (
-            <div style={{ ...fallbackStyle, display: 'block' }} />
-        );
+        return React.createElement('div', {
+            style: { ...fallbackStyle, display: 'block' }
+        });
     }
 }
