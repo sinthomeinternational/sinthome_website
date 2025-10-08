@@ -24,9 +24,12 @@ export default function MarkdownContent({ content, className = '' }: MarkdownCon
 
   const parseMarkdown = (text: string): React.ReactElement[] => {
     const elements: React.ReactElement[] = [];
-    // First convert literal \n to actual newlines, then split
-    const normalizedText = text.replace(/\\n/g, '\n');
-    const paragraphs = normalizedText.split(/\n\n+/).filter(para => para.trim());
+    // Normalize all line endings (CRLF, CR, literal \n) to LF
+    const normalizedText = text
+      .replace(/\r\n/g, '\n')  // Windows CRLF -> LF
+      .replace(/\r/g, '\n')    // Old Mac CR -> LF
+      .replace(/\\n/g, '\n'); // Literal \n -> LF
+    const paragraphs = normalizedText.split(/\n\s*\n/).filter(para => para.trim());
 
     paragraphs.forEach((paragraph, idx) => {
       const trimmed = paragraph.trim();
@@ -34,31 +37,55 @@ export default function MarkdownContent({ content, className = '' }: MarkdownCon
       // Skip empty paragraphs
       if (!trimmed) return;
 
-      // Headers
-      if (trimmed.startsWith('### ')) {
+      // Headers - only process first line of the block as header
+      const lines = trimmed.split('\n');
+      const firstLine = lines[0];
+
+      if (firstLine.startsWith('### ')) {
         elements.push(
           <h5 key={idx} className="text-lg font-semibold text-white mt-8 mb-4 border-l-2 border-red-600 pl-4">
-            {parseInlineMarkdown(trimmed.substring(4))}
+            {parseInlineMarkdown(firstLine.substring(4))}
           </h5>
         );
+        // Process remaining lines as separate content if they exist
+        if (lines.length > 1) {
+          const remainingContent = lines.slice(1).join('\n').trim();
+          if (remainingContent) {
+            elements.push(...parseMarkdown(remainingContent));
+          }
+        }
         return;
       }
 
-      if (trimmed.startsWith('## ')) {
+      if (firstLine.startsWith('## ')) {
         elements.push(
           <h4 key={idx} className="text-xl font-bold text-white mt-8 mb-4 border-l-4 border-red-600 pl-4">
-            {parseInlineMarkdown(trimmed.substring(3))}
+            {parseInlineMarkdown(firstLine.substring(3))}
           </h4>
         );
+        // Process remaining lines as separate content if they exist
+        if (lines.length > 1) {
+          const remainingContent = lines.slice(1).join('\n').trim();
+          if (remainingContent) {
+            elements.push(...parseMarkdown(remainingContent));
+          }
+        }
         return;
       }
 
-      if (trimmed.startsWith('# ')) {
+      if (firstLine.startsWith('# ')) {
         elements.push(
           <h3 key={idx} className="text-2xl font-bold text-white mt-8 mb-6 border-l-4 border-red-600 pl-4">
-            {parseInlineMarkdown(trimmed.substring(2))}
+            {parseInlineMarkdown(firstLine.substring(2))}
           </h3>
         );
+        // Process remaining lines as separate content if they exist
+        if (lines.length > 1) {
+          const remainingContent = lines.slice(1).join('\n').trim();
+          if (remainingContent) {
+            elements.push(...parseMarkdown(remainingContent));
+          }
+        }
         return;
       }
 
