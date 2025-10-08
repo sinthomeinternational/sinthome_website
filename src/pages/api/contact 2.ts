@@ -1,6 +1,5 @@
 import type { APIRoute } from 'astro';
 import { z } from 'zod';
-import { sanitizeInput } from '../../lib/security';
 
 // Note: API routes are only available in SSR mode (Vercel config)
 // Remove prerender flag for static builds
@@ -8,7 +7,7 @@ import { sanitizeInput } from '../../lib/security';
 // Contact form validation schema
 const ContactSchema = z.object({
   name: z.string().min(1, 'Name is required').max(100, 'Name too long'),
-  email: z.string().email({ message: 'Invalid email format' }).max(254, 'Email too long'),
+  email: z.string().email('Invalid email format').max(254, 'Email too long'),
   message: z.string().min(1, 'Message is required').max(1000, 'Message too long'),
   // Optional honeypot field for bot detection
   website: z.string().optional()
@@ -30,13 +29,6 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Sanitize input data to prevent XSS
-    const sanitizedData = {
-      name: sanitizeInput(data.name),
-      email: sanitizeInput(data.email),
-      message: sanitizeInput(data.message)
-    };
-
     // Handle form submission
     // Options:
     // 1. Send email via Resend/SendGrid
@@ -44,7 +36,7 @@ export const POST: APIRoute = async ({ request }) => {
     // 3. Forward to webhook/Slack
     // 4. Send to Google Sheets via API
 
-    console.log('Form submission:', sanitizedData);
+    console.log('Form submission:', data);
 
     // Example: Send to Discord webhook
     if (process.env.DISCORD_WEBHOOK_URL) {
@@ -52,7 +44,7 @@ export const POST: APIRoute = async ({ request }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          content: `New contact form submission:\n**Name:** ${sanitizedData.name}\n**Email:** ${sanitizedData.email}\n**Message:** ${sanitizedData.message}`
+          content: `New contact form submission:\n**Name:** ${data.name}\n**Email:** ${data.email}\n**Message:** ${data.message}`
         })
       });
     }
@@ -64,7 +56,7 @@ export const POST: APIRoute = async ({ request }) => {
   } catch (error) {
     // Handle validation errors specifically
     if (error instanceof z.ZodError) {
-      const validationErrors = error.issues.map((err: z.ZodIssue) => ({
+      const validationErrors = error.errors.map(err => ({
         field: err.path.join('.'),
         message: err.message
       }));
