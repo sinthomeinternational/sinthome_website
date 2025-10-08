@@ -32,22 +32,6 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
 
   return (
     <>
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
       {/* Event Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.map((event) => (
@@ -123,21 +107,38 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
 
       {/* Modal Overlay */}
       {isModalOpen && selectedEvent && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-opacity duration-200"
-          style={{
-            animation: 'fadeIn 0.2s ease-out'
-          }}
-          onClick={closeModal}
-        >
-          {/* Modal Content */}
+        <>
+          <style>{`
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            @keyframes slideUp {
+              from {
+                opacity: 0;
+                transform: translateY(20px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+          `}</style>
           <div
-            className="relative w-full max-w-4xl max-h-[90vh] bg-zinc-950 border border-zinc-800 rounded-lg shadow-2xl overflow-hidden"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-opacity duration-200"
             style={{
-              animation: 'slideUp 0.3s ease-out'
+              animation: 'fadeIn 0.2s ease-out'
             }}
-            onClick={(e) => e.stopPropagation()}
+            onClick={closeModal}
           >
+            {/* Modal Content */}
+            <div
+              className="relative w-full max-w-4xl max-h-[90vh] bg-zinc-950 border border-zinc-800 rounded-lg shadow-2xl overflow-hidden"
+              style={{
+                animation: 'slideUp 0.3s ease-out'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
             {/* Close Button */}
             <button
               onClick={closeModal}
@@ -286,6 +287,7 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
             </div>
           </div>
         </div>
+        </>
       )}
     </>
   );
