@@ -84,23 +84,7 @@ const projects: Project[] = pageContent.projects || [
 
       <!-- Enhanced Projects Grid -->
       <section>
-        <div class="flex items-center justify-between mb-8">
-          <h2 class="text-3xl font-bold text-white">{pageContent.projectsTitle || 'Our Programs'}</h2>
-          <div class="flex items-center gap-4 text-sm">
-            <span class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-              <span class="text-zinc-400">Active</span>
-            </span>
-            <span class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-              <span class="text-zinc-400">Ongoing</span>
-            </span>
-            <span class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
-              <span class="text-zinc-400">Upcoming</span>
-            </span>
-          </div>
-        </div>
+        <h2 class="text-3xl font-bold text-white mb-8">{pageContent.projectsTitle || 'Our Programs'}</h2>
 
         <div class="grid md:grid-cols-2 gap-6">
           {projects.map((project) => (
@@ -119,16 +103,9 @@ const projects: Project[] = pageContent.projects || [
                 {/* Header with status */}
                 <div class="flex items-start justify-between mb-4">
                   <div>
-                    <div class="flex items-center gap-3 mb-2">
-                      <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors">
-                        {project.title}
-                      </h3>
-                      <span class={`w-2 h-2 rounded-full ${
-                        project.status === 'active' ? 'bg-green-500' :
-                        project.status === 'ongoing' ? 'bg-blue-500' :
-                        'bg-yellow-500'
-                      }`}></span>
-                    </div>
+                    <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors mb-2">
+                      {project.title}
+                    </h3>
                     <span class="text-xs text-zinc-500 uppercase tracking-wide">
                       {project.category}
                     </span>
