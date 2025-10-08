@@ -223,14 +223,14 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
               )}
 
               {/* Full Event Details */}
-              {(selectedEvent as any).body && (
+              {selectedEvent.data.description && (
                 <div className="mb-8">
                   <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wide">
                     Full Details
                   </h3>
                   <div className="prose prose-invert max-w-none">
                     <div className="space-y-6 text-zinc-300 leading-relaxed">
-                      {((selectedEvent as any).body as string)
+                      {selectedEvent.data.description
                         .split(/\n\n+/)
                         .filter(para => para.trim())
                         .map((paragraph, idx) => {
