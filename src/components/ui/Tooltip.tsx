@@ -23,25 +23,30 @@ export default function Tooltip({
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   const updateTooltipPosition = useCallback(() => {
-    if (!triggerRef.current) return;
+    if (!triggerRef.current || !mounted) return;
 
     const triggerRect = triggerRef.current.getBoundingClientRect();
 
-    // Calculate estimated tooltip dimensions if not yet mounted
-    let tooltipWidth = 320; // max-w-xs default
-    let tooltipHeight = 100; // estimated height
-
-    if (tooltipRef.current) {
-      const tooltipRect = tooltipRef.current.getBoundingClientRect();
-      tooltipWidth = tooltipRect.width;
-      tooltipHeight = tooltipRect.height;
+    // Wait for tooltip to be rendered and get actual dimensions
+    if (!tooltipRef.current) {
+      // If tooltip isn't ready yet, try again shortly
+      setTimeout(() => updateTooltipPosition(), 20);
+      return;
     }
+
+    const tooltipRect = tooltipRef.current.getBoundingClientRect();
+    const tooltipWidth = tooltipRect.width || 320; // fallback to max-w-xs
+    const tooltipHeight = tooltipRect.height || 100; // fallback estimate
+
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
+    const scrollX = window.pageXOffset || window.scrollX;
+    const scrollY = window.pageYOffset || window.scrollY;
 
     let x = 0;
     let y = 0;
 
+    // Calculate position relative to viewport
     switch (position) {
       case 'top':
         x = triggerRect.left + (triggerRect.width / 2) - (tooltipWidth / 2);
@@ -62,17 +67,16 @@ export default function Tooltip({
     }
 
     // Keep tooltip within viewport bounds
-    if (x < 8) x = 8;
-    if (x + tooltipWidth > viewportWidth - 8) {
-      x = viewportWidth - tooltipWidth - 8;
-    }
-    if (y < 8) y = 8;
-    if (y + tooltipHeight > viewportHeight - 8) {
-      y = viewportHeight - tooltipHeight - 8;
-    }
+    const minX = 8;
+    const maxX = viewportWidth - tooltipWidth - 8;
+    const minY = 8;
+    const maxY = viewportHeight - tooltipHeight - 8;
+
+    x = Math.max(minX, Math.min(x, maxX));
+    y = Math.max(minY, Math.min(y, maxY));
 
     setTooltipPosition({ x, y });
-  }, [position]);
+  }, [position, mounted]);
 
   const showTooltip = useCallback(() => {
     if (timeoutRef.current) {
@@ -81,29 +85,34 @@ export default function Tooltip({
     timeoutRef.current = setTimeout(() => {
       setIsVisible(true);
       setMounted(true);
-      updateTooltipPosition();
+      // Don't update position immediately - wait for render
     }, delay);
-  }, [delay, updateTooltipPosition]);
+  }, [delay]);
 
   const hideTooltip = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
     setIsVisible(false);
+    setMounted(false);
   }, []);
 
   useEffect(() => {
     if (isVisible && mounted) {
-      // Update position after tooltip is rendered
-      const timer = setTimeout(() => {
+      // Use requestAnimationFrame to ensure DOM has updated
+      const rafId = requestAnimationFrame(() => {
         updateTooltipPosition();
-      }, 10);
+        // Update again shortly after to ensure correct positioning
+        setTimeout(() => {
+          updateTooltipPosition();
+        }, 50);
+      });
 
       window.addEventListener('scroll', updateTooltipPosition);
       window.addEventListener('resize', updateTooltipPosition);
 
       return () => {
-        clearTimeout(timer);
+        cancelAnimationFrame(rafId);
         window.removeEventListener('scroll', updateTooltipPosition);
         window.removeEventListener('resize', updateTooltipPosition);
       };
