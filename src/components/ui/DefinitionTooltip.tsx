@@ -92,10 +92,10 @@ export default function DefinitionTooltip({
 
   const tooltipContent = (
     <div className="space-y-2">
-      <div className="font-semibold text-red-300 text-sm">{definition.term}</div>
-      <div className="text-zinc-200 text-sm leading-relaxed">{definition.definition}</div>
+      <div className="font-semibold text-red-400 text-sm">{definition.term}</div>
+      <div className="text-sm leading-relaxed" style={{ color: 'var(--theme-text-primary, #e4e4e7)' }}>{definition.definition}</div>
       {definition.context && (
-        <div className="text-zinc-400 text-xs italic border-t border-zinc-700 pt-2 mt-2">
+        <div className="text-xs italic pt-2 mt-2" style={{ color: 'var(--theme-text-muted, #a1a1aa)', borderTop: '1px solid var(--theme-border, #3f3f46)' }}>
           {definition.context}
         </div>
       )}
@@ -110,7 +110,7 @@ export default function DefinitionTooltip({
       delay={300}
     >
       {children || (
-        <span className="text-red-300 font-medium">
+        <span className="text-red-400 font-medium">
           {term === 'arche' ? 'ἀρχή' :
            term === 'zu-kunft' ? 'zu-Kunft' :
            term === 'a-venir' ? 'a-venir' :
