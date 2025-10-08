@@ -228,57 +228,58 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                   <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wide">
                     Full Details
                   </h3>
-                  <div className="leading-relaxed space-y-4">
-                    {((selectedEvent as any).body as string)
-                      .split('\n\n')
-                      .map((paragraph, idx) => {
-                        // Check if it's a heading (starts with ## or #)
-                        if (paragraph.startsWith('## ')) {
-                          return (
-                            <h4 key={idx} className="text-lg font-semibold text-white mt-6 mb-3">
-                              {paragraph.replace('## ', '').replace(/\*\*/g, '')}
-                            </h4>
-                          );
-                        }
-                        if (paragraph.startsWith('# ')) {
-                          return (
-                            <h4 key={idx} className="text-lg font-semibold text-white mt-6 mb-3">
-                              {paragraph.replace('# ', '').replace(/\*\*/g, '')}
-                            </h4>
-                          );
-                        }
-                        // Handle list items
-                        if (paragraph.startsWith('- ')) {
-                          const items = paragraph.split('\n').filter(item => item.trim());
-                          return (
-                            <ul key={idx} className="space-y-2 text-zinc-400">
-                              {items.map((item, itemIdx) => {
-                                const cleanItem = item.replace(/^- /, '')
-                                  .replace(/\*\*([^*]+)\*\*/g, (match, text) => text); // Remove bold markdown
-                                return (
-                                  <li key={itemIdx} className="flex items-start">
-                                    <span className="text-red-500 mr-2">•</span>
-                                    <span dangerouslySetInnerHTML={{
-                                      __html: cleanItem
-                                        .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-zinc-300 font-medium">$1</strong>')
-                                    }} />
+                  <div className="prose prose-invert max-w-none">
+                    <div className="space-y-4 text-zinc-400 leading-relaxed">
+                      {((selectedEvent as any).body as string)
+                        .split(/\n\n+/)
+                        .filter(para => para.trim())
+                        .map((paragraph, idx) => {
+                          const trimmed = paragraph.trim();
+
+                          // Check if it's a heading
+                          if (trimmed.startsWith('## ')) {
+                            return (
+                              <h4 key={idx} className="text-lg font-semibold text-white mt-6 mb-3">
+                                {trimmed.substring(3)}
+                              </h4>
+                            );
+                          }
+
+                          if (trimmed.startsWith('# ')) {
+                            return (
+                              <h4 key={idx} className="text-lg font-semibold text-white mt-6 mb-3">
+                                {trimmed.substring(2)}
+                              </h4>
+                            );
+                          }
+
+                          // Handle lists
+                          if (trimmed.startsWith('- ')) {
+                            const listItems = trimmed.split('\n').filter(item => item.startsWith('- '));
+                            return (
+                              <ul key={idx} className="list-disc list-inside space-y-1 ml-4">
+                                {listItems.map((item, itemIdx) => (
+                                  <li key={itemIdx} className="text-zinc-400">
+                                    {item.substring(2).replace(/\*\*([^*]+)\*\*/g, '$1')}
                                   </li>
-                                );
-                              })}
-                            </ul>
+                                ))}
+                              </ul>
+                            );
+                          }
+
+                          // Regular paragraph - remove markdown syntax but keep text
+                          const cleanText = trimmed
+                            .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold markers
+                            .replace(/##\s+/g, '') // Remove heading markers
+                            .replace(/^#\s+/, ''); // Remove single # at start
+
+                          return (
+                            <p key={idx} className="text-zinc-400 mb-3">
+                              {cleanText}
+                            </p>
                           );
-                        }
-                        // Regular paragraph - parse markdown bold
-                        return paragraph.trim() ? (
-                          <p key={idx} className="text-zinc-400">
-                            <span dangerouslySetInnerHTML={{
-                              __html: paragraph
-                                .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-zinc-300 font-medium">$1</strong>')
-                                .replace(/#([#\s])/g, '$1') // Remove single # at start
-                            }} />
-                          </p>
-                        ) : null;
-                      })}
+                        })}
+                    </div>
                   </div>
                 </div>
               )}
