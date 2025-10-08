@@ -1,11 +1,16 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
-import EventTimeline from "../../components/srtp/EventTimeline.astro";
+import EventCardsWithModal from "../../components/srtp/EventCardsWithModal";
 import { getCollection } from 'astro:content';
 import { getLanguageFromURL } from "../../lib/translations";
 
 // Get all SRTP events from content collection
 const srtpEvents = await getCollection('srtpEvents');
+
+// Sort events by date (newest first) and take only the first 6 for sample
+const sortedEvents = srtpEvents
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 6);
 
 // Get current language
 const lang = getLanguageFromURL(Astro.url);
@@ -139,15 +144,15 @@ const lang = getLanguageFromURL(Astro.url);
         </div>
       </section>
 
-      <!-- Past Events Section -->
+      <!-- Sample Past Events Section -->
       <section>
-        <h2 class="text-3xl font-bold text-white mb-10 text-center">Past Events</h2>
+        <h2 class="text-3xl font-bold text-white mb-10 text-center">Sample Past Events</h2>
         <p class="text-zinc-400 text-center mb-8">
-          Explore our archive of past lectures, seminars, and workshops on revolutionary theory and practice.
+          Explore a selection of our past lectures, seminars, and workshops on revolutionary theory and practice.
         </p>
 
-        <!-- Event Timeline -->
-        <EventTimeline events={srtpEvents} lang={lang} />
+        <!-- Event Cards with Modal -->
+        <EventCardsWithModal events={sortedEvents} lang={lang} client:load />
       </section>
 
       <!-- Call to Action -->

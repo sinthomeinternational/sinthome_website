@@ -32,6 +32,22 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
 
   return (
     <>
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
       {/* Event Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.map((event) => (
@@ -64,7 +80,7 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
               <div className="p-5 bg-zinc-950">
                 {/* Title */}
                 <h3 className="text-lg font-bold text-white mb-3 group-hover:text-red-500 transition-colors line-clamp-2">
-                  {lang === 'zh' ? event.data.titleZh : event.data.title}
+                  {lang === 'zh' && event.data.titleZh ? event.data.titleZh : event.data.title}
                 </h3>
 
                 {/* Date */}
@@ -76,17 +92,21 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                 </div>
 
                 {/* Speaker */}
-                <div className="flex items-center gap-2 text-sm text-zinc-500 mb-3">
-                  <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                  <span className="line-clamp-1">{event.data.speaker}</span>
-                </div>
+                {event.data.speaker && (
+                  <div className="flex items-center gap-2 text-sm text-zinc-500 mb-3">
+                    <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span className="line-clamp-1">{event.data.speaker}</span>
+                  </div>
+                )}
 
                 {/* Synopsis */}
-                <p className="text-sm text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
-                  {lang === 'zh' ? event.data.synopsisZh : event.data.synopsis}
-                </p>
+                {(event.data.synopsis || event.data.synopsisZh) && (
+                  <p className="text-sm text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
+                    {lang === 'zh' && event.data.synopsisZh ? event.data.synopsisZh : event.data.synopsis}
+                  </p>
+                )}
 
                 {/* View Details Button */}
                 <div className="flex items-center gap-2 text-red-600 font-semibold group-hover:text-red-400 transition-colors">
@@ -145,7 +165,7 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                     {selectedEvent.data.type}
                   </span>
                   <h2 className="text-3xl font-bold text-white mb-2">
-                    {lang === 'zh' ? selectedEvent.data.titleZh : selectedEvent.data.title}
+                    {lang === 'zh' && selectedEvent.data.titleZh ? selectedEvent.data.titleZh : selectedEvent.data.title}
                   </h2>
                   {lang !== 'zh' && selectedEvent.data.titleZh && (
                     <p className="text-lg text-zinc-400">{selectedEvent.data.titleZh}</p>
@@ -158,22 +178,28 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
             <div className="p-8 bg-black overflow-y-auto max-h-[calc(90vh-18rem)]">
               {/* Event Metadata */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="bg-zinc-950 border border-zinc-800 rounded-lg p-3">
-                  <div className="text-xs text-zinc-600 uppercase tracking-wider mb-1">Speaker</div>
-                  <div className="text-sm text-white font-semibold">{selectedEvent.data.speaker}</div>
-                </div>
+                {selectedEvent.data.speaker && (
+                  <div className="bg-zinc-950 border border-zinc-800 rounded-lg p-3">
+                    <div className="text-xs text-zinc-600 uppercase tracking-wider mb-1">Speaker</div>
+                    <div className="text-sm text-white font-semibold">{selectedEvent.data.speaker}</div>
+                  </div>
+                )}
                 <div className="bg-zinc-950 border border-zinc-800 rounded-lg p-3">
                   <div className="text-xs text-zinc-600 uppercase tracking-wider mb-1">Date</div>
                   <div className="text-sm text-white font-semibold">{formatDate(selectedEvent.data.date)}</div>
                 </div>
-                <div className="bg-zinc-950 border border-zinc-800 rounded-lg p-3">
-                  <div className="text-xs text-zinc-600 uppercase tracking-wider mb-1">Duration</div>
-                  <div className="text-sm text-white font-semibold">{selectedEvent.data.duration}</div>
-                </div>
-                <div className="bg-zinc-950 border border-zinc-800 rounded-lg p-3">
-                  <div className="text-xs text-zinc-600 uppercase tracking-wider mb-1">Location</div>
-                  <div className="text-sm text-white font-semibold">{selectedEvent.data.location}</div>
-                </div>
+                {selectedEvent.data.duration && (
+                  <div className="bg-zinc-950 border border-zinc-800 rounded-lg p-3">
+                    <div className="text-xs text-zinc-600 uppercase tracking-wider mb-1">Duration</div>
+                    <div className="text-sm text-white font-semibold">{selectedEvent.data.duration}</div>
+                  </div>
+                )}
+                {selectedEvent.data.location && (
+                  <div className="bg-zinc-950 border border-zinc-800 rounded-lg p-3">
+                    <div className="text-xs text-zinc-600 uppercase tracking-wider mb-1">Location</div>
+                    <div className="text-sm text-white font-semibold">{selectedEvent.data.location}</div>
+                  </div>
+                )}
               </div>
 
               {/* Synopsis */}
@@ -182,7 +208,7 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                   Synopsis
                 </h3>
                 <p className="text-zinc-400 leading-relaxed">
-                  {lang === 'zh' ? selectedEvent.data.synopsisZh : selectedEvent.data.synopsis}
+                  {lang === 'zh' && selectedEvent.data.synopsisZh ? selectedEvent.data.synopsisZh : (selectedEvent.data.synopsis || selectedEvent.data.description || 'No synopsis available')}
                 </p>
               </div>
 
@@ -225,16 +251,18 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
               )}
 
               {/* Tags */}
-              <div className="mb-8">
-                <h3 className="text-lg font-bold text-white mb-3 uppercase tracking-wide">Topics</h3>
-                <div className="flex flex-wrap gap-2">
-                  {selectedEvent.data.tags.map((tag: string) => (
-                    <span key={tag} className="px-3 py-1 bg-zinc-950 border border-zinc-800 text-zinc-500 rounded-full text-sm">
-                      #{tag}
-                    </span>
-                  ))}
+              {selectedEvent.data.tags && selectedEvent.data.tags.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="text-lg font-bold text-white mb-3 uppercase tracking-wide">Topics</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedEvent.data.tags.map((tag: string) => (
+                      <span key={tag} className="px-3 py-1 bg-zinc-950 border border-zinc-800 text-zinc-500 rounded-full text-sm">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Actions */}
               <div className="flex gap-4 pt-6 border-t border-zinc-800">
