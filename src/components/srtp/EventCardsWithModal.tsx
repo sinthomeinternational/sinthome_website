@@ -264,10 +264,10 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                           // Handle lists - improved to handle mixed content
                           if (trimmed.includes('\n- ') || trimmed.startsWith('- ')) {
                             const lines = trimmed.split('\n');
-                            const elements: JSX.Element[] = [];
+                            const elements: React.ReactElement[] = [];
                             let currentList: string[] = [];
 
-                            lines.forEach((line, lineIdx) => {
+                            lines.forEach((line) => {
                               if (line.startsWith('- ')) {
                                 currentList.push(line.substring(2));
                               } else if (currentList.length > 0) {
