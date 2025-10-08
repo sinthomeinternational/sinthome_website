@@ -1,30 +1,22 @@
-import { Warp, type WarpProps } from '@paper-design/shaders-react';
-import { useEffect, useState } from 'react';
+import { Warp } from '@paper-design/shaders-react';
 
-interface AccessibleWarpBackgroundProps extends WarpProps {
+interface AccessibleWarpBackgroundProps {
   fallbackClassName?: string;
+  color1?: string;
+  color2?: string;
+  color3?: string;
+  speed?: number;
+  swirl?: number;
+  swirlIterations?: number;
+  shapeScale?: number;
+  rotation?: number;
+  scale?: number;
+  softness?: number;
+  distortion?: number;
+  style?: React.CSSProperties;
 }
 
 export default function WarpBackground({ fallbackClassName = '', ...props }: AccessibleWarpBackgroundProps) {
-    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true);
-
-        // Check for reduced motion preference
-        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-        setPrefersReducedMotion(mediaQuery.matches);
-
-        // Listen for changes in motion preference
-        const handleChange = (e: MediaQueryListEvent) => {
-            setPrefersReducedMotion(e.matches);
-        };
-
-        mediaQuery.addEventListener('change', handleChange);
-        return () => mediaQuery.removeEventListener('change', handleChange);
-    }, []);
-
     // Same colors as homepage for consistency
     const defaultProps = {
         color1: '#000000',  // Black
@@ -41,25 +33,25 @@ export default function WarpBackground({ fallbackClassName = '', ...props }: Acc
         style: { width: '100%', height: '100%' }
     };
 
-    // Accessibility: Show static fallback if user prefers reduced motion
-    if (!isClient || prefersReducedMotion) {
-        return (
+    // Always render both: CSS will handle accessibility via media queries
+    return (
+        <>
+            {/* Animated WebGL background - hidden by CSS if prefers-reduced-motion */}
+            <div className="warp-background" role="img" aria-label="Animated background pattern">
+                <Warp
+                    {...defaultProps}
+                    {...props}
+                    style={{ ...defaultProps.style, ...props.style }}
+                />
+            </div>
+
+            {/* Static fallback - shown by CSS if prefers-reduced-motion */}
             <div
                 className={`warp-background-fallback ${fallbackClassName}`}
                 style={defaultProps.style}
                 role="img"
                 aria-label="Static background pattern"
             />
-        );
-    }
-
-    return (
-        <div className="warp-background" role="img" aria-label="Animated background pattern">
-            <Warp
-                {...defaultProps}
-                {...props}
-                style={{ ...defaultProps.style, ...props.style }}
-            />
-        </div>
+        </>
     );
 }
