@@ -278,7 +278,7 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                                       <li key={itemIdx} className="text-zinc-300 leading-relaxed">
                                         <span dangerouslySetInnerHTML={{
                                           __html: item
-                                            .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+                                            .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-zinc-200 font-medium">$1</strong>')
                                             .replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>')
                                         }} />
                                       </li>
@@ -293,7 +293,7 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                                     <p key={`para-${idx}-${elements.length}`} className="text-zinc-300 mb-4 leading-relaxed">
                                       <span dangerouslySetInnerHTML={{
                                         __html: line
-                                          .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+                                          .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-zinc-200 font-medium">$1</strong>')
                                           .replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>')
                                       }} />
                                     </p>
@@ -310,7 +310,7 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                                     <li key={itemIdx} className="text-zinc-300 leading-relaxed">
                                       <span dangerouslySetInnerHTML={{
                                         __html: item
-                                          .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+                                          .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-zinc-200 font-medium">$1</strong>')
                                           .replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>')
                                       }} />
                                     </li>
@@ -340,7 +340,7 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                             <p key={idx} className="text-zinc-300 mb-4 leading-relaxed text-base">
                               <span dangerouslySetInnerHTML={{
                                 __html: cleanText
-                                  .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+                                  .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-zinc-200 font-medium">$1</strong>')
                                   .replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>')
                               }} />
                             </p>
