@@ -37,14 +37,14 @@ const theme = getThemeFromURL(Astro.url);
           <div class="absolute -inset-1 bg-gradient-to-r from-red-900/20 via-red-800/10 to-red-900/20 rounded-xl blur opacity-50 group-hover:opacity-100 transition duration-500"></div>
 
           <!-- Main card with gradient background -->
-          <div class="relative bg-gradient-to-br from-zinc-900/95 to-zinc-800/85 border border-zinc-700/50 rounded-xl p-6 backdrop-blur-md group-hover:shadow-2xl group-hover:shadow-red-900/20 transition-all duration-300">
+          <div class="relative rounded-xl p-6 backdrop-blur-md group-hover:shadow-2xl group-hover:shadow-red-900/20 transition-all duration-300" style="background-color: var(--theme-bg-card); border: 1px solid var(--theme-border);">
 
             <!-- Compact header with icon and badge -->
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
               <div class="flex items-center mb-2 sm:mb-0">
                 <!-- Academic icon -->
                 <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center mr-3 shadow-lg shadow-red-900/50">
-                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" style="color: var(--theme-text-primary);">
                     <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
                   </svg>
                 </div>
@@ -74,7 +74,7 @@ const theme = getThemeFromURL(Astro.url);
             <!-- Inline Activities list -->
             <div class="flex flex-wrap gap-3 mb-4">
               <!-- Philosophical Lectures -->
-              <div class="group/item bg-zinc-800/30 rounded-md px-3 py-2 border border-zinc-700/30 hover:border-red-700/50 hover:bg-zinc-800/50 hover:translate-y-[-1px] transition-all duration-300">
+              <div class="group/item rounded-md px-3 py-2 hover:border-red-700/50 hover:translate-y-[-1px] transition-all duration-300" style="background-color: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
                 <div class="flex items-center">
                   <div class="w-6 h-6 bg-gradient-to-br from-amber-500/20 to-amber-600/10 rounded flex items-center justify-center mr-2 group-hover/item:from-amber-500/30 group-hover/item:to-amber-600/20 transition-colors">
                     <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@ const theme = getThemeFromURL(Astro.url);
               </div>
 
               <!-- Textual Analysis -->
-              <div class="group/item bg-zinc-800/30 rounded-md px-3 py-2 border border-zinc-700/30 hover:border-red-700/50 hover:bg-zinc-800/50 hover:translate-y-[-1px] transition-all duration-300">
+              <div class="group/item rounded-md px-3 py-2 hover:border-red-700/50 hover:translate-y-[-1px] transition-all duration-300" style="background-color: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
                 <div class="flex items-center">
                   <div class="w-6 h-6 bg-gradient-to-br from-blue-500/20 to-blue-600/10 rounded flex items-center justify-center mr-2 group-hover/item:from-blue-500/30 group-hover/item:to-blue-600/20 transition-colors">
                     <svg class="w-3.5 h-3.5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
@@ -99,7 +99,7 @@ const theme = getThemeFromURL(Astro.url);
               </div>
 
               <!-- Praxis Reflection -->
-              <div class="group/item bg-zinc-800/30 rounded-md px-3 py-2 border border-zinc-700/30 hover:border-red-700/50 hover:bg-zinc-800/50 hover:translate-y-[-1px] transition-all duration-300">
+              <div class="group/item rounded-md px-3 py-2 hover:border-red-700/50 hover:translate-y-[-1px] transition-all duration-300" style="background-color: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
                 <div class="flex items-center">
                   <div class="w-6 h-6 bg-gradient-to-br from-green-500/20 to-green-600/10 rounded flex items-center justify-center mr-2 group-hover/item:from-green-500/30 group-hover/item:to-green-600/20 transition-colors">
                     <svg class="w-3.5 h-3.5 text-green-400" fill="currentColor" viewBox="0 0 24 24">
