@@ -27,4 +27,174 @@ export function setupCSPReporting(): void {
       });
     }
   });
-}\n\n// Rate limiting for form submissions\nconst submissionTracker = new Map<string, number[]>();\n\nexport function checkFormSubmissionRate(formId: string, maxSubmissions = 3, windowMs = 300000): boolean {\n  if (typeof window === 'undefined') return true;\n\n  const now = Date.now();\n  const submissions = submissionTracker.get(formId) || [];\n  \n  // Remove old submissions outside the time window\n  const recentSubmissions = submissions.filter(time => now - time < windowMs);\n  \n  if (recentSubmissions.length >= maxSubmissions) {\n    console.warn(`Rate limit exceeded for form: ${formId}`);\n    reportSecurityEvent('form_rate_limit', { formId, attempts: recentSubmissions.length });\n    return false;\n  }\n  \n  // Add current submission\n  recentSubmissions.push(now);\n  submissionTracker.set(formId, recentSubmissions);\n  \n  return true;\n}\n\n// Security event reporting\ninterface SecurityEvent {\n  type: string;\n  data: Record<string, any>;\n  timestamp?: number;\n  userAgent?: string;\n  url?: string;\n}\n\nexport function reportSecurityEvent(type: string, data: Record<string, any>): void {\n  const event: SecurityEvent = {\n    type,\n    data,\n    timestamp: Date.now(),\n    userAgent: navigator.userAgent,\n    url: window.location.href\n  };\n\n  // Log locally in development\n  if (import.meta.env.DEV) {\n    console.warn('Security Event:', event);\n    return;\n  }\n\n  // In production, send to monitoring service\n  // This could be Sentry, LogRocket, or custom endpoint\n  try {\n    fetch('/api/security-events', {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json',\n      },\n      body: JSON.stringify(event)\n    }).catch(err => {\n      console.error('Failed to report security event:', err);\n    });\n  } catch (error) {\n    console.error('Security event reporting error:', error);\n  }\n}\n\n// Input sanitization for user-generated content\nexport function sanitizeInput(input: string): string {\n  // Basic XSS prevention\n  return input\n    .replace(/</g, '&lt;')\n    .replace(/>/g, '&gt;')\n    .replace(/\"/g, '&quot;')\n    .replace(/'/g, '&#x27;')\n    .replace(/\\//g, '&#x2F;');\n}\n\n// Validate URLs to prevent open redirects\nexport function isValidRedirectUrl(url: string): boolean {\n  try {\n    const parsedUrl = new URL(url, window.location.origin);\n    \n    // Only allow same-origin or explicitly allowed domains\n    const allowedDomains = [\n      'sinthome.org',\n      'docs.google.com', // For forms\n      'forms.gle' // For form redirects\n    ];\n    \n    if (parsedUrl.origin === window.location.origin) {\n      return true;\n    }\n    \n    return allowedDomains.some(domain => \n      parsedUrl.hostname === domain || \n      parsedUrl.hostname.endsWith('.' + domain)\n    );\n  } catch {\n    return false;\n  }\n}\n\n// Detect suspicious activity patterns\ninterface ActivityPattern {\n  rapidClicks: number;\n  formSubmissions: number;\n  pageViews: number;\n  lastActivity: number;\n}\n\nconst activityTracker: ActivityPattern = {\n  rapidClicks: 0,\n  formSubmissions: 0,\n  pageViews: 0,\n  lastActivity: Date.now()\n};\n\nexport function trackUserActivity(): void {\n  if (typeof window === 'undefined') return;\n\n  const now = Date.now();\n  const timeSinceLastActivity = now - activityTracker.lastActivity;\n  \n  // Reset counters if more than 1 minute since last activity\n  if (timeSinceLastActivity > 60000) {\n    activityTracker.rapidClicks = 0;\n    activityTracker.formSubmissions = 0;\n    activityTracker.pageViews = 0;\n  }\n  \n  activityTracker.lastActivity = now;\n  \n  // Track clicks\n  document.addEventListener('click', () => {\n    activityTracker.rapidClicks++;\n    \n    // Flag suspicious rapid clicking\n    if (activityTracker.rapidClicks > 20) {\n      reportSecurityEvent('suspicious_activity', {\n        type: 'rapid_clicking',\n        count: activityTracker.rapidClicks\n      });\n    }\n  });\n  \n  // Track page visibility changes\n  document.addEventListener('visibilitychange', () => {\n    if (document.visibilityState === 'visible') {\n      activityTracker.pageViews++;\n      \n      // Flag excessive page switching\n      if (activityTracker.pageViews > 50) {\n        reportSecurityEvent('suspicious_activity', {\n          type: 'excessive_page_views',\n          count: activityTracker.pageViews\n        });\n      }\n    }\n  });\n}\n\n// Initialize security monitoring\nexport function initializeSecurity(): void {\n  setupCSPReporting();\n  trackUserActivity();\n  \n  // Log security initialization\n  console.log('Security monitoring initialized');\n}
+}
+
+// Rate limiting for form submissions
+const submissionTracker = new Map<string, number[]>();
+
+export function checkFormSubmissionRate(formId: string, maxSubmissions = 3, windowMs = 300000): boolean {
+  if (typeof window === 'undefined') return true;
+
+  const now = Date.now();
+  const submissions = submissionTracker.get(formId) || [];
+
+  // Remove old submissions outside the time window
+  const recentSubmissions = submissions.filter(time => now - time < windowMs);
+
+  if (recentSubmissions.length >= maxSubmissions) {
+    console.warn(`Rate limit exceeded for form: ${formId}`);
+    reportSecurityEvent('form_rate_limit', { formId, attempts: recentSubmissions.length });
+    return false;
+  }
+
+  // Add current submission
+  recentSubmissions.push(now);
+  submissionTracker.set(formId, recentSubmissions);
+
+  return true;
+}
+
+// Security event reporting
+interface SecurityEvent {
+  type: string;
+  data: Record<string, any>;
+  timestamp?: number;
+  userAgent?: string;
+  url?: string;
+}
+
+export function reportSecurityEvent(type: string, data: Record<string, any>): void {
+  const event: SecurityEvent = {
+    type,
+    data,
+    timestamp: Date.now(),
+    userAgent: navigator.userAgent,
+    url: window.location.href
+  };
+
+  // Log locally in development
+  if (import.meta.env.DEV) {
+    console.warn('Security Event:', event);
+    return;
+  }
+
+  // In production, send to monitoring service
+  // This could be Sentry, LogRocket, or custom endpoint
+  try {
+    fetch('/api/security-events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(event)
+    }).catch(err => {
+      console.error('Failed to report security event:', err);
+    });
+  } catch (error) {
+    console.error('Security event reporting error:', error);
+  }
+}
+
+// Input sanitization for user-generated content
+export function sanitizeInput(input: string): string {
+  // Basic XSS prevention
+  return input
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;');
+}
+
+// Validate URLs to prevent open redirects
+export function isValidRedirectUrl(url: string): boolean {
+  try {
+    const parsedUrl = new URL(url, window.location.origin);
+
+    // Only allow same-origin or explicitly allowed domains
+    const allowedDomains = [
+      'sinthome.org',
+      'docs.google.com', // For forms
+      'forms.gle' // For form redirects
+    ];
+
+    if (parsedUrl.origin === window.location.origin) {
+      return true;
+    }
+
+    return allowedDomains.some(domain =>
+      parsedUrl.hostname === domain ||
+      parsedUrl.hostname.endsWith('.' + domain)
+    );
+  } catch {
+    return false;
+  }
+}
+
+// Detect suspicious activity patterns
+interface ActivityPattern {
+  rapidClicks: number;
+  formSubmissions: number;
+  pageViews: number;
+  lastActivity: number;
+}
+
+const activityTracker: ActivityPattern = {
+  rapidClicks: 0,
+  formSubmissions: 0,
+  pageViews: 0,
+  lastActivity: Date.now()
+};
+
+export function trackUserActivity(): void {
+  if (typeof window === 'undefined') return;
+
+  const now = Date.now();
+  const timeSinceLastActivity = now - activityTracker.lastActivity;
+
+  // Reset counters if more than 1 minute since last activity
+  if (timeSinceLastActivity > 60000) {
+    activityTracker.rapidClicks = 0;
+    activityTracker.formSubmissions = 0;
+    activityTracker.pageViews = 0;
+  }
+
+  activityTracker.lastActivity = now;
+
+  // Track clicks
+  document.addEventListener('click', () => {
+    activityTracker.rapidClicks++;
+
+    // Flag suspicious rapid clicking
+    if (activityTracker.rapidClicks > 20) {
+      reportSecurityEvent('suspicious_activity', {
+        type: 'rapid_clicking',
+        count: activityTracker.rapidClicks
+      });
+    }
+  });
+
+  // Track page visibility changes
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      activityTracker.pageViews++;
+
+      // Flag excessive page switching
+      if (activityTracker.pageViews > 50) {
+        reportSecurityEvent('suspicious_activity', {
+          type: 'excessive_page_views',
+          count: activityTracker.pageViews
+        });
+      }
+    }
+  });
+}
+
+// Initialize security monitoring
+export function initializeSecurity(): void {
+  setupCSPReporting();
+  trackUserActivity();
+
+  // Log security initialization
+  console.log('Security monitoring initialized');
+}
