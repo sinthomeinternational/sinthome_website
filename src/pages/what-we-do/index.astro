@@ -33,59 +33,42 @@ interface Project {
 const projects: Project[] = pageContent.projects || [
   {
     id: 'aiHackathon',
-    title: 'AI Hackathon',
-    description: 'Annual event bringing together developers, designers, and innovators to create AI-powered solutions for social good. Participants work on real-world challenges with mentorship from industry experts.',
+    title: 'AI for Better Boston',
+    description: 'Rooted in our own experience of running a community-based NGO (Workers Assist), Sinthome Hackathon brings real-world challenges to AI practitioners and university students, creating a space for mutual learning and development of practical solutions for social good.',
     href: '/what-we-do/ai-hackathon/',
-    category: 'AI for Public Good',
-    status: 'active',
-    participants: '150+ Participants',
-    nextDate: 'March 2025'
+    category: 'Hackathon for social good',
+    status: 'upcoming',
+    nextDate: 'Expected: February 2026',
+    impact: 'Help wanted'
   },
   {
     id: 'workersAssist',
     title: 'Workers Assist',
-    description: 'Supporting workers in transition with skills training, career counseling, and job placement assistance. We focus on emerging technologies and sustainable employment opportunities.',
+    description: 'A nonprofit organization dedicated to fostering a mutual-support community for Asian labor workers in the Boston area.',
     href: '/what-we-do/workers-assist',
     category: 'Workers Assist',
-    status: 'ongoing',
-    impact: '200+ Workers Supported'
+    status: 'active',
+    impact: 'Free sessions every weekday evening and monthly gatherings'
   },
   {
     id: 'plantcoreAi',
     title: 'Plantcore AI',
-    description: 'Using artificial intelligence to revolutionize sustainable agriculture and environmental conservation. Our AI models help farmers optimize crop yields while minimizing environmental impact.',
+    description: 'Building the first Industrial Vertical Large Language Model (LLM) by deploying AI Agents that capture real-time Context-Decision-Outcome (CDO) data from factory floors.',
     href: '/what-we-do/plantcore-ai',
     category: 'Factory AI Solution',
-    status: 'active',
-    impact: '10+ Factories Connected'
+    status: 'ongoing',
+    impact: 'Reshaping the future of industry'
   },
   {
     id: 'srtp',
-    title: 'S.R.T.P.',
-    description: 'Student Research and Training Program connecting young minds with cutting-edge research opportunities. We provide mentorship, resources, and real-world project experience.',
+    title: 'S.R.T.P. Public Lecture',
+    description: 'In our weekly lectures and community activities, every member is encouraged to take part in the collective study of leftist and critical theories.',
     href: '/what-we-do/srtp',
     category: 'Public Lecture',
-    status: 'upcoming',
-    nextDate: 'January 2025'
+    status: 'active',
+    participants: 'Every Saturday in person and online'
   }
 ];
-
-// Define impact stat type with optional color
-interface ImpactStat {
-  number: string;
-  label: string;
-  color?: string;
-}
-
-// Get enhanced impact stats with colors
-const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
-  stats: [
-    { number: '500+', label: 'People Trained', color: 'text-blue-600 dark:text-blue-400' },
-    { number: '50+', label: 'Projects Completed', color: 'text-green-600 dark:text-green-400' },
-    { number: '20+', label: 'Partner Organizations', color: 'text-purple-600 dark:text-purple-400' },
-    { number: '10+', label: 'Communities Served', color: 'text-orange-600 dark:text-orange-400' }
-  ]
-};
 ---
 
 <PageLayout title="What We Do - Sinthome" useInfoLayout={true}>
@@ -101,23 +84,7 @@ const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
 
       <!-- Enhanced Projects Grid -->
       <section>
-        <div class="flex items-center justify-between mb-8">
-          <h2 class="text-3xl font-bold text-white">{pageContent.projectsTitle || 'Our Programs'}</h2>
-          <div class="flex items-center gap-4 text-sm">
-            <span class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-              <span class="text-zinc-400">Active</span>
-            </span>
-            <span class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-              <span class="text-zinc-400">Ongoing</span>
-            </span>
-            <span class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
-              <span class="text-zinc-400">Upcoming</span>
-            </span>
-          </div>
-        </div>
+        <h2 class="text-3xl font-bold text-white mb-8">{pageContent.projectsTitle || 'Our Programs'}</h2>
 
         <div class="grid md:grid-cols-2 gap-6">
           {projects.map((project) => (
@@ -136,16 +103,9 @@ const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
                 {/* Header with status */}
                 <div class="flex items-start justify-between mb-4">
                   <div>
-                    <div class="flex items-center gap-3 mb-2">
-                      <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors">
-                        {project.title}
-                      </h3>
-                      <span class={`w-2 h-2 rounded-full ${
-                        project.status === 'active' ? 'bg-green-500' :
-                        project.status === 'ongoing' ? 'bg-blue-500' :
-                        'bg-yellow-500'
-                      }`}></span>
-                    </div>
+                    <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors mb-2">
+                      {project.title}
+                    </h3>
                     <span class="text-xs text-zinc-500 uppercase tracking-wide">
                       {project.category}
                     </span>
@@ -176,7 +136,7 @@ const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
                     )}
                     {project.nextDate && (
                       <span class="text-xs text-zinc-500">
-                        Next: {project.nextDate}
+                        {project.nextDate}
                       </span>
                     )}
                     {project.impact && (
@@ -196,24 +156,6 @@ const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
               </div>
             </a>
           ))}
-        </div>
-      </section>
-
-      <!-- Enhanced Impact Section -->
-      <section class="relative mt-16">
-        <div class="absolute inset-0 bg-gradient-to-r from-red-900/20 via-transparent to-blue-900/20 rounded-2xl"></div>
-        <div class="relative p-12 bg-zinc-900/40 backdrop-blur-sm border border-zinc-800 rounded-2xl">
-          <h2 class="text-3xl font-bold text-white mb-8 text-center">{impact.title || 'Our Impact'}</h2>
-          <div class="grid md:grid-cols-4 gap-8">
-            {impact.stats.map((stat) => (
-              <div class="text-center group">
-                <div class={`text-4xl font-bold mb-2 ${stat.color || 'text-red-500'} transition-transform group-hover:scale-110`}>
-                  {stat.number}
-                </div>
-                <div class="text-sm text-zinc-400 uppercase tracking-wide">{stat.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
