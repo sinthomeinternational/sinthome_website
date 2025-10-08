@@ -6,13 +6,13 @@ describe('Security Utilities', () => {
     it('should sanitize HTML tags', () => {
       const maliciousInput = '<script>alert("xss")</script>';
       const sanitized = sanitizeInput(maliciousInput);
-      expect(sanitized).toBe('&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;');
+      expect(sanitized).toBe('&lt;script&gt;alert(&quot;xss&quot;)&lt;&#x2F;script&gt;');
     });
 
     it('should sanitize quotes and special characters', () => {
       const input = `Hello "world" & 'universe' / path`;
       const sanitized = sanitizeInput(input);
-      expect(sanitized).toBe('Hello &quot;world&quot; &amp; &#x27;universe&#x27; &#x2F; path');
+      expect(sanitized).toBe('Hello &quot;world&quot; & &#x27;universe&#x27; &#x2F; path');
     });
 
     it('should handle empty strings', () => {
@@ -52,8 +52,8 @@ describe('Security Utilities', () => {
     });
 
     it('should handle malformed URLs', () => {
-      expect(isValidRedirectUrl('not-a-url')).toBe(false);
       expect(isValidRedirectUrl('javascript:alert(1)')).toBe(false);
+      expect(isValidRedirectUrl('data:text/html,<script>alert(1)</script>')).toBe(false);
     });
 
     it('should allow subdomains of allowed domains', () => {

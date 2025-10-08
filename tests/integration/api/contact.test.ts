@@ -12,11 +12,29 @@ const createMockRequest = (body: any): Request => {
   } as unknown as Request;
 };
 
+// Create mock API context - since we only need the request parameter
 const createMockAPIContext = (request: Request) => ({
   request,
+  // Mock minimal required properties for APIContext type
   params: {},
   url: new URL('http://localhost/api/contact'),
-});
+  site: new URL('http://localhost'),
+  generator: 'Astro v5.7.5',
+  props: {},
+  redirect: vi.fn(),
+  rewrite: vi.fn(),
+  cookies: {} as any, // Mock as any since contact API doesn't use cookies
+  clientAddress: '127.0.0.1',
+  locals: {},
+  preferredLocale: 'en',
+  preferredLocaleList: ['en'],
+  currentLocale: 'en',
+  routePattern: '/api/contact',
+  originPathname: '/api/contact',
+  getActionResult: vi.fn(),
+  callAction: vi.fn(),
+  isPrerendered: false
+} as any); // Type assertion since this is a test mock
 
 describe('Contact API Integration', () => {
   beforeEach(() => {
