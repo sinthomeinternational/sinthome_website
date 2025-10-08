@@ -61,13 +61,6 @@ export const SITE_CONFIG = {
   contact: {
     email: import.meta.env.PUBLIC_CONTACT_EMAIL || 'contact@sinthome.org',
     phone: import.meta.env.PUBLIC_CONTACT_PHONE || '+1 (555) 123-4567',
-    address: {
-      street: '123 Tech Street',
-      city: 'San Francisco',
-      state: 'CA',
-      zip: '94102',
-      country: 'USA'
-    }
   },
 
   // Social media handles (without @ or full URLs)
