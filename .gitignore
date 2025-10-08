@@ -23,3 +23,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# CLI metadata
+.claude/
+
+# Playground/experimental files
+playground/

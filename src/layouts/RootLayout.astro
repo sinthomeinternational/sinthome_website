@@ -1,7 +1,5 @@
 ---
 import "../styles/global.css";
-import { ClientRouter } from 'astro:transitions';
-import LoadingIndicator from "astro-loading-indicator/component";
 import { getTheme } from "../config/themes";
 
 // 导入资源管理模块
@@ -46,8 +44,9 @@ const lightThemeConfig = getTheme('light');
 		<meta name="twitter:description" content={defaultDescription} />
 		<meta name="twitter:image" content={assets.socialImage} />
 
-		<ClientRouter />
-		<LoadingIndicator color="#f4f4f5" height="2px" />
+		<!-- Removing ClientRouter to maintain static site benefits and avoid SPA behavior -->
+		<!-- <ClientRouter /> -->
+		<!-- <LoadingIndicator color="#f4f4f5" height="2px" /> -->
 
 		<!-- Theme CSS Variables -->
 		<style define:vars={{
@@ -158,12 +157,28 @@ const lightThemeConfig = getTheme('light');
 		<script>
 			// Restore scroll position if this was a language switch
 			const scrollPosition = sessionStorage.getItem('scrollPosition');
-			if (scrollPosition) {
-				// Use requestAnimationFrame to ensure DOM is ready
-				requestAnimationFrame(() => {
-					window.scrollTo(0, parseInt(scrollPosition));
+			const switchTimestamp = sessionStorage.getItem('languageSwitchTimestamp');
+
+			// Only restore if switch happened within last 3 seconds (prevents stale restores)
+			if (scrollPosition && switchTimestamp) {
+				const timeSinceSwitch = Date.now() - parseInt(switchTimestamp);
+				if (timeSinceSwitch < 3000) {
+					// Wait for page to fully load before restoring
+					window.addEventListener('load', () => {
+						requestAnimationFrame(() => {
+							window.scrollTo({
+								top: parseInt(scrollPosition),
+								behavior: 'instant'
+							});
+							sessionStorage.removeItem('scrollPosition');
+							sessionStorage.removeItem('languageSwitchTimestamp');
+						});
+					});
+				} else {
+					// Clean up stale data
 					sessionStorage.removeItem('scrollPosition');
-				});
+					sessionStorage.removeItem('languageSwitchTimestamp');
+				}
 			}
 		</script>
 	</body>

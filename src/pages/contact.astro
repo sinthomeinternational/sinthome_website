@@ -5,7 +5,7 @@ import ContactMethods from "../components/contact/ContactMethods";
 import { SITE_CONFIG } from "../config/site";
 ---
 
-<PageLayout title="Contact - Sinthome" useContentLayout={true}>
+<PageLayout title="Contact - Sinthome" useInfoLayout={true}>
      <div class="min-h-dvh py-12">
           <!-- Header Section -->
           <div class="text-center mb-16">
@@ -17,66 +17,40 @@ import { SITE_CONFIG } from "../config/site";
           </div>
 
           <!-- Contact Methods Component -->
-          <ContactMethods client:load />
+          <ContactMethods client:visible />
 
-          <!-- Office Information -->
+          <!-- Connect & Collaborate Section -->
           <div class="mt-20 pt-12 border-t border-zinc-800">
-               <div class="max-w-4xl mx-auto">
-                    <div class="grid md:grid-cols-2 gap-12">
-                         <!-- Office Address -->
-                         <div>
-                              <h3 class="text-xl font-semibold text-white mb-4">Our Office</h3>
-                              <div class="space-y-2">
-                                   <p class="text-zinc-400">{SITE_CONFIG.contact.address.street}</p>
-                                   <p class="text-zinc-400">
-                                        {SITE_CONFIG.contact.address.city}, {SITE_CONFIG.contact.address.state} {SITE_CONFIG.contact.address.zip}
-                                   </p>
-                                   <p class="text-zinc-400">{SITE_CONFIG.contact.address.country}</p>
-                              </div>
+               <div class="max-w-4xl mx-auto text-center">
+                    <h3 class="text-xl font-semibold text-white mb-4">Connect & Collaborate</h3>
+                    <p class="text-zinc-400 mb-8">
+                         Interested in working together? We welcome new projects,
+                         collaboration opportunities, and partnerships that align with our mission.
+                    </p>
 
-                              <!-- Office Hours -->
-                              <div class="mt-6">
-                                   <h4 class="text-sm font-semibold text-zinc-300 mb-2">Office Hours</h4>
-                                   <p class="text-zinc-500 text-sm">Monday - Friday: 9:00 AM - 6:00 PM EST</p>
-                                   <p class="text-zinc-500 text-sm">Saturday - Sunday: By appointment</p>
-                              </div>
-                         </div>
-
-                         <!-- Additional Info -->
-                         <div>
-                              <h3 class="text-xl font-semibold text-white mb-4">Connect & Collaborate</h3>
-                              <p class="text-zinc-400 mb-6">
-                                   Interested in working together? We welcome new projects,
-                                   collaboration opportunities, and partnerships that align with our mission.
-                              </p>
-
-                              <!-- Quick Links -->
-                              <div class="space-y-3">
-                                   <a
-                                        href="/what-we-do"
-                                        class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
-                                   >
-                                        <span class="mr-2">→</span>
-                                        Learn about our projects
-                                   </a>
-                                   <br/>
-                                   <a
-                                        href="/events"
-                                        class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
-                                   >
-                                        <span class="mr-2">→</span>
-                                        View upcoming events
-                                   </a>
-                                   <br/>
-                                   <a
-                                        href="/donate"
-                                        class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
-                                   >
-                                        <span class="mr-2">→</span>
-                                        Support our mission
-                                   </a>
-                              </div>
-                         </div>
+                    <!-- Quick Links -->
+                    <div class="flex flex-col sm:flex-row justify-center gap-6">
+                         <a
+                              href="/what-we-do"
+                              class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
+                         >
+                              <span class="mr-2">→</span>
+                              Learn about our projects
+                         </a>
+                         <a
+                              href="/events"
+                              class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
+                         >
+                              <span class="mr-2">→</span>
+                              View upcoming events
+                         </a>
+                         <a
+                              href="/donate"
+                              class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
+                         >
+                              <span class="mr-2">→</span>
+                              Support our mission
+                         </a>
                     </div>
                </div>
           </div>

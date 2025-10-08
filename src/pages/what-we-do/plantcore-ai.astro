@@ -1,114 +1,241 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
-import H1 from "../../components/ui/H1.astro";
 import GoogleForm from "../../components/forms/GoogleForm";
 import { FORMS } from "../../config/forms";
 import { Image } from 'astro:assets';
 
-// 导入工厂图片
+// Import Plantcore components
+import HeroSection from "../../components/plantcore/HeroSection";
+import MissionSection from "../../components/plantcore/MissionSection";
+import MethodCards from "../../components/plantcore/MethodCards";
+import DataFlowDiagram from "../../components/plantcore/DataFlowDiagram";
+import ROIMetrics from "../../components/plantcore/ROIMetrics";
+import SideNavigation from "../../components/plantcore/SideNavigation";
+import IndustrialWarpBackground from "../../components/plantcore/IndustrialWarpBackground";
+import ProjectContext from "../../components/plantcore/ProjectContext";
+
+// Import factory image
 import factoryImage from "../../assets/plantcore-ai/factory.png";
 ---
 
-<PageLayout title="Plantcore.AI - Sinthome" useContentLayout={true}>
-    <H1>Plantcore.AI</H1>
+<PageLayout title="Plantcore.AI - Sinthome">
+  <div class="relative bg-black min-h-screen">
+    <!-- Warp Background -->
+    <IndustrialWarpBackground client:load />
 
-    <div class="space-y-8">
-      <!-- Mission -->
-      <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Mission — Reshaping the Future of Industry</h2>
-        <p class="text-zinc-300 leading-relaxed mb-4">
-          Plantcore.AI is committed to building the world's first Industrial Vertical Large Language Model (LLM) to drive a fundamental transformation in manufacturing. We believe the future of industry is not limited to automated execution but lies in the intelligent and collective structuring of decision-making. Every act of production is shaped by countless judgments and choices—decisions that are the true drivers of industry. Plantcore.AI begins from this reality, aiming to construct a new industrial intelligence system grounded in real-world decision data.
-        </p>
+    <!-- Side Navigation -->
+    <SideNavigation client:load />
 
-        <!-- Factory Image -->
-        <div class="flex justify-center my-8">
-          <div class="relative overflow-hidden rounded-xl max-w-3xl w-full">
-            <Image
-              src={factoryImage}
-              alt="Factory floor showing industrial AI implementation"
-              width={1000}
-              height={600}
-              loading="lazy"
-              format="webp"
-              quality={85}
-              class="w-full h-auto object-cover"
-            />
-            <div class="absolute bottom-4 left-4 bg-zinc-900/90 backdrop-blur-sm px-3 py-1 rounded-full">
-              <span class="text-sm font-semibold text-white">凡事都有开端 - Everything Has a Beginning</span>
+    <!-- Hero Section -->
+    <HeroSection
+      client:load
+      onRequestDemo={() => {
+        const element = document.getElementById('contact');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }}
+      onJoinPilot={() => {
+        const element = document.getElementById('contact');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }}
+    />
+
+    <!-- Mission Section -->
+    <MissionSection client:load />
+
+    <!-- Method Section -->
+    <section id="method" class="relative py-20 bg-black/90 z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Three-Layer Architecture
+          </h2>
+
+          <div class="max-w-4xl mx-auto mb-12">
+            <div class="bg-zinc-900/40 border-l-4 border-red-500 pl-6 py-6 text-left rounded-r-lg">
+              <p class="text-lg text-zinc-300 leading-relaxed mb-4">
+                AI Agents generate direct value and cover decision points where ERP cannot reach.
+                These agents deliver immediate ROI (≥10% procurement savings, ~7% inventory shrinkage reduction)
+                while simultaneously creating a sustainable stream of decision assets.
+              </p>
+              <p class="text-sm text-red-400">
+                Building a three-layer architecture: AI Agents → CDO Data Platform → Industrial Vertical LLM
+              </p>
+            </div>
+          </div>
+
+          {/* Factory Image */}
+          <div class="relative my-16">
+            <div class="relative overflow-hidden max-w-6xl mx-auto border-2 border-zinc-800 rounded-2xl">
+              <Image
+                src={factoryImage}
+                alt="Factory floor showing industrial AI implementation"
+                width={1200}
+                height={700}
+                loading="lazy"
+                format="webp"
+                quality={90}
+                class="w-full h-auto object-cover opacity-80"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
+              <div class="absolute bottom-6 left-6 bg-black/80 border border-red-500/60 px-6 py-3 rounded-lg backdrop-blur-sm">
+                <span class="text-sm font-semibold text-red-400">凡事都有开端</span>
+                <div class="text-xs text-zinc-400">Everything has a beginning</div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- Method -->
-      <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Method — Starting from Decisions</h2>
-        <p class="text-zinc-300 leading-relaxed mb-4">
-          Current ERP systems record transactions and processes but fail to capture the on-the-ground choices made by workers and managers in real time. This blind spot prevents the accumulation of experiential data and blocks the path toward genuine intelligent decision-making. Plantcore.AI addresses this gap by deploying AI Agents directly on the factory floor to capture Context–Decision–Outcome (CDO) data. These agents deliver immediate ROI (≥10% procurement savings, ~7% inventory shrinkage reduction) while simultaneously creating a sustainable stream of decision assets.
-        </p>
-        <p class="text-zinc-300 leading-relaxed mb-4">
-          On this basis, Plantcore.AI builds a three-layer architecture:
-        </p>
-        <div class="space-y-4">
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">AI Agents</h3>
-            <p class="text-zinc-400">
-              Generate direct value and cover decision points where ERP cannot reach.
-            </p>
-          </div>
-          
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">CDO Data Platform</h3>
-            <p class="text-zinc-400">
-              Standardizes and systematizes decisions into a governed "decision ledger."
-            </p>
-          </div>
-          
-          <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">Industrial Vertical LLM</h3>
-            <p class="text-zinc-400">
-              Trains on authentic decision data to become the decision operating system for manufacturing.
+        {/* Method Cards */}
+        <MethodCards client:load />
+
+        {/* Summary */}
+        <div class="mt-16 text-center">
+          <div class="max-w-4xl mx-auto bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-8">
+            <p class="text-lg text-zinc-300 leading-relaxed">
+              This systematic approach creates a foundation for industrial knowledge accumulation,
+              transfer, and amplification across global manufacturing networks.
             </p>
           </div>
         </div>
-        <p class="text-zinc-300 leading-relaxed mt-6">
-          This approach not only transforms day-to-day industrial operations but also lays the foundation for the long-term accumulation, transfer, and sharing of industrial knowledge.
-        </p>
-      </section>
+      </div>
+    </section>
 
-      <!-- Vision -->
-      <section>
-        <h2 class="text-2xl font-bold text-white mb-4">Our Vision</h2>
-        <p class="text-zinc-300 leading-relaxed mb-4">
-          Our vision is to build, within the next five years, a decision-data-driven industrial intelligence network through continuous agent deployment and CDO data collection. By 2030, Plantcore.AI will reach 10,000 factories and 150,000 AI Agents, generating hundreds of millions of validated decision samples.
-        </p>
-        <p class="text-zinc-300 leading-relaxed mb-4">
-          On this foundation, we will train and deploy the world's first Industrial Vertical LLM—an engine of decision-making grounded in authentic factory data. This LLM will serve as the operating system of Industry 4.0, guiding real-time production choices, amplifying collective industrial knowledge, and reshaping how humans and machines collaborate in production.
-        </p>
-      </section>
-
-      <!-- Philosophy -->
-      <section class="mt-12 p-8 bg-zinc-900/50 border border-zinc-800 rounded-lg">
-        <h2 class="text-2xl font-bold text-white mb-4 text-center">Our Philosophy</h2>
-        <p class="text-zinc-300 leading-relaxed text-center">
-          At Plantcore.AI, we believe the true industrial revolution is not the replacement of workers by machines, but the creation of an intelligent decision network—powered by an Industrial LLM—that redefines the relationship between humans and production, opening new possibilities for the industries and societies of the future.
-        </p>
-      </section>
-
-      <!-- Contact -->
-      <section class="mt-12">
-        <h2 class="text-2xl font-bold text-white mb-4">Partner with Plantcore.AI</h2>
-        <p class="text-zinc-300 mb-6">
-          Interested in implementing AI-driven decision intelligence in your manufacturing operations? Join our pilot program and be part of the industrial revolution.
-        </p>
-        <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6">
-          <GoogleForm
-            formId={FORMS.projects.plantcoreAI.id}
-            title={FORMS.projects.plantcoreAI.title}
-            height={FORMS.projects.plantcoreAI.height}
-            client:visible
-          />
+    <!-- Data Flow Architecture -->
+    <section id="data-flow" class="relative py-20 bg-zinc-950/80 z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Three-Layer Pipeline Architecture
+          </h2>
+          <p class="text-lg text-zinc-400 max-w-4xl mx-auto leading-relaxed">
+            Systematic transformation: Raw decisions → Structured intelligence → Predictive guidance
+          </p>
         </div>
-      </section>
-    </div>
+
+        <DataFlowDiagram client:load />
+      </div>
+    </section>
+
+    <!-- ROI Metrics -->
+    <section id="roi" class="relative py-20 bg-black/90 z-10">
+      <ROIMetrics client:load />
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision" class="relative py-20 bg-zinc-950/80 z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-12">
+            Our Vision: 2030 Roadmap
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div class="bg-black border-2 border-blue-600/40 rounded-xl p-8">
+              <div class="text-5xl font-bold text-blue-400 mb-4">10,000</div>
+              <div class="text-lg font-semibold text-white mb-3">Factories Connected</div>
+              <p class="text-zinc-400 text-sm leading-relaxed">
+                Global manufacturing network with comprehensive decision intelligence coverage
+              </p>
+            </div>
+
+            <div class="bg-black border-2 border-green-600/40 rounded-xl p-8">
+              <div class="text-5xl font-bold text-green-400 mb-4">150K+</div>
+              <div class="text-lg font-semibold text-white mb-3">AI Agents (Target)</div>
+              <p class="text-zinc-400 text-sm leading-relaxed">
+                Comprehensive decision capture points across all industrial processes
+              </p>
+            </div>
+          </div>
+
+          <div class="max-w-4xl mx-auto bg-zinc-900/60 border border-zinc-800 rounded-xl p-12">
+            <p class="text-xl text-zinc-300 leading-relaxed mb-8">
+              Our vision is to build, within the next five years, a decision-data-driven industrial intelligence network
+              through continuous agent deployment and CDO data collection.
+            </p>
+            <p class="text-lg text-zinc-400 leading-relaxed mb-6">
+              By 2030, Plantcore.AI will reach 10,000 factories and 150,000 AI Agents, generating hundreds of millions of validated decision samples.
+            </p>
+            <p class="text-lg text-zinc-400 leading-relaxed">
+              On this foundation, we will train and deploy the world's first Industrial Vertical LLM—an engine of decision-making
+              grounded in authentic factory data. This LLM will serve as the operating system of Industry 4.0, guiding real-time
+              production choices, amplifying collective industrial knowledge, and reshaping how humans and machines collaborate in production.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="relative py-20 bg-black/90 z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="bg-zinc-900/60 border-2 border-red-600/30 rounded-2xl p-16">
+            <h2 class="text-3xl font-bold text-white mb-8">Core Belief</h2>
+            <div class="max-w-4xl mx-auto">
+              <p class="text-xl text-zinc-300 leading-relaxed mb-6">
+                The True Industrial Revolution
+              </p>
+              <p class="text-lg text-zinc-400 leading-relaxed">
+                At Plantcore.AI, we believe the true industrial revolution is not the replacement of workers by machines,
+                but the creation of an intelligent decision network—powered by an Industrial LLM—that redefines the
+                relationship between humans and production, opening new possibilities for the industries and societies of the future.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-20 bg-zinc-950/80 z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Get in Touch
+          </h2>
+          <p class="text-lg text-zinc-400 leading-relaxed mb-12">
+            Interested in learning more about our vision? Contact Plantcore.AI
+          </p>
+
+          {/* Action Buttons */}
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
+            <a href="#contact-form"
+               class="group bg-red-600 border-2 border-red-500 text-white px-8 py-6 font-semibold rounded-lg hover:bg-red-700 transition-all duration-300 flex items-center justify-center gap-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <div>
+                <div class="text-lg">Request Demo</div>
+                <div class="text-xs text-red-200">Schedule a demonstration</div>
+              </div>
+            </a>
+
+            <a href="#contact-form"
+               class="group bg-transparent border-2 border-zinc-400 text-zinc-300 px-8 py-6 font-semibold rounded-lg hover:border-white hover:text-white transition-all duration-300 flex items-center justify-center gap-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <div>
+                <div class="text-lg">Join Pilot</div>
+                <div class="text-xs text-zinc-400 group-hover:text-zinc-300">Pilot program</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div id="contact-form" class="bg-black/80 border-2 border-zinc-800 rounded-2xl p-8">
+          {/* Contact form placeholder */}
+          <div class="text-center py-12">
+            <p class="text-zinc-400 text-lg">Contact Form</p>
+            <p class="text-sm text-zinc-500 mt-2">Contact Plantcore.AI for demo and pilot program inquiries</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </PageLayout>
