@@ -1,5 +1,4 @@
 ---
-import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 
@@ -104,9 +103,11 @@ const formatDate = (date: Date) => {
                       <span class="px-3 py-1 text-xs font-medium bg-zinc-800 text-zinc-400 rounded-full">
                         {formatDate(event.data.date)}
                       </span>
-                      <span class="px-3 py-1 text-xs font-medium bg-zinc-800 text-zinc-400 rounded-full">
-                        {event.data.duration}
-                      </span>
+                      {event.data.duration && (
+                        <span class="px-3 py-1 text-xs font-medium bg-zinc-800 text-zinc-400 rounded-full">
+                          {event.data.duration}
+                        </span>
+                      )}
                       {event.data.featured && (
                         <span class="px-3 py-1 text-xs font-medium bg-yellow-600/20 text-yellow-400 rounded-full">
                           Featured
@@ -117,13 +118,15 @@ const formatDate = (date: Date) => {
 
                   <!-- Title (bilingual) -->
                   <h3 class="text-xl font-bold text-white mb-3 hover:text-red-300 transition-colors">
-                    {lang === 'zh' ? event.data.titleZh : event.data.title}
+                    {lang === 'zh' && event.data.titleZh ? event.data.titleZh : event.data.title}
                   </h3>
 
                   <!-- Synopsis -->
-                  <p class="text-zinc-400 mb-4 line-clamp-3 leading-relaxed">
-                    {lang === 'zh' ? event.data.synopsisZh : event.data.synopsis}
-                  </p>
+                  {(event.data.synopsis || event.data.synopsisZh) && (
+                    <p class="text-zinc-400 mb-4 line-clamp-3 leading-relaxed">
+                      {lang === 'zh' && event.data.synopsisZh ? event.data.synopsisZh : (event.data.synopsis || event.data.description || '')}
+                    </p>
+                  )}
 
                   <!-- Quote (if available) -->
                   {event.data.quote && (
@@ -138,35 +141,43 @@ const formatDate = (date: Date) => {
                   )}
 
                   <!-- Tags -->
-                  <div class="flex flex-wrap gap-2 mb-6">
-                    {event.data.tags.slice(0, 4).map(tag => (
-                      <span class="text-xs text-zinc-500 bg-zinc-800/50 px-2 py-1 rounded">
-                        #{tag}
-                      </span>
-                    ))}
-                    {event.data.tags.length > 4 && (
-                      <span class="text-xs text-zinc-600">
-                        +{event.data.tags.length - 4} more
-                      </span>
-                    )}
-                  </div>
+                  {event.data.tags && event.data.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-2 mb-6">
+                      {event.data.tags.slice(0, 4).map(tag => (
+                        <span class="text-xs text-zinc-500 bg-zinc-800/50 px-2 py-1 rounded">
+                          #{tag}
+                        </span>
+                      ))}
+                      {event.data.tags.length > 4 && (
+                        <span class="text-xs text-zinc-600">
+                          +{event.data.tags.length - 4} more
+                        </span>
+                      )}
+                    </div>
+                  )}
 
                   <!-- Location and Speaker Info -->
-                  <div class="flex flex-col gap-2 mb-4 text-sm text-zinc-500">
-                    <div class="flex items-center gap-2">
-                      <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                      </svg>
-                      <span class="truncate">{event.data.location}</span>
+                  {(event.data.location || event.data.speaker) && (
+                    <div class="flex flex-col gap-2 mb-4 text-sm text-zinc-500">
+                      {event.data.location && (
+                        <div class="flex items-center gap-2">
+                          <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                          </svg>
+                          <span class="truncate">{event.data.location}</span>
+                        </div>
+                      )}
+                      {event.data.speaker && (
+                        <div class="flex items-center gap-2">
+                          <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                          </svg>
+                          <span class="truncate">{event.data.speaker}</span>
+                        </div>
+                      )}
                     </div>
-                    <div class="flex items-center gap-2">
-                      <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                      </svg>
-                      <span class="truncate">{event.data.speaker}</span>
-                    </div>
-                  </div>
+                  )}
 
                   <!-- Actions Row -->
                   <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-zinc-700">
