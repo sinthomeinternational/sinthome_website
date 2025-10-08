@@ -38,7 +38,7 @@ export default function WarpBackground(props: WarpBackgroundProps) {
         };
     }, []);
 
-    // Theme-specific color configurations
+    // Theme-specific color configurations for info layout warp
     const themeColors = {
         dark: {
             color1: '#000000',  // Black
@@ -46,9 +46,9 @@ export default function WarpBackground(props: WarpBackgroundProps) {
             color3: '#000000',  // Black
         },
         light: {
-            color1: '#ffffff',  // White
-            color2: '#f87171',  // Light coral/pink (lighter red for light theme)
-            color3: '#fef2f2',  // Very light pink background
+            color1: '#fee2e2',  // Very light red/pink
+            color2: '#fca5a5',  // Light red/pink
+            color3: '#f87171',  // Medium red/pink
         }
     };
 
