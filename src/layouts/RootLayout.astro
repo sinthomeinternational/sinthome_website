@@ -122,22 +122,26 @@ const lightThemeConfig = getTheme('light');
 				const urlParams = new URLSearchParams(window.location.search);
 				const urlTheme = urlParams.get('theme');
 
-				// Check if user has explicitly set a theme preference in localStorage
-				const storedTheme = localStorage.getItem('theme');
+				// Determine which theme to use (priority: URL > localStorage > default to dark)
+				let theme = 'dark'; // Default to dark theme
 
-				// Determine which theme to use (priority: URL > localStorage > default)
-				let theme;
-				if (urlTheme === 'light' || urlTheme === 'dark') {
-					theme = urlTheme;
-					// Save URL theme to localStorage for future visits
-					localStorage.setItem('theme', theme);
-				} else if (storedTheme === 'light') {
+				if (urlTheme === 'light') {
 					theme = 'light';
-				} else {
-					// Default to dark for any other case (including null, undefined, or invalid values)
+					// Save URL theme to localStorage for future visits
+					localStorage.setItem('theme', 'light');
+				} else if (urlTheme === 'dark') {
 					theme = 'dark';
-					// Ensure localStorage is set to dark if it wasn't already
-					if (storedTheme !== 'dark') {
+					// Save URL theme to localStorage for future visits
+					localStorage.setItem('theme', 'dark');
+				} else {
+					// No URL theme parameter, check localStorage
+					const storedTheme = localStorage.getItem('theme');
+					if (storedTheme === 'light') {
+						theme = 'light';
+					} else {
+						// For any other case (null, undefined, 'dark', or invalid values), use dark
+						theme = 'dark';
+						// Always ensure localStorage is set to dark for consistency
 						localStorage.setItem('theme', 'dark');
 					}
 				}
