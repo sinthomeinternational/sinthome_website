@@ -228,22 +228,54 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                   <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wide">
                     Full Details
                   </h3>
-                  <div className="text-zinc-400 leading-relaxed space-y-4 whitespace-pre-wrap">
+                  <div className="leading-relaxed space-y-4">
                     {((selectedEvent as any).body as string)
                       .split('\n\n')
                       .map((paragraph, idx) => {
-                        // Check if it's a heading (starts with ##)
+                        // Check if it's a heading (starts with ## or #)
                         if (paragraph.startsWith('## ')) {
                           return (
                             <h4 key={idx} className="text-lg font-semibold text-white mt-6 mb-3">
-                              {paragraph.replace('## ', '')}
+                              {paragraph.replace('## ', '').replace(/\*\*/g, '')}
                             </h4>
                           );
                         }
-                        // Regular paragraph
+                        if (paragraph.startsWith('# ')) {
+                          return (
+                            <h4 key={idx} className="text-lg font-semibold text-white mt-6 mb-3">
+                              {paragraph.replace('# ', '').replace(/\*\*/g, '')}
+                            </h4>
+                          );
+                        }
+                        // Handle list items
+                        if (paragraph.startsWith('- ')) {
+                          const items = paragraph.split('\n').filter(item => item.trim());
+                          return (
+                            <ul key={idx} className="space-y-2 text-zinc-400">
+                              {items.map((item, itemIdx) => {
+                                const cleanItem = item.replace(/^- /, '')
+                                  .replace(/\*\*([^*]+)\*\*/g, (match, text) => text); // Remove bold markdown
+                                return (
+                                  <li key={itemIdx} className="flex items-start">
+                                    <span className="text-red-500 mr-2">•</span>
+                                    <span dangerouslySetInnerHTML={{
+                                      __html: cleanItem
+                                        .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-zinc-300 font-medium">$1</strong>')
+                                    }} />
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          );
+                        }
+                        // Regular paragraph - parse markdown bold
                         return paragraph.trim() ? (
-                          <p key={idx} className="text-zinc-300">
-                            {paragraph}
+                          <p key={idx} className="text-zinc-400">
+                            <span dangerouslySetInnerHTML={{
+                              __html: paragraph
+                                .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-zinc-300 font-medium">$1</strong>')
+                                .replace(/#([#\s])/g, '$1') // Remove single # at start
+                            }} />
                           </p>
                         ) : null;
                       })}
