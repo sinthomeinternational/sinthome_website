@@ -38,8 +38,8 @@ const projects: Project[] = pageContent.projects || [
     href: '/what-we-do/ai-hackathon/',
     category: 'Hackathon for social good',
     status: 'upcoming',
-    participants: '150+ Participants',
-    nextDate: 'March 2025'
+    nextDate: 'Expected: February 2026',
+    impact: 'Help wanted'
   },
   {
     id: 'workersAssist',
@@ -48,7 +48,7 @@ const projects: Project[] = pageContent.projects || [
     href: '/what-we-do/workers-assist',
     category: 'Workers Assist',
     status: 'active',
-    impact: '200+ Workers Supported'
+    impact: 'Free sessions every weekday evening and monthly gatherings'
   },
   {
     id: 'plantcoreAi',
@@ -57,7 +57,7 @@ const projects: Project[] = pageContent.projects || [
     href: '/what-we-do/plantcore-ai',
     category: 'Factory AI Solution',
     status: 'ongoing',
-    impact: '10+ Factories Connected'
+    impact: 'Reshaping the future of industry'
   },
   {
     id: 'srtp',
@@ -66,7 +66,7 @@ const projects: Project[] = pageContent.projects || [
     href: '/what-we-do/srtp',
     category: 'Public Lecture',
     status: 'active',
-    nextDate: 'January 2025'
+    participants: 'Weekly sessions'
   }
 ];
 ---
@@ -136,7 +136,7 @@ const projects: Project[] = pageContent.projects || [
                     )}
                     {project.nextDate && (
                       <span class="text-xs text-zinc-500">
-                        Next: {project.nextDate}
+                        {project.nextDate}
                       </span>
                     )}
                     {project.impact && (
