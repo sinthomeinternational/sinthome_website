@@ -5,8 +5,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 <RootLayout>
 	<main class="homepage-main">
-		<div id="homepage-container" class="group relative w-full h-dvh flex items-center justify-center overflow-hidden">
-			<div class="absolute w-full h-dvh -z-10 overflow-hidden">
+		<div id="homepage-container" class="group relative w-full h-screen md:h-dvh min-h-screen flex items-center justify-center overflow-hidden">
+			<div class="absolute inset-0 z-0 overflow-hidden">
 				{/* Enhanced Warp with directional movement */}
 				<WarpBackground
 					color1="#000000"
@@ -24,7 +24,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 				/>
 			</div>
 
-			<div class="absolute w-full h-dvh flex flex-col justify-center items-center z-10">
+			<div class="absolute inset-0 flex flex-col justify-center items-center z-10">
 				<!-- Animated Content Container -->
 				<div id="hero-content" class="flex flex-col justify-center items-center text-center transition-all duration-700 ease-out w-full">
 					<!-- SINTHOME - Starts Centered with responsive positioning -->
