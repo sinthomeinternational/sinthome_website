@@ -2,13 +2,17 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
 import { Image } from 'astro:assets';
+import { getThemeFromURL } from "../../lib/utils";
 
 // 导入项目图片
 import communityPhoto from "../../assets/workers-assist/合影.jpg";
 import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
+
+const pageTitle = "Workers Assist - Sinthome";
+const theme = getThemeFromURL(Astro.url);
 ---
 
-<PageLayout title="Workers Assist - Sinthome" useContentLayout={true}>
+<PageLayout title={pageTitle} useContentLayout={true} theme={theme}>
     <!-- Hero Section with Background Image -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden -mx-4 sm:-mx-6 lg:-mx-8">
       <!-- Background Image -->
@@ -29,20 +33,20 @@ import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
       
       <!-- Hero Content -->
       <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <h1 class="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight">
+        <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight" style="color: var(--theme-text-primary)">
           Workers Assist
         </h1>
-        <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color: var(--theme-text-primary)">
           <span class="text-red-500">Mutual Support Community</span> for Asian Labor Workers
         </h2>
         <p class="text-red-400 font-black text-lg md:text-xl uppercase tracking-wider mb-8">
           SOLIDARITY • EMPOWERMENT • COLLECTIVE ACTION
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#about" class="inline-flex items-center px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-colors duration-300 transform hover:scale-105">
+          <a href="#about" class="inline-flex items-center px-8 py-4 bg-red-600 font-bold rounded-lg hover:bg-red-700 transition-colors duration-300 transform hover:scale-105" style="color: white">
             Learn More
           </a>
-          <a href="#join" class="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-black transition-all duration-300">
+          <a href="#join" class="inline-flex items-center px-8 py-4 bg-transparent border-2 font-bold rounded-lg transition-all duration-300" style="border-color: var(--theme-text-primary); color: var(--theme-text-primary)" onmouseover="this.style.backgroundColor='var(--theme-text-primary)'; this.style.color='var(--theme-bg-primary)'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--theme-text-primary)'">
             Join Us
           </a>
         </div>
@@ -50,36 +54,36 @@ import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
     </section>
 
     <!-- Key Statistics Section -->
-    <section class="py-16 bg-zinc-900">
+    <section class="py-16" style="background: var(--theme-bg-secondary)">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div class="space-y-2">
             <div class="text-4xl md:text-5xl font-black text-red-500">400+</div>
-            <div class="text-white font-semibold">Active Members</div>
+            <div class="font-semibold" style="color: var(--theme-text-primary)">Active Members</div>
           </div>
           <div class="space-y-2">
             <div class="text-4xl md:text-5xl font-black text-red-500">50+</div>
-            <div class="text-white font-semibold">Volunteers</div>
+            <div class="font-semibold" style="color: var(--theme-text-primary)">Volunteers</div>
           </div>
           <div class="space-y-2">
             <div class="text-4xl md:text-5xl font-black text-red-500">3</div>
-            <div class="text-white font-semibold">Service Programs</div>
+            <div class="font-semibold" style="color: var(--theme-text-primary)">Service Programs</div>
           </div>
           <div class="space-y-2">
             <div class="text-4xl md:text-5xl font-black text-red-500">2023</div>
-            <div class="text-white font-semibold">Founded</div>
+            <div class="font-semibold" style="color: var(--theme-text-primary)">Founded</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- About Us Section -->
-    <section id="about" class="py-16 bg-black">
+    <section id="about" class="py-16" style="background: var(--theme-bg-primary);">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 class="text-4xl font-black text-white mb-6">About Us</h2>
-            <div class="space-y-4 text-lg text-zinc-300 leading-relaxed">
+            <h2 class="text-4xl font-black mb-6" style="color: var(--theme-text-primary);">About Us</h2>
+            <div class="space-y-4 text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
               <p>
                 Workers Assist is a nonprofit organization dedicated to fostering a mutual-support community for Asian labor workers in the Boston area. Since its founding in 2023, WA has grown into a vibrant community platform of more than 400 active members. Together, we provide a wide range of supportive services, including free language learning, everyday life skills training, and youth education programs.
               </p>
@@ -108,63 +112,63 @@ import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
     </section>
 
     <!-- What We Do Section -->
-    <section class="py-16 bg-zinc-900">
+    <section class="py-16" style="background: var(--theme-bg-secondary);">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-4xl font-black text-white mb-4">What We Do</h2>
-          <p class="text-lg text-zinc-400 max-w-4xl mx-auto">
+          <h2 class="text-4xl font-black mb-4" style="color: var(--theme-text-primary);">What We Do</h2>
+          <p class="text-lg max-w-4xl mx-auto" style="color: var(--theme-text-muted);">
             We provide a wide range of supportive services, including free language learning, everyday life skills training, and youth education programs.
           </p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
           <!-- Free Language Learning -->
-          <div class="bg-zinc-800 rounded-xl p-8 border border-zinc-700 hover:border-red-600/50 transition-all duration-300 group hover:transform hover:scale-105">
+          <div class="rounded-xl p-8 transition-all duration-300 group hover:transform hover:scale-105" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
             <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-300">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
               </svg>
             </div>
-            <h3 class="text-2xl font-bold text-white mb-4">Free Language Learning</h3>
-            <p class="text-zinc-400 mb-6">
+            <h3 class="text-2xl font-bold mb-4" style="color: var(--theme-text-primary);">Free Language Learning</h3>
+            <p class="mb-6" style="color: var(--theme-text-muted);">
               Community conversation corners, hospital/school scenario phrase cards, job interview practice, and translation support.
             </p>
             <p class="text-red-400 font-semibold mb-4">
               Serving 400+ workers with essential communication skills for workplace and daily life
             </p>
-            <a href="#contact" class="inline-flex items-center text-red-400 font-semibold hover:text-white transition-colors">
+            <a href="#contact" class="inline-flex items-center text-red-400 font-semibold transition-colors" style="color: var(--theme-text-primary);" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='var(--theme-text-primary)'">
               Learn More →
             </a>
           </div>
 
           <!-- Youth Education Programs -->
-          <div class="bg-zinc-800 rounded-xl p-8 border border-zinc-700 hover:border-red-600/50 transition-all duration-300 group hover:transform hover:scale-105">
+          <div class="rounded-xl p-8 transition-all duration-300 group hover:transform hover:scale-105" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
             <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-300">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
               </svg>
             </div>
-            <h3 class="text-2xl font-bold text-white mb-4">Youth Education Programs</h3>
-            <p class="text-zinc-400 mb-6">
+            <h3 class="text-2xl font-bold mb-4" style="color: var(--theme-text-primary);">Youth Education Programs</h3>
+            <p class="mb-6" style="color: var(--theme-text-muted);">
               Homework support, interest groups, city exploration; safe and fun learning environments for young people.
             </p>
-            <a href="#contact" class="inline-flex items-center text-red-400 font-semibold hover:text-white transition-colors">
+            <a href="#contact" class="inline-flex items-center font-semibold transition-colors" style="color: var(--theme-text-primary);" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='var(--theme-text-primary)'">
               Learn More →
             </a>
           </div>
 
           <!-- Everyday Life Skills Training -->
-          <div class="bg-zinc-800 rounded-xl p-8 border border-zinc-700 hover:border-red-600/50 transition-all duration-300 group hover:transform hover:scale-105">
+          <div class="rounded-xl p-8 transition-all duration-300 group hover:transform hover:scale-105" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
             <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-300">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
               </svg>
             </div>
-            <h3 class="text-2xl font-bold text-white mb-4">Everyday Life Skills Training</h3>
-            <p class="text-zinc-400 mb-6">
+            <h3 class="text-2xl font-bold mb-4" style="color: var(--theme-text-primary);">Everyday Life Skills Training</h3>
+            <p class="mb-6" style="color: var(--theme-text-muted);">
               Community shop partnerships, medical process guides, housing and commute experience sharing—real problems solved on-site.
             </p>
-            <a href="#contact" class="inline-flex items-center text-red-400 font-semibold hover:text-white transition-colors">
+            <a href="#contact" class="inline-flex items-center font-semibold transition-colors" style="color: var(--theme-text-primary);" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='var(--theme-text-primary)'">
               Learn More →
             </a>
           </div>
@@ -173,33 +177,33 @@ import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
     </section>
 
     <!-- Our Vision Section -->
-    <section class="py-16 bg-zinc-800">
+    <section class="py-16" style="background: var(--theme-bg-card);">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-3 gap-12">
           <div class="lg:col-span-2">
-            <h2 class="text-4xl font-black text-white mb-6">Our Vision</h2>
-            <p class="text-lg text-zinc-300 mb-8 leading-relaxed">
+            <h2 class="text-4xl font-black mb-6" style="color: var(--theme-text-primary);">Our Vision</h2>
+            <p class="text-lg mb-8 leading-relaxed" style="color: var(--theme-text-secondary);">
               In the near future, WA's next step is to grow into a closer-knit mutual support community. We hope to achieve this by working closely with local small vendors, restaurants, service providers, and building stronger connections through collaboration. Guided by this vision, we aim to:
             </p>
             
             <div class="space-y-6">
-              <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-700 hover:border-red-600/50 transition-colors duration-300">
-                <h3 class="text-xl font-bold text-white mb-3">Collaborate with Local Small Businesses to Create Shared Services</h3>
-                <p class="text-zinc-400">
+              <div class="rounded-xl p-6 transition-colors duration-300" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--theme-text-primary);">Collaborate with Local Small Businesses to Create Shared Services</h3>
+                <p style="color: var(--theme-text-muted);">
                   WA invites small businesses in Chinatown to include their services in the community service directory. Workers and community members can access these services while also benefiting from services offered by other participating businesses, creating a mutually supportive community ecosystem.
                 </p>
               </div>
 
-              <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-700 hover:border-red-600/50 transition-colors duration-300">
-                <h3 class="text-xl font-bold text-white mb-3">Continuously Expand Community Services</h3>
-                <p class="text-zinc-400">
+              <div class="rounded-xl p-6 transition-colors duration-300" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--theme-text-primary);">Continuously Expand Community Services</h3>
+                <p style="color: var(--theme-text-muted);">
                   As more businesses and community members join, the service directory grows to cover a wider range of daily life and work scenarios, providing comprehensive and diverse support and opportunities for all participants.
                 </p>
               </div>
 
-              <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-700 hover:border-red-600/50 transition-colors duration-300">
-                <h3 class="text-xl font-bold text-white mb-3">Build an Inclusive Mutual Support Platform</h3>
-                <p class="text-zinc-400">
+              <div class="rounded-xl p-6 transition-colors duration-300" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+                <h3 class="text-xl font-bold mb-3" style="color: var(--theme-text-primary);">Build an Inclusive Mutual Support Platform</h3>
+                <p style="color: var(--theme-text-muted);">
                   Regardless of members' circumstances—whether at home, at work, or in daily life—everyone can find services suited to their needs, facilitating resource sharing and mutual support so that every community member can benefit.
                 </p>
               </div>
@@ -207,8 +211,8 @@ import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
           </div>
           
           <div class="lg:col-span-1">
-            <div class="bg-zinc-900 rounded-xl p-8 border border-zinc-700">
-              <h3 class="text-2xl font-bold text-white mb-6">Get Involved</h3>
+            <div class="rounded-xl p-8" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
+              <h3 class="text-2xl font-bold mb-6" style="color: var(--theme-text-primary);">Get Involved</h3>
               <div class="space-y-4">
                 <div class="flex items-start gap-3">
                   <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
@@ -217,8 +221,8 @@ import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
                     </svg>
                   </div>
                   <div>
-                    <h4 class="font-semibold text-white">Volunteer</h4>
-                    <p class="text-zinc-400 text-sm">Join our team of dedicated volunteers</p>
+                    <h4 class="font-semibold" style="color: var(--theme-text-primary);">Volunteer</h4>
+                    <p class="text-sm" style="color: var(--theme-text-muted);">Join our team of dedicated volunteers</p>
                   </div>
                 </div>
 
@@ -229,8 +233,8 @@ import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
                     </svg>
                   </div>
                   <div>
-                    <h4 class="font-semibold text-white">Partnerships</h4>
-                    <p class="text-zinc-400 text-sm">Partner with local businesses</p>
+                    <h4 class="font-semibold" style="color: var(--theme-text-primary);">Partnerships</h4>
+                    <p class="text-sm" style="color: var(--theme-text-muted);">Partner with local businesses</p>
                   </div>
                 </div>
 
@@ -241,8 +245,8 @@ import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
                     </svg>
                   </div>
                   <div>
-                    <h4 class="font-semibold text-white">Collaborations</h4>
-                    <p class="text-zinc-400 text-sm">Work with peer NGOs</p>
+                    <h4 class="font-semibold" style="color: var(--theme-text-primary);">Collaborations</h4>
+                    <p class="text-sm" style="color: var(--theme-text-muted);">Work with peer NGOs</p>
                   </div>
                 </div>
               </div>
@@ -255,25 +259,25 @@ import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
     <!-- Join Us Section -->
     <section id="join" class="py-16 bg-gradient-to-r from-red-600/10 to-red-700/10">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-4xl font-black text-white mb-8">Join Us</h2>
-        <p class="text-lg text-zinc-300 mb-8">
+        <h2 class="text-4xl font-black mb-8" style="color: var(--theme-text-primary);">Join Us</h2>
+        <p class="text-lg mb-8" style="color: var(--theme-text-secondary);">
           We are currently recruiting:
         </p>
         <div class="grid md:grid-cols-3 gap-6 mb-8">
-          <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-700">
-            <h3 class="text-xl font-bold text-white mb-2">Volunteer Teachers</h3>
-            <p class="text-zinc-400">Help teach English and life skills</p>
+          <div class="rounded-xl p-6" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
+            <h3 class="text-xl font-bold mb-2" style="color: var(--theme-text-primary);">Volunteer Teachers</h3>
+            <p style="color: var(--theme-text-muted);">Help teach English and life skills</p>
           </div>
-          <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-700">
-            <h3 class="text-xl font-bold text-white mb-2">Business Development Volunteers</h3>
-            <p class="text-zinc-400">Expand our community network</p>
+          <div class="rounded-xl p-6" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
+            <h3 class="text-xl font-bold mb-2" style="color: var(--theme-text-primary);">Business Development Volunteers</h3>
+            <p style="color: var(--theme-text-muted);">Expand our community network</p>
           </div>
-          <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-700">
-            <h3 class="text-xl font-bold text-white mb-2">Community Partners</h3>
-            <p class="text-zinc-400">Local vendors, restaurants, service providers, and peer NGOs</p>
+          <div class="rounded-xl p-6" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
+            <h3 class="text-xl font-bold mb-2" style="color: var(--theme-text-primary);">Community Partners</h3>
+            <p style="color: var(--theme-text-muted);">Local vendors, restaurants, service providers, and peer NGOs</p>
           </div>
         </div>
-        <p class="text-lg text-zinc-300 mb-8">
+        <p class="text-lg mb-8" style="color: var(--theme-text-secondary);">
           Join English class and youth program participation as student, please contact:
         </p>
         <div class="flex justify-center">
@@ -291,48 +295,48 @@ import picnicPhoto from "../../assets/workers-assist/野餐.jpg";
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-16 bg-black">
+    <section class="py-16" style="background: var(--theme-bg-primary);">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-4xl font-black text-white mb-4">Frequently Asked Questions</h2>
+          <h2 class="text-4xl font-black mb-4" style="color: var(--theme-text-primary);">Frequently Asked Questions</h2>
         </div>
         <div class="space-y-4">
-          <details class="bg-zinc-900 border border-zinc-700 rounded-xl p-6 hover:border-red-600/50 transition-all duration-300 group">
-            <summary class="font-bold text-white cursor-pointer flex items-center justify-between text-lg">
+          <details class="rounded-xl p-6 transition-all duration-300 group" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+            <summary class="font-bold cursor-pointer flex items-center justify-between text-lg" style="color: var(--theme-text-primary);">
               <span>Who can join Workers Assist?</span>
               <span class="text-red-400 group-open:rotate-180 transition-transform duration-300 text-2xl">+</span>
             </summary>
-            <p class="text-zinc-300 mt-4 pt-4 border-t border-zinc-700 leading-relaxed">
+            <p class="mt-4 pt-4 leading-relaxed" style="color: var(--theme-text-secondary); border-top: 1px solid var(--theme-border);">
               WA is open to all Asian labor workers in the Boston area, and we welcome anyone interested in supporting our community through volunteer service or collaboration.
             </p>
           </details>
 
-          <details class="bg-zinc-900 border border-zinc-700 rounded-xl p-6 hover:border-red-600/50 transition-all duration-300 group">
-            <summary class="font-bold text-white cursor-pointer flex items-center justify-between text-lg">
+          <details class="rounded-xl p-6 transition-all duration-300 group" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+            <summary class="font-bold cursor-pointer flex items-center justify-between text-lg" style="color: var(--theme-text-primary);">
               <span>Are services really free?</span>
               <span class="text-red-400 group-open:rotate-180 transition-transform duration-300 text-2xl">+</span>
             </summary>
-            <p class="text-zinc-300 mt-4 pt-4 border-t border-zinc-700 leading-relaxed">
+            <p class="mt-4 pt-4 leading-relaxed" style="color: var(--theme-text-secondary); border-top: 1px solid var(--theme-border);">
               Yes! All our core services, including language learning, life skills training, and youth education programs, are completely free for community members.
             </p>
           </details>
 
-          <details class="bg-zinc-900 border border-zinc-700 rounded-xl p-6 hover:border-red-600/50 transition-all duration-300 group">
-            <summary class="font-bold text-white cursor-pointer flex items-center justify-between text-lg">
+          <details class="rounded-xl p-6 transition-all duration-300 group" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+            <summary class="font-bold cursor-pointer flex items-center justify-between text-lg" style="color: var(--theme-text-primary);">
               <span>How can businesses participate?</span>
               <span class="text-red-400 group-open:rotate-180 transition-transform duration-300 text-2xl">+</span>
             </summary>
-            <p class="text-zinc-300 mt-4 pt-4 border-t border-zinc-700 leading-relaxed">
+            <p class="mt-4 pt-4 leading-relaxed" style="color: var(--theme-text-secondary); border-top: 1px solid var(--theme-border);">
               Local businesses can join our service directory, offer special discounts to community members, or provide in-kind support for our programs.
             </p>
           </details>
 
-          <details class="bg-zinc-900 border border-zinc-700 rounded-xl p-6 hover:border-red-600/50 transition-all duration-300 group">
-            <summary class="font-bold text-white cursor-pointer flex items-center justify-between text-lg">
+          <details class="rounded-xl p-6 transition-all duration-300 group" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+            <summary class="font-bold cursor-pointer flex items-center justify-between text-lg" style="color: var(--theme-text-primary);">
               <span>What volunteer opportunities are available?</span>
               <span class="text-red-400 group-open:rotate-180 transition-transform duration-300 text-2xl">+</span>
             </summary>
-            <p class="text-zinc-300 mt-4 pt-4 border-t border-zinc-700 leading-relaxed">
+            <p class="mt-4 pt-4 leading-relaxed" style="color: var(--theme-text-secondary); border-top: 1px solid var(--theme-border);">
               We need volunteer teachers for English classes, business development volunteers to help expand our network, and general volunteers for community events and programs.
             </p>
           </details>
