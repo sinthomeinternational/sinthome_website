@@ -42,33 +42,33 @@ export default function WarpBackground(props: WarpBackgroundProps) {
     // Combine default props with passed props
     const warpProps = { ...defaultProps, ...props };
 
-    // Static fallback gradient
+    // Static fallback gradient - hidden by default
     const fallbackStyle: React.CSSProperties = {
         width: '100%',
         height: '100%',
         background: 'linear-gradient(45deg, #000000 0%, #1a0000 25%, #940000 50%, #1a0000 75%, #000000 100%)',
         backgroundSize: '400% 400%',
-        animation: 'gradientShift 8s ease-in-out infinite'
+        animation: 'gradientShift 8s ease-in-out infinite',
+        display: 'none' // Hidden by default
     };
 
     if (!mounted) {
         // Server-side rendering fallback
         return (
-            <div style={fallbackStyle} className="warp-background-fallback" />
+            <div style={{ ...fallbackStyle, display: 'block' }} />
         );
     }
 
     try {
         return (
             <>
-                {/* WebGL Warp Component */}
+                {/* WebGL Warp Component - always visible by default */}
                 <div
-                    className="warp-background"
                     style={{ width: '100%', height: '100%' }}
                 >
                     <Warp {...warpProps} />
                 </div>
-                {/* Fallback for reduced motion preference */}
+                {/* Fallback hidden - only shows if CSS forces it */}
                 <div
                     className="warp-background-fallback"
                     style={fallbackStyle}
@@ -79,7 +79,7 @@ export default function WarpBackground(props: WarpBackgroundProps) {
         console.error('WarpBackground error:', error);
         // Fallback to static gradient if Warp fails
         return (
-            <div style={fallbackStyle} className="warp-background-fallback" />
+            <div style={{ ...fallbackStyle, display: 'block' }} />
         );
     }
 }

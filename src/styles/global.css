@@ -57,6 +57,7 @@ button:disabled {
 }
 
 /* Accessibility: Motion preferences for users with vestibular disorders */
+/* TEMPORARILY FORCING WEBGL TO ALWAYS SHOW
 @media (prefers-reduced-motion: reduce) {
 	/* Disable all animations and transitions for users who prefer reduced motion */
 	*,
@@ -80,6 +81,7 @@ button:disabled {
 		background: linear-gradient(45deg, #000000 0%, #1a1a1a 50%, #000000 100%);
 	}
 }
+*/
 
 /* Default state: hide fallback when motion is allowed */
 .warp-background-fallback {
