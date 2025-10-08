@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { CollectionEntry } from 'astro:content';
+import MarkdownContent from '../ui/MarkdownContent';
 
 interface EventCardsWithModalProps {
   events: CollectionEntry<'srtpEvents'>[];
@@ -204,14 +205,16 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
               </div>
 
               {/* Synopsis */}
-              <div className="mb-8">
-                <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wide">
-                  Synopsis
-                </h3>
-                <p className="text-zinc-400 leading-relaxed">
-                  {lang === 'zh' && selectedEvent.data.synopsisZh ? selectedEvent.data.synopsisZh : (selectedEvent.data.synopsis || selectedEvent.data.description || 'No synopsis available')}
-                </p>
-              </div>
+              {(selectedEvent.data.synopsis || selectedEvent.data.synopsisZh) && (
+                <div className="mb-8">
+                  <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wide">
+                    Synopsis
+                  </h3>
+                  <p className="text-zinc-400 leading-relaxed">
+                    {lang === 'zh' && selectedEvent.data.synopsisZh ? selectedEvent.data.synopsisZh : selectedEvent.data.synopsis}
+                  </p>
+                </div>
+              )}
 
               {/* Quote */}
               {selectedEvent.data.quote && (
@@ -222,134 +225,16 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                 </div>
               )}
 
-              {/* Full Event Details */}
+              {/* Event Details */}
               {selectedEvent.data.description && (
                 <div className="mb-8">
                   <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wide">
-                    Full Details
+                    {selectedEvent.data.synopsis || selectedEvent.data.synopsisZh ? 'Full Details' : 'Details'}
                   </h3>
-                  <div className="prose prose-invert max-w-none">
-                    <div className="space-y-6 text-zinc-300 leading-relaxed">
-                      {selectedEvent.data.description
-                        .split(/\n\n+/)
-                        .filter(para => para.trim())
-                        .map((paragraph, idx) => {
-                          const trimmed = paragraph.trim();
-
-                          // Check if it's a heading (## or ###)
-                          if (trimmed.startsWith('### ')) {
-                            return (
-                              <h5 key={idx} className="text-lg font-semibold text-white mt-8 mb-4 border-l-2 border-red-600 pl-4">
-                                {trimmed.substring(4)}
-                              </h5>
-                            );
-                          }
-
-                          if (trimmed.startsWith('## ')) {
-                            return (
-                              <h4 key={idx} className="text-xl font-bold text-white mt-8 mb-4 border-l-4 border-red-600 pl-4">
-                                {trimmed.substring(3)}
-                              </h4>
-                            );
-                          }
-
-                          if (trimmed.startsWith('# ')) {
-                            return (
-                              <h4 key={idx} className="text-xl font-bold text-white mt-8 mb-4 border-l-4 border-red-600 pl-4">
-                                {trimmed.substring(2)}
-                              </h4>
-                            );
-                          }
-
-                          // Handle lists - improved to handle mixed content
-                          if (trimmed.includes('\n- ') || trimmed.startsWith('- ')) {
-                            const lines = trimmed.split('\n');
-                            const elements: React.ReactElement[] = [];
-                            let currentList: string[] = [];
-
-                            lines.forEach((line) => {
-                              if (line.startsWith('- ')) {
-                                currentList.push(line.substring(2));
-                              } else if (currentList.length > 0) {
-                                // End current list and add it
-                                elements.push(
-                                  <ul key={`list-${idx}-${elements.length}`} className="list-disc list-outside space-y-2 ml-6 mb-4">
-                                    {currentList.map((item, itemIdx) => (
-                                      <li key={itemIdx} className="text-zinc-300 leading-relaxed">
-                                        <span dangerouslySetInnerHTML={{
-                                          __html: item
-                                            .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-zinc-200 font-medium">$1</strong>')
-                                            .replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>')
-                                        }} />
-                                      </li>
-                                    ))}
-                                  </ul>
-                                );
-                                currentList = [];
-
-                                // Add non-list line as paragraph if not empty
-                                if (line.trim()) {
-                                  elements.push(
-                                    <p key={`para-${idx}-${elements.length}`} className="text-zinc-300 mb-4 leading-relaxed">
-                                      <span dangerouslySetInnerHTML={{
-                                        __html: line
-                                          .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-zinc-200 font-medium">$1</strong>')
-                                          .replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>')
-                                      }} />
-                                    </p>
-                                  );
-                                }
-                              }
-                            });
-
-                            // Handle remaining list items
-                            if (currentList.length > 0) {
-                              elements.push(
-                                <ul key={`list-${idx}-${elements.length}`} className="list-disc list-outside space-y-2 ml-6 mb-4">
-                                  {currentList.map((item, itemIdx) => (
-                                    <li key={itemIdx} className="text-zinc-300 leading-relaxed">
-                                      <span dangerouslySetInnerHTML={{
-                                        __html: item
-                                          .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-zinc-200 font-medium">$1</strong>')
-                                          .replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>')
-                                      }} />
-                                    </li>
-                                  ))}
-                                </ul>
-                              );
-                            }
-
-                            return (
-                              <div key={idx} className="mb-4">
-                                {elements}
-                              </div>
-                            );
-                          }
-
-                          // Regular paragraph - enhanced markdown parsing
-                          let cleanText = trimmed
-                            // Remove heading markers that might be inline
-                            .replace(/^#{1,6}\s+/, '')
-                            // Don't remove ** and * here, we'll handle them with HTML
-                            .trim();
-
-                          // Skip empty paragraphs
-                          if (!cleanText) return null;
-
-                          return (
-                            <p key={idx} className="text-zinc-300 mb-4 leading-relaxed text-base">
-                              <span dangerouslySetInnerHTML={{
-                                __html: cleanText
-                                  .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-zinc-200 font-medium">$1</strong>')
-                                  .replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>')
-                              }} />
-                            </p>
-                          );
-                        })
-                        .filter(Boolean) // Remove null elements
-                      }
-                    </div>
-                  </div>
+                  <MarkdownContent
+                    content={selectedEvent.data.description}
+                    className="text-zinc-300"
+                  />
                 </div>
               )}
 

@@ -1,0 +1,287 @@
+/*
+ * Enhanced Markdown Content Styles for Dark Backgrounds
+ * Optimized for readability and visual hierarchy
+ */
+
+/* Base typography improvements */
+.markdown-content p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgb(212 212 216); /* zinc-300 */
+  margin-bottom: 1.5rem;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced headings with better contrast */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  color: rgb(255 255 255); /* white */
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  scroll-margin-top: 2rem;
+}
+
+.markdown-content h1 {
+  font-size: 2.25rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  border-left: 6px solid rgb(220 38 38); /* red-600 */
+  padding-left: 1.5rem;
+}
+
+.markdown-content h2 {
+  font-size: 1.875rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid rgb(220 38 38); /* red-600 */
+  padding-left: 1rem;
+}
+
+.markdown-content h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-left: 3px solid rgb(220 38 38); /* red-600 */
+  padding-left: 0.75rem;
+}
+
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  border-left: 2px solid rgb(220 38 38); /* red-600 */
+  padding-left: 0.5rem;
+}
+
+/* Enhanced text emphasis */
+.markdown-content strong {
+  color: rgb(255 255 255); /* white */
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.markdown-content em {
+  color: rgb(228 228 231); /* zinc-200 */
+  font-style: italic;
+}
+
+/* Improved links with better accessibility */
+.markdown-content a {
+  color: rgb(248 113 113); /* red-400 */
+  text-decoration: underline;
+  text-decoration-color: rgba(248, 113, 113, 0.4);
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  transition: all 0.2s ease;
+}
+
+.markdown-content a:hover {
+  color: rgb(252 165 165); /* red-300 */
+  text-decoration-color: rgb(248 113 113);
+  text-decoration-thickness: 2px;
+}
+
+.markdown-content a:focus {
+  outline: 2px solid rgb(248 113 113);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Enhanced lists with custom bullets */
+.markdown-content ul {
+  list-style: none;
+  margin: 1.5rem 0;
+  padding-left: 0;
+}
+
+.markdown-content ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  color: rgb(212 212 216); /* zinc-300 */
+  line-height: 1.7;
+  transition: transform 0.1s ease;
+}
+
+.markdown-content ul li:hover {
+  transform: translateX(2px);
+}
+
+.markdown-content ul li::before {
+  content: '→';
+  color: rgb(220 38 38); /* red-600 */
+  font-weight: bold;
+  font-size: 1.1em;
+  flex-shrink: 0;
+  margin-top: 0.1em;
+}
+
+/* Ordered lists */
+.markdown-content ol {
+  color: rgb(212 212 216); /* zinc-300 */
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.markdown-content ol li {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+  padding-left: 0.5rem;
+}
+
+/* Enhanced blockquotes */
+.markdown-content blockquote {
+  border-left: 4px solid rgb(220 38 38); /* red-600 */
+  background: rgba(39, 39, 42, 0.3); /* zinc-800/30 */
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  position: relative;
+}
+
+.markdown-content blockquote::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom,
+    rgba(220, 38, 38, 0.2),
+    rgb(220, 38, 38),
+    rgba(220, 38, 38, 0.2)
+  );
+}
+
+.markdown-content blockquote p {
+  color: rgb(161 161 170); /* zinc-400 */
+  font-style: italic;
+  font-size: 1.125rem;
+  margin-bottom: 0;
+}
+
+/* Code styling */
+.markdown-content code {
+  background: rgb(39 39 42); /* zinc-800 */
+  color: rgb(248 113 113); /* red-400 */
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+  letter-spacing: -0.025em;
+}
+
+.markdown-content pre {
+  background: rgb(24 24 27); /* zinc-900 */
+  border: 1px solid rgb(63 63 70); /* zinc-700 */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.markdown-content pre code {
+  background: none;
+  padding: 0;
+  color: rgb(212 212 216); /* zinc-300 */
+}
+
+/* Image styling */
+.markdown-content img {
+  border-radius: 0.5rem;
+  border: 1px solid rgb(63 63 70); /* zinc-700 */
+  margin: 2rem 0;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Tables */
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  background: rgba(39, 39, 42, 0.3); /* zinc-800/30 */
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.markdown-content th,
+.markdown-content td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgb(63 63 70); /* zinc-700 */
+}
+
+.markdown-content th {
+  background: rgba(220, 38, 38, 0.1); /* red-600/10 */
+  color: rgb(255 255 255); /* white */
+  font-weight: 600;
+}
+
+.markdown-content td {
+  color: rgb(212 212 216); /* zinc-300 */
+}
+
+/* Horizontal rules */
+.markdown-content hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right,
+    transparent,
+    rgba(220, 38, 38, 0.5),
+    transparent
+  );
+  margin: 3rem 0;
+}
+
+/* Focus improvements for accessibility */
+.markdown-content *:focus {
+  outline: 2px solid rgb(248 113 113); /* red-400 */
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Print styles */
+@media print {
+  .markdown-content {
+    color: black;
+  }
+
+  .markdown-content a {
+    color: blue;
+    text-decoration: underline;
+  }
+
+  .markdown-content h1,
+  .markdown-content h2,
+  .markdown-content h3,
+  .markdown-content h4,
+  .markdown-content h5,
+  .markdown-content h6 {
+    color: black;
+    border-left-color: black;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .markdown-content ul li,
+  .markdown-content a {
+    transition: none;
+  }
+
+  .markdown-content ul li:hover {
+    transform: none;
+  }
+}
