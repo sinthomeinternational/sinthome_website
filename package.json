@@ -28,7 +28,12 @@
     "build:analyze": "astro build --verbose",
     "test": "npm run test:content",
     "test:content": "node scripts/validate-content.js",
-    "fix-shader": "./scripts/clear-vite-cache.sh"
+    "fix-shader": "./scripts/clear-vite-cache.sh",
+    "security:audit": "node scripts/security-audit.js",
+    "security:deps": "pnpm audit --audit-level moderate",
+    "security:build": "pnpm run build && pnpm run security:audit",
+    "security:headers": "curl -I https://sinthome-website.vercel.app | grep -E '(Strict-Transport|X-Frame|X-Content|Content-Security)'",
+    "deploy:secure": "pnpm run security:build && pnpm run build:vercel"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.5",
