@@ -29,7 +29,7 @@ export default function ContactCard({
       />
 
       {/* Card content */}
-      <div className="relative bg-zinc-900/50 backdrop-blur-sm rounded-2xl p-6 border border-zinc-800 group-hover:border-zinc-700 transition-all duration-300">
+      <div className="relative backdrop-blur-sm rounded-2xl p-6 transition-all duration-300" style={{ backgroundColor: 'var(--theme-bg-card)', border: '1px solid var(--theme-border)' }}>
         <div className="flex items-start gap-4">
           {/* Icon container */}
           <div
@@ -44,16 +44,16 @@ export default function ContactCard({
 
           {/* Text content */}
           <div className="flex-1">
-            <h3 className="text-white text-lg font-semibold mb-1 group-hover:text-zinc-100 transition-colors">
+            <h3 className="text-lg font-semibold mb-1 transition-colors" style={{ color: 'var(--theme-text-primary)' }}>
               {title}
             </h3>
-            <p className="text-zinc-400 text-sm group-hover:text-zinc-300 transition-colors">
+            <p className="text-sm transition-colors" style={{ color: 'var(--theme-text-secondary)' }}>
               {subtitle}
             </p>
           </div>
 
           {/* Arrow indicator */}
-          <div className="text-zinc-600 group-hover:text-zinc-400 transition-all duration-300 group-hover:translate-x-1">
+          <div className="transition-all duration-300 group-hover:translate-x-1" style={{ color: 'var(--theme-text-muted)' }}>
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
