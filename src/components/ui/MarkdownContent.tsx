@@ -105,33 +105,40 @@ export default function MarkdownContent({ content, className = '' }: MarkdownCon
         return;
       }
 
-      // Lists - collect consecutive list items from current and subsequent paragraphs
-      if (trimmed.startsWith('- ')) {
+      // Lists - handle both single paragraph lists and multi-paragraph lists
+      const allLines = trimmed.split('\n');
+      const hasListItems = allLines.some(line => line.trim().startsWith('- '));
+
+      if (hasListItems) {
         const listItems: string[] = [];
-        let currentParagraphIndex = idx;
+        let nonListContent: string[] = [];
+        let isInList = false;
 
-        // Collect all consecutive list items
-        while (currentParagraphIndex < paragraphs.length) {
-          const currentPara = paragraphs[currentParagraphIndex].trim();
-          const currentLines = currentPara.split('\n').filter(line => line.trim());
-
-          // Check if this paragraph contains list items
-          const paraListItems = currentLines.filter(line => line.trim().startsWith('- '));
-
-          if (paraListItems.length > 0) {
-            // Add items from this paragraph
-            paraListItems.forEach(line => {
-              listItems.push(line.trim().substring(2).trim());
-            });
-            currentParagraphIndex++;
-          } else {
-            break; // Stop when we hit a non-list paragraph
+        // Process lines in current paragraph
+        allLines.forEach(line => {
+          const cleanLine = line.trim();
+          if (cleanLine.startsWith('- ')) {
+            listItems.push(cleanLine.substring(2).trim());
+            isInList = true;
+          } else if (cleanLine && !isInList) {
+            // Non-list content before the list
+            nonListContent.push(cleanLine);
           }
+        });
+
+        // Render non-list content first if it exists
+        if (nonListContent.length > 0) {
+          elements.push(
+            <p key={`${idx}-text`} className="text-zinc-300 mb-6 leading-relaxed text-base">
+              {parseInlineMarkdown(nonListContent.join(' '))}
+            </p>
+          );
         }
 
+        // Render the list
         if (listItems.length > 0) {
           elements.push(
-            <ul key={idx} className="list-none space-y-3 my-6 ml-0">
+            <ul key={`${idx}-list`} className="list-none space-y-3 my-6 ml-0">
               {listItems.map((item, itemIdx) => (
                 <li key={itemIdx} className="flex items-start gap-3 text-zinc-300 leading-relaxed">
                   <span className="text-red-500 font-bold mt-1 flex-shrink-0">→</span>
@@ -140,13 +147,9 @@ export default function MarkdownContent({ content, className = '' }: MarkdownCon
               ))}
             </ul>
           );
-
-          // Skip the paragraphs we've already processed
-          for (let skipIdx = idx + 1; skipIdx < currentParagraphIndex; skipIdx++) {
-            paragraphs[skipIdx] = ''; // Mark as processed
-          }
-          return;
         }
+
+        return;
       }
 
       // Regular paragraphs
