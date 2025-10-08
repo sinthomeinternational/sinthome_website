@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useId, useLayoutEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface TooltipProps {
   children: React.ReactNode;
@@ -16,6 +17,8 @@ export default function Tooltip({
   position = 'top'
 }: TooltipProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(null);
   const [tooltipStyle, setTooltipStyle] = useState<React.CSSProperties>({
     position: 'fixed',
     opacity: 0,
@@ -32,6 +35,18 @@ export default function Tooltip({
   const triggerRef = useRef<HTMLSpanElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
   const tooltipId = useId();
+
+  // Set up portal container after component mounts
+  useEffect(() => {
+    console.log(`[${tooltipId}] Setting up portal container`);
+    setPortalContainer(document.body);
+    setIsMounted(true);
+
+    return () => {
+      console.log(`[${tooltipId}] Cleaning up portal container`);
+      setIsMounted(false);
+    };
+  }, [tooltipId]);
 
   const calculatePosition = useCallback(() => {
     console.log(`[${tooltipId}] === calculatePosition START ===`);
@@ -118,12 +133,12 @@ export default function Tooltip({
     const position = calculatePosition();
     if (position && isVisible) {
       console.log(`[${tooltipId}] Setting tooltip style with position:`, position);
-      const newStyle = {
+      const newStyle: React.CSSProperties = {
         left: `${position.x}px`,
         top: `${position.y}px`,
         opacity: 1,
-        visibility: 'visible',
-        position: 'fixed',
+        visibility: 'visible' as const,
+        position: 'fixed' as const,
         transition: 'opacity 200ms',
         color: 'var(--theme-text-primary, #f4f4f5)',
         backgroundColor: 'var(--theme-bg-card, #18181b)',
@@ -155,12 +170,12 @@ export default function Tooltip({
     }
     setIsVisible(false);
     setTooltipStyle(prev => {
-      const newStyle = {
+      const newStyle: React.CSSProperties = {
         ...prev,
         left: '-9999px',
         top: '-9999px',
         opacity: 0,
-        visibility: 'hidden'
+        visibility: 'hidden' as const
       };
       console.log(`[${tooltipId}] Hiding tooltip with style:`, newStyle);
       return newStyle;
@@ -206,6 +221,58 @@ export default function Tooltip({
     };
   }, []);
 
+  // Create tooltip element
+  const tooltipElement = isMounted && portalContainer && (
+    <div
+      ref={tooltipRef}
+      id={tooltipId}
+      role="tooltip"
+      className="z-[9999] px-3 py-2 text-sm rounded-lg shadow-2xl backdrop-blur-sm max-w-xs sm:max-w-sm pointer-events-none"
+      style={tooltipStyle}
+    >
+      {content}
+
+      {/* Arrow indicator */}
+      <div
+        className="absolute w-2 h-2 transform rotate-45"
+        style={{
+          backgroundColor: 'var(--theme-bg-card, #18181b)',
+          borderColor: 'var(--theme-border, #52525b)',
+          borderWidth: '1px',
+          borderStyle: 'solid',
+          ...(position === 'top' && {
+            bottom: '-5px',
+            left: '50%',
+            transform: 'translateX(-50%) rotate(45deg)',
+            borderTop: 'none',
+            borderLeft: 'none'
+          }),
+          ...(position === 'bottom' && {
+            top: '-5px',
+            left: '50%',
+            transform: 'translateX(-50%) rotate(45deg)',
+            borderBottom: 'none',
+            borderRight: 'none'
+          }),
+          ...(position === 'left' && {
+            right: '-5px',
+            top: '50%',
+            transform: 'translateY(-50%) rotate(45deg)',
+            borderTop: 'none',
+            borderLeft: 'none'
+          }),
+          ...(position === 'right' && {
+            left: '-5px',
+            top: '50%',
+            transform: 'translateY(-50%) rotate(45deg)',
+            borderBottom: 'none',
+            borderRight: 'none'
+          }),
+        }}
+      />
+    </div>
+  );
+
   return (
     <>
       <span
@@ -222,55 +289,8 @@ export default function Tooltip({
         {children}
       </span>
 
-      {/* Always render tooltip but control visibility with styles */}
-      <div
-        ref={tooltipRef}
-        id={tooltipId}
-        role="tooltip"
-        className="z-[9999] px-3 py-2 text-sm rounded-lg shadow-2xl backdrop-blur-sm max-w-xs sm:max-w-sm pointer-events-none"
-        style={tooltipStyle}
-      >
-        {content}
-
-        {/* Arrow indicator */}
-        <div
-          className="absolute w-2 h-2 transform rotate-45"
-          style={{
-            backgroundColor: 'var(--theme-bg-card, #18181b)',
-            borderColor: 'var(--theme-border, #52525b)',
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            ...(position === 'top' && {
-              bottom: '-5px',
-              left: '50%',
-              transform: 'translateX(-50%) rotate(45deg)',
-              borderTop: 'none',
-              borderLeft: 'none'
-            }),
-            ...(position === 'bottom' && {
-              top: '-5px',
-              left: '50%',
-              transform: 'translateX(-50%) rotate(45deg)',
-              borderBottom: 'none',
-              borderRight: 'none'
-            }),
-            ...(position === 'left' && {
-              right: '-5px',
-              top: '50%',
-              transform: 'translateY(-50%) rotate(45deg)',
-              borderTop: 'none',
-              borderLeft: 'none'
-            }),
-            ...(position === 'right' && {
-              left: '-5px',
-              top: '50%',
-              transform: 'translateY(-50%) rotate(45deg)',
-              borderBottom: 'none',
-              borderRight: 'none'
-            }),
-          }}
-        />
-      </div>
+      {/* Render tooltip via portal to document.body */}
+      {portalContainer && tooltipElement && createPortal(tooltipElement, portalContainer)}
     </>
   );
 }
