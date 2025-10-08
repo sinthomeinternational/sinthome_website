@@ -1,22 +1,12 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
-import EventCardsWithModal from "../../components/srtp/EventCardsWithModal";
+import EventTimeline from "../../components/srtp/EventTimeline.astro";
 import { getCollection, render } from 'astro:content';
 import { getLanguageFromURL } from "../../lib/translations";
 
 // Get all SRTP events from content collection
 const srtpEvents = await getCollection('srtpEvents');
-
-// Sort events by date (most recent first) and include body content
-const sortedEvents = srtpEvents
-  .map(event => ({
-    ...event,
-    body: event.body || '' // Include the markdown body content
-  }))
-  .sort((a, b) => {
-    return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
-  });
 
 // Get current language
 const lang = getLanguageFromURL(Astro.url);
@@ -154,11 +144,11 @@ const lang = getLanguageFromURL(Astro.url);
       <section>
         <h2 class="text-3xl font-bold text-white mb-10 text-center">Past Events</h2>
         <p class="text-zinc-400 text-center mb-8">
-          Click on any event card to view more details. Our archive includes lectures, seminars, and workshops on revolutionary theory and practice.
+          Explore our archive of past lectures, seminars, and workshops on revolutionary theory and practice.
         </p>
 
-        <!-- Event Cards with Modal -->
-        <EventCardsWithModal events={sortedEvents} lang={lang} client:load />
+        <!-- Event Timeline -->
+        <EventTimeline events={srtpEvents} lang={lang} />
       </section>
 
       <!-- Call to Action -->
