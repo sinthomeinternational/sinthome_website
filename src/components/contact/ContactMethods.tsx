@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ContactCard from './ContactCard';
 import QRCodeModal from './QRCodeModal';
 
+// Helper function to get public assets with correct base path
+function getPublicAsset(path: string): string {
+  return `${import.meta.env.BASE_URL}${path.startsWith('/') ? path.slice(1) : path}`;
+}
+
 // QR code URLs
 const QR_CODES = {
-  wechat: '/qr-codes/wechat-qr.svg',
-  rednote: '/qr-codes/rednote-qr.svg',
-  bilibili: '/qr-codes/bilibili-qr.svg'
+  wechat: getPublicAsset('/qr-codes/wechat-qr-latest.png'),
+  rednote: getPublicAsset('/qr-codes/rednote-qr-latest.png'),
+  bilibili: getPublicAsset('/qr-codes/bilibili-qr-latest.png')
 };
 
 export default function ContactMethods() {
@@ -80,7 +85,7 @@ export default function ContactMethods() {
 
       {/* Contact Cards Grid */}
       <div className="grid gap-4 sm:grid-cols-2">
-        {contactMethods.map((method, index) => (
+        {contactMethods.map((method) => (
           <ContactCard
             key={method.id}
             title={method.title}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface QRCodeModalProps {
@@ -31,6 +31,7 @@ const platformInfo = {
 
 export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QRCodeModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const previousOverflowRef = useRef<string>('');
   const info = platformInfo[platform];
 
   // Handle click outside
@@ -43,13 +44,15 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QR
 
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
-      // Prevent body scroll when modal is open
+      // Store the previous overflow value and prevent body scroll when modal is open
+      previousOverflowRef.current = document.body.style.overflow || '';
       document.body.style.overflow = 'hidden';
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'unset';
+      // Restore the previous overflow value
+      document.body.style.overflow = previousOverflowRef.current;
     };
   }, [isOpen, onClose]);
 
@@ -128,11 +131,11 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QR
                     className="absolute inset-0 rounded-xl opacity-50 blur-xl transition-all duration-500 group-hover:opacity-70"
                     style={{ background: `radial-gradient(circle, ${info.color}, transparent)` }}
                   />
-                  <div className="relative bg-white p-4 rounded-xl">
+                  <div className="relative bg-white p-4 rounded-xl flex items-center justify-center">
                     <img
                       src={qrCodeUrl}
                       alt={`${info.title} QR Code`}
-                      className="w-48 h-48 sm:w-56 sm:h-56"
+                      className="w-48 h-48 sm:w-56 sm:h-56 object-contain"
                     />
                   </div>
                 </div>

@@ -1,7 +1,5 @@
 ---
 import "../styles/global.css";
-import { ClientRouter } from 'astro:transitions';
-import LoadingIndicator from "astro-loading-indicator/component";
 
 // 导入资源管理模块
 import { assets } from "../lib/assets";
@@ -41,12 +39,79 @@ const defaultDescription = "A public-interest community reconstructing new relat
 		<meta name="twitter:description" content={defaultDescription} />
 		<meta name="twitter:image" content={assets.socialImage} />
 
-		<ClientRouter />
-		<LoadingIndicator color="#f4f4f5" height="2px" />
+		<!-- Removing ClientRouter to maintain static site benefits and avoid SPA behavior -->
+		<!-- <ClientRouter /> -->
+		<!-- <LoadingIndicator color="#f4f4f5" height="2px" /> -->
 
+		<!-- Inline script to prevent theme flash -->
+		<script is:inline>
+			(function() {
+				// Remove any existing theme classes first
+				document.documentElement.classList.remove('theme-light', 'theme-dark');
+
+				// Check URL parameters first
+				const urlParams = new URLSearchParams(window.location.search);
+				const urlTheme = urlParams.get('theme');
+
+				// Check if user has explicitly set a theme preference in localStorage
+				const storedTheme = localStorage.getItem('theme');
+
+				// Determine which theme to use (priority: URL > localStorage > default)
+				let theme;
+				if (urlTheme === 'light' || urlTheme === 'dark') {
+					theme = urlTheme;
+					// Save URL theme to localStorage for future visits
+					localStorage.setItem('theme', theme);
+				} else if (storedTheme === 'light') {
+					theme = 'light';
+				} else {
+					// Default to dark for any other case (including null, undefined, or invalid values)
+					theme = 'dark';
+					// Ensure localStorage is set to dark if it wasn't already
+					if (storedTheme !== 'dark') {
+						localStorage.setItem('theme', 'dark');
+					}
+				}
+
+				// Apply theme classes to html element
+				document.documentElement.classList.add(`theme-${theme}`);
+
+				// Apply data attribute for CSS targeting
+				document.documentElement.setAttribute('data-theme', theme);
+			})();
+		</script>
 	</head>
-	<body class="font-sans min-h-screen bg-black">
+	<body class="font-sans min-h-screen">
 		<slot />
+
+		<!-- Script to restore scroll position after language switch -->
+		<script>
+			// Restore scroll position if this was a language switch
+			const scrollPosition = sessionStorage.getItem('scrollPosition');
+			const switchTimestamp = sessionStorage.getItem('languageSwitchTimestamp');
+
+			// Only restore if switch happened within last 3 seconds (prevents stale restores)
+			if (scrollPosition && switchTimestamp) {
+				const timeSinceSwitch = Date.now() - parseInt(switchTimestamp);
+				if (timeSinceSwitch < 3000) {
+					// Wait for page to fully load before restoring
+					window.addEventListener('load', () => {
+						requestAnimationFrame(() => {
+							window.scrollTo({
+								top: parseInt(scrollPosition),
+								behavior: 'instant'
+							});
+							sessionStorage.removeItem('scrollPosition');
+							sessionStorage.removeItem('languageSwitchTimestamp');
+						});
+					});
+				} else {
+					// Clean up stale data
+					sessionStorage.removeItem('scrollPosition');
+					sessionStorage.removeItem('languageSwitchTimestamp');
+				}
+			}
+		</script>
 	</body>
 </html>
 

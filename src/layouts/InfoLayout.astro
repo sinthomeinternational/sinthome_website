@@ -19,13 +19,13 @@ const { title, description } = Astro.props;
 					swirl={1.5}
 					swirlIterations={10}
 					shapeScale={0.3}
-					client:load
+					client:idle
 				/>
 			</div>
 		</nav>
 
 		<main class="relative bg-black flex-1">
-			<TopNavigation variant="static" client:load />
+			<TopNavigation variant="static" client:idle />
 			<div class="[&_h1]:text-red-600 pt-8 pb-20 text-white">
 				<slot />
 			</div>

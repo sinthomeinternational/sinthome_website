@@ -20,7 +20,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 						scale={0.4}
 						softness={0}
 						distortion={0}
-						client:load
+						client:visible
 				/>
 			</div>
 
@@ -105,6 +105,15 @@ import WarpBackground from "../components/ui/WarpBackground";
 </RootLayout>
 
 <script>
+	import { initializePreserveParams } from '../lib/preserveUrlParams';
+
+	// Initialize URL parameter preservation for all links
+	if (typeof window !== 'undefined') {
+		document.addEventListener('DOMContentLoaded', () => {
+			initializePreserveParams();
+		});
+	}
+
 	// Professional smooth animation logic - scoped to homepage container only
 	function initializeHomepageAnimations(): (() => void) | null {
 		const container = document.getElementById('homepage-container');
@@ -267,7 +276,11 @@ import WarpBackground from "../components/ui/WarpBackground";
 		};
 
 		const keydownHandler = (e: KeyboardEvent) => {
-			if (e.key === 'ArrowDown' || e.key === ' ') {
+			// Only handle if container has focus
+			if (document.activeElement !== container) return;
+
+			// Don't hijack spacebar - it breaks default scrolling
+			if (e.key === 'ArrowDown') {
 				e.preventDefault();
 				e.stopPropagation();
 				triggerAnimation();
@@ -325,23 +338,53 @@ import WarpBackground from "../components/ui/WarpBackground";
 		cleanupHomepageAnimations = initializeHomepageAnimations();
 	});
 
-	// Re-initialize after Astro navigation
-	document.addEventListener('astro:after-swap', () => {
-		// Clean up previous instance if it exists
-		if (cleanupHomepageAnimations) {
+	// Handle browser back/forward navigation (bfcache restoration)
+	window.addEventListener('pageshow', (event) => {
+		// Only reinitialize if page was restored from bfcache
+		if (event.persisted) {
+			console.log('[Homepage] Restoring from bfcache');
+
+			// Clean up stale instance first
+			if (cleanupHomepageAnimations) {
+				cleanupHomepageAnimations();
+				cleanupHomepageAnimations = null;
+			}
+
+			// Reinitialize animations
+			cleanupHomepageAnimations = initializeHomepageAnimations();
+		}
+	});
+
+	// Clean up before page goes into bfcache (optional optimization)
+	window.addEventListener('pagehide', (event) => {
+		// Only cleanup if page is being cached (not fully unloaded)
+		if (event.persisted && cleanupHomepageAnimations) {
+			console.log('[Homepage] Preparing for bfcache');
 			cleanupHomepageAnimations();
 			cleanupHomepageAnimations = null;
 		}
-
-		// Initialize new instance if we're on the homepage
-		cleanupHomepageAnimations = initializeHomepageAnimations();
 	});
 
-	// Clean up before navigation
-	document.addEventListener('astro:before-swap', () => {
-		if (cleanupHomepageAnimations) {
-			cleanupHomepageAnimations();
-			cleanupHomepageAnimations = null;
+	// Handle tab visibility changes
+	document.addEventListener('visibilitychange', () => {
+		const container = document.getElementById('homepage-container');
+
+		// Only act if we're on the homepage
+		if (!container) return;
+
+		if (document.hidden) {
+			// Tab hidden - cleanup to save resources
+			if (cleanupHomepageAnimations) {
+				console.log('[Homepage] Tab hidden - cleaning up animations');
+				cleanupHomepageAnimations();
+				cleanupHomepageAnimations = null;
+			}
+		} else {
+			// Tab visible - reinitialize if needed
+			if (!cleanupHomepageAnimations) {
+				console.log('[Homepage] Tab visible - reinitializing animations');
+				cleanupHomepageAnimations = initializeHomepageAnimations();
+			}
 		}
 	});
 </script>
@@ -355,6 +398,16 @@ import WarpBackground from "../components/ui/WarpBackground";
 		--animation-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Professional ease-out curve */
 		--animation-easing-entrance: cubic-bezier(0.16, 1, 0.3, 1); /* Smooth entrance */
 		--animation-easing-micro: cubic-bezier(0.4, 0, 0.2, 1); /* Subtle micro-animations */
+	}
+
+	/* Keyboard focus indicator for accessibility */
+	#homepage-container {
+		outline: none;
+	}
+
+	#homepage-container:focus-visible {
+		outline: 2px solid rgba(220, 38, 38, 0.5);
+		outline-offset: -4px;
 	}
 
 	/* SINTHOME title styling - League Spartan Bold */

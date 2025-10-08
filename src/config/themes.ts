@@ -180,15 +180,28 @@ export function generateThemeCSSVariables(theme: ThemeConfig): string {
 /**
  * Apply theme to document
  */
-export function applyTheme(themeId: ThemeId): void {
+export function applyTheme(themeId: ThemeId, enableTransition: boolean = true): void {
   const theme = getTheme(themeId);
   const root = document.documentElement;
+  const body = document.body;
 
-  // Remove existing theme classes
+  // Add transition class for smooth switching (but not on initial load)
+  if (enableTransition && !root.classList.contains('theme-transition')) {
+    root.classList.add('theme-transition');
+    // Remove transition class after animation completes
+    setTimeout(() => {
+      root.classList.remove('theme-transition');
+    }, 350);
+  }
+
+  // Remove existing theme classes from both html and body
   root.classList.remove('theme-dark', 'theme-light');
 
-  // Add new theme class
+  // Add new theme class to root
   root.classList.add(`theme-${themeId}`);
+
+  // Update data attribute
+  root.setAttribute('data-theme', themeId);
 
   // Apply CSS variables
   const cssVariables = generateThemeCSSVariables(theme);
@@ -241,5 +254,6 @@ export function detectPreferredTheme(): ThemeId {
  */
 export function initializeTheme(): void {
   const themeId = detectPreferredTheme();
-  applyTheme(themeId);
+  // Don't enable transitions on initial load to prevent flash
+  applyTheme(themeId, false);
 }

@@ -2,71 +2,188 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
 import ProjectCard from "../../components/shared/ProjectCard.astro";
+import { getTranslations, getLanguageFromURL } from "../../lib/translations";
 
-// Handle base path for GitHub Pages compatibility
+// Get current language from URL (SSR-compatible)
+const lang = getLanguageFromURL(Astro.url);
+const t = getTranslations(lang);
+const pageContent: any = t.pages?.whatWeDo || {}; // Using any type to handle missing fields
+
+// Handle base path for GitHub Pages compatibility with language
 const getFullPath = (path: string) => {
-  return path.startsWith('/') ? `${import.meta.env.BASE_URL}${path.slice(1)}` : path;
+  const basePath = path.startsWith('/') ? `${import.meta.env.BASE_URL}${path.slice(1)}` : path;
+  // Preserve language parameter in URLs
+  return lang === 'zh' ? `${basePath}${basePath.includes('?') ? '&' : '?'}lang=zh` : basePath;
 };
+
+// Define enhanced project type with status and metrics
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  category: string;
+  status: 'active' | 'ongoing' | 'upcoming';
+  participants?: string;
+  nextDate?: string;
+  impact?: string;
+}
+
+// Get enhanced projects data with status and metrics
+const projects: Project[] = pageContent.projects || [
+  {
+    id: 'aiHackathon',
+    title: 'AI for Better Boston',
+    description: 'Rooted in our own experience of running a community-based NGO (Workers Assist), Sinthome Hackathon brings real-world challenges to AI practitioners and university students, creating a space for mutual learning and development of practical solutions for social good.',
+    href: '/what-we-do/ai-hackathon/',
+    category: 'Hackathon for social good',
+    status: 'upcoming',
+    nextDate: 'Expected: February 2026',
+    impact: 'Help wanted'
+  },
+  {
+    id: 'workersAssist',
+    title: 'Workers Assist',
+    description: 'A nonprofit organization dedicated to fostering a mutual-support community for Asian labor workers in the Boston area.',
+    href: '/what-we-do/workers-assist',
+    category: 'Workers Assist',
+    status: 'active',
+    impact: 'Free sessions every weekday evening and monthly gatherings'
+  },
+  {
+    id: 'plantcoreAi',
+    title: 'Plantcore AI',
+    description: 'Building the first Industrial Vertical Large Language Model (LLM) by deploying AI Agents that capture real-time Context-Decision-Outcome (CDO) data from factory floors.',
+    href: '/what-we-do/plantcore-ai',
+    category: 'Factory AI Solution',
+    status: 'ongoing',
+    impact: 'Reshaping the future of industry'
+  },
+  {
+    id: 'srtp',
+    title: 'S.R.T.P. Public Lecture',
+    description: 'In our weekly lectures and community activities, every member is encouraged to take part in the collective study of leftist and critical theories.',
+    href: '/what-we-do/srtp',
+    category: 'Public Lecture',
+    status: 'active',
+    participants: 'Every Saturday in person and online'
+  }
+];
 ---
 
 <PageLayout title="What We Do - Sinthome" useInfoLayout={true}>
-    <H1>What We Do</H1>
+    <H1>{pageContent.title || 'What We Do'}</H1>
 
-    <div class="space-y-8 max-w-6xl">
+    <div class="space-y-12">
       <!-- Introduction -->
       <section class="max-w-4xl">
         <p class="text-lg text-zinc-300 leading-relaxed">
-          We are committed to leveraging technology and innovation to create positive social impact.
-          Through our various programs and initiatives, we work to address critical challenges in our community.
+          {pageContent.subtitle || 'We are committed to leveraging technology and innovation to create positive social impact. Through our various programs and initiatives, we work to address critical challenges in our community.'}
         </p>
       </section>
 
-      <!-- Projects Grid -->
+      <!-- Enhanced Projects Grid -->
       <section>
-        <h2 class="text-2xl font-bold text-white mb-6">Our Programs</h2>
+        <h2 class="text-3xl font-bold text-white mb-8">{pageContent.projectsTitle || 'Our Programs'}</h2>
+
         <div class="grid md:grid-cols-2 gap-6">
-          <ProjectCard
-            title="Sinthome Hackathon"
-            description="Rooted in our experience running Workers Assist, we bring real-world challenges to AI practitioners and students, creating a space for mutual learning and developing practical solutions for social good."
-            href="/what-we-do/ai-hackathon/"
-            category="AI for Public Good"
-          />
+          {projects.map((project) => (
+            <a
+              href={getFullPath(project.href)}
+              class="group relative overflow-hidden bg-zinc-900/50 border border-zinc-800 rounded-xl hover:border-zinc-700 transition-all duration-300"
+            >
+              {/* Background gradient effect */}
+              <div class={`absolute inset-0 bg-gradient-to-br opacity-5 group-hover:opacity-10 transition-opacity ${
+                project.status === 'active' ? 'from-green-500 to-blue-500' :
+                project.status === 'ongoing' ? 'from-blue-500 to-purple-500' :
+                'from-yellow-500 to-orange-500'
+              }`}></div>
 
-          <ProjectCard
-            title="Workers Assist"
-            description="A nonprofit organization dedicated to fostering a mutual-support community for Asian labor workers in the Boston area."
-            href="/what-we-do/workers-assist"
-            category="Workers Assist"
-          />
+              <div class="relative p-6">
+                {/* Header with status */}
+                <div class="flex items-start justify-between mb-4">
+                  <div>
+                    <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors mb-2">
+                      {project.title}
+                    </h3>
+                    <span class="text-xs text-zinc-500 uppercase tracking-wide">
+                      {project.category}
+                    </span>
+                  </div>
 
-          <ProjectCard
-            title="Plantcore AI"
-            description="Building the first Industrial Vertical Large Language Model by deploying AI Agents that capture real-time Context-Decision-Outcome data from factory floors."
-            href="/what-we-do/plantcore-ai"
-            category="Factory AI Solution"
-          />
+                  {/* Status badge */}
+                  <span class={`px-2 py-1 text-xs font-medium rounded-md ${
+                    project.status === 'active' ? 'bg-green-900/30 text-green-400 border border-green-800/50' :
+                    project.status === 'ongoing' ? 'bg-blue-900/30 text-blue-400 border border-blue-800/50' :
+                    'bg-yellow-900/30 text-yellow-400 border border-yellow-800/50'
+                  }`}>
+                    {project.status.toUpperCase()}
+                  </span>
+                </div>
 
-          <ProjectCard
-            title="S.R.T.P."
-            description="Interrogating praxis, until it unveils the future."
-            href="/what-we-do/srtp"
-            category="Public Lecture"
-          />
+                {/* Description */}
+                <p class="text-sm text-zinc-400 mb-4 line-clamp-3">
+                  {project.description}
+                </p>
+
+                {/* Metrics */}
+                {(project.participants || project.nextDate || project.impact) && (
+                  <div class="flex flex-wrap gap-3 pt-4 border-t border-zinc-800/50">
+                    {project.participants && (
+                      <span class="text-xs text-zinc-500">
+                        {project.participants}
+                      </span>
+                    )}
+                    {project.nextDate && (
+                      <span class="text-xs text-zinc-500">
+                        {project.nextDate}
+                      </span>
+                    )}
+                    {project.impact && (
+                      <span class="text-xs text-zinc-500">
+                        {project.impact}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {/* Hover arrow */}
+                <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          ))}
         </div>
       </section>
 
-      <!-- Call to Action -->
-      <section class="text-center">
-        <h2 class="text-2xl font-bold text-white mb-4">Get Involved</h2>
-        <p class="text-zinc-300 mb-6">
-          Join us in making a difference. Whether you're a volunteer, partner, or supporter, there's a place for you.
-        </p>
-        <a
-          href={getFullPath("/contact")}
-          class="inline-block px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-        >
-          Learn How to Help
-        </a>
+      <!-- Enhanced Call to Action -->
+      <section class="text-center py-12">
+        <div class="max-w-2xl mx-auto">
+          <h2 class="text-3xl font-bold text-white mb-4">{pageContent.callToAction?.title || 'Get Involved'}</h2>
+          <p class="text-lg text-zinc-300 mb-8">
+            {pageContent.callToAction?.description || "Join us in making a difference. Whether you're a volunteer, partner, or supporter, there's a place for you."}
+          </p>
+          <div class="flex gap-4 justify-center">
+            <a
+              href={getFullPath("/contact")}
+              class="inline-flex items-center gap-2 px-8 py-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-all duration-300 hover:scale-105"
+            >
+              {pageContent.callToAction?.buttons?.learnMore || 'Learn How to Help'}
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            <a
+              href={getFullPath("/donate")}
+              class="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-zinc-600 text-zinc-300 font-semibold rounded-lg hover:border-zinc-500 hover:bg-zinc-800/30 transition-all duration-300"
+            >
+              Support Our Work
+            </a>
+          </div>
+        </div>
       </section>
     </div>
 </PageLayout>

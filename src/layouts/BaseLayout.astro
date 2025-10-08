@@ -56,7 +56,7 @@ const shouldShowSidebar = variant === 'info' || showSidebar;
       {/* Fixed Navigation for default variant */}
       {variant === 'default' && showNavigation && (
         <>
-          <TopNavigation client:load />
+          <TopNavigation client:idle />
           <div class="h-16"></div> <!-- Spacer for fixed nav -->
         </>
       )}
@@ -75,7 +75,7 @@ const shouldShowSidebar = variant === 'info' || showSidebar;
                 swirl={1.5}
                 swirlIterations={10}
                 shapeScale={0.3}
-                client:load
+                client:idle
               />
             </div>
           </nav>
@@ -83,7 +83,7 @@ const shouldShowSidebar = variant === 'info' || showSidebar;
           {/* Main Content */}
           <main class={`relative flex-1 ${config.mainBg}`}>
             {showNavigation && variant === 'info' && (
-              <TopNavigation variant="static" client:load />
+              <TopNavigation variant="static" client:idle />
             )}
             <div class={config.contentClasses}>
               <slot />

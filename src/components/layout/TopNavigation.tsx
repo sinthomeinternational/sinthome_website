@@ -1,36 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import clsx from "clsx/lite";
+import ThemeLanguageSwitcher from "../ui/ThemeLanguageSwitcher";
+import { getCurrentLanguageClient, useTranslations } from "../../lib/translations";
 
 interface NavItem {
   label: string;
   href?: string;
   children?: NavItem[];
 }
-
-const navItems: NavItem[] = [
-  { label: "Who We Are", href: "/who-we-are" },
-  {
-    label: "What We Do",
-    href: "/what-we-do",
-    children: [
-      { label: "AI Hackathon", href: "/what-we-do/ai-hackathon/" },
-      { label: "Workers Assist", href: "/what-we-do/workers-assist" },
-      { label: "Plantcore AI", href: "/what-we-do/plantcore-ai" },
-      { label: "S.R.T.P.", href: "/what-we-do/srtp" },
-    ],
-  },
-  {
-    label: "Events",
-    href: "/events",
-    children: [
-      { label: "Upcoming Events", href: "/events#upcoming" },
-      { label: "Past Events", href: "/events#past" },
-    ],
-  },
-  { label: "Contact", href: "/contact" },
-  { label: "Donate", href: "/donate" },
-];
 
 interface TopNavigationProps {
   variant?: 'fixed' | 'static';
@@ -151,15 +129,47 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Handle base path for GitHub Pages and theme routing
+  // Get current language from URL
+  const [currentLang, setCurrentLang] = useState('en');
+  const [navItems, setNavItems] = useState<NavItem[]>([]);
+
+  // Get translations
+  const translations = useTranslations();
+
+  useEffect(() => {
+    const lang = getCurrentLanguageClient();
+    setCurrentLang(lang);
+
+    // Filter out "Home" from navigation items and map dropdown correctly
+    if (translations?.navigation?.items) {
+      const filteredItems = translations.navigation.items
+        .filter(item => item.label !== 'Home' && item.label !== '首页')
+        .map(item => ({
+          label: item.label,
+          href: item.href,
+          children: item.dropdown as NavItem[] | undefined
+        }));
+      setNavItems(filteredItems);
+    }
+  }, [translations]);
+
+  // Handle base path for GitHub Pages, theme routing, and language parameter
   const getFullPath = (path: string) => {
     const basePath = import.meta.env.BASE_URL || "";
     const themePath = theme === 'redwhite' ? 'redwhite/' : '';
 
+    let fullPath: string;
     if (path.startsWith("/")) {
-      return `${basePath}${themePath}${path.slice(1)}`;
+      fullPath = `${basePath}${themePath}${path.slice(1)}`;
+    } else {
+      fullPath = path;
     }
-    return path;
+
+    // Preserve language parameter in all navigation links
+    if (currentLang === 'zh') {
+      return `${fullPath}${fullPath.includes('?') ? '&' : '?'}lang=zh`;
+    }
+    return fullPath;
   };
 
   const handleMouseEnter = (label: string) => {
@@ -252,6 +262,7 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
                   handleMouseEnter={handleMouseEnter}
                   handleMouseLeave={handleMouseLeave}
                 />
+                <ThemeLanguageSwitcher />
               </div>
             </>
           ) : (
@@ -270,10 +281,13 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
                 />
               </div>
 
-              <Logo
-                href={getFullPath("/")}
-                className={linkClasses}
-              />
+              <div className="flex items-center gap-6">
+                <Logo
+                  href={getFullPath("/")}
+                  className={linkClasses}
+                />
+                <ThemeLanguageSwitcher />
+              </div>
             </>
           )}
 
