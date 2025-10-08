@@ -75,10 +75,10 @@ export default function ContactMethods() {
     <div className="w-full max-w-4xl mx-auto">
       {/* Section Header */}
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-white mb-4">
+        <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--theme-text-primary)' }}>
           Connect With Us
         </h2>
-        <p className="text-zinc-400 text-lg">
+        <p className="text-lg" style={{ color: 'var(--theme-text-muted)' }}>
           Choose your preferred platform to get in touch
         </p>
       </div>
@@ -121,10 +121,10 @@ export default function ContactMethods() {
 
       {/* Additional Information */}
       <div className="mt-16 text-center">
-        <p className="text-zinc-500 text-sm">
+        <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>
           Response time: Usually within 24-48 hours
         </p>
-        <p className="text-zinc-600 text-xs mt-2">
+        <p className="text-xs mt-2" style={{ color: 'var(--theme-text-secondary)' }}>
           For urgent matters, please contact us via WeChat
         </p>
       </div>
