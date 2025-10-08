@@ -229,17 +229,25 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
                     Full Details
                   </h3>
                   <div className="prose prose-invert max-w-none">
-                    <div className="space-y-4 text-zinc-400 leading-relaxed">
+                    <div className="space-y-6 text-zinc-300 leading-relaxed">
                       {((selectedEvent as any).body as string)
                         .split(/\n\n+/)
                         .filter(para => para.trim())
                         .map((paragraph, idx) => {
                           const trimmed = paragraph.trim();
 
-                          // Check if it's a heading
+                          // Check if it's a heading (## or ###)
+                          if (trimmed.startsWith('### ')) {
+                            return (
+                              <h5 key={idx} className="text-lg font-semibold text-white mt-8 mb-4 border-l-2 border-red-600 pl-4">
+                                {trimmed.substring(4)}
+                              </h5>
+                            );
+                          }
+
                           if (trimmed.startsWith('## ')) {
                             return (
-                              <h4 key={idx} className="text-lg font-semibold text-white mt-6 mb-3">
+                              <h4 key={idx} className="text-xl font-bold text-white mt-8 mb-4 border-l-4 border-red-600 pl-4">
                                 {trimmed.substring(3)}
                               </h4>
                             );
@@ -247,38 +255,99 @@ export default function EventCardsWithModal({ events, lang }: EventCardsWithModa
 
                           if (trimmed.startsWith('# ')) {
                             return (
-                              <h4 key={idx} className="text-lg font-semibold text-white mt-6 mb-3">
+                              <h4 key={idx} className="text-xl font-bold text-white mt-8 mb-4 border-l-4 border-red-600 pl-4">
                                 {trimmed.substring(2)}
                               </h4>
                             );
                           }
 
-                          // Handle lists
-                          if (trimmed.startsWith('- ')) {
-                            const listItems = trimmed.split('\n').filter(item => item.startsWith('- '));
+                          // Handle lists - improved to handle mixed content
+                          if (trimmed.includes('\n- ') || trimmed.startsWith('- ')) {
+                            const lines = trimmed.split('\n');
+                            const elements: JSX.Element[] = [];
+                            let currentList: string[] = [];
+
+                            lines.forEach((line, lineIdx) => {
+                              if (line.startsWith('- ')) {
+                                currentList.push(line.substring(2));
+                              } else if (currentList.length > 0) {
+                                // End current list and add it
+                                elements.push(
+                                  <ul key={`list-${idx}-${elements.length}`} className="list-disc list-outside space-y-2 ml-6 mb-4">
+                                    {currentList.map((item, itemIdx) => (
+                                      <li key={itemIdx} className="text-zinc-300 leading-relaxed">
+                                        <span dangerouslySetInnerHTML={{
+                                          __html: item
+                                            .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+                                            .replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>')
+                                        }} />
+                                      </li>
+                                    ))}
+                                  </ul>
+                                );
+                                currentList = [];
+
+                                // Add non-list line as paragraph if not empty
+                                if (line.trim()) {
+                                  elements.push(
+                                    <p key={`para-${idx}-${elements.length}`} className="text-zinc-300 mb-4 leading-relaxed">
+                                      <span dangerouslySetInnerHTML={{
+                                        __html: line
+                                          .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+                                          .replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>')
+                                      }} />
+                                    </p>
+                                  );
+                                }
+                              }
+                            });
+
+                            // Handle remaining list items
+                            if (currentList.length > 0) {
+                              elements.push(
+                                <ul key={`list-${idx}-${elements.length}`} className="list-disc list-outside space-y-2 ml-6 mb-4">
+                                  {currentList.map((item, itemIdx) => (
+                                    <li key={itemIdx} className="text-zinc-300 leading-relaxed">
+                                      <span dangerouslySetInnerHTML={{
+                                        __html: item
+                                          .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+                                          .replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>')
+                                      }} />
+                                    </li>
+                                  ))}
+                                </ul>
+                              );
+                            }
+
                             return (
-                              <ul key={idx} className="list-disc list-inside space-y-1 ml-4">
-                                {listItems.map((item, itemIdx) => (
-                                  <li key={itemIdx} className="text-zinc-400">
-                                    {item.substring(2).replace(/\*\*([^*]+)\*\*/g, '$1')}
-                                  </li>
-                                ))}
-                              </ul>
+                              <div key={idx} className="mb-4">
+                                {elements}
+                              </div>
                             );
                           }
 
-                          // Regular paragraph - remove markdown syntax but keep text
-                          const cleanText = trimmed
-                            .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold markers
-                            .replace(/##\s+/g, '') // Remove heading markers
-                            .replace(/^#\s+/, ''); // Remove single # at start
+                          // Regular paragraph - enhanced markdown parsing
+                          let cleanText = trimmed
+                            // Remove heading markers that might be inline
+                            .replace(/^#{1,6}\s+/, '')
+                            // Don't remove ** and * here, we'll handle them with HTML
+                            .trim();
+
+                          // Skip empty paragraphs
+                          if (!cleanText) return null;
 
                           return (
-                            <p key={idx} className="text-zinc-400 mb-3">
-                              {cleanText}
+                            <p key={idx} className="text-zinc-300 mb-4 leading-relaxed text-base">
+                              <span dangerouslySetInnerHTML={{
+                                __html: cleanText
+                                  .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+                                  .replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>')
+                              }} />
                             </p>
                           );
-                        })}
+                        })
+                        .filter(Boolean) // Remove null elements
+                      }
                     </div>
                   </div>
                 </div>
