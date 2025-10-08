@@ -102,6 +102,7 @@ button:disabled {
 }
 
 /* Ensure WebGL background takes priority when motion is allowed */
+/* ALSO TEMPORARILY DISABLED
 @media (prefers-reduced-motion: no-preference) {
 	.warp-background {
 		display: block !important;
@@ -110,6 +111,7 @@ button:disabled {
 		display: none !important;
 	}
 }
+*/
 
 /* Accessibility: Focus indicators with high contrast */
 :focus {
