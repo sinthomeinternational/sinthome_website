@@ -29,3 +29,13 @@ pnpm-debug.log*
 
 # Playground/experimental files
 playground/
+
+# Test artifacts
+test-results/
+playwright-report/
+coverage/
+
+# Temporary files
+*.tmp
+*~
+.#*

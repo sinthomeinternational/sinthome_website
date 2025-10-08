@@ -26,7 +26,7 @@ const logoStyle = {
 
 // Logo component
 const Logo = ({ href, className }: { href: string; className: string }) => (
-  <a href={href} className={className} style={logoStyle} aria-label="SINTHOME homepage">
+  <a href={href} className={className} style={logoStyle} aria-label="SINTHOME homepage - Go to main page">
     SINTHOME
   </a>
 );
@@ -52,77 +52,109 @@ const NavItems = ({
   openDropdown,
   handleMouseEnter,
   handleMouseLeave
-}: NavItemsProps) => (
-  <>
-    {items.map((item) => (
-      <div
-        key={item.label}
-        className="relative"
-        onMouseEnter={() => item.children && handleMouseEnter(item.label)}
-        onMouseLeave={handleMouseLeave}
-      >
-        <a
-          href={getFullPath(item.href || "#")}
-          className={clsx(
-            linkClasses,
-            "py-4 text-sm font-medium",
-            item.children && "flex items-center gap-1"
-          )}
-        >
-          {item.label}
-          {item.children && (
-            <svg
-              className={clsx(
-                "w-4 h-4 transition-transform",
-                openDropdown === item.label && "rotate-180"
-              )}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          )}
-        </a>
+}: NavItemsProps) => {
+  const handleKeyDown = (event: React.KeyboardEvent, itemLabel: string, hasChildren: boolean) => {
+    if (hasChildren) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        handleMouseEnter(itemLabel);
+      } else if (event.key === 'Escape') {
+        handleMouseLeave();
+      }
+    }
+  };
 
-        {/* Dropdown Menu */}
-        <AnimatePresence>
-          {item.children && openDropdown === item.label && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.15 }}
-              className="absolute top-full left-0 w-48 z-50"
+  return (
+    <>
+      {items.map((item) => (
+        <div
+          key={item.label}
+          className="relative"
+          onMouseEnter={() => item.children && handleMouseEnter(item.label)}
+          onMouseLeave={handleMouseLeave}
+        >
+          {item.children ? (
+            // Dropdown trigger button for accessibility
+            <button
+              className={clsx(
+                linkClasses,
+                "py-4 text-sm font-medium flex items-center gap-1"
+              )}
+              aria-expanded={openDropdown === item.label}
+              aria-haspopup="true"
+              aria-label={`${item.label} menu`}
+              onKeyDown={(e) => handleKeyDown(e, item.label, true)}
+              onClick={() => handleMouseEnter(item.label)}
             >
-              {/* Invisible bridge to prevent gap */}
-              <div className="h-2 bg-transparent" />
-              <div className={clsx(
-                "rounded-lg shadow-xl border overflow-hidden",
-                dropdownBgClasses
-              )}>
-                {item.children.map((child) => (
-                  <a
-                    key={child.label}
-                    href={getFullPath(child.href || "#")}
-                    className={dropdownLinkClasses}
-                  >
-                    {child.label}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
+              {item.label}
+              <svg
+                className={clsx(
+                  "w-4 h-4 transition-transform",
+                  openDropdown === item.label && "rotate-180"
+                )}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+          ) : (
+            // Regular navigation link
+            <a
+              href={getFullPath(item.href || "#")}
+              className={clsx(linkClasses, "py-4 text-sm font-medium")}
+              aria-label={`Go to ${item.label} page`}
+            >
+              {item.label}
+            </a>
           )}
-        </AnimatePresence>
-      </div>
-    ))}
-  </>
-);
+
+          {/* Dropdown Menu */}
+          <AnimatePresence>
+            {item.children && openDropdown === item.label && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.15 }}
+                className="absolute top-full left-0 w-48 z-50"
+                role="menu"
+                aria-label={`${item.label} submenu`}
+              >
+                {/* Invisible bridge to prevent gap */}
+                <div className="h-2 bg-transparent" />
+                <div className={clsx(
+                  "rounded-lg shadow-xl border overflow-hidden",
+                  dropdownBgClasses
+                )}>
+                  {item.children.map((child, index) => (
+                    <a
+                      key={child.label}
+                      href={getFullPath(child.href || "#")}
+                      className={dropdownLinkClasses}
+                      role="menuitem"
+                      aria-label={`Go to ${child.label} page`}
+                      tabIndex={index === 0 ? 0 : -1}
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      ))}
+    </>
+  );
+};
 
 export default function TopNavigation({ variant = 'fixed', theme = 'default' }: TopNavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -298,12 +330,15 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
               "lg:hidden p-2 rounded-lg transition-colors",
               buttonClasses
             )}
+            aria-expanded={mobileMenuOpen}
+            aria-label="Toggle mobile menu"
           >
             <svg
               className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               {mobileMenuOpen ? (
                 <path
@@ -348,6 +383,7 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
                       mobileLinkClasses
                     )}
                     onClick={() => setMobileMenuOpen(false)}
+                    aria-label={`Go to ${item.label} page`}
                   >
                     {item.label}
                   </a>
@@ -362,6 +398,7 @@ export default function TopNavigation({ variant = 'fixed', theme = 'default' }: 
                             mobileSubLinkClasses
                           )}
                           onClick={() => setMobileMenuOpen(false)}
+                          aria-label={`Go to ${child.label} page`}
                         >
                           {child.label}
                         </a>

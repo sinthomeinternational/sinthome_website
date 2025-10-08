@@ -1,6 +1,29 @@
 import { Warp, type WarpProps } from '@paper-design/shaders-react';
+import { useEffect, useState } from 'react';
 
-export default function WarpBackground(props: WarpProps) {
+interface AccessibleWarpBackgroundProps extends WarpProps {
+  fallbackClassName?: string;
+}
+
+export default function WarpBackground({ fallbackClassName = '', ...props }: AccessibleWarpBackgroundProps) {
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+
+        // Check for reduced motion preference
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        setPrefersReducedMotion(mediaQuery.matches);
+
+        // Listen for changes in motion preference
+        const handleChange = (e: MediaQueryListEvent) => {
+            setPrefersReducedMotion(e.matches);
+        };
+
+        mediaQuery.addEventListener('change', handleChange);
+        return () => mediaQuery.removeEventListener('change', handleChange);
+    }, []);
 
     // Same colors as homepage for consistency
     const defaultProps = {
@@ -18,6 +41,25 @@ export default function WarpBackground(props: WarpProps) {
         style: { width: '100%', height: '100%' }
     };
 
-    return <Warp {...defaultProps} {...props} style={{ ...defaultProps.style, ...props.style }} />;
+    // Accessibility: Show static fallback if user prefers reduced motion
+    if (!isClient || prefersReducedMotion) {
+        return (
+            <div
+                className={`warp-background-fallback ${fallbackClassName}`}
+                style={defaultProps.style}
+                role="img"
+                aria-label="Static background pattern"
+            />
+        );
+    }
 
+    return (
+        <div className="warp-background" role="img" aria-label="Animated background pattern">
+            <Warp
+                {...defaultProps}
+                {...props}
+                style={{ ...defaultProps.style, ...props.style }}
+            />
+        </div>
+    );
 }
