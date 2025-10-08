@@ -222,7 +222,7 @@ const formatDate = (date: Date) => {
           Topics Covered
         </h3>
         <div class="flex flex-wrap gap-3">
-          {event.data.tags.map((tag) => (
+          {event.data.tags && event.data.tags.map((tag) => (
             <span class="px-4 py-2 bg-gradient-to-r from-red-900/30 to-zinc-900/50 border border-red-600/30 text-red-300 rounded-lg text-sm font-medium hover:from-red-900/40 hover:to-zinc-900/60 transition-all duration-200">
               #{tag}
             </span>
