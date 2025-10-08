@@ -356,6 +356,79 @@ import ShaderErrorBoundary from "../components/ui/ShaderErrorBoundary";
 			cleanupHomepageAnimations = null;
 		}
 	});
+
+	// Debug script for layout inspection
+	if (new URLSearchParams(window.location.search).get('debug') === '1') {
+		console.log('🔍 [PageDebug] Debug mode enabled for homepage');
+
+		document.addEventListener('DOMContentLoaded', () => {
+			setTimeout(() => {
+				const container = document.getElementById('homepage-container');
+				const bgWrapper = container?.querySelector('div.absolute.inset-0.z-0');
+				const contentWrapper = container?.querySelector('div.absolute.inset-0.z-10');
+
+				if (container) {
+					const containerRect = container.getBoundingClientRect();
+					const containerStyle = getComputedStyle(container);
+					console.log('🔍 [PageDebug] Container rect:', containerRect);
+					console.log('🔍 [PageDebug] Container classes:', container.className);
+					console.log('🔍 [PageDebug] Container computed height:', containerStyle.height);
+				}
+
+				if (bgWrapper) {
+					const bgRect = bgWrapper.getBoundingClientRect();
+					const bgStyle = getComputedStyle(bgWrapper);
+					console.log('🔍 [PageDebug] Background wrapper rect:', bgRect);
+					console.log('🔍 [PageDebug] Background z-index:', bgStyle.zIndex);
+					console.log('🔍 [PageDebug] Background classes:', bgWrapper.className);
+
+					// Add visual debug outline
+					(bgWrapper as HTMLElement).style.outline = '3px dashed cyan';
+					(bgWrapper as HTMLElement).style.outlineOffset = '3px';
+
+					// Check for canvas elements
+					const canvases = bgWrapper.querySelectorAll('canvas');
+					console.log('🔍 [PageDebug] Canvas elements found:', canvases.length);
+					canvases.forEach((canvas, i) => {
+						const canvasRect = canvas.getBoundingClientRect();
+						console.log(`🔍 [PageDebug] Canvas ${i} rect:`, canvasRect);
+						console.log(`🔍 [PageDebug] Canvas ${i} computed style:`, getComputedStyle(canvas));
+					});
+				}
+
+				if (contentWrapper) {
+					const contentRect = contentWrapper.getBoundingClientRect();
+					const contentStyle = getComputedStyle(contentWrapper);
+					console.log('🔍 [PageDebug] Content wrapper rect:', contentRect);
+					console.log('🔍 [PageDebug] Content z-index:', contentStyle.zIndex);
+
+					// Add visual debug outline
+					(contentWrapper as HTMLElement).style.outline = '3px dashed yellow';
+					(contentWrapper as HTMLElement).style.outlineOffset = '-3px';
+				}
+
+				// Check viewport and dvh support
+				const viewportHeight = window.innerHeight;
+				const supportsDvh = CSS.supports('height', '100dvh');
+				console.log('🔍 [PageDebug] Viewport height:', viewportHeight);
+				console.log('🔍 [PageDebug] DVH support:', supportsDvh);
+
+				// Monitor motion preferences
+				const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				console.log('🔍 [PageDebug] Prefers reduced motion:', prefersReducedMotion);
+
+				// Add resize observer for container
+				if (container) {
+					const resizeObserver = new ResizeObserver((entries) => {
+						entries.forEach((entry) => {
+							console.log('🔍 [PageDebug] Container resized:', entry.contentRect);
+						});
+					});
+					resizeObserver.observe(container);
+				}
+			}, 100);
+		});
+	}
 </script>
 
 <style>
