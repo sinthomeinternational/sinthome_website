@@ -105,11 +105,29 @@ export default function MarkdownContent({ content, className = '' }: MarkdownCon
         return;
       }
 
-      // Lists
-      if (trimmed.includes('- ') || trimmed.startsWith('- ')) {
-        const listItems = trimmed.split('\n')
-          .filter(line => line.trim().startsWith('- '))
-          .map(line => line.trim().substring(2).trim());
+      // Lists - collect consecutive list items from current and subsequent paragraphs
+      if (trimmed.startsWith('- ')) {
+        const listItems: string[] = [];
+        let currentParagraphIndex = idx;
+
+        // Collect all consecutive list items
+        while (currentParagraphIndex < paragraphs.length) {
+          const currentPara = paragraphs[currentParagraphIndex].trim();
+          const currentLines = currentPara.split('\n').filter(line => line.trim());
+
+          // Check if this paragraph contains list items
+          const paraListItems = currentLines.filter(line => line.trim().startsWith('- '));
+
+          if (paraListItems.length > 0) {
+            // Add items from this paragraph
+            paraListItems.forEach(line => {
+              listItems.push(line.trim().substring(2).trim());
+            });
+            currentParagraphIndex++;
+          } else {
+            break; // Stop when we hit a non-list paragraph
+          }
+        }
 
         if (listItems.length > 0) {
           elements.push(
@@ -122,6 +140,11 @@ export default function MarkdownContent({ content, className = '' }: MarkdownCon
               ))}
             </ul>
           );
+
+          // Skip the paragraphs we've already processed
+          for (let skipIdx = idx + 1; skipIdx < currentParagraphIndex; skipIdx++) {
+            paragraphs[skipIdx] = ''; // Mark as processed
+          }
           return;
         }
       }
