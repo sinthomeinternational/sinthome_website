@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useId } from 'react';
 
 interface TooltipProps {
   children: React.ReactNode;
@@ -21,6 +21,7 @@ export default function Tooltip({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const triggerRef = useRef<HTMLSpanElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const tooltipId = useId();
 
   const updateTooltipPosition = useCallback(() => {
     if (!triggerRef.current || !mounted) return;
@@ -136,7 +137,7 @@ export default function Tooltip({
         onBlur={hideTooltip}
         tabIndex={0}
         role="button"
-        aria-describedby={isVisible ? 'tooltip' : undefined}
+        aria-describedby={isVisible ? tooltipId : undefined}
       >
         {children}
       </span>
@@ -145,7 +146,7 @@ export default function Tooltip({
       {isVisible && (
         <div
           ref={tooltipRef}
-          id="tooltip"
+          id={tooltipId}
           role="tooltip"
           className="fixed z-50 px-3 py-2 text-sm rounded-lg shadow-2xl backdrop-blur-sm transition-opacity duration-200 max-w-xs sm:max-w-sm pointer-events-none"
           style={{
