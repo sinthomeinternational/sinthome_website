@@ -88,6 +88,13 @@ button:disabled {
 	display: none;
 }
 
+/* Force canvas to fill container properly */
+canvas {
+	width: 100% !important;
+	height: 100% !important;
+	min-height: 100vh !important;
+}
+
 /* Gradient animation for fallback background */
 @keyframes gradientShift {
 	0% {
