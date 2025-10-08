@@ -1,319 +1,165 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
-import H1 from "../../components/ui/H1.astro";
-import { Image } from 'astro:assets';
+import EventCardsWithModal from "../../components/srtp/EventCardsWithModal";
 import { getCollection } from 'astro:content';
-import { getThemeFromURL } from "../../lib/utils";
+import { getLanguageFromURL } from "../../lib/translations";
 
-// Get SRTP events from content collection
+// Get all SRTP events from content collection
 const srtpEvents = await getCollection('srtpEvents');
-const sortedEvents = srtpEvents.sort((a, b) => a.data.order - b.data.order);
 
-const pageTitle = "S.R.T.P. - Sinthome";
-const theme = getThemeFromURL(Astro.url);
+// Sort events by date (newest first) and take only the first 6 for sample
+const sortedEvents = srtpEvents
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 6);
+
+// Get current language
+const lang = getLanguageFromURL(Astro.url);
 ---
 
-<PageLayout title={pageTitle} useContentLayout={true} theme={theme}>
+<PageLayout title="Public Lectures - Sinthome" useContentLayout={true}>
     <!-- Enhanced Title Structure -->
     <div class="text-center mb-12">
-      <h1 class="text-6xl font-bold mb-4 tracking-wider" style="color: var(--theme-text-primary);">S.R.T.P.</h1>
-      <h2 class="text-2xl text-red-400 font-medium tracking-wide">Sinthome Revolutionary Theoretical Practice</h2>
+      <h1 class="text-6xl font-bold text-white mb-4 tracking-wider">Public Lectures</h1>
+      <h2 class="text-2xl text-red-400 font-medium tracking-wide">S.R.T.P. · Sinthome Revolutionary Theoretical Practice</h2>
       <div class="w-32 h-1 bg-gradient-to-r from-red-600 to-red-800 mx-auto mt-6"></div>
     </div>
 
     <div class="space-y-16">
       <!-- Activities Section -->
       <section>
-        <h2 class="text-3xl font-bold mb-10 text-center" style="color: var(--theme-text-primary);">Activities</h2>
+        <h2 class="text-2xl font-bold text-white mb-6 text-center">Activities</h2>
 
         <!-- Enhanced Activities Card -->
         <div class="relative group">
           <!-- Background glow effect -->
-          <div class="absolute -inset-1 bg-gradient-to-r from-red-900/20 via-red-800/10 to-red-900/20 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
+          <div class="absolute -inset-1 bg-gradient-to-r from-red-900/20 via-red-800/10 to-red-900/20 rounded-xl blur opacity-50 group-hover:opacity-100 transition duration-500"></div>
 
-          <!-- Main card -->
-          <div class="relative rounded-xl p-8 backdrop-blur-sm" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-            <!-- Card header with icon -->
-            <div class="flex items-center mb-6">
-              <div class="w-3 h-3 bg-red-500 rounded-full mr-4"></div>
-              <h3 class="text-2xl font-semibold text-red-400">Lectures & Seminars in Boston</h3>
-            </div>
+          <!-- Main card with gradient background -->
+          <div class="relative bg-gradient-to-br from-zinc-900/95 to-zinc-800/85 border border-zinc-700/50 rounded-xl p-6 backdrop-blur-md group-hover:shadow-2xl group-hover:shadow-red-900/20 transition-all duration-300">
 
-            <!-- Schedule highlight -->
-            <div class="rounded-lg p-4 mb-8" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
-              <div class="flex items-center">
-                <span class="text-red-400 font-bold text-lg mr-3">📅</span>
-                <span class="font-semibold text-xl" style="color: var(--theme-text-primary);">Every Saturday</span>
-              </div>
-              <p class="text-sm mt-1 ml-8" style="color: var(--theme-text-muted);">In-person gatherings for collective theoretical engagement</p>
-            </div>
-
-            <!-- Activities list -->
-            <div class="space-y-6 mb-8">
-              <p class="text-lg leading-8" style="color: var(--theme-text-secondary);">
-                We come together for a series of in-person seminars featuring:
-              </p>
-
-              <div class="grid gap-4">
-                <div class="flex items-start group/item">
-                  <div class="w-2 h-2 bg-red-500 rounded-full mr-4 mt-3 group-hover/item:bg-red-400 transition-colors"></div>
-                  <div>
-                    <h4 class="font-medium mb-1" style="color: var(--theme-text-primary);">Philosophical Lectures</h4>
-                    <p style="color: var(--theme-text-muted);">Deep dives into philosophy, political economy, and related disciplines</p>
-                  </div>
+            <!-- Compact header with icon and badge -->
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+              <div class="flex items-center mb-2 sm:mb-0">
+                <!-- Academic icon -->
+                <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center mr-3 shadow-lg shadow-red-900/50">
+                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+                  </svg>
                 </div>
-
-                <div class="flex items-start group/item">
-                  <div class="w-2 h-2 bg-red-500 rounded-full mr-4 mt-3 group-hover/item:bg-red-400 transition-colors"></div>
-                  <div>
-                    <h4 class="font-medium mb-1" style="color: var(--theme-text-primary);">Textual Analysis</h4>
-                    <p style="color: var(--theme-text-muted);">Close readings of foundational theoretical texts</p>
-                  </div>
-                </div>
-
-                <div class="flex items-start group/item">
-                  <div class="w-2 h-2 bg-red-500 rounded-full mr-4 mt-3 group-hover/item:bg-red-400 transition-colors"></div>
-                  <div>
-                    <h4 class="font-medium mb-1" style="color: var(--theme-text-primary);">Praxis Reflection</h4>
-                    <p style="color: var(--theme-text-muted);">Collective discussion on issues emerging from our practices</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Mission statement -->
-            <div class="border-l-4 border-red-600/50 pl-6 py-4 rounded-r-lg" style="background: linear-gradient(to right, var(--theme-bg-secondary), transparent);">
-              <p class="text-lg leading-8" style="color: var(--theme-text-secondary);">
-                These gatherings aim to equip community members with a solid grounding in leftist theory, help build theoretical consensus, and cultivate new critical insights. Through this process, we seek to maintain a <span class="text-red-300 font-medium">dynamic and reciprocal relationship between theory and practice</span>.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Past Events Section -->
-      <section>
-        <h2 class="text-3xl font-bold mb-10 text-center" style="color: var(--theme-text-primary);">Past Events</h2>
-
-        <div class="space-y-8">
-          {sortedEvents.map((event) => (
-            <article class="group rounded-xl overflow-hidden transition-all duration-300" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
-              <!-- Event Header with Key Metadata -->
-              <div class="p-6" style="background: var(--theme-bg-secondary); border-bottom: 1px solid var(--theme-border);">
-                <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
-                  <div class="flex-1 min-w-0">
-                    <h3 class="text-2xl font-bold mb-2 group-hover:text-red-400 transition-colors" style="color: var(--theme-text-primary);">
-                      {event.data.title}
-                    </h3>
-                    <p class="line-clamp-2" style="color: var(--theme-text-muted);">{event.data.description}</p>
-                  </div>
-
-                  {/* Key Metadata Tags */}
-                  <div class="flex flex-col gap-2 items-end">
-                    <span class="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 border border-red-600/30 rounded-full text-red-400 text-sm font-semibold">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                      </svg>
-                      {event.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                    </span>
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm capitalize" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border); color: var(--theme-text-secondary);">
-                      {event.data.type}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Quick Actions */}
-                <div class="flex flex-wrap gap-3">
-                  {event.data.recordingUrl && (
-                    <a
-                      href={event.data.recordingUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-lg transition-colors"
-                    >
-                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z"/>
-                      </svg>
-                      Watch Recording
-                    </a>
-                  )}
-                  <button
-                    class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg transition-colors"
-                    style="background: var(--theme-bg-card); color: var(--theme-text-secondary);"
-                    onmouseover="this.style.backgroundColor='var(--theme-bg-secondary)'"
-                    onmouseout="this.style.backgroundColor='var(--theme-bg-card)'"
-                    onclick="this.closest('article').querySelector('.event-details').classList.toggle('hidden')"
-                  >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                <div>
+                  <h3 class="text-lg font-bold text-white leading-tight">Lectures & Seminars</h3>
+                  <div class="flex items-center">
+                    <svg class="w-3 h-3 text-zinc-500 mr-1.5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                     </svg>
-                    View Details
-                  </button>
-                </div>
-              </div>
-
-              <!-- Event Details (Collapsible) -->
-              <div class="event-details hidden">
-                <div class="p-6 space-y-6">
-                  <!-- Event Images -->
-                  {(event.data.poster || event.data.eventPhoto) && (
-                    <div class="grid md:grid-cols-2 gap-4">
-                      {event.data.poster && (
-                        <div class="relative group/img overflow-hidden rounded-lg border-2 border-zinc-800">
-                          <Image
-                            src={event.data.poster}
-                            alt={`${event.data.title} Poster`}
-                            class="w-full h-auto object-cover transition-transform duration-300 group-hover/img:scale-105"
-                          />
-                          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
-                            <span class="text-xs text-zinc-400">Event Poster</span>
-                          </div>
-                        </div>
-                      )}
-                      {event.data.eventPhoto && (
-                        <div class="relative group/img overflow-hidden rounded-lg border-2 border-zinc-800">
-                          <Image
-                            src={event.data.eventPhoto}
-                            alt={`${event.data.title} Event Photo`}
-                            class="w-full h-auto object-cover transition-transform duration-300 group-hover/img:scale-105"
-                          />
-                          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
-                            <span class="text-xs text-zinc-400">Event Photo</span>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  <!-- Quote -->
-                  {(event.data.quote || event.data.quoteTranslation) && (
-                    <div class="border-l-4 border-red-600/50 pl-6 py-4 rounded-r-lg" style="background: linear-gradient(to right, var(--theme-bg-secondary), transparent);">
-                      {event.data.quote && (
-                        <p class="italic text-lg mb-2 leading-relaxed" style="color: var(--theme-text-primary);">
-                          "{event.data.quote}"
-                        </p>
-                      )}
-                      {event.data.quoteTranslation && (
-                        <p class="text-sm" style="color: var(--theme-text-muted);">
-                          {event.data.quoteTranslation}
-                        </p>
-                      )}
-                    </div>
-                  )}
-
-                  <!-- Event Body Content -->
-                  <div class="prose prose-zinc max-w-none">
-                    <div class="leading-relaxed space-y-4" style="color: var(--theme-text-secondary);" set:html={event.body} />
+                    <span class="text-zinc-400 text-xs">Boston • In-person gatherings</span>
                   </div>
-
-                  <!-- Topics and Readings -->
-                  {event.data.topics && event.data.topics.length > 0 && (
-                    <div class="bg-zinc-900/60 border border-zinc-800 rounded-xl p-6">
-                      <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                        </svg>
-                        Topics & Readings
-                      </h4>
-                      <div class="space-y-4">
-                        {event.data.topics.map((topic) => (
-                          <div class="border-l-2 border-zinc-700 pl-4">
-                            <h5 class="font-semibold text-zinc-200 mb-2">{topic.title}</h5>
-                            {topic.readings && (
-                              <ul class="space-y-1 text-zinc-400 text-sm">
-                                {topic.readings.map((reading) => (
-                                  <li class="flex items-start gap-2">
-                                    <span class="text-red-400 mt-1">•</span>
-                                    <span>{reading}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
-            </article>
-          ))}
+
+              <!-- Compact schedule badge -->
+              <div class="bg-gradient-to-r from-red-900/30 to-red-800/20 border border-red-700/50 rounded-full px-3 py-1 backdrop-blur-sm">
+                <div class="flex items-center">
+                  <div class="w-1.5 h-1.5 bg-red-400 rounded-full mr-2 animate-pulse"></div>
+                  <span class="text-red-300 font-bold text-xs uppercase tracking-wider">Every Saturday</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Minimal divider -->
+            <div class="w-full h-px bg-gradient-to-r from-transparent via-zinc-600/30 to-transparent mb-3"></div>
+
+            <!-- Inline Activities list -->
+            <div class="flex flex-wrap gap-3 mb-4">
+              <!-- Philosophical Lectures -->
+              <div class="group/item bg-zinc-800/30 rounded-md px-3 py-2 border border-zinc-700/30 hover:border-red-700/50 hover:bg-zinc-800/50 hover:translate-y-[-1px] transition-all duration-300">
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-gradient-to-br from-amber-500/20 to-amber-600/10 rounded flex items-center justify-center mr-2 group-hover/item:from-amber-500/30 group-hover/item:to-amber-600/20 transition-colors">
+                    <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  </div>
+                  <div class="text-zinc-200 font-semibold text-sm">Philosophical Lectures</div>
+                </div>
+              </div>
+
+              <!-- Textual Analysis -->
+              <div class="group/item bg-zinc-800/30 rounded-md px-3 py-2 border border-zinc-700/30 hover:border-red-700/50 hover:bg-zinc-800/50 hover:translate-y-[-1px] transition-all duration-300">
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-gradient-to-br from-blue-500/20 to-blue-600/10 rounded flex items-center justify-center mr-2 group-hover/item:from-blue-500/30 group-hover/item:to-blue-600/20 transition-colors">
+                    <svg class="w-3.5 h-3.5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
+                      <path d="M8 12h8v2H8zm0 4h8v2H8z"/>
+                    </svg>
+                  </div>
+                  <div class="text-zinc-200 font-semibold text-sm">Textual Analysis</div>
+                </div>
+              </div>
+
+              <!-- Praxis Reflection -->
+              <div class="group/item bg-zinc-800/30 rounded-md px-3 py-2 border border-zinc-700/30 hover:border-red-700/50 hover:bg-zinc-800/50 hover:translate-y-[-1px] transition-all duration-300">
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-gradient-to-br from-green-500/20 to-green-600/10 rounded flex items-center justify-center mr-2 group-hover/item:from-green-500/30 group-hover/item:to-green-600/20 transition-colors">
+                    <svg class="w-3.5 h-3.5 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7 1.49 0 2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5c1.38 0 2.5-1.12 2.5-2.5S21.88 11 20.5 11z"/>
+                    </svg>
+                  </div>
+                  <div class="text-zinc-200 font-semibold text-sm">Praxis Reflection</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Activity descriptions -->
+            <div class="text-zinc-400 text-sm mb-4 space-y-1">
+              <div>• <span class="text-amber-400 font-medium">Philosophy:</span> Deep dives into philosophy, political economy, and related disciplines</div>
+              <div>• <span class="text-blue-400 font-medium">Analysis:</span> Close readings of foundational theoretical texts</div>
+              <div>• <span class="text-green-400 font-medium">Praxis:</span> Collective discussion on issues emerging from our practices</div>
+            </div>
+
+            <!-- Minimal divider -->
+            <div class="flex items-center my-3">
+              <div class="flex-1 h-px bg-gradient-to-r from-zinc-700/50 to-red-600/30"></div>
+              <div class="px-2">
+                <div class="w-1 h-1 bg-red-500 rounded-full"></div>
+              </div>
+              <div class="flex-1 h-px bg-gradient-to-l from-zinc-700/50 to-red-600/30"></div>
+            </div>
+
+            <!-- Compact Mission statement -->
+            <div class="relative">
+              <!-- Opening quote -->
+              <div class="absolute -left-0.5 -top-0.5 text-red-600/30 text-xl font-serif">"</div>
+
+              <div class="bg-gradient-to-r from-red-900/20 via-red-800/10 to-transparent rounded-md p-3 border-l-2 border-red-600/60">
+                <p class="text-zinc-300 text-sm leading-snug italic pl-1.5">
+                  These gatherings aim to equip community members with a solid grounding in leftist theory, help build theoretical consensus, and cultivate new critical insights. Through this process, we seek to maintain a
+                  <span class="text-red-300 font-semibold not-italic">dynamic and reciprocal relationship between theory and practice</span>.
+                </p>
+              </div>
+
+              <!-- Closing quote -->
+              <div class="absolute -right-0.5 -bottom-0.5 text-red-600/30 text-xl font-serif">"</div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- FAQ Section -->
+      <!-- Sample Past Events Section -->
       <section>
-        <h2 class="text-3xl font-bold mb-10 text-center" style="color: var(--theme-text-primary);">Frequently Asked Questions</h2>
+        <h2 class="text-3xl font-bold text-white mb-10 text-center">Sample Past Events</h2>
+        <p class="text-zinc-400 text-center mb-8">
+          Explore a selection of our past lectures, seminars, and workshops on revolutionary theory and practice.
+        </p>
 
-        <div class="space-y-6">
-          <!-- Q1 -->
-          <div class="rounded-lg p-6" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">Q1: When are the lectures/seminars held?</h3>
-            <p class="leading-relaxed" style="color: var(--theme-text-secondary);">
-              Our in-person lectures/seminars in Boston take place in the spring (mid-January to mid-May) and fall (September to mid-December), every Saturday from 3:00–5:00 PM (EST).
-            </p>
-            <p class="leading-relaxed mt-3" style="color: var(--theme-text-secondary);">
-              During the summer, we mainly host online lectures and in-person events in China. In the summer of 2025, for example, Sinthome organized lecture series such as The History of Leftist Organizations, History of Philosophy: Metaphysics, Parrhesia and Politics, and Lacan on Love, as well as in-person literature seminars in China.
-            </p>
-          </div>
-
-          <!-- Q2 -->
-          <div class="rounded-lg p-6" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">Q2: Where are the in-person lectures in Boston held?</h3>
-            <p class="leading-relaxed" style="color: var(--theme-text-secondary);">
-              Address: 175 Washington St, Brighton, MA 02135.
-            </p>
-          </div>
-
-          <!-- Q3 -->
-          <div class="rounded-lg p-6" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">Q3: Do I need to register in advance to attend?</h3>
-            <p class="leading-relaxed" style="color: var(--theme-text-secondary);">
-              No. You can simply come to the venue on the day of the lecture.
-            </p>
-          </div>
-
-          <!-- Q4 -->
-          <div class="rounded-lg p-6" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">Q4: Can I join the lectures online?</h3>
-            <p class="leading-relaxed" style="color: var(--theme-text-secondary);">
-              Yes. All Boston in-person lectures are simultaneously livestreamed on Tencent Meeting.
-            </p>
-            <p class="leading-relaxed mt-3" style="color: var(--theme-text-secondary);">
-              To receive the meeting link, please DM @圣状Sinthome on Xiaohongshu to join the Xiaohongshu/WeChat group. The link will be shared in the group before each lecture.
-            </p>
-          </div>
-
-          <!-- Q5 -->
-          <div class="rounded-lg p-6" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">Q5: Are lecture recordings available?</h3>
-            <p class="leading-relaxed" style="color: var(--theme-text-secondary);">
-              Yes. Recordings are uploaded after each lecture to our Bilibili account @圣状Sinthome.
-            </p>
-          </div>
-
-          <!-- Q6 -->
-          <div class="rounded-lg p-6" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">Q6: Does Sinthome offer lectures suitable for Beijing Time?</h3>
-            <p class="leading-relaxed" style="color: var(--theme-text-secondary);">
-              Yes. Our online community hosts lectures/talks scheduled for Beijing Time.
-            </p>
-            <p class="leading-relaxed mt-3" style="color: var(--theme-text-secondary);">
-              To join, please add WeChat: 13276453866 and request access to the online community group. Details of upcoming events will be shared there.
-            </p>
-          </div>
-        </div>
+        <!-- Event Cards with Modal -->
+        <EventCardsWithModal events={sortedEvents} lang={lang} client:load />
       </section>
 
-      <!-- Join Section -->
-      <section class="text-center">
-        <h2 class="text-3xl font-bold mb-6" style="color: var(--theme-text-primary);">Join Us</h2>
-
-        <div class="max-w-3xl mx-auto mb-8">
-          <blockquote class="text-xl font-medium italic leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
-            Ready to engage with revolutionary theory and practice?
-          </blockquote>
-          <p class="text-lg" style="color: var(--theme-text-muted);">
+      <!-- Call to Action -->
+      <section class="mt-16 text-center bg-zinc-900/50 p-12 rounded-lg border border-zinc-800">
+        <div class="max-w-2xl mx-auto">
+          <h3 class="text-3xl font-bold text-white mb-4">Join Our Community</h3>
+          <p class="text-zinc-400 text-lg mb-8">
             Join our intellectual community and be part of the interrogation that opens the future.
           </p>
         </div>

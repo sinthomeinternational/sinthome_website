@@ -1,8 +1,8 @@
 ---
-import PageLayout from "../layouts/PageLayout.astro";
-import H1 from "../components/ui/H1.astro";
-import { getTranslations, getLanguageFromURL } from "../lib/translations";
-import { getThemeFromURL } from "../lib/utils";
+import PageLayout from "../../layouts/PageLayout.astro";
+import H1 from "../../components/ui/H1.astro";
+import { getTranslations, getLanguageFromURL } from "../../lib/translations";
+import { getThemeFromURL } from "../../lib/utils";
 
 // Get current language and theme from URL (SSR-compatible)
 const lang = getLanguageFromURL(Astro.url);
@@ -22,7 +22,7 @@ const pageContent = t.pages.whoWeAre;
     )}
 
     <div class="space-y-12 max-w-4xl" style="color: var(--theme-text-secondary);">
-      {pageContent.sections?.map((section) => (
+      {pageContent.sections?.map((section: any) => (
         <section>
           <h2 class="text-2xl font-bold mb-4" style="color: var(--theme-text-primary);">
             {section.title}
@@ -31,7 +31,7 @@ const pageContent = t.pages.whoWeAre;
           {/* Handle content as string or array */}
           {section.content && (
             Array.isArray(section.content) ? (
-              section.content.map((paragraph) => (
+              section.content.map((paragraph: any) => (
                 <p class="leading-relaxed mb-4">
                   {paragraph}
                 </p>
