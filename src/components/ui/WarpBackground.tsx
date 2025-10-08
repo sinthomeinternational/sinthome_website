@@ -21,6 +21,7 @@ export default function WarpBackground(props: WarpBackgroundProps) {
 
     useEffect(() => {
         setMounted(true);
+        console.log('🟢 BROWSER: WarpBackground mounted successfully!');
     }, []);
 
     // Default props that match the original homepage settings
@@ -41,33 +42,44 @@ export default function WarpBackground(props: WarpBackgroundProps) {
     // Combine default props with passed props
     const warpProps = { ...defaultProps, ...props };
 
+    // Static fallback gradient
+    const fallbackStyle: React.CSSProperties = {
+        width: '100%',
+        height: '100%',
+        background: 'linear-gradient(45deg, #000000 0%, #1a0000 25%, #940000 50%, #1a0000 75%, #000000 100%)',
+        backgroundSize: '400% 400%',
+        animation: 'gradientShift 8s ease-in-out infinite'
+    };
+
     if (!mounted) {
         // Server-side rendering fallback
-        return React.createElement('div', {
-            style: {
-                width: '100%',
-                height: '100%',
-                background: 'linear-gradient(45deg, #000000, #1a1a1a)',
-            }
-        });
+        return (
+            <div style={fallbackStyle} className="warp-background-fallback" />
+        );
     }
 
     try {
-        return React.createElement('div', {
-            style: {
-                width: '100%',
-                height: '100%'
-            }
-        }, React.createElement(Warp, warpProps));
+        return (
+            <>
+                {/* WebGL Warp Component */}
+                <div
+                    className="warp-background"
+                    style={{ width: '100%', height: '100%' }}
+                >
+                    <Warp {...warpProps} />
+                </div>
+                {/* Fallback for reduced motion preference */}
+                <div
+                    className="warp-background-fallback"
+                    style={fallbackStyle}
+                />
+            </>
+        );
     } catch (error) {
         console.error('WarpBackground error:', error);
         // Fallback to static gradient if Warp fails
-        return React.createElement('div', {
-            style: {
-                width: '100%',
-                height: '100%',
-                background: 'linear-gradient(45deg, #000000, #1a1a1a)',
-            }
-        });
+        return (
+            <div style={fallbackStyle} className="warp-background-fallback" />
+        );
     }
 }
