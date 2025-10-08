@@ -227,7 +227,7 @@ export default function Tooltip({
       ref={tooltipRef}
       id={tooltipId}
       role="tooltip"
-      className="z-[9999] px-3 py-2 text-sm rounded-lg shadow-2xl backdrop-blur-sm max-w-xs sm:max-w-sm pointer-events-none"
+      className="z-[9999] px-3 py-2 text-sm rounded-lg shadow-2xl max-w-xs sm:max-w-sm pointer-events-none"
       style={tooltipStyle}
     >
       {content}
