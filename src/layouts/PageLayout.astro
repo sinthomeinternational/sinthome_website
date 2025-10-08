@@ -37,9 +37,9 @@ const {
       <nav class="relative w-4 md:min-w-[4rem] xl:min-w-[5rem] sm:min-h-screen sm:ml-8 sm:pb-4">
         <div class="w-full h-[80vh] max-sm:w-4 md:max-w-[3rem] xl:max-w-[4rem] fixed top-[10vh] -z-10 sm:rounded-full overflow-hidden shadow-2xl">
           <WarpBackground
-            color1="#000000"
-            color2="#940000"
-            color3="#000000"
+            color1={theme === 'light' ? "#fee2e2" : "#000000"}
+            color2={theme === 'light' ? "#fca5a5" : "#940000"}
+            color3={theme === 'light' ? "#f87171" : "#000000"}
             speed={0.15}
             swirl={0.98}
             swirlIterations={20}

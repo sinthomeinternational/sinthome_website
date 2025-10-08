@@ -2,9 +2,12 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import H1 from "../components/ui/H1.astro";
 import Card from "../components/ui/Card.astro";
+import { getThemeFromURL } from "../lib/utils";
+
+const theme = getThemeFromURL(Astro.url);
 ---
 
-<PageLayout title="Upcoming Events - Sinthome" useInfoLayout={true}>
+<PageLayout title="Upcoming Events - Sinthome" useInfoLayout={true} theme={theme}>
   <H1 className="mb-8">Upcoming Events</H1>
 
   <div class="space-y-10 mt-8">

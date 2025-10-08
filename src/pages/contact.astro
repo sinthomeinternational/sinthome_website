@@ -3,9 +3,12 @@ import H1 from "../components/ui/H1.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import ContactMethods from "../components/contact/ContactMethods";
 import { SITE_CONFIG } from "../config/site";
+import { getThemeFromURL } from "../lib/utils";
+
+const theme = getThemeFromURL(Astro.url);
 ---
 
-<PageLayout title="Contact - Sinthome" useInfoLayout={true}>
+<PageLayout title="Contact - Sinthome" useInfoLayout={true} theme={theme}>
      <div class="min-h-dvh py-12">
           <!-- Header Section -->
           <div class="text-center mb-16">
