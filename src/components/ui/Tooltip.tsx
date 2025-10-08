@@ -40,8 +40,6 @@ export default function Tooltip({
 
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    const scrollX = window.pageXOffset || window.scrollX;
-    const scrollY = window.pageYOffset || window.scrollY;
 
     let x = 0;
     let y = 0;
