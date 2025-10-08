@@ -64,7 +64,7 @@ export const POST: APIRoute = async ({ request }) => {
   } catch (error) {
     // Handle validation errors specifically
     if (error instanceof z.ZodError) {
-      const validationErrors = error.issues.map((err: z.ZodIssue) => ({
+      const validationErrors = error.issues.map((err: any) => ({
         field: err.path.join('.'),
         message: err.message
       }));
