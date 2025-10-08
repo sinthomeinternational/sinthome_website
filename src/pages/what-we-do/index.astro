@@ -69,23 +69,6 @@ const projects: Project[] = pageContent.projects || [
     nextDate: 'January 2025'
   }
 ];
-
-// Define impact stat type with optional color
-interface ImpactStat {
-  number: string;
-  label: string;
-  color?: string;
-}
-
-// Get enhanced impact stats with colors
-const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
-  stats: [
-    { number: '500+', label: 'People Trained', color: 'text-blue-600 dark:text-blue-400' },
-    { number: '50+', label: 'Projects Completed', color: 'text-green-600 dark:text-green-400' },
-    { number: '20+', label: 'Partner Organizations', color: 'text-purple-600 dark:text-purple-400' },
-    { number: '10+', label: 'Communities Served', color: 'text-orange-600 dark:text-orange-400' }
-  ]
-};
 ---
 
 <PageLayout title="What We Do - Sinthome" useInfoLayout={true}>
@@ -196,24 +179,6 @@ const impact: { title?: string; stats: ImpactStat[] } = pageContent.impact || {
               </div>
             </a>
           ))}
-        </div>
-      </section>
-
-      <!-- Enhanced Impact Section -->
-      <section class="relative mt-16">
-        <div class="absolute inset-0 bg-gradient-to-r from-red-900/20 via-transparent to-blue-900/20 rounded-2xl"></div>
-        <div class="relative p-12 bg-zinc-900/40 backdrop-blur-sm border border-zinc-800 rounded-2xl">
-          <h2 class="text-3xl font-bold text-white mb-8 text-center">{impact.title || 'Our Impact'}</h2>
-          <div class="grid md:grid-cols-4 gap-8">
-            {impact.stats.map((stat) => (
-              <div class="text-center group">
-                <div class={`text-4xl font-bold mb-2 ${stat.color || 'text-red-500'} transition-transform group-hover:scale-110`}>
-                  {stat.number}
-                </div>
-                <div class="text-sm text-zinc-400 uppercase tracking-wide">{stat.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
