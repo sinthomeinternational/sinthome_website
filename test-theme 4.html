@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Debug Test</title>
+</head>
+<body>
+    <h1>Theme Debug Test</h1>
+
+    <div id="output"></div>
+
+    <button onclick="clearTheme()">Clear Theme Storage</button>
+    <button onclick="setDarkTheme()">Set Dark Theme</button>
+    <button onclick="setLightTheme()">Set Light Theme</button>
+
+    <script>
+        function updateOutput() {
+            const storedTheme = localStorage.getItem('theme');
+            const htmlClasses = document.documentElement.className;
+            const dataTheme = document.documentElement.getAttribute('data-theme');
+
+            document.getElementById('output').innerHTML = `
+                <p><strong>localStorage theme:</strong> ${storedTheme || 'NOT SET'}</p>
+                <p><strong>HTML classes:</strong> ${htmlClasses || 'NONE'}</p>
+                <p><strong>data-theme attribute:</strong> ${dataTheme || 'NOT SET'}</p>
+            `;
+        }
+
+        function clearTheme() {
+            localStorage.removeItem('theme');
+            alert('Theme cleared from localStorage. Refresh the page to see default behavior.');
+            updateOutput();
+        }
+
+        function setDarkTheme() {
+            localStorage.setItem('theme', 'dark');
+            updateOutput();
+        }
+
+        function setLightTheme() {
+            localStorage.setItem('theme', 'light');
+            updateOutput();
+        }
+
+        // Initial update
+        updateOutput();
+
+        // Check periodically
+        setInterval(updateOutput, 1000);
+    </script>
+</body>
+</html>

@@ -1,20 +1,38 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
-import H1 from "../../components/ui/H1.astro";
+import DefinitionTooltip from "../../components/ui/DefinitionTooltip.tsx";
 
-const pageTitle = "S.R.T.P. - Sinthome Revolutionary Theory Practice";
+const pageTitle = "S.R.T.P. - Sinthome Revolutionary Theoretical Practice";
 ---
 
 <PageLayout title={pageTitle} useContentLayout={true}>
   <!-- Enhanced Title Structure -->
   <div class="text-center mb-12">
     <h1 class="text-6xl font-bold text-white mb-4 tracking-wider">S.R.T.P.</h1>
-    <h2 class="text-2xl text-red-400 font-medium tracking-wide">Sinthome Revolutionary Theory Practice</h2>
+    <h2 class="text-2xl text-red-400 font-medium tracking-wide">Sinthome Revolutionary Theoretical Practice</h2>
     <div class="w-32 h-1 bg-gradient-to-r from-red-600 to-red-800 mx-auto mt-6"></div>
   </div>
 
+  <!-- Vision Statement -->
+  <div class="text-center mb-16 max-w-4xl mx-auto">
+    <div class="space-y-4">
+      <p class="text-lg text-zinc-300 leading-relaxed">
+        In our weekly lectures and community activities, every member is encouraged to take part in the collective study of leftist and critical theories.
+      </p>
+      <p class="text-lg text-zinc-300 leading-relaxed font-serif italic">
+        在每周讲座和社区活动，我们邀请每位社区成员加入左翼和批判理论的集体学习。
+      </p>
+      <p class="text-xl text-red-400 font-bold tracking-wide mt-6">
+        逼问实践，直至它吐露未来。
+      </p>
+      <p class="text-xl text-red-400 font-medium tracking-wide italic">
+        Interrogating <DefinitionTooltip term="praxis" client:load />, until it unveils the future.
+      </p>
+    </div>
+  </div>
+
   <div class="space-y-16 max-w-4xl mx-auto">
-    <!-- Mission Statement -->
+    <!-- Philosophy Section with Marx Quote -->
     <section>
       <div class="relative">
         <!-- Background glow effect -->
@@ -22,109 +40,139 @@ const pageTitle = "S.R.T.P. - Sinthome Revolutionary Theory Practice";
 
         <!-- Main card -->
         <div class="relative bg-gradient-to-br from-zinc-900/95 to-zinc-800/85 border border-zinc-700/50 rounded-xl p-8 backdrop-blur-md">
-          <h2 class="text-3xl font-bold text-white mb-6 text-center">Interrogating praxis, until it unveils the future.</h2>
+          <!-- Marx Quote with special styling -->
+          <div class="bg-gradient-to-r from-red-900/20 via-red-800/10 to-transparent rounded-md p-6 border-l-4 border-red-600/60 mb-8">
+            <div class="relative">
+              <!-- Opening quote -->
+              <div class="absolute -left-1 -top-1 text-red-600/30 text-2xl font-serif">"</div>
+
+              <p class="text-zinc-200 italic pl-4 text-lg">
+                Die Philosophen haben die Welt nur verschieden <DefinitionTooltip term="interpretiert" client:load />; es kommt <DefinitionTooltip term="aber" client:load /> darauf an, sie zu <DefinitionTooltip term="verändern" client:load />.
+              </p>
+
+              <!-- Closing quote -->
+              <div class="absolute -right-1 -bottom-1 text-red-600/30 text-2xl font-serif">"</div>
+            </div>
+            <p class="text-red-300 font-semibold text-sm mt-3 text-right">—— Karl Marx</p>
+          </div>
 
           <div class="space-y-6 text-zinc-300 leading-relaxed">
             <p>
-              There is no clear path that leads theoretical critique to social praxis. Born from this rupture between theory and praxis,
-              Sinthome Revolutionary Theory Practice (S.R.T.P.) is such a special yet indispensable program that formulates the guidelines for Sinthome's social praxis.
+              There is no clear path that leads <DefinitionTooltip term="theoretical critique" client:load /> to social <DefinitionTooltip term="praxis" client:load />. Born from this rupture between theory and praxis,
+              <DefinitionTooltip term="sinthome" client:load /> Revolutionary Theoretical Practice (<DefinitionTooltip term="srtp" client:load />) is such a special yet indispensable program that formulates the guidelines for Sinthome's social praxis.
             </p>
 
             <p>
-              By hosting weekly lectures and seminars, S.R.T.P. harbors a self-reflexive intellectual community that facilitates the necessary circulation between theoretical critique and social praxis.
-              Departing from knowledge learning and theoretical critique, we interrogate every possible dimension of our own praxis: What is the meaning of our praxis? How can it be theorized? How can it lead to new revolutionary thinking?
+              By hosting weekly lectures and seminars, <DefinitionTooltip term="srtp" client:load /> harbors a self-reflexive intellectual community that facilitates the necessary circulation between <DefinitionTooltip term="theoretical critique" client:load /> and social <DefinitionTooltip term="praxis" client:load />.
+              Departing from knowledge learning and theoretical critique, we interrogate every possible dimension of our own praxis: What is the meaning of our praxis? How can it be theorized? How can it lead to new <DefinitionTooltip term="revolutionary thinking" client:load />?
+            </p>
+
+            <p>
+              Yet, who is changing the world? Which world needs to be changed? On this point, Marx remained silent.
+              It is precisely this silence that constitutes our origin (<DefinitionTooltip term="arche" client:load />) of departure.
+            </p>
+
+            <p>
+              The task of <DefinitionTooltip term="srtp" client:load /> is established within this call. We are not here to interpret the world in order to understand it,
+              nor do we interpret first and only "then (<DefinitionTooltip term="dann" client:load />)" go on to change it. Marx's "<DefinitionTooltip term="aber" client:load />" precedes all interpretation,
+              precedes all theory. Changing the world is the sole a priori, the absolute principle.
+            </p>
+
+            <p class="text-lg text-red-300 font-semibold">
+              <DefinitionTooltip term="srtp" client:load /> is both a machine of reflection and an apparatus of interrogation:
+              Its very existence is a reminder—The world must be changed, and all theory and <DefinitionTooltip term="praxis" client:load /> must assume this mission.
             </p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Philosophy Section -->
-      <section>
-        <div class="relative">
-          <!-- Background glow effect -->
-          <div class="absolute -inset-1 bg-gradient-to-r from-red-900/20 via-red-800/10 to-red-900/20 rounded-xl blur opacity-50"></div>
+    <!-- Activities Section -->
+    <section>
+      <div class="relative">
+        <!-- Background glow effect -->
+        <div class="absolute -inset-1 bg-gradient-to-r from-red-900/20 via-red-800/10 to-red-900/20 rounded-xl blur opacity-50"></div>
 
-          <!-- Main card -->
-          <div class="relative bg-gradient-to-br from-zinc-900/95 to-zinc-800/85 border border-zinc-700/50 rounded-xl p-8 backdrop-blur-md">
-            <h3 class="text-2xl font-bold text-white mb-6">Our Philosophical Foundation</h3>
+        <!-- Main card -->
+        <div class="relative bg-gradient-to-br from-zinc-900/95 to-zinc-800/85 border border-zinc-700/50 rounded-xl p-8 backdrop-blur-md">
+          <h3 class="text-2xl font-bold text-white mb-6">Activities</h3>
 
-            <div class="space-y-6 text-zinc-300 leading-relaxed">
-              <!-- Marx Quote with special styling -->
-              <div class="bg-gradient-to-r from-red-900/20 via-red-800/10 to-transparent rounded-md p-6 border-l-4 border-red-600/60">
-                <div class="relative">
-                  <!-- Opening quote -->
-                  <div class="absolute -left-1 -top-1 text-red-600/30 text-2xl font-serif">"</div>
-
-                  <p class="text-zinc-200 italic pl-4">
-                    Philosophers have only interpreted the world in various ways; the point, however, is to change it.
-                  </p>
-
-                  <!-- Closing quote -->
-                  <div class="absolute -right-1 -bottom-1 text-red-600/30 text-2xl font-serif">"</div>
-                </div>
-                <p class="text-red-300 font-semibold text-sm mt-3 text-right">— Karl Marx</p>
-              </div>
-
-              <p>
-                Yet, who is changing the world? Which world needs to be changed? On this point, Marx remained silent.
-                It is precisely this silence that constitutes our origin (ἀρχή) of departure.
+          <div class="space-y-6 text-zinc-300 leading-relaxed">
+            <div>
+              <h4 class="text-xl font-semibold text-red-300 mb-3">Lectures & Seminars in Boston</h4>
+              <p class="mb-2">
+                <strong class="text-white">Every Saturday from 3–5 pm</strong> (EST, starting September 2025)
               </p>
+              <p class="mb-2">
+                <strong class="text-white">Location:</strong> Boston University, Stone Science Building, Room 116
+              </p>
+              <p class="mb-4">
+                Our weekly lectures and seminars provide a space for collective study and critical engagement with leftist theory, philosophy, and contemporary social issues. Each session combines theoretical exploration with practical applications, fostering dialogue between academic knowledge and lived experience.
+              </p>
+            </div>
 
-              <p>
-                The task of S.R.T.P. is established within this call. We are not here to interpret the world in order to understand it,
-                nor do we interpret first and only "then (dann)" go on to change it. Marx's "aber" precedes all interpretation,
-                precedes all theory. Changing the world is the sole a priori, the absolute principle.
+            <div>
+              <h4 class="text-xl font-semibold text-red-300 mb-3">Online Community Platform</h4>
+              <p class="mb-2">
+                <strong class="text-white">Format:</strong> WeChat groups + Tencent Meeting for lectures
+              </p>
+              <p class="mb-2">
+                <strong class="text-white">Schedule:</strong> Regular online discussions and virtual lecture attendance
+              </p>
+              <p class="mb-4">
+                For those unable to attend in-person sessions, our online platform provides access to live-streamed lectures, discussion forums, and study groups. This digital community extends our reach globally while maintaining the intimate, collaborative spirit of our local gatherings.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="text-xl font-semibold text-red-300 mb-3">Summer Intensive Series</h4>
+              <p class="mb-2">
+                <strong class="text-white">Summer 2025:</strong> Four specialized lecture series (8 weeks each)
+              </p>
+              <p class="mb-2">
+                <strong class="text-white">Topics:</strong> History, Community Practice, Political Philosophy, and Lacan's Seminar on Love
+              </p>
+              <p class="mb-4">
+                Our intensive summer programs dive deep into specific theoretical frameworks and their practical applications. These extended series allow for comprehensive exploration of complex topics while building sustained intellectual community among participants.
+              </p>
+            </div>
+
+            <div class="mt-8 p-6 bg-zinc-800/50 rounded-lg border border-zinc-700">
+              <p class="text-zinc-200 font-medium mb-2">Join Our Learning Community</p>
+              <p class="text-sm text-zinc-400">
+                All activities are open to community members interested in critical theory and social practice.
+                No prior academic background required—just curiosity and commitment to collective learning.
               </p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Mission Section -->
-      <section>
-        <div class="relative">
-          <!-- Background glow effect -->
-          <div class="absolute -inset-1 bg-gradient-to-r from-red-900/20 via-red-800/10 to-red-900/20 rounded-xl blur opacity-50"></div>
+    <!-- Call to Action -->
+    <section class="mt-16 text-center bg-zinc-900/50 p-12 rounded-lg border border-zinc-800">
+      <div class="max-w-2xl mx-auto">
+        <h3 class="text-3xl font-bold text-white mb-4">Join the Critical Inquiry</h3>
+        <p class="text-zinc-400 text-lg mb-8">
+          Be part of the intellectual community that bridges theory and praxis in revolutionary thinking.
+        </p>
+      </div>
 
-          <!-- Main card -->
-          <div class="relative bg-gradient-to-br from-zinc-900/95 to-zinc-800/85 border border-zinc-700/50 rounded-xl p-8 backdrop-blur-md">
-            <h3 class="text-2xl font-bold text-white mb-6">A Machine of Reflection</h3>
-
-            <div class="space-y-6 text-zinc-300 leading-relaxed">
-              <p class="text-lg">
-                S.R.T.P. is both a <span class="text-red-300 font-semibold">machine of reflection</span> and an
-                <span class="text-red-300 font-semibold">apparatus of interrogation</span>:
-                Its very existence is a reminder—The world must be changed, and all theory and praxis must assume this mission.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Call to Action -->
-      <section class="mt-16 text-center bg-zinc-900/50 p-12 rounded-lg border border-zinc-800">
-        <div class="max-w-2xl mx-auto">
-          <h3 class="text-3xl font-bold text-white mb-4">Join the Interrogation</h3>
-          <p class="text-zinc-400 text-lg mb-8">
-            Be part of the intellectual community that bridges theory and praxis in revolutionary thinking.
-          </p>
-        </div>
-
-        <div class="flex flex-wrap gap-4 justify-center">
-          <a
-            href="/what-we-do/public-lectures"
-            class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-600/25"
-          >
-            View Our Lectures
-            <span class="ml-2">→</span>
-          </a>
-          <a
-            href="/contact"
-            class="inline-flex items-center px-8 py-4 border border-zinc-700 hover:border-red-600 text-zinc-300 hover:text-white font-semibold rounded-lg transition-all duration-300"
-          >
-            Get Involved
-          </a>
-        </div>
-      </section>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a
+          href="/what-we-do/public-lectures"
+          class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-600/25"
+        >
+          View Our Lectures
+          <span class="ml-2">→</span>
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center px-8 py-4 border border-zinc-700 hover:border-red-600 text-zinc-300 hover:text-white font-semibold rounded-lg transition-all duration-300"
+        >
+          Get Involved
+        </a>
+      </div>
+    </section>
   </div>
 </PageLayout>

@@ -61,13 +61,6 @@ export const SITE_CONFIG = {
   contact: {
     email: import.meta.env.PUBLIC_CONTACT_EMAIL || 'contact@sinthome.org',
     phone: import.meta.env.PUBLIC_CONTACT_PHONE || '+1 (555) 123-4567',
-    address: {
-      street: '123 Tech Street',
-      city: 'San Francisco',
-      state: 'CA',
-      zip: '94102',
-      country: 'USA'
-    }
   },
 
   // Social media handles (without @ or full URLs)
@@ -79,38 +72,8 @@ export const SITE_CONFIG = {
     instagram: 'sinthome'
   },
 
-  // Navigation items
-  navigation: {
-    main: [
-      { label: 'Home', href: '/' },
-      {
-        label: 'Who We Are',
-        href: '/who-we-are',
-        dropdown: [
-          { label: 'About Us', href: '/who-we-are' },
-          { label: 'Public Lectures', href: '/what-we-do/public-lectures' },
-        ]
-      },
-      {
-        label: 'What We Do',
-        href: '/what-we-do',
-        dropdown: [
-          { label: 'AI Hackathon', href: '/what-we-do/ai-hackathon' },
-          { label: 'Workers Assist', href: '/what-we-do/workers-assist' },
-          { label: 'Plantcore AI', href: '/what-we-do/plantcore-ai' },
-          { label: 'Public Lectures', href: '/what-we-do/public-lectures' },
-        ]
-      },
-      { label: 'Upcoming Events', href: '/events' },
-      { label: 'Contact', href: '/contact' },
-      { label: 'Support Us', href: '/donate' },
-    ],
-    footer: [
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms of Service', href: '/terms' },
-      { label: 'Sitemap', href: '/sitemap' },
-    ]
-  },
+  // Navigation items are now managed in translation files
+  // See src/content/translations/[lang]/site.ts for navigation configuration
 
   // Feature flags
   features: {
@@ -123,4 +86,3 @@ export const SITE_CONFIG = {
 
 // Type exports for TypeScript
 export type SiteConfig = typeof SITE_CONFIG;
-export type NavigationItem = typeof SITE_CONFIG.navigation.main[number];

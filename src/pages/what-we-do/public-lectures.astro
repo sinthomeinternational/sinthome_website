@@ -166,6 +166,208 @@ const lang = getLanguageFromURL(Astro.url);
         <div class="max-w-2xl mx-auto">
           <h3 class="text-3xl font-bold text-white mb-4">Join Our Community</h3>
           <p class="text-zinc-400 text-lg mb-8">
+            <article class="group bg-zinc-900/50 border border-zinc-800 rounded-xl overflow-hidden hover:border-red-600/50 transition-all duration-300">
+              <!-- Event Header with Key Metadata -->
+              <div class="bg-gradient-to-r from-zinc-900 to-zinc-900/50 p-6 border-b border-zinc-800">
+                <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                  <div class="flex-1 min-w-0">
+                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">
+                      {event.data.title}
+                    </h3>
+                    <p class="text-zinc-400 line-clamp-2">{event.data.description}</p>
+                  </div>
+
+                  {/* Key Metadata Tags */}
+                  <div class="flex flex-col gap-2 items-end">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 border border-red-600/30 rounded-full text-red-400 text-sm font-semibold">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                      </svg>
+                      {event.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1 bg-zinc-800 border border-zinc-700 rounded-full text-zinc-300 text-sm capitalize">
+                      {event.data.type}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Quick Actions */}
+                <div class="flex flex-wrap gap-3">
+                  {event.data.recordingUrl && (
+                    <a
+                      href={event.data.recordingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-lg transition-colors"
+                    >
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                      Watch Recording
+                    </a>
+                  )}
+                  <button
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-sm font-semibold rounded-lg transition-colors"
+                    onclick="this.closest('article').querySelector('.event-details').classList.toggle('hidden')"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                    View Details
+                  </button>
+                </div>
+              </div>
+
+              <!-- Event Details (Collapsible) -->
+              <div class="event-details hidden">
+                <div class="p-6 space-y-6">
+                  <!-- Event Images -->
+                  {(event.data.poster || event.data.eventPhoto) && (
+                    <div class="grid md:grid-cols-2 gap-4">
+                      {event.data.poster && (
+                        <div class="relative group/img overflow-hidden rounded-lg border-2 border-zinc-800">
+                          <Image
+                            src={event.data.poster}
+                            alt={`${event.data.title} Poster`}
+                            class="w-full h-auto object-cover transition-transform duration-300 group-hover/img:scale-105"
+                          />
+                          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+                            <span class="text-xs text-zinc-400">Event Poster</span>
+                          </div>
+                        </div>
+                      )}
+                      {event.data.eventPhoto && (
+                        <div class="relative group/img overflow-hidden rounded-lg border-2 border-zinc-800">
+                          <Image
+                            src={event.data.eventPhoto}
+                            alt={`${event.data.title} Event Photo`}
+                            class="w-full h-auto object-cover transition-transform duration-300 group-hover/img:scale-105"
+                          />
+                          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+                            <span class="text-xs text-zinc-400">Event Photo</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  <!-- Quote -->
+                  {(event.data.quote || event.data.quoteTranslation) && (
+                    <div class="border-l-4 border-red-600/50 pl-6 py-4 bg-gradient-to-r from-zinc-800/30 to-transparent rounded-r-lg">
+                      {event.data.quote && (
+                        <p class="text-zinc-200 italic text-lg mb-2 leading-relaxed">
+                          "{event.data.quote}"
+                        </p>
+                      )}
+                      {event.data.quoteTranslation && (
+                        <p class="text-zinc-500 text-sm">
+                          {event.data.quoteTranslation}
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  <!-- Event Body Content -->
+                  <div class="prose prose-invert prose-zinc max-w-none">
+                    <div class="text-zinc-300 leading-relaxed space-y-4" set:html={event.body} />
+                  </div>
+
+                  <!-- Topics and Readings -->
+                  {event.data.topics && event.data.topics.length > 0 && (
+                    <div class="bg-zinc-900/60 border border-zinc-800 rounded-xl p-6">
+                      <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        Topics & Readings
+                      </h4>
+                      <div class="space-y-4">
+                        {event.data.topics.map((topic) => (
+                          <div class="border-l-2 border-zinc-700 pl-4">
+                            <h5 class="font-semibold text-zinc-200 mb-2">{topic.title}</h5>
+                            {topic.readings && (
+                              <ul class="space-y-1 text-zinc-400 text-sm">
+                                {topic.readings.map((reading) => (
+                                  <li class="flex items-start gap-2">
+                                    <span class="text-red-400 mt-1">•</span>
+                                    <span>{reading}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+
+        <div class="space-y-6">
+          <!-- Q1 -->
+          <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Q1: When are the lectures/seminars held?</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              Our in-person lectures/seminars in Boston take place in the spring (mid-January to mid-May) and fall (September to mid-December), every Saturday from 3:00–5:00 PM (EST).
+            </p>
+            <p class="text-zinc-300 leading-relaxed mt-3">
+              During the summer, we mainly host online lectures and in-person events in China. In the summer of 2025, for example, Sinthome organized lecture series such as The History of Leftist Organizations, History of Philosophy: Metaphysics, Parrhesia and Politics, and Lacan on Love, as well as in-person literature seminars in China.
+            </p>
+          </div>
+
+          <!-- Q2 -->
+          <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Q2: Where are the in-person lectures in Boston held?</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              Address: 175 Washington St, Brighton, MA 02135.
+            </p>
+          </div>
+
+          <!-- Q3 -->
+          <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Q3: Do I need to register in advance to attend?</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              No. You can simply come to the venue on the day of the lecture.
+            </p>
+          </div>
+
+          <!-- Q4 -->
+          <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Q4: Can I join the lectures online?</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              Yes. All Boston in-person lectures are simultaneously livestreamed on Tencent Meeting.
+            </p>
+            <p class="text-zinc-300 leading-relaxed mt-3">
+              To receive the meeting link, please DM @圣状Sinthome on Xiaohongshu to join the Xiaohongshu/WeChat group. The link will be shared in the group before each lecture.
+            </p>
+          </div>
+
+          <!-- Q5 -->
+          <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Q5: Are lecture recordings available?</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              Yes. Recordings are uploaded after each lecture to our Bilibili account @圣状Sinthome.
+            </p>
+          </div>
+
+          <!-- Q6 -->
+          <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Q6: Does Sinthome offer lectures suitable for Beijing Time?</h3>
+            <p class="text-zinc-300 leading-relaxed">
+              Yes. Our online community hosts lectures/talks scheduled for Beijing Time.
+            </p>
+            <p class="text-zinc-300 leading-relaxed mt-3">
+              To join, please add WeChat: 13276453866 and request access to the online community group. Details of upcoming events will be shared there.
+            </p>
+          </div>
+        </div>
+      </section>
+
             Join our intellectual community and be part of the interrogation that opens the future.
           </p>
         </div>

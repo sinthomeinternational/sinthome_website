@@ -21,23 +21,30 @@ const articles = defineCollection({
 });
 
 const srtpEvents = defineCollection({
-    loader: glob({ pattern: "**/*.md", base: "./src/content/srtp-events" }),
+    loader: glob({ pattern: ["**/*.md", "**/*.mdx"], base: "./src/content/srtp-events" }),
     schema: ({ image }) => z.object({
         title: z.string(),
-        titleZh: z.string(),
-        type: z.enum(["Reading Seminar", "Philosophy Lecture", "Workshop", "Discussion"]),
+        titleZh: z.string().optional(),
+        type: z.enum(["Reading Seminar", "Philosophy Lecture", "Workshop", "Discussion", "lecture", "seminar", "workshop"]),
         date: z.coerce.date(),
-        speaker: z.string(),
-        location: z.string(),
-        duration: z.string(),
+        speaker: z.string().optional(),
+        location: z.string().optional(),
+        duration: z.string().optional(),
         recordingUrl: z.string().url().optional(),
         poster: image().optional(),
         eventPhoto: image().optional(),
-        tags: z.array(z.string()),
+        tags: z.array(z.string()).optional(),
         featured: z.boolean().default(false),
-        synopsis: z.string(),
-        synopsisZh: z.string(),
+        synopsis: z.string().optional(),
+        synopsisZh: z.string().optional(),
         quote: z.string().optional(),
+        quoteTranslation: z.string().optional(),
+        description: z.string().optional(),
+        topics: z.array(z.object({
+            title: z.string(),
+            readings: z.array(z.string()).optional()
+        })).optional(),
+        order: z.number().default(0), // For sorting past events
     }),
 });
 

@@ -27,13 +27,22 @@ export default function ThemeLanguageSwitcher({
 
   useEffect(() => {
     setMounted(true);
-    // Get current theme from localStorage first, then fallback to DOM
+
+    // Check URL params first for theme
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlTheme = urlParams.get('theme') as ThemeId | null;
+
+    // Get current theme from URL first, then localStorage, then fallback to DOM
     const storedTheme = localStorage.getItem('theme') as ThemeId;
     const root = document.documentElement;
 
     // Check multiple sources for theme
     let currentThemeFromDOM: ThemeId;
-    if (storedTheme === 'light' || storedTheme === 'dark') {
+    if (urlTheme === 'light' || urlTheme === 'dark') {
+      currentThemeFromDOM = urlTheme;
+      // Apply the URL theme
+      applyTheme(urlTheme);
+    } else if (storedTheme === 'light' || storedTheme === 'dark') {
       currentThemeFromDOM = storedTheme;
     } else if (root.classList.contains('theme-light')) {
       currentThemeFromDOM = 'light';
@@ -53,19 +62,28 @@ export default function ThemeLanguageSwitcher({
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     setCurrentTheme(newTheme);
     applyTheme(newTheme);
+
+    // Update URL with theme parameter
+    const url = new URL(window.location.href);
+    url.searchParams.set('theme', newTheme);
+
+    // Update URL without page reload using History API
+    window.history.replaceState({}, '', url.toString());
   };
 
   const handleLanguageToggle = () => {
     const newLang = currentLang === 'en' ? 'zh' : 'en';
 
-    // Store the scroll position to restore it after reload
+    // Store the scroll position and active element to restore after reload
     sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+    sessionStorage.setItem('languageSwitchTimestamp', Date.now().toString());
 
-    // Update URL with new language parameter
+    // Update URL with new language parameter and preserve theme
     const url = new URL(window.location.href);
     url.searchParams.set('lang', newLang);
+    url.searchParams.set('theme', currentTheme);
 
-    // Navigate to the new URL (this will trigger a page reload)
+    // Navigate to new URL (causes page reload for SSR language switch)
     window.location.href = url.toString();
   };
 

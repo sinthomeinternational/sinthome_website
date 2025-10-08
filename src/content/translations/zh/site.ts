@@ -8,7 +8,14 @@ export const zhContent: SiteContent = {
   navigation: {
     items: [
       { label: '首页', href: '/' },
-      { label: '关于我们', href: '/who-we-are' },
+      {
+        label: '关于我们',
+        href: '/who-we-are',
+        dropdown: [
+          { label: '关于我们', href: '/who-we-are' },
+          { label: 'S.R.T.P.', href: '/who-we-are/srtp' },
+        ],
+      },
       {
         label: '我们的工作',
         href: '/what-we-do',
