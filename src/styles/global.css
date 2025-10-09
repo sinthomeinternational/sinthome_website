@@ -120,18 +120,24 @@ canvas {
 }
 */
 
-/* Accessibility: Elegant focus indicators with sufficient contrast */
-:focus {
-	outline: 1px solid rgba(220, 38, 38, 0.6) !important;
+/* Remove focus indicators for mouse users */
+:focus:not(:focus-visible) {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+/* Accessibility: Focus indicators only for keyboard navigation */
+:focus-visible {
+	outline: 1px solid rgba(220, 38, 38, 0.8) !important;
 	outline-offset: 1px !important;
 }
 
-/* Enhanced focus for interactive elements - subtle but accessible */
-button:focus,
-a:focus,
-input:focus,
-select:focus,
-textarea:focus {
+/* Enhanced focus for interactive elements - keyboard navigation only */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
 	outline: 1px solid rgba(220, 38, 38, 0.8) !important;
 	outline-offset: 1px !important;
 	box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15) !important;
