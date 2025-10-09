@@ -81,8 +81,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 				<!-- Enhanced Scroll Indicator -->
 				<div id="scroll-indicator" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-100 transition-opacity duration-500">
-					<div class="scroll-pulse-animation backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition-all duration-300" style="background-color: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--theme-text-secondary);">
+					<div class="scroll-pulse-animation backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition-all duration-300 theme-scroll-indicator">
+						<svg class="w-6 h-6 theme-scroll-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
 						</svg>
 					</div>
@@ -687,13 +687,15 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 	/* Light theme tags */
 	html.theme-light .theme-tag {
-		color: #b91c1c; /* Bright burgundy/red */
-		border-color: #b91c1c;
+		color: #7f1d1d; /* Dark burgundy - matching button */
+		border-color: #7f1d1d;
+		background-color: transparent;
 	}
 
 	html.theme-light .theme-tag:hover {
-		color: #991b1b; /* Slightly darker on hover */
-		border-color: #991b1b;
+		color: #7f1d1d; /* Keep dark burgundy text */
+		border-color: #7f1d1d;
+		background-color: #fecaca; /* Light pink solid background */
 	}
 
 	/* Theme-aware hero title */
@@ -711,7 +713,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 	}
 
 	html.theme-light .theme-subtitle {
-		color: #b91c1c; /* Bright burgundy/red - unified */
+		color: #b91c1c; /* Bright burgundy/red - same as title */
 	}
 
 	/* CTA Button Variants - Primary */
@@ -760,7 +762,7 @@ import WarpBackground from "../components/ui/WarpBackground";
 	}
 
 	html.theme-light .cta-button-secondary {
-		background-color: rgba(254, 202, 202, 0.3); /* Light pink background */
+		background-color: #fecaca; /* Solid light pink background */
 		color: #7f1d1d; /* Dark burgundy text */
 		border-color: #7f1d1d;
 	}
@@ -798,5 +800,24 @@ import WarpBackground from "../components/ui/WarpBackground";
 		background-color: #7f1d1d; /* Dark burgundy background */
 		color: #fecaca; /* Light pink text */
 		border-color: #7f1d1d;
+	}
+
+	/* Scroll indicator styling */
+	.theme-scroll-indicator {
+		background-color: var(--theme-bg-card);
+		border: 1px solid var(--theme-border);
+	}
+
+	html.theme-light .theme-scroll-indicator {
+		background-color: #fecaca; /* Light pink background */
+		border-color: #7f1d1d; /* Dark burgundy border */
+	}
+
+	.theme-scroll-arrow {
+		color: var(--theme-text-secondary);
+	}
+
+	html.theme-light .theme-scroll-arrow {
+		color: #7f1d1d; /* Dark burgundy arrow */
 	}
 </style>
