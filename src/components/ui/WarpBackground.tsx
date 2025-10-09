@@ -69,6 +69,18 @@ export default function WarpBackground(props: WarpBackgroundProps) {
         style: { width: '100%', height: '100%' }
     };
 
-    return <Warp {...defaultProps} {...props} style={{ ...defaultProps.style, ...props.style }} />;
+    return <Warp
+        {...defaultProps}
+        {...props}
+        style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            ...defaultProps.style,
+            ...props.style
+        }}
+    />;
 
 }
