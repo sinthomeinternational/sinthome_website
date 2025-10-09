@@ -17,6 +17,8 @@ export const assets = {
   // JavaScript files for security compliance
   themeInit: getPublicAsset('/js/theme-init.js'),
   scrollRestore: getPublicAsset('/js/scroll-restore.js'),
+  homepageAnimations: getPublicAsset('/js/homepage-animations.js'),
+  themeTest: getPublicAsset('/js/theme-test.js'),
 
   // 项目图片
   projects: {
