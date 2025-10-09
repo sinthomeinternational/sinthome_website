@@ -85,19 +85,19 @@ export default function WarpBackground(props: WarpBackgroundProps) {
         }
     }, []);
 
-    // Production baseline parameters (dark theme)
+    // Main branch parameters (proven working values)
     const defaultProps = {
         color1: '#000000',    // Black
-        color2: '#940000',    // Deep red (not neon)
+        color2: '#940000',    // Deep red
         color3: '#000000',    // Black
-        speed: 0.32,          // Subtle motion, not distracting
-        swirl: 0.98,          // Keeps the signature flow
-        swirlIterations: 30,  // Enough detail without noise
-        shapeScale: 0.08,     // Small, refined features
-        rotation: 0.55,       // Keeps the diagonal drift that framed the hero
-        scale: 0.48,          // Fills the frame without obvious repetition
-        softness: 0,          // Crisp edges read best behind text
-        distortion: 0.12      // Mild life in the field (not chaotic)
+        speed: 0.2,           // Main branch proven speed
+        swirl: 0.98,          // Signature flow
+        swirlIterations: 29,  // Main branch proven iterations
+        shapeScale: 0.04,     // Main branch proven scale
+        rotation: 0.55,       // Diagonal drift
+        scale: 0.4,           // Main branch proven scale
+        softness: 0,          // Crisp edges
+        distortion: 0         // Main branch uses no distortion
     };
 
     // Combine default props with passed props
