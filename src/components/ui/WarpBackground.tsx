@@ -157,8 +157,8 @@ export default function WarpBackground(props: WarpBackgroundProps) {
     const isDebugMode = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === '1';
 
     try {
-        const debugHUD = isDebugMode && mounted ? React.createElement('div', {
-            style: {
+        const debugHUD = isDebugMode && mounted ? (
+            <div style={{
                 position: 'absolute',
                 top: '10px',
                 left: '10px',
@@ -172,63 +172,34 @@ export default function WarpBackground(props: WarpBackgroundProps) {
                 borderRadius: '4px',
                 border: '1px solid lime',
                 maxWidth: '300px'
-            }
-        }, [
-            React.createElement('div', { key: 'title' }, '🔍 Debug Mode Active'),
-            React.createElement('div', { key: 'props' }, `Props: speed=${warpProps.speed}, scale=${warpProps.shapeScale}`),
-            React.createElement('div', { key: 'distortion' }, `Distortion: ${warpProps.distortion}, Color2: ${warpProps.color2}`),
-            React.createElement('div', { key: 'webgl' }, `WebGL: ${typeof window !== 'undefined' ? 'Available' : 'Unknown'}`),
-            React.createElement('div', { key: 'dvh' }, `DVH: ${typeof CSS !== 'undefined' && CSS.supports('height', '100dvh') ? 'Yes' : 'No'}`)
-        ]) : null;
+            }}>
+                <div>🔍 Debug Mode Active</div>
+                <div>Props: speed={warpProps.speed}, scale={warpProps.shapeScale}</div>
+                <div>Distortion: {warpProps.distortion}, Color2: {warpProps.color2}</div>
+                <div>WebGL: {typeof window !== 'undefined' ? 'Available' : 'Unknown'}</div>
+                <div>DVH: {typeof CSS !== 'undefined' && CSS.supports('height', '100dvh') ? 'Yes' : 'No'}</div>
+            </div>
+        ) : null;
 
-        const debugOverlay = isDebugMode && mounted ? React.createElement('div', {
-            style: {
+        const debugOverlay = isDebugMode && mounted ? (
+            <div style={{
                 position: 'absolute',
                 inset: '0',
                 background: 'rgba(255, 0, 0, 0.1)',
                 pointerEvents: 'none',
                 zIndex: -1,
                 border: '2px dashed red'
-            }
-        }) : null;
+            }} />
+        ) : null;
 
-        // Create a test canvas if Warp fails to create one
-        const testCanvas = React.createElement('canvas', {
-            key: 'test-canvas',
-            width: 800,
-            height: 600,
-            style: {
-                width: '100%',
-                height: '100%',
-                background: 'linear-gradient(45deg, #ff0000 0%, #000000 50%, #ff0000 100%)',
-                animation: 'testAnimation 2s ease-in-out infinite alternate'
-            }
-        });
-
-        const styles = React.createElement('style', {
-            key: 'test-styles'
-        }, `
-            @keyframes testAnimation {
-                0% { filter: hue-rotate(0deg) brightness(1); }
-                100% { filter: hue-rotate(180deg) brightness(1.5); }
-            }
-        `);
-
-        return React.createElement('div', {
-            ref: rootRef,
-            style: { width: '100%', height: '100%', position: 'relative' }
-        }, [
-            styles,
-            React.createElement(Warp, { key: 'warp', ...warpProps }),
-            testCanvas,
-            debugHUD,
-            debugOverlay,
-            React.createElement('div', {
-                key: 'fallback',
-                className: 'warp-background-fallback',
-                style: fallbackStyle
-            })
-        ]);
+        return (
+            <div ref={rootRef} style={{ width: '100%', height: '100%', position: 'relative' }}>
+                <Warp {...warpProps} />
+                {debugHUD}
+                {debugOverlay}
+                <div className="warp-background-fallback" style={fallbackStyle} />
+            </div>
+        );
     } catch (error) {
         console.error('WarpBackground error:', error);
         return React.createElement('div', {
