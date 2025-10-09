@@ -25,14 +25,14 @@ import WarpBackground from "../components/ui/WarpBackground";
 				<!-- Animated Content Container -->
 				<div id="hero-content" class="flex flex-col justify-center items-center text-center transition-all duration-700 ease-out w-full">
 					<!-- SINTHOME - Starts Centered with responsive positioning -->
-					<h1 id="sinthome-title" class="sinthome-title font-black uppercase mb-0 transition-all duration-700 ease-out sinthome-centered" style="color: var(--theme-text-primary);">
+					<h1 id="sinthome-title" class="sinthome-title font-black uppercase mb-0 transition-all duration-700 ease-out sinthome-centered theme-hero-title">
 						SINTHOME
 					</h1>
 
 					<!-- Initially Hidden Elements -->
 					<div id="emerging-content" class="content-hidden absolute-content">
 						<!-- Straightforward Tagline -->
-						<p class="tagline text-xl sm:text-2xl font-semibold mb-6 mt-4 text-center" style="color: var(--theme-text-primary);">
+						<p class="tagline text-xl sm:text-2xl font-semibold mb-6 mt-4 text-center theme-subtitle">
 							Knowledge — Critique — Praxis
 						</p>
 
@@ -694,6 +694,24 @@ import WarpBackground from "../components/ui/WarpBackground";
 		border-color: rgba(0, 0, 0, 0.4);
 	}
 
+	/* Theme-aware hero title */
+	.theme-hero-title {
+		color: var(--theme-text-primary);
+	}
+
+	html.theme-light .theme-hero-title {
+		color: #7f1d1d; /* Deep burgundy */
+	}
+
+	/* Theme-aware subtitle */
+	.theme-subtitle {
+		color: var(--theme-text-primary);
+	}
+
+	html.theme-light .theme-subtitle {
+		color: #9f1239; /* Rich crimson */
+	}
+
 	/* CTA Button Variants - Primary */
 	.cta-button-primary {
 		border: 2px solid;
@@ -711,13 +729,15 @@ import WarpBackground from "../components/ui/WarpBackground";
 	}
 
 	html.theme-light .cta-button-primary {
-		background-color: rgba(255, 255, 255, 0.8);
-		border-color: rgba(0, 0, 0, 0.2);
+		background-color: #450a0a; /* Dark burgundy */
+		color: #fecaca; /* Light pink */
+		border-color: #450a0a;
 	}
 
 	html.theme-light .cta-button-primary:hover {
-		background-color: rgba(0, 0, 0, 0.05);
-		border-color: rgba(0, 0, 0, 0.4);
+		background-color: #7f1d1d; /* Medium burgundy */
+		color: #ffffff; /* White */
+		border-color: #7f1d1d;
 	}
 
 	/* CTA Button Variants - Secondary */
@@ -738,14 +758,15 @@ import WarpBackground from "../components/ui/WarpBackground";
 	}
 
 	html.theme-light .cta-button-secondary {
-		background-color: rgba(255, 255, 255, 0.6);
-		border-color: rgba(0, 0, 0, 0.2);
+		background-color: #450a0a; /* Dark burgundy */
+		color: #fecaca; /* Light pink */
+		border-color: #450a0a;
 	}
 
 	html.theme-light .cta-button-secondary:hover {
-		background-color: #dc2626;
-		color: white;
-		border-color: #dc2626;
+		background-color: #7f1d1d; /* Medium burgundy */
+		color: #ffffff; /* White */
+		border-color: #7f1d1d;
 	}
 
 	/* CTA Button Variants - Tertiary */
@@ -766,12 +787,14 @@ import WarpBackground from "../components/ui/WarpBackground";
 	}
 
 	html.theme-light .cta-button-tertiary {
-		border-color: rgba(0, 0, 0, 0.2);
+		background-color: #450a0a; /* Dark burgundy */
+		color: #fecaca; /* Light pink */
+		border-color: #450a0a;
 	}
 
 	html.theme-light .cta-button-tertiary:hover {
-		background-color: #dc2626;
-		color: white;
-		border-color: #dc2626;
+		background-color: #7f1d1d; /* Medium burgundy */
+		color: #ffffff; /* White */
+		border-color: #7f1d1d;
 	}
 </style>
