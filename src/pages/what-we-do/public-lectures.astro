@@ -60,10 +60,10 @@ const theme = getThemeFromURL(Astro.url);
               </div>
 
               <!-- Compact schedule badge -->
-              <div class="bg-gradient-to-r from-red-900/30 to-red-800/20 border border-red-700/50 rounded-full px-3 py-1 backdrop-blur-sm">
+              <div class="theme-badge-red rounded-full px-3 py-1">
                 <div class="flex items-center">
-                  <div class="w-1.5 h-1.5 bg-red-400 rounded-full mr-2 animate-pulse"></div>
-                  <span class="text-red-300 font-bold text-xs uppercase tracking-wider">Every Saturday</span>
+                  <div class="w-1.5 h-1.5 theme-badge-dot-red rounded-full mr-2 animate-pulse"></div>
+                  <span class="theme-badge-text-red font-bold text-xs uppercase tracking-wider">Every Saturday</span>
                 </div>
               </div>
             </div>
@@ -176,3 +176,33 @@ const theme = getThemeFromURL(Astro.url);
       </section>
     </div>
 </PageLayout>
+
+<style>
+  /* Theme-aware red badge styles */
+  .theme-badge-red {
+    background: linear-gradient(to right, rgba(220, 38, 38, 0.15), rgba(185, 28, 28, 0.1));
+    border: 1px solid rgba(220, 38, 38, 0.3);
+  }
+
+  .theme-badge-dot-red {
+    background-color: #ef4444;
+  }
+
+  .theme-badge-text-red {
+    color: #dc2626;
+  }
+
+  /* Dark theme adjustments */
+  html.theme-dark .theme-badge-red {
+    background: linear-gradient(to right, rgba(127, 29, 29, 0.3), rgba(127, 29, 29, 0.2));
+    border-color: rgba(185, 28, 28, 0.5);
+  }
+
+  html.theme-dark .theme-badge-dot-red {
+    background-color: #f87171;
+  }
+
+  html.theme-dark .theme-badge-text-red {
+    color: #fca5a5;
+  }
+</style>
