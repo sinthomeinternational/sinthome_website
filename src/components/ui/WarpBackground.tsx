@@ -65,8 +65,7 @@ export default function WarpBackground(props: WarpBackgroundProps) {
         rotation: 0.55,
         scale: 0.5,
         softness: 0,
-        distortion: 0,
-        style: { width: '100%', height: '100%' }
+        distortion: 0
     };
 
     return <Warp
@@ -78,7 +77,6 @@ export default function WarpBackground(props: WarpBackgroundProps) {
             left: 0,
             width: '100%',
             height: '100%',
-            ...defaultProps.style,
             ...props.style
         }}
     />;
