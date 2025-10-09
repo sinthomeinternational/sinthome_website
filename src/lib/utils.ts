@@ -14,3 +14,14 @@ export function getInternalHref(href: string): string {
     }
     return href;
 }
+
+/**
+ * Get theme from URL parameters (SSR-compatible)
+ * @param url URL object from Astro context
+ * @returns Theme string ('light' or 'dark')
+ */
+export function getThemeFromURL(url: URL): 'light' | 'dark' {
+    const theme = url.searchParams.get('theme');
+    if (theme === 'light') return 'light';
+    return 'dark'; // Default to dark
+}

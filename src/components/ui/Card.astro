@@ -21,26 +21,60 @@ const {
 
 const baseClasses = 'rounded-xl transition-all duration-300';
 
-const variantClasses = {
-  default: 'bg-zinc-900/50 border border-zinc-800 p-6',
-  elevated: 'bg-zinc-900/50 border border-zinc-800 p-6 shadow-xl',
-  gradient: 'bg-gradient-to-r from-red-600/20 to-red-700/10 border border-red-600/30 p-8',
-  bordered: 'bg-transparent border-2 border-zinc-700 p-6'
+// Define styles using CSS variables for theme compatibility
+const variantStyles = {
+  default: {
+    backgroundColor: 'var(--theme-bg-card)',
+    border: '1px solid var(--theme-border)',
+    padding: '1.5rem'
+  },
+  elevated: {
+    backgroundColor: 'var(--theme-bg-card)',
+    border: '1px solid var(--theme-border)',
+    padding: '1.5rem',
+    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+  },
+  gradient: {
+    background: 'linear-gradient(to right, rgba(220, 38, 38, 0.2), rgba(185, 28, 28, 0.1))',
+    border: '1px solid rgba(220, 38, 38, 0.3)',
+    padding: '2rem'
+  },
+  bordered: {
+    backgroundColor: 'transparent',
+    border: '2px solid var(--theme-border)',
+    padding: '1.5rem'
+  }
 };
 
-const hoverClasses = hoverable ? {
-  default: 'hover:bg-zinc-800/50 hover:border-zinc-700',
-  elevated: 'hover:bg-zinc-800/50 hover:shadow-2xl hover:scale-[1.02]',
-  gradient: 'hover:border-red-600/50',
-  bordered: 'hover:border-red-600 hover:bg-zinc-900/30'
+const hoverStyles = hoverable ? {
+  default: {
+    backgroundColor: 'var(--theme-bg-secondary)',
+    borderColor: 'var(--theme-border-hover)'
+  },
+  elevated: {
+    backgroundColor: 'var(--theme-bg-secondary)',
+    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4)',
+    transform: 'scale(1.02)'
+  },
+  gradient: {
+    borderColor: 'rgba(220, 38, 38, 0.5)'
+  },
+  bordered: {
+    borderColor: '#dc2626',
+    backgroundColor: 'var(--theme-bg-card)'
+  }
 } : {};
 
 const combinedClasses = clsx(
   baseClasses,
-  variantClasses[variant],
-  hoverClasses[variant],
+  hoverable && `card-hover-${variant}`,
   className
 );
+
+// Combine styles for the current variant
+const currentStyles = {
+  ...variantStyles[variant]
+};
 
 const Component = href ? 'a' : 'div';
 const linkProps = href ? { href } : {};
@@ -48,8 +82,32 @@ const linkProps = href ? { href } : {};
 
 <Component
   class={combinedClasses}
+  style={currentStyles}
   {...linkProps}
   {...props}
 >
   <slot />
 </Component>
+
+<style>
+  /* Hover effects using CSS for better performance */
+  .card-hover-default:hover {
+    background-color: var(--theme-bg-secondary);
+    border-color: var(--theme-border-hover);
+  }
+
+  .card-hover-elevated:hover {
+    background-color: var(--theme-bg-secondary);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    transform: scale(1.02);
+  }
+
+  .card-hover-gradient:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+  }
+
+  .card-hover-bordered:hover {
+    border-color: #dc2626;
+    background-color: var(--theme-bg-card);
+  }
+</style>

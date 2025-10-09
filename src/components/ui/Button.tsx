@@ -23,12 +23,31 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const baseClasses = 'font-semibold transition-all duration-300 inline-flex items-center justify-center rounded-lg';
 
-  const variantClasses = {
-    primary: 'bg-red-600 text-white hover:bg-red-700 active:bg-red-800',
-    secondary: 'bg-zinc-800 text-white hover:bg-zinc-700 active:bg-zinc-900',
-    outline: 'border-2 border-white text-white hover:bg-white hover:text-black',
-    ghost: 'text-white hover:bg-white/10 active:bg-white/20',
-    danger: 'bg-red-900/30 text-red-400 hover:bg-red-900/50 border border-red-600/30 hover:border-red-600/50'
+  // Use CSS variables for theme-aware styling
+  const variantStyles = {
+    primary: {
+      backgroundColor: '#dc2626',
+      color: 'white',
+    },
+    secondary: {
+      backgroundColor: 'var(--theme-bg-secondary)',
+      color: 'var(--theme-text-primary)',
+      border: '1px solid var(--theme-border)'
+    },
+    outline: {
+      border: '2px solid var(--theme-border)',
+      color: 'var(--theme-text-primary)',
+      backgroundColor: 'transparent'
+    },
+    ghost: {
+      color: 'var(--theme-text-primary)',
+      backgroundColor: 'transparent'
+    },
+    danger: {
+      backgroundColor: 'rgba(185, 28, 28, 0.3)',
+      color: '#f87171',
+      border: '1px solid rgba(220, 38, 38, 0.3)'
+    }
   };
 
   const sizeClasses = {
@@ -43,11 +62,12 @@ const Button: React.FC<ButtonProps> = ({
     <button
       className={clsx(
         baseClasses,
-        variantClasses[variant],
+        `button-${variant}`, // Add variant class for CSS hover effects
         sizeClasses[size],
         widthClass,
         className
       )}
+      style={variantStyles[variant]}
       {...props}
     >
       {children}

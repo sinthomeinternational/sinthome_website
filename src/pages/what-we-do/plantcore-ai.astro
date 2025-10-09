@@ -3,6 +3,7 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import GoogleForm from "../../components/forms/GoogleForm";
 import { FORMS } from "../../config/forms";
 import { Image } from 'astro:assets';
+import { getThemeFromURL } from "../../lib/utils";
 
 // Import Plantcore components
 import HeroSection from "../../components/plantcore/HeroSection";
@@ -16,10 +17,13 @@ import ProjectContext from "../../components/plantcore/ProjectContext";
 
 // Import factory image
 import factoryImage from "../../assets/plantcore-ai/factory.png";
+
+const pageTitle = "Plantcore.AI - Sinthome";
+const theme = getThemeFromURL(Astro.url);
 ---
 
-<PageLayout title="Plantcore.AI - Sinthome">
-  <div class="relative bg-black min-h-screen">
+<PageLayout title={pageTitle} theme={theme}>
+  <div class="relative min-h-screen" style="background: var(--theme-bg-primary);">
     <!-- Warp Background -->
     <IndustrialWarpBackground client:load />
 
@@ -47,17 +51,17 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
     <MissionSection client:load />
 
     <!-- Method Section -->
-    <section id="method" class="relative py-20 bg-black/90 z-10">
+    <section id="method" class="relative py-20 z-10" style="background: var(--theme-bg-secondary);">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6" style="color: var(--theme-text-primary);">
             Three-Layer Architecture
           </h2>
 
           <div class="max-w-4xl mx-auto mb-12">
-            <div class="bg-zinc-900/40 border-l-4 border-red-500 pl-6 py-6 text-left rounded-r-lg">
-              <p class="text-lg text-zinc-300 leading-relaxed mb-4">
+            <div class="border-l-4 border-red-500 pl-6 py-6 text-left rounded-r-lg" style="background: var(--theme-bg-card);">
+              <p class="text-lg leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
                 AI Agents generate direct value and cover decision points where ERP cannot reach.
                 These agents deliver immediate ROI (≥10% procurement savings, ~7% inventory shrinkage reduction)
                 while simultaneously creating a sustainable stream of decision assets.
@@ -95,8 +99,8 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
 
         {/* Summary */}
         <div class="mt-16 text-center">
-          <div class="max-w-4xl mx-auto bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-8">
-            <p class="text-lg text-zinc-300 leading-relaxed">
+          <div class="max-w-4xl mx-auto rounded-xl p-8" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
+            <p class="text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
               This systematic approach creates a foundation for industrial knowledge accumulation,
               transfer, and amplification across global manufacturing networks.
             </p>
@@ -106,13 +110,13 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
     </section>
 
     <!-- Data Flow Architecture -->
-    <section id="data-flow" class="relative py-20 bg-zinc-950/80 z-10">
+    <section id="data-flow" class="relative py-20 z-10" style="background: var(--theme-bg-primary);">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6" style="color: var(--theme-text-primary);">
             Three-Layer Pipeline Architecture
           </h2>
-          <p class="text-lg text-zinc-400 max-w-4xl mx-auto leading-relaxed">
+          <p class="text-lg max-w-4xl mx-auto leading-relaxed" style="color: var(--theme-text-muted);">
             Systematic transformation: Raw decisions → Structured intelligence → Predictive guidance
           </p>
         </div>
@@ -122,45 +126,45 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
     </section>
 
     <!-- ROI Metrics -->
-    <section id="roi" class="relative py-20 bg-black/90 z-10">
+    <section id="roi" class="relative py-20 z-10" style="background: var(--theme-bg-secondary);">
       <ROIMetrics client:load />
     </section>
 
     <!-- Vision Section -->
-    <section id="vision" class="relative py-20 bg-zinc-950/80 z-10">
+    <section id="vision" class="relative py-20 z-10" style="background: var(--theme-bg-primary);">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-6xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-12">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-12" style="color: var(--theme-text-primary);">
             Our Vision: 2030 Roadmap
           </h2>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <div class="bg-black border-2 border-blue-600/40 rounded-xl p-8">
+            <div class="border-2 border-blue-600/40 rounded-xl p-8" style="background: var(--theme-bg-card);">
               <div class="text-5xl font-bold text-blue-400 mb-4">10,000</div>
-              <div class="text-lg font-semibold text-white mb-3">Factories Connected</div>
-              <p class="text-zinc-400 text-sm leading-relaxed">
+              <div class="text-lg font-semibold mb-3" style="color: var(--theme-text-primary);">Factories Connected</div>
+              <p class="text-sm leading-relaxed" style="color: var(--theme-text-muted);">
                 Global manufacturing network with comprehensive decision intelligence coverage
               </p>
             </div>
 
-            <div class="bg-black border-2 border-green-600/40 rounded-xl p-8">
+            <div class="border-2 border-green-600/40 rounded-xl p-8" style="background: var(--theme-bg-card);">
               <div class="text-5xl font-bold text-green-400 mb-4">150K+</div>
-              <div class="text-lg font-semibold text-white mb-3">AI Agents (Target)</div>
-              <p class="text-zinc-400 text-sm leading-relaxed">
+              <div class="text-lg font-semibold mb-3" style="color: var(--theme-text-primary);">AI Agents (Target)</div>
+              <p class="text-sm leading-relaxed" style="color: var(--theme-text-muted);">
                 Comprehensive decision capture points across all industrial processes
               </p>
             </div>
           </div>
 
-          <div class="max-w-4xl mx-auto bg-zinc-900/60 border border-zinc-800 rounded-xl p-12">
-            <p class="text-xl text-zinc-300 leading-relaxed mb-8">
+          <div class="max-w-4xl mx-auto rounded-xl p-12" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
+            <p class="text-xl leading-relaxed mb-8" style="color: var(--theme-text-secondary);">
               Our vision is to build, within the next five years, a decision-data-driven industrial intelligence network
               through continuous agent deployment and CDO data collection.
             </p>
-            <p class="text-lg text-zinc-400 leading-relaxed mb-6">
+            <p class="text-lg leading-relaxed mb-6" style="color: var(--theme-text-muted);">
               By 2030, Plantcore.AI will reach 10,000 factories and 150,000 AI Agents, generating hundreds of millions of validated decision samples.
             </p>
-            <p class="text-lg text-zinc-400 leading-relaxed">
+            <p class="text-lg leading-relaxed" style="color: var(--theme-text-muted);">
               On this foundation, we will train and deploy the world's first Industrial Vertical LLM—an engine of decision-making
               grounded in authentic factory data. This LLM will serve as the operating system of Industry 4.0, guiding real-time
               production choices, amplifying collective industrial knowledge, and reshaping how humans and machines collaborate in production.
@@ -171,16 +175,16 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
     </section>
 
     <!-- Philosophy Section -->
-    <section class="relative py-20 bg-black/90 z-10">
+    <section class="relative py-20 z-10" style="background: var(--theme-bg-secondary);">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto text-center">
-          <div class="bg-zinc-900/60 border-2 border-red-600/30 rounded-2xl p-16">
-            <h2 class="text-3xl font-bold text-white mb-8">Core Belief</h2>
+          <div class="border-2 border-red-600/30 rounded-2xl p-16" style="background: var(--theme-bg-card);">
+            <h2 class="text-3xl font-bold mb-8" style="color: var(--theme-text-primary);">Core Belief</h2>
             <div class="max-w-4xl mx-auto">
-              <p class="text-xl text-zinc-300 leading-relaxed mb-6">
+              <p class="text-xl leading-relaxed mb-6" style="color: var(--theme-text-secondary);">
                 The True Industrial Revolution
               </p>
-              <p class="text-lg text-zinc-400 leading-relaxed">
+              <p class="text-lg leading-relaxed" style="color: var(--theme-text-muted);">
                 At Plantcore.AI, we believe the true industrial revolution is not the replacement of workers by machines,
                 but the creation of an intelligent decision network—powered by an Industrial LLM—that redefines the
                 relationship between humans and production, opening new possibilities for the industries and societies of the future.
@@ -192,13 +196,13 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="relative py-20 bg-zinc-950/80 z-10">
+    <section id="contact" class="relative py-20 z-10" style="background: var(--theme-bg-primary);">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto text-center mb-16">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6" style="color: var(--theme-text-primary);">
             Get in Touch
           </h2>
-          <p class="text-lg text-zinc-400 leading-relaxed mb-12">
+          <p class="text-lg leading-relaxed mb-12" style="color: var(--theme-text-muted);">
             Interested in learning more about our vision? Contact Plantcore.AI
           </p>
 
@@ -216,23 +220,23 @@ import factoryImage from "../../assets/plantcore-ai/factory.png";
             </a>
 
             <a href="#contact-form"
-               class="group bg-transparent border-2 border-zinc-400 text-zinc-300 px-8 py-6 font-semibold rounded-lg hover:border-white hover:text-white transition-all duration-300 flex items-center justify-center gap-3">
+               class="group bg-transparent border-2 px-8 py-6 font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-3" style="border-color: var(--theme-border); color: var(--theme-text-secondary);" onmouseover="this.style.borderColor='var(--theme-text-primary)'; this.style.color='var(--theme-text-primary)'" onmouseout="this.style.borderColor='var(--theme-border)'; this.style.color='var(--theme-text-secondary)'">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
               <div>
                 <div class="text-lg">Join Pilot</div>
-                <div class="text-xs text-zinc-400 group-hover:text-zinc-300">Pilot program</div>
+                <div class="text-xs" style="color: var(--theme-text-muted);">Pilot program</div>
               </div>
             </a>
           </div>
         </div>
 
-        <div id="contact-form" class="bg-black/80 border-2 border-zinc-800 rounded-2xl p-8">
+        <div id="contact-form" class="border-2 rounded-2xl p-8" style="background: var(--theme-bg-card); border-color: var(--theme-border);">
           {/* Contact form placeholder */}
           <div class="text-center py-12">
-            <p class="text-zinc-400 text-lg">Contact Form</p>
-            <p class="text-sm text-zinc-500 mt-2">Contact Plantcore.AI for demo and pilot program inquiries</p>
+            <p class="text-lg" style="color: var(--theme-text-muted);">Contact Form</p>
+            <p class="text-sm mt-2" style="color: var(--theme-text-muted);">Contact Plantcore.AI for demo and pilot program inquiries</p>
           </div>
         </div>
       </div>

@@ -1,11 +1,13 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from 'astro:transitions';
+import LoadingIndicator from "astro-loading-indicator/component";
 import { getTheme } from "../config/themes";
 
 // 导入资源管理模块
 import { assets } from "../lib/assets";
 
-const { title, description, theme = 'dark' } = Astro.props;
+const { title, description } = Astro.props;
 
 const defaultTitle = "Sinthome - Knowledge, Critique, Praxis";
 const defaultDescription = "A public-interest community reconstructing new relations of production through the integration of knowledge learning, theoretical critique, and social praxis.";
@@ -16,7 +18,7 @@ const lightThemeConfig = getTheme('light');
 ---
 
 <!doctype html>
-<html lang="en" class={`theme-${theme}`} data-theme={theme}>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -44,9 +46,8 @@ const lightThemeConfig = getTheme('light');
 		<meta name="twitter:description" content={defaultDescription} />
 		<meta name="twitter:image" content={assets.socialImage} />
 
-		<!-- Removing ClientRouter to maintain static site benefits and avoid SPA behavior -->
-		<!-- <ClientRouter /> -->
-		<!-- <LoadingIndicator color="#f4f4f5" height="2px" /> -->
+		<ClientRouter />
+		<LoadingIndicator color="#f4f4f5" height="2px" />
 
 		<!-- Theme CSS Variables -->
 		<style define:vars={{
@@ -61,8 +62,6 @@ const lightThemeConfig = getTheme('light');
 			'theme-accent-hover-dark': darkThemeConfig.colors.accentHover,
 			'theme-border-dark': darkThemeConfig.colors.border,
 			'theme-border-hover-dark': darkThemeConfig.colors.borderHover,
-			'theme-tag-bg-dark': darkThemeConfig.colors.tagBg,
-			'theme-tag-text-dark': darkThemeConfig.colors.tagText,
 			'theme-bg-primary-light': lightThemeConfig.colors.bgPrimary,
 			'theme-bg-secondary-light': lightThemeConfig.colors.bgSecondary,
 			'theme-bg-tertiary-light': lightThemeConfig.colors.bgTertiary,
@@ -74,8 +73,6 @@ const lightThemeConfig = getTheme('light');
 			'theme-accent-hover-light': lightThemeConfig.colors.accentHover,
 			'theme-border-light': lightThemeConfig.colors.border,
 			'theme-border-hover-light': lightThemeConfig.colors.borderHover,
-			'theme-tag-bg-light': lightThemeConfig.colors.tagBg,
-			'theme-tag-text-light': lightThemeConfig.colors.tagText,
 		}}>
 			:root {
 				/* Dark theme variables (default) */
@@ -90,8 +87,6 @@ const lightThemeConfig = getTheme('light');
 				--theme-accent-hover: var(--theme-accent-hover-dark);
 				--theme-border: var(--theme-border-dark);
 				--theme-border-hover: var(--theme-border-hover-dark);
-				--theme-tag-bg: var(--theme-tag-bg-dark);
-				--theme-tag-text: var(--theme-tag-text-dark);
 			}
 
 			/* Light theme variables */
@@ -107,8 +102,6 @@ const lightThemeConfig = getTheme('light');
 				--theme-accent-hover: var(--theme-accent-hover-light);
 				--theme-border: var(--theme-border-light);
 				--theme-border-hover: var(--theme-border-hover-light);
-				--theme-tag-bg: var(--theme-tag-bg-light);
-				--theme-tag-text: var(--theme-tag-text-light);
 			}
 		</style>
 
@@ -122,26 +115,22 @@ const lightThemeConfig = getTheme('light');
 				const urlParams = new URLSearchParams(window.location.search);
 				const urlTheme = urlParams.get('theme');
 
-				// Determine which theme to use (priority: URL > localStorage > default to dark)
-				let theme = 'dark'; // Default to dark theme
+				// Check if user has explicitly set a theme preference in localStorage
+				const storedTheme = localStorage.getItem('theme');
 
-				if (urlTheme === 'light') {
+				// Determine which theme to use (priority: URL > localStorage > default)
+				let theme;
+				if (urlTheme === 'light' || urlTheme === 'dark') {
+					theme = urlTheme;
+					// Save URL theme to localStorage for future visits
+					localStorage.setItem('theme', theme);
+				} else if (storedTheme === 'light') {
 					theme = 'light';
-					// Save URL theme to localStorage for future visits
-					localStorage.setItem('theme', 'light');
-				} else if (urlTheme === 'dark') {
-					theme = 'dark';
-					// Save URL theme to localStorage for future visits
-					localStorage.setItem('theme', 'dark');
 				} else {
-					// No URL theme parameter, check localStorage
-					const storedTheme = localStorage.getItem('theme');
-					if (storedTheme === 'light') {
-						theme = 'light';
-					} else {
-						// For any other case (null, undefined, 'dark', or invalid values), use dark
-						theme = 'dark';
-						// Always ensure localStorage is set to dark for consistency
+					// Default to dark for any other case (including null, undefined, or invalid values)
+					theme = 'dark';
+					// Ensure localStorage is set to dark if it wasn't already
+					if (storedTheme !== 'dark') {
 						localStorage.setItem('theme', 'dark');
 					}
 				}
@@ -161,28 +150,12 @@ const lightThemeConfig = getTheme('light');
 		<script>
 			// Restore scroll position if this was a language switch
 			const scrollPosition = sessionStorage.getItem('scrollPosition');
-			const switchTimestamp = sessionStorage.getItem('languageSwitchTimestamp');
-
-			// Only restore if switch happened within last 3 seconds (prevents stale restores)
-			if (scrollPosition && switchTimestamp) {
-				const timeSinceSwitch = Date.now() - parseInt(switchTimestamp);
-				if (timeSinceSwitch < 3000) {
-					// Wait for page to fully load before restoring
-					window.addEventListener('load', () => {
-						requestAnimationFrame(() => {
-							window.scrollTo({
-								top: parseInt(scrollPosition),
-								behavior: 'instant'
-							});
-							sessionStorage.removeItem('scrollPosition');
-							sessionStorage.removeItem('languageSwitchTimestamp');
-						});
-					});
-				} else {
-					// Clean up stale data
+			if (scrollPosition) {
+				// Use requestAnimationFrame to ensure DOM is ready
+				requestAnimationFrame(() => {
+					window.scrollTo(0, parseInt(scrollPosition));
 					sessionStorage.removeItem('scrollPosition');
-					sessionStorage.removeItem('languageSwitchTimestamp');
-				}
+				});
 			}
 		</script>
 	</body>

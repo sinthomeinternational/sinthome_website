@@ -2,26 +2,29 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import H1 from "../../components/ui/H1.astro";
 import { getTranslations, getLanguageFromURL } from "../../lib/translations";
+import { getThemeFromURL } from "../../lib/utils";
 
-// Get current language from URL (SSR-compatible)
+// Get current language and theme from URL (SSR-compatible)
 const lang = getLanguageFromURL(Astro.url);
+const theme = getThemeFromURL(Astro.url);
 const t = getTranslations(lang);
 const pageContent = t.pages.whoWeAre;
+
 ---
 
-<PageLayout title={`${pageContent.title} - Sinthome`} useInfoLayout={true}>
+<PageLayout title={`${pageContent.title} - Sinthome`} useInfoLayout={true} theme={theme}>
     <H1>{pageContent.title}</H1>
 
     {pageContent.subtitle && (
-      <p class="text-xl text-gray-600 dark:text-zinc-400 mb-8 max-w-4xl">
+      <p class="text-xl mb-8 max-w-4xl" style="color: var(--theme-text-secondary);">
         {pageContent.subtitle}
       </p>
     )}
 
-    <div class="space-y-12 text-gray-700 dark:text-zinc-300 max-w-4xl">
+    <div class="space-y-12 max-w-4xl" style="color: var(--theme-text-secondary);">
       {pageContent.sections?.map((section: any) => (
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 class="text-2xl font-bold mb-4" style="color: var(--theme-text-primary);">
             {section.title}
           </h2>
 
@@ -42,11 +45,11 @@ const pageContent = t.pages.whoWeAre;
           {section.items && section.items.length > 0 && (
             <div class="space-y-4 mt-4">
               {section.items.map((item: any) => (
-                <div class="bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg p-6">
-                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                <div class="rounded-lg p-6" style="background-color: var(--theme-bg-card); border: 1px solid var(--theme-border);">
+                  <h3 class="text-lg font-semibold mb-2" style="color: var(--theme-text-primary);">
                     {item.name || item.title}
                   </h3>
-                  <p class="text-gray-600 dark:text-zinc-400">
+                  <p style="color: var(--theme-text-secondary);">
                     {item.description}
                   </p>
                 </div>
@@ -58,11 +61,11 @@ const pageContent = t.pages.whoWeAre;
 
       {/* Call to Action Section */}
       {pageContent.callToAction && (
-        <section class="mt-12 p-8 bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg text-center">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        <section class="mt-12 p-8 rounded-lg text-center" style="background-color: var(--theme-bg-card); border: 1px solid var(--theme-border);">
+          <h2 class="text-2xl font-bold mb-4" style="color: var(--theme-text-primary);">
             {pageContent.callToAction.title}
           </h2>
-          <p class="text-gray-600 dark:text-zinc-300 mb-6">
+          <p class="mb-6" style="color: var(--theme-text-secondary);">
             {pageContent.callToAction.description}
           </p>
           <div class="flex flex-wrap gap-4 justify-center">
@@ -76,7 +79,8 @@ const pageContent = t.pages.whoWeAre;
                 </a>
                 <a
                   href={`/contact${lang === 'zh' ? '?lang=zh' : ''}`}
-                  class="px-6 py-3 bg-gray-200 dark:bg-zinc-800 text-gray-900 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-zinc-700 transition-colors"
+                  class="px-6 py-3 rounded-lg transition-colors"
+                  style="background-color: var(--theme-bg-secondary); color: var(--theme-text-primary); border: 1px solid var(--theme-border);"
                 >
                   {pageContent.callToAction.buttons.getInvolved}
                 </a>
