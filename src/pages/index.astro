@@ -1,6 +1,7 @@
 ---
 import RootLayout from "../layouts/RootLayout.astro";
 import WarpBackground from "../components/ui/WarpBackground";
+import ThemeLanguageSwitcher from "../components/ui/ThemeLanguageSwitcher";
 ---
 
 <RootLayout>
@@ -22,6 +23,11 @@ import WarpBackground from "../components/ui/WarpBackground";
 			</div>
 
 			<div class="absolute w-full h-dvh flex flex-col justify-center items-center z-10">
+				<!-- Theme and Language Switchers - Top Right -->
+				<div id="switcher-buttons" class="absolute top-6 right-6 opacity-0 transition-opacity duration-500">
+					<ThemeLanguageSwitcher client:load />
+				</div>
+
 				<!-- Animated Content Container -->
 				<div id="hero-content" class="flex flex-col justify-center items-center text-center transition-all duration-700 ease-out w-full">
 					<!-- SINTHOME - Starts Centered with responsive positioning -->
@@ -139,9 +145,10 @@ import WarpBackground from "../components/ui/WarpBackground";
 		}
 
 		function triggerAnimation() {
-			// Hide scroll indicator and show collapse button
+			// Hide scroll indicator and show collapse button + switchers
 			const scrollIndicator = document.getElementById('scroll-indicator');
 			const collapseButton = document.getElementById('collapse-button');
+			const switcherButtons = document.getElementById('switcher-buttons');
 			scrollIndicator?.classList.add('scroll-hidden');
 
 			if (hasScrolled) return;
@@ -156,10 +163,12 @@ import WarpBackground from "../components/ui/WarpBackground";
 			// Step 1: Move SINTHOME title up smoothly
 			sinthomeTitle?.classList.add('title-moved');
 
-			// Show collapse button after a delay
+			// Show collapse button and switcher buttons after a delay
 			animationTimeouts.push(setTimeout(() => {
 				collapseButton?.classList.remove('opacity-0', 'pointer-events-none');
 				collapseButton?.classList.add('opacity-100');
+				switcherButtons?.classList.remove('opacity-0');
+				switcherButtons?.classList.add('opacity-100');
 			}, ANIMATION_CONFIG.buttonsDelay + 200));
 
 			// Step 3: Start content animation sequence
@@ -222,15 +231,18 @@ import WarpBackground from "../components/ui/WarpBackground";
 			const sinthomeTitle = document.getElementById('sinthome-title');
 			const scrollIndicator = document.getElementById('scroll-indicator');
 			const collapseButton = document.getElementById('collapse-button');
+			const switcherButtons = document.getElementById('switcher-buttons');
 
 			// Remove all animation classes simultaneously for instant reset
 			sinthomeTitle?.classList.remove('title-moved');
 			emergingContent?.classList.remove('content-visible');
 			scrollIndicator?.classList.remove('scroll-hidden');
 
-			// Hide collapse button and show scroll indicator
+			// Hide collapse button, switcher buttons and show scroll indicator
 			collapseButton?.classList.add('opacity-0', 'pointer-events-none');
 			collapseButton?.classList.remove('opacity-100');
+			switcherButtons?.classList.add('opacity-0');
+			switcherButtons?.classList.remove('opacity-100');
 
 			// Reset all child elements and micro-animations
 			document.querySelectorAll('.element-visible').forEach(el => {
