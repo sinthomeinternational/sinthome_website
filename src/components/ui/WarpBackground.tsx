@@ -85,19 +85,19 @@ export default function WarpBackground(props: WarpBackgroundProps) {
         }
     }, []);
 
-    // Default props that match the original homepage settings
+    // Fallback props - these should be overridden by props from parent
     const defaultProps = {
         color1: '#000000',  // Black
-        color2: '#940000',  // Dark red
+        color2: '#ff0000',  // Bright red (matching index.astro)
         color3: '#000000',  // Black
-        speed: 0.3,
+        speed: 1.0,         // Matching index.astro
         swirl: 0.98,
-        swirlIterations: 41,
-        shapeScale: 0.7,
+        swirlIterations: 20, // Matching index.astro
+        shapeScale: 0.5,    // Matching index.astro
         rotation: 0.55,
-        scale: 0.5,
+        scale: 0.6,         // Matching index.astro
         softness: 0,
-        distortion: 0
+        distortion: 0.6     // Matching index.astro
     };
 
     // Combine default props with passed props
