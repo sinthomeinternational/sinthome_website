@@ -112,79 +112,14 @@ const lightThemeConfig = getTheme('light');
 			}
 		</style>
 
-		<!-- Inline script to prevent theme flash -->
-		<script is:inline>
-			(function() {
-				// Remove any existing theme classes first
-				document.documentElement.classList.remove('theme-light', 'theme-dark');
-
-				// Check URL parameters first
-				const urlParams = new URLSearchParams(window.location.search);
-				const urlTheme = urlParams.get('theme');
-
-				// Determine which theme to use (priority: URL > localStorage > default to dark)
-				let theme = 'dark'; // Default to dark theme
-
-				if (urlTheme === 'light') {
-					theme = 'light';
-					// Save URL theme to localStorage for future visits
-					localStorage.setItem('theme', 'light');
-				} else if (urlTheme === 'dark') {
-					theme = 'dark';
-					// Save URL theme to localStorage for future visits
-					localStorage.setItem('theme', 'dark');
-				} else {
-					// No URL theme parameter, check localStorage
-					const storedTheme = localStorage.getItem('theme');
-					if (storedTheme === 'light') {
-						theme = 'light';
-					} else {
-						// For any other case (null, undefined, 'dark', or invalid values), use dark
-						theme = 'dark';
-						// Always ensure localStorage is set to dark for consistency
-						localStorage.setItem('theme', 'dark');
-					}
-				}
-
-				// Apply theme classes to html element
-				document.documentElement.classList.add(`theme-${theme}`);
-
-				// Apply data attribute for CSS targeting
-				document.documentElement.setAttribute('data-theme', theme);
-			})();
-		</script>
+		<!-- External script to prevent theme flash -->
+		<script src={assets.themeInit}></script>
 	</head>
 	<body class="font-sans min-h-screen">
 		<slot />
 
-		<!-- Script to restore scroll position after language switch -->
-		<script>
-			// Restore scroll position if this was a language switch
-			const scrollPosition = sessionStorage.getItem('scrollPosition');
-			const switchTimestamp = sessionStorage.getItem('languageSwitchTimestamp');
-
-			// Only restore if switch happened within last 3 seconds (prevents stale restores)
-			if (scrollPosition && switchTimestamp) {
-				const timeSinceSwitch = Date.now() - parseInt(switchTimestamp);
-				if (timeSinceSwitch < 3000) {
-					// Wait for page to fully load before restoring
-					window.addEventListener('load', () => {
-						requestAnimationFrame(() => {
-							window.scrollTo({
-								top: parseInt(scrollPosition),
-								behavior: 'instant'
-							});
-							sessionStorage.removeItem('scrollPosition');
-							sessionStorage.removeItem('languageSwitchTimestamp');
-						});
-					});
-				} else {
-					// Clean up stale data
-					sessionStorage.removeItem('scrollPosition');
-					sessionStorage.removeItem('languageSwitchTimestamp');
-				}
-			}
-		</script>
+		<!-- External script to restore scroll position after language switch -->
+		<script type="module" src={assets.scrollRestore}></script>
 	</body>
 </html>
 

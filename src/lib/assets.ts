@@ -13,7 +13,11 @@ export const assets = {
   favicon: getPublicAsset('/favicon.svg'),
   logo: getPublicAsset('/sinthome.png'),
   socialImage: getPublicAsset('/social-image.jpg'),
-  
+
+  // JavaScript files for security compliance
+  themeInit: getPublicAsset('/js/theme-init.js'),
+  scrollRestore: getPublicAsset('/js/scroll-restore.js'),
+
   // 项目图片
   projects: {
     acGenerator: acGeneratorImg,
