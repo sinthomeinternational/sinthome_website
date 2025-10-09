@@ -90,8 +90,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 				<!-- Collapse Button (hidden by default, shown when content is visible) -->
 				<div id="collapse-button" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 pointer-events-none transition-all duration-300">
-					<div class="backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 cursor-pointer" style="background-color: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--theme-text-secondary);">
+					<div class="backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 cursor-pointer theme-scroll-indicator">
+						<svg class="w-6 h-6 theme-scroll-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 11l7-7 7 7M5 19l7-7 7 7"></path>
 						</svg>
 					</div>
@@ -687,15 +687,17 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 	/* Light theme tags */
 	html.theme-light .theme-tag {
-		color: #7f1d1d; /* Dark burgundy - matching button */
+		background-color: #7f1d1d; /* Dark burgundy background */
+		color: #fecaca; /* Light pink text */
 		border-color: #7f1d1d;
-		background-color: transparent;
+		box-shadow: 0 1px 3px rgba(127, 29, 29, 0.2);
 	}
 
 	html.theme-light .theme-tag:hover {
-		color: #7f1d1d; /* Keep dark burgundy text */
-		border-color: #7f1d1d;
-		background-color: #fecaca; /* Light pink solid background */
+		background-color: #b91c1c; /* Bright burgundy background */
+		color: #fee2e2; /* Very light pink text */
+		border-color: #b91c1c;
+		box-shadow: 0 2px 4px rgba(127, 29, 29, 0.3);
 	}
 
 	/* Theme-aware hero title */
