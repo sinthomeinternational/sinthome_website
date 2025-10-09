@@ -85,19 +85,19 @@ export default function WarpBackground(props: WarpBackgroundProps) {
         }
     }, []);
 
-    // Fallback props - these should be overridden by props from parent
+    // Production baseline parameters (dark theme)
     const defaultProps = {
-        color1: '#000000',  // Black
-        color2: '#ff0000',  // Bright red (matching index.astro)
-        color3: '#000000',  // Black
-        speed: 1.0,         // Matching index.astro
-        swirl: 0.98,
-        swirlIterations: 20, // Matching index.astro
-        shapeScale: 0.5,    // Matching index.astro
-        rotation: 0.55,
-        scale: 0.6,         // Matching index.astro
-        softness: 0,
-        distortion: 0.6     // Matching index.astro
+        color1: '#000000',    // Black
+        color2: '#940000',    // Deep red (not neon)
+        color3: '#000000',    // Black
+        speed: 0.32,          // Subtle motion, not distracting
+        swirl: 0.98,          // Keeps the signature flow
+        swirlIterations: 30,  // Enough detail without noise
+        shapeScale: 0.08,     // Small, refined features
+        rotation: 0.55,       // Keeps the diagonal drift that framed the hero
+        scale: 0.48,          // Fills the frame without obvious repetition
+        softness: 0,          // Crisp edges read best behind text
+        distortion: 0.12      // Mild life in the field (not chaotic)
     };
 
     // Combine default props with passed props
