@@ -194,7 +194,17 @@ export default function WarpBackground(props: WarpBackgroundProps) {
 
         return (
             <div ref={rootRef} style={{ width: '100%', height: '100%', position: 'relative' }}>
-                <Warp {...warpProps} />
+                <Warp
+                    {...warpProps}
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%'
+                    }}
+                    className="warp-background"
+                />
                 {debugHUD}
                 {debugOverlay}
                 <div className="warp-background-fallback" style={fallbackStyle} />
