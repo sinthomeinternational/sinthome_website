@@ -39,7 +39,18 @@ export default function WarpBackgroundMinimal(props: WarpBackgroundProps) {
     console.log('🔍 WarpBackgroundMinimal props:', finalProps);
 
     try {
-        return <Warp {...finalProps} />;
+        return <Warp
+            {...finalProps}
+            style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                ...finalProps.style
+            }}
+            className="warp-background"
+        />;
     } catch (error) {
         console.error('WarpBackgroundMinimal error:', error);
         return (
@@ -52,7 +63,7 @@ export default function WarpBackgroundMinimal(props: WarpBackgroundProps) {
                 justifyContent: 'center',
                 color: 'white'
             }}>
-                Warp Error: {error?.message || 'Unknown error'}
+                Warp Error: {(error as Error)?.message || 'Unknown error'}
             </div>
         );
     }
