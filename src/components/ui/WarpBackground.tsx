@@ -192,11 +192,35 @@ export default function WarpBackground(props: WarpBackgroundProps) {
             }
         }) : null;
 
+        // Create a test canvas if Warp fails to create one
+        const testCanvas = React.createElement('canvas', {
+            key: 'test-canvas',
+            width: 800,
+            height: 600,
+            style: {
+                width: '100%',
+                height: '100%',
+                background: 'linear-gradient(45deg, #ff0000 0%, #000000 50%, #ff0000 100%)',
+                animation: 'testAnimation 2s ease-in-out infinite alternate'
+            }
+        });
+
+        const styles = React.createElement('style', {
+            key: 'test-styles'
+        }, `
+            @keyframes testAnimation {
+                0% { filter: hue-rotate(0deg) brightness(1); }
+                100% { filter: hue-rotate(180deg) brightness(1.5); }
+            }
+        `);
+
         return React.createElement('div', {
             ref: rootRef,
             style: { width: '100%', height: '100%', position: 'relative' }
         }, [
+            styles,
             React.createElement(Warp, { key: 'warp', ...warpProps }),
+            testCanvas,
             debugHUD,
             debugOverlay,
             React.createElement('div', {
