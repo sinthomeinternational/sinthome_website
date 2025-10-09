@@ -8,23 +8,21 @@ import ShaderErrorBoundary from "../components/ui/ShaderErrorBoundary";
 	<main class="homepage-main">
 		<div id="homepage-container" class="group relative w-full h-screen md:h-dvh min-h-screen flex items-center justify-center overflow-hidden">
 			<div class="absolute inset-0 z-0 overflow-hidden">
-				{/* Enhanced Warp with directional movement wrapped in error boundary */}
-				<ShaderErrorBoundary client:load>
-					<WarpBackground
-						color1="#000000"
-						color2="#ff0000"
-						color3="#000000"
-						speed={1.0}
-						swirl={0.98}
-						swirlIterations={20}
-						shapeScale={0.5}
-						rotation={0.55}
-						scale={0.6}
-						softness={0}
-						distortion={0.6}
-						client:load
-					/>
-				</ShaderErrorBoundary>
+				{/* Enhanced Warp with directional movement - simplified single island */}
+				<WarpBackground
+					color1="#000000"
+					color2="#ff0000"
+					color3="#000000"
+					speed={1.0}
+					swirl={0.98}
+					swirlIterations={20}
+					shapeScale={0.5}
+					rotation={0.55}
+					scale={0.6}
+					softness={0}
+					distortion={0.6}
+					client:load
+				/>
 			</div>
 
 			<div class="absolute inset-0 flex flex-col justify-center items-center z-10">
