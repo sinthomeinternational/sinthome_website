@@ -1,17 +1,15 @@
 ---
 import RootLayout from "../layouts/RootLayout.astro";
 import WarpBackground from "../components/ui/WarpBackground";
+import ThemeLanguageSwitcher from "../components/ui/ThemeLanguageSwitcher";
 ---
 
 <RootLayout>
 	<main class="homepage-main">
 		<div id="homepage-container" class="group relative w-full h-dvh flex items-center justify-center overflow-hidden">
 			<div class="absolute w-full h-dvh -z-10 overflow-hidden">
-				{/* Enhanced Warp with directional movement */}
+				{/* Enhanced Warp with directional movement - colors will auto-adapt to theme */}
 				<WarpBackground
-						color1="#000000"
-						color2="#940000"
-						color3="#000000"
 						speed={0.2}
 						swirl={0.98}
 						swirlIterations={29}
@@ -25,35 +23,40 @@ import WarpBackground from "../components/ui/WarpBackground";
 			</div>
 
 			<div class="absolute w-full h-dvh flex flex-col justify-center items-center z-10">
+				<!-- Theme and Language Switchers - Top Right -->
+				<div id="switcher-buttons" class="absolute top-6 right-6 opacity-0 transition-opacity duration-500">
+					<ThemeLanguageSwitcher client:load />
+				</div>
+
 				<!-- Animated Content Container -->
 				<div id="hero-content" class="flex flex-col justify-center items-center text-center transition-all duration-700 ease-out w-full">
 					<!-- SINTHOME - Starts Centered with responsive positioning -->
-					<h1 id="sinthome-title" class="sinthome-title font-black uppercase mb-0 transition-all duration-700 ease-out sinthome-centered" style="color: var(--theme-text-primary);">
+					<h1 id="sinthome-title" class="sinthome-title font-black uppercase mb-0 transition-all duration-700 ease-out sinthome-centered theme-hero-title">
 						SINTHOME
 					</h1>
 
 					<!-- Initially Hidden Elements -->
 					<div id="emerging-content" class="content-hidden absolute-content">
 						<!-- Straightforward Tagline -->
-						<p class="tagline text-xl sm:text-2xl font-semibold mb-6 mt-4 text-center" style="color: var(--theme-text-primary);">
+						<p class="tagline text-xl sm:text-2xl font-semibold mb-6 mt-4 text-center theme-subtitle">
 							Knowledge — Critique — Praxis
 						</p>
 
 						<!-- Plain Practice Tags -->
 						<div class="tags-container flex flex-wrap justify-center gap-3 mb-10 max-w-3xl mx-auto">
-							<span class="tag-item px-4 py-2 rounded-full text-sm border border-white/20 text-white hover:border-white/40">
+							<span class="tag-item px-4 py-2 rounded-full text-sm theme-tag">
 								Public Lectures
 							</span>
-							<span class="tag-item px-4 py-2 rounded-full text-sm border border-white/20 text-white hover:border-white/40">
+							<span class="tag-item px-4 py-2 rounded-full text-sm theme-tag">
 								Psychoanalysis
 							</span>
-							<span class="tag-item px-4 py-2 rounded-full text-sm border border-white/20 text-white hover:border-white/40">
+							<span class="tag-item px-4 py-2 rounded-full text-sm theme-tag">
 								Workers Assist
 							</span>
-							<span class="tag-item px-4 py-2 rounded-full text-sm border border-white/20 text-white hover:border-white/40">
+							<span class="tag-item px-4 py-2 rounded-full text-sm theme-tag">
 								AI for Public Good
 							</span>
-							<span class="tag-item px-4 py-2 rounded-full text-sm border border-white/20 text-white hover:border-white/40">
+							<span class="tag-item px-4 py-2 rounded-full text-sm theme-tag">
 								Factory AI Solution
 							</span>
 						</div>
@@ -62,19 +65,19 @@ import WarpBackground from "../components/ui/WarpBackground";
 						<div class="buttons-container flex flex-col sm:flex-row gap-4 justify-center items-center">
 							<a
 								href="/who-we-are"
-								class="cta-button px-8 py-4 font-bold transition-colors bg-black/40 border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/60"
+								class="cta-button cta-button-primary px-8 py-4 font-bold transition-colors"
 							>
 								ABOUT US
 							</a>
 							<a
 								href="/what-we-do"
-								class="cta-button px-8 py-4 font-bold border-2 border-white/40 text-white bg-black/20 transition-colors hover:bg-red-600 hover:text-white hover:border-red-600"
+								class="cta-button cta-button-secondary px-8 py-4 font-bold transition-colors"
 							>
 								OUR PROJECTS
 							</a>
 							<a
 								href="/contact"
-								class="cta-button px-8 py-4 font-bold border-2 border-white/40 text-white bg-transparent transition-colors hover:bg-red-600 hover:text-white hover:border-red-600"
+								class="cta-button cta-button-tertiary px-8 py-4 font-bold transition-colors"
 							>
 								JOIN US
 							</a>
@@ -84,8 +87,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 				<!-- Enhanced Scroll Indicator -->
 				<div id="scroll-indicator" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-100 transition-opacity duration-500">
-					<div class="scroll-pulse-animation backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition-all duration-300" style="background-color: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--theme-text-secondary);">
+					<div class="scroll-pulse-animation backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition-all duration-300 theme-scroll-indicator">
+						<svg class="w-6 h-6 theme-scroll-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
 						</svg>
 					</div>
@@ -93,8 +96,8 @@ import WarpBackground from "../components/ui/WarpBackground";
 
 				<!-- Collapse Button (hidden by default, shown when content is visible) -->
 				<div id="collapse-button" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 pointer-events-none transition-all duration-300">
-					<div class="backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 cursor-pointer" style="background-color: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--theme-text-secondary);">
+					<div class="backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 cursor-pointer theme-scroll-indicator">
+						<svg class="w-6 h-6 theme-scroll-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 11l7-7 7 7M5 19l7-7 7 7"></path>
 						</svg>
 					</div>
@@ -142,9 +145,10 @@ import WarpBackground from "../components/ui/WarpBackground";
 		}
 
 		function triggerAnimation() {
-			// Hide scroll indicator and show collapse button
+			// Hide scroll indicator and show collapse button + switchers
 			const scrollIndicator = document.getElementById('scroll-indicator');
 			const collapseButton = document.getElementById('collapse-button');
+			const switcherButtons = document.getElementById('switcher-buttons');
 			scrollIndicator?.classList.add('scroll-hidden');
 
 			if (hasScrolled) return;
@@ -159,10 +163,12 @@ import WarpBackground from "../components/ui/WarpBackground";
 			// Step 1: Move SINTHOME title up smoothly
 			sinthomeTitle?.classList.add('title-moved');
 
-			// Show collapse button after a delay
+			// Show collapse button and switcher buttons after a delay
 			animationTimeouts.push(setTimeout(() => {
 				collapseButton?.classList.remove('opacity-0', 'pointer-events-none');
 				collapseButton?.classList.add('opacity-100');
+				switcherButtons?.classList.remove('opacity-0');
+				switcherButtons?.classList.add('opacity-100');
 			}, ANIMATION_CONFIG.buttonsDelay + 200));
 
 			// Step 3: Start content animation sequence
@@ -225,15 +231,18 @@ import WarpBackground from "../components/ui/WarpBackground";
 			const sinthomeTitle = document.getElementById('sinthome-title');
 			const scrollIndicator = document.getElementById('scroll-indicator');
 			const collapseButton = document.getElementById('collapse-button');
+			const switcherButtons = document.getElementById('switcher-buttons');
 
 			// Remove all animation classes simultaneously for instant reset
 			sinthomeTitle?.classList.remove('title-moved');
 			emergingContent?.classList.remove('content-visible');
 			scrollIndicator?.classList.remove('scroll-hidden');
 
-			// Hide collapse button and show scroll indicator
+			// Hide collapse button, switcher buttons and show scroll indicator
 			collapseButton?.classList.add('opacity-0', 'pointer-events-none');
 			collapseButton?.classList.remove('opacity-100');
+			switcherButtons?.classList.add('opacity-0');
+			switcherButtons?.classList.remove('opacity-100');
 
 			// Reset all child elements and micro-animations
 			document.querySelectorAll('.element-visible').forEach(el => {
@@ -670,5 +679,159 @@ import WarpBackground from "../components/ui/WarpBackground";
 		#scroll-indicator {
 			transition-duration: 0.1s !important;
 		}
+	}
+
+	/* Theme-aware tag and button styles */
+	.theme-tag {
+		border: 1px solid;
+		color: var(--theme-text-primary);
+		background-color: transparent;
+	}
+
+	/* Dark theme tags */
+	html.theme-dark .theme-tag {
+		border-color: rgba(255, 255, 255, 0.2);
+	}
+
+	html.theme-dark .theme-tag:hover {
+		border-color: rgba(255, 255, 255, 0.4);
+	}
+
+	/* Light theme tags */
+	html.theme-light .theme-tag {
+		background-color: #7f1d1d; /* Dark burgundy background */
+		color: #fecaca; /* Light pink text */
+		border-color: #7f1d1d;
+		box-shadow: 0 1px 3px rgba(127, 29, 29, 0.2);
+	}
+
+	html.theme-light .theme-tag:hover {
+		background-color: #b91c1c; /* Bright burgundy background */
+		color: #fee2e2; /* Very light pink text */
+		border-color: #b91c1c;
+		box-shadow: 0 2px 4px rgba(127, 29, 29, 0.3);
+	}
+
+	/* Theme-aware hero title */
+	.theme-hero-title {
+		color: var(--theme-text-primary);
+	}
+
+	html.theme-light .theme-hero-title {
+		color: #b91c1c; /* Bright burgundy/red */
+	}
+
+	/* Theme-aware subtitle */
+	.theme-subtitle {
+		color: var(--theme-text-primary);
+	}
+
+	html.theme-light .theme-subtitle {
+		color: #7f1d1d; /* Dark burgundy - matching tags/buttons */
+	}
+
+	/* CTA Button Variants - Primary */
+	.cta-button-primary {
+		border: 2px solid;
+		color: var(--theme-text-primary);
+	}
+
+	html.theme-dark .cta-button-primary {
+		background-color: rgba(0, 0, 0, 0.4);
+		border-color: rgba(255, 255, 255, 0.4);
+	}
+
+	html.theme-dark .cta-button-primary:hover {
+		background-color: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255, 255, 255, 0.6);
+	}
+
+	html.theme-light .cta-button-primary {
+		background-color: #7f1d1d; /* Dark burgundy background */
+		color: #fecaca; /* Light pink text */
+		border-color: #7f1d1d;
+	}
+
+	html.theme-light .cta-button-primary:hover {
+		background-color: #991b1b; /* Slightly brighter */
+		color: #ffffff; /* White text */
+		border-color: #991b1b;
+	}
+
+	/* CTA Button Variants - Secondary */
+	.cta-button-secondary {
+		border: 2px solid;
+		color: var(--theme-text-primary);
+	}
+
+	html.theme-dark .cta-button-secondary {
+		background-color: rgba(0, 0, 0, 0.2);
+		border-color: rgba(255, 255, 255, 0.4);
+	}
+
+	html.theme-dark .cta-button-secondary:hover {
+		background-color: #dc2626;
+		color: white;
+		border-color: #dc2626;
+	}
+
+	html.theme-light .cta-button-secondary {
+		background-color: #fecaca; /* Solid light pink background */
+		color: #7f1d1d; /* Dark burgundy text */
+		border-color: #7f1d1d;
+	}
+
+	html.theme-light .cta-button-secondary:hover {
+		background-color: #7f1d1d; /* Dark burgundy background */
+		color: #fecaca; /* Light pink text */
+		border-color: #7f1d1d;
+	}
+
+	/* CTA Button Variants - Tertiary */
+	.cta-button-tertiary {
+		border: 2px solid;
+		color: var(--theme-text-primary);
+	}
+
+	html.theme-dark .cta-button-tertiary {
+		border-color: rgba(255, 255, 255, 0.4);
+		background-color: transparent;
+	}
+
+	html.theme-dark .cta-button-tertiary:hover {
+		background-color: #dc2626;
+		color: white;
+		border-color: #dc2626;
+	}
+
+	html.theme-light .cta-button-tertiary {
+		background-color: transparent; /* Transparent background */
+		color: #7f1d1d; /* Dark burgundy text */
+		border-color: #7f1d1d;
+	}
+
+	html.theme-light .cta-button-tertiary:hover {
+		background-color: #7f1d1d; /* Dark burgundy background */
+		color: #fecaca; /* Light pink text */
+		border-color: #7f1d1d;
+	}
+
+	/* Scroll indicator styling */
+	.theme-scroll-indicator {
+		background-color: var(--theme-bg-card);
+		border: 1px solid var(--theme-border);
+	}
+
+	html.theme-light .theme-scroll-indicator {
+		background-color: #fecaca; /* Light pink background */
+		border-color: #7f1d1d; /* Dark burgundy border */
+	}
+
+	.theme-scroll-arrow {
+		color: var(--theme-text-secondary);
+	}
+
+	html.theme-light .theme-scroll-arrow {
+		color: #7f1d1d; /* Dark burgundy arrow */
 	}
 </style>
