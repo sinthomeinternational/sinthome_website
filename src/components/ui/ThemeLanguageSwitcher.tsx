@@ -135,10 +135,10 @@ export default function ThemeLanguageSwitcher({
       {/* Theme Switcher */}
       <button
         onClick={handleThemeToggle}
-        className={`px-3 py-1.5 rounded-lg transition-colors text-sm font-medium ${
+        className={`px-3 py-1.5 rounded-lg transition-all duration-300 text-sm font-medium ${
           currentTheme === 'dark'
             ? 'bg-zinc-800 hover:bg-zinc-700 text-white'
-            : 'bg-gray-200 hover:bg-gray-300 text-gray-900'
+            : 'bg-[#fecaca] hover:bg-[#7f1d1d] text-[#7f1d1d] hover:text-[#fecaca] border-2 border-[#7f1d1d]'
         }`}
         aria-label={`Switch to ${currentTheme === 'dark' ? 'light' : 'dark'} theme`}
       >
@@ -148,10 +148,10 @@ export default function ThemeLanguageSwitcher({
       {/* Language Switcher */}
       <button
         onClick={handleLanguageToggle}
-        className={`px-3 py-1.5 rounded-lg transition-colors text-sm font-medium ${
+        className={`px-3 py-1.5 rounded-lg transition-all duration-300 text-sm font-medium ${
           currentTheme === 'dark'
             ? 'bg-zinc-800 hover:bg-zinc-700 text-white'
-            : 'bg-gray-200 hover:bg-gray-300 text-gray-900'
+            : 'bg-[#fecaca] hover:bg-[#7f1d1d] text-[#7f1d1d] hover:text-[#fecaca] border-2 border-[#7f1d1d]'
         }`}
         aria-label={`Switch to ${currentLang === 'en' ? 'Chinese' : 'English'}`}
       >
