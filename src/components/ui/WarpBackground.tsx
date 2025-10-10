@@ -65,10 +65,20 @@ export default function WarpBackground(props: WarpBackgroundProps) {
         rotation: 0.55,
         scale: 0.5,
         softness: 0,
-        distortion: 0,
-        style: { width: '100%', height: '100%' }
+        distortion: 0
     };
 
-    return <Warp {...defaultProps} {...props} style={{ ...defaultProps.style, ...props.style }} />;
+    return <Warp
+        {...defaultProps}
+        {...props}
+        style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            ...props.style
+        }}
+    />;
 
 }

@@ -123,7 +123,7 @@ const theme = getThemeFromURL(Astro.url);
 
         <div class="grid md:grid-cols-3 gap-8">
           <!-- Free Language Learning -->
-          <div class="rounded-xl p-8 transition-all duration-300 group hover:transform hover:scale-105" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+          <div class="rounded-xl p-8 transition-all duration-300 group hover:transform hover:scale-105 hover:border-red-600/50" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
             <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-300">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
@@ -136,13 +136,13 @@ const theme = getThemeFromURL(Astro.url);
             <p class="text-red-400 font-semibold mb-4">
               Serving 400+ workers with essential communication skills for workplace and daily life
             </p>
-            <a href="#contact" class="inline-flex items-center text-red-400 font-semibold transition-colors" style="color: var(--theme-text-primary);" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='var(--theme-text-primary)'">
+            <a href="#contact" class="inline-flex items-center text-red-400 font-semibold transition-colors hover:text-red-400" style="color: var(--theme-text-primary);">
               Learn More →
             </a>
           </div>
 
           <!-- Youth Education Programs -->
-          <div class="rounded-xl p-8 transition-all duration-300 group hover:transform hover:scale-105" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+          <div class="rounded-xl p-8 transition-all duration-300 group hover:transform hover:scale-105 hover:border-red-600/50" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
             <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-300">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
@@ -152,13 +152,13 @@ const theme = getThemeFromURL(Astro.url);
             <p class="mb-6" style="color: var(--theme-text-muted);">
               Homework support, interest groups, city exploration; safe and fun learning environments for young people.
             </p>
-            <a href="#contact" class="inline-flex items-center font-semibold transition-colors" style="color: var(--theme-text-primary);" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='var(--theme-text-primary)'">
+            <a href="#contact" class="inline-flex items-center font-semibold transition-colors hover:text-red-400" style="color: var(--theme-text-primary);">
               Learn More →
             </a>
           </div>
 
           <!-- Everyday Life Skills Training -->
-          <div class="rounded-xl p-8 transition-all duration-300 group hover:transform hover:scale-105" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+          <div class="rounded-xl p-8 transition-all duration-300 group hover:transform hover:scale-105 hover:border-red-600/50" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
             <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-300">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
@@ -168,7 +168,7 @@ const theme = getThemeFromURL(Astro.url);
             <p class="mb-6" style="color: var(--theme-text-muted);">
               Community shop partnerships, medical process guides, housing and commute experience sharing—real problems solved on-site.
             </p>
-            <a href="#contact" class="inline-flex items-center font-semibold transition-colors" style="color: var(--theme-text-primary);" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='var(--theme-text-primary)'">
+            <a href="#contact" class="inline-flex items-center font-semibold transition-colors hover:text-red-400" style="color: var(--theme-text-primary);">
               Learn More →
             </a>
           </div>
@@ -187,21 +187,21 @@ const theme = getThemeFromURL(Astro.url);
             </p>
             
             <div class="space-y-6">
-              <div class="rounded-xl p-6 transition-colors duration-300" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+              <div class="rounded-xl p-6 transition-colors duration-300 hover:border-red-600/50" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
                 <h3 class="text-xl font-bold mb-3" style="color: var(--theme-text-primary);">Collaborate with Local Small Businesses to Create Shared Services</h3>
                 <p style="color: var(--theme-text-muted);">
                   WA invites small businesses in Chinatown to include their services in the community service directory. Workers and community members can access these services while also benefiting from services offered by other participating businesses, creating a mutually supportive community ecosystem.
                 </p>
               </div>
 
-              <div class="rounded-xl p-6 transition-colors duration-300" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+              <div class="rounded-xl p-6 transition-colors duration-300 hover:border-red-600/50" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
                 <h3 class="text-xl font-bold mb-3" style="color: var(--theme-text-primary);">Continuously Expand Community Services</h3>
                 <p style="color: var(--theme-text-muted);">
                   As more businesses and community members join, the service directory grows to cover a wider range of daily life and work scenarios, providing comprehensive and diverse support and opportunities for all participants.
                 </p>
               </div>
 
-              <div class="rounded-xl p-6 transition-colors duration-300" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+              <div class="rounded-xl p-6 transition-colors duration-300 hover:border-red-600/50" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
                 <h3 class="text-xl font-bold mb-3" style="color: var(--theme-text-primary);">Build an Inclusive Mutual Support Platform</h3>
                 <p style="color: var(--theme-text-muted);">
                   Regardless of members' circumstances—whether at home, at work, or in daily life—everyone can find services suited to their needs, facilitating resource sharing and mutual support so that every community member can benefit.
@@ -301,7 +301,7 @@ const theme = getThemeFromURL(Astro.url);
           <h2 class="text-4xl font-black mb-4" style="color: var(--theme-text-primary);">Frequently Asked Questions</h2>
         </div>
         <div class="space-y-4">
-          <details class="rounded-xl p-6 transition-all duration-300 group" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+          <details class="rounded-xl p-6 transition-all duration-300 group hover:border-red-600/50" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
             <summary class="font-bold cursor-pointer flex items-center justify-between text-lg" style="color: var(--theme-text-primary);">
               <span>Who can join Workers Assist?</span>
               <span class="text-red-400 group-open:rotate-180 transition-transform duration-300 text-2xl">+</span>
@@ -311,7 +311,7 @@ const theme = getThemeFromURL(Astro.url);
             </p>
           </details>
 
-          <details class="rounded-xl p-6 transition-all duration-300 group" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+          <details class="rounded-xl p-6 transition-all duration-300 group hover:border-red-600/50" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
             <summary class="font-bold cursor-pointer flex items-center justify-between text-lg" style="color: var(--theme-text-primary);">
               <span>Are services really free?</span>
               <span class="text-red-400 group-open:rotate-180 transition-transform duration-300 text-2xl">+</span>
@@ -321,7 +321,7 @@ const theme = getThemeFromURL(Astro.url);
             </p>
           </details>
 
-          <details class="rounded-xl p-6 transition-all duration-300 group" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+          <details class="rounded-xl p-6 transition-all duration-300 group hover:border-red-600/50" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
             <summary class="font-bold cursor-pointer flex items-center justify-between text-lg" style="color: var(--theme-text-primary);">
               <span>How can businesses participate?</span>
               <span class="text-red-400 group-open:rotate-180 transition-transform duration-300 text-2xl">+</span>
@@ -331,7 +331,7 @@ const theme = getThemeFromURL(Astro.url);
             </p>
           </details>
 
-          <details class="rounded-xl p-6 transition-all duration-300 group" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);" onmouseover="this.style.borderColor='rgba(220, 38, 38, 0.5)'" onmouseout="this.style.borderColor='var(--theme-border)'">
+          <details class="rounded-xl p-6 transition-all duration-300 group hover:border-red-600/50" style="background: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
             <summary class="font-bold cursor-pointer flex items-center justify-between text-lg" style="color: var(--theme-text-primary);">
               <span>What volunteer opportunities are available?</span>
               <span class="text-red-400 group-open:rotate-180 transition-transform duration-300 text-2xl">+</span>

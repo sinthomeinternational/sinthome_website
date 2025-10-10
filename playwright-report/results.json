@@ -1,0 +1,137 @@
+{
+  "config": {
+    "configFile": "/Users/photon/Library/Mobile Documents/com~apple~CloudDocs/INDEX/Current/Work/Sinthome/website/sinthome_website/playwright.config.ts",
+    "rootDir": "/Users/photon/Library/Mobile Documents/com~apple~CloudDocs/INDEX/Current/Work/Sinthome/website/sinthome_website/tests/e2e",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "playwright-report/results.xml"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/photon/Library/Mobile Documents/com~apple~CloudDocs/INDEX/Current/Work/Sinthome/website/sinthome_website/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/photon/Library/Mobile Documents/com~apple~CloudDocs/INDEX/Current/Work/Sinthome/website/sinthome_website/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/photon/Library/Mobile Documents/com~apple~CloudDocs/INDEX/Current/Work/Sinthome/website/sinthome_website/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/photon/Library/Mobile Documents/com~apple~CloudDocs/INDEX/Current/Work/Sinthome/website/sinthome_website/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/photon/Library/Mobile Documents/com~apple~CloudDocs/INDEX/Current/Work/Sinthome/website/sinthome_website/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/photon/Library/Mobile Documents/com~apple~CloudDocs/INDEX/Current/Work/Sinthome/website/sinthome_website/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/photon/Library/Mobile Documents/com~apple~CloudDocs/INDEX/Current/Work/Sinthome/website/sinthome_website/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "Mobile Chrome",
+        "name": "Mobile Chrome",
+        "testDir": "/Users/photon/Library/Mobile Documents/com~apple~CloudDocs/INDEX/Current/Work/Sinthome/website/sinthome_website/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/photon/Library/Mobile Documents/com~apple~CloudDocs/INDEX/Current/Work/Sinthome/website/sinthome_website/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "Mobile Safari",
+        "name": "Mobile Safari",
+        "testDir": "/Users/photon/Library/Mobile Documents/com~apple~CloudDocs/INDEX/Current/Work/Sinthome/website/sinthome_website/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.0",
+    "workers": 5,
+    "webServer": {
+      "command": "pnpm run dev",
+      "url": "http://localhost:4321",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  },
+  "suites": [],
+  "errors": [
+    {
+      "message": "Error: Timed out waiting 120000ms from config.webServer.",
+      "stack": "Error: Timed out waiting 120000ms from config.webServer."
+    }
+  ],
+  "stats": {
+    "startTime": "2025-10-08T04:05:05.371Z",
+    "duration": 120033.614,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
