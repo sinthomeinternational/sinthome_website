@@ -15,22 +15,87 @@ const theme = getThemeFromURL(Astro.url);
     </div>
   </section>
 
-  <!-- Mission Section -->
+  <!-- Hook Section -->
   <section class="py-20" style="background-color: var(--theme-bg-secondary);">
-    <div class="max-w-5xl mx-auto">
-      <div class="border-l-4 border-red-600 pl-8 mb-8">
-        <h2 class="text-3xl font-bold mb-6" style="color: var(--theme-text-primary);">Mission — Reshaping the Future of Industry</h2>
+    <div class="max-w-4xl mx-auto">
+      <div class="rounded-lg p-12 border-l-4 border-red-600" style="background-color: var(--theme-bg-card);">
+        <h2 class="text-3xl font-bold mb-8 text-center" style="color: var(--theme-text-primary);">
+          The Key Insight
+        </h2>
+
+        <div class="space-y-8">
+          <div class="rounded-lg p-6" style="background-color: var(--theme-bg-secondary);">
+            <p class="text-2xl font-semibold mb-4 text-center" style="color: var(--theme-text-primary);">
+              Our customers pay us to build our data moat
+            </p>
+            <p class="text-lg leading-relaxed text-center" style="color: var(--theme-text-secondary);">
+              This solves the fundamental chicken-and-egg problem in industrial AI
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="rounded-lg p-6" style="background-color: var(--theme-bg-secondary); border: 1px solid var(--theme-border);">
+              <h3 class="font-bold mb-3 text-red-400">Traditional Approach</h3>
+              <ul class="space-y-2 text-sm" style="color: var(--theme-text-secondary);">
+                <li>• Need data to build AI model</li>
+                <li>• Can't get data without customers</li>
+                <li>• Can't get customers without working model</li>
+                <li class="text-red-400 font-semibold pt-2">→ Stalemate</li>
+              </ul>
+            </div>
+
+            <div class="rounded-lg p-6" style="background-color: var(--theme-bg-secondary); border: 2px solid #22c55e;">
+              <h3 class="font-bold mb-3 text-green-400">Our Approach</h3>
+              <ul class="space-y-2 text-sm" style="color: var(--theme-text-secondary);">
+                <li>• AI agents deliver immediate 10%+ ROI</li>
+                <li>• Factories pay us to deploy agents</li>
+                <li>• Agents capture decision data as byproduct</li>
+                <li class="text-green-400 font-semibold pt-2">→ Paid to build our moat</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="text-lg leading-relaxed text-center italic" style="color: var(--theme-text-muted);">
+            Revenue-generating agents that collect the data to train the world's first Industrial LLM
+          </p>
+        </div>
       </div>
-      <div class="prose prose-lg max-w-none leading-relaxed">
-        <p class="text-xl mb-6" style="color: var(--theme-text-secondary);">
-          We are building the world's first Industrial Vertical Large Language Model to fundamentally transform
-          how manufacturing organizations make decisions, accumulate knowledge, and drive continuous improvement.
-        </p>
-        <p class="text-lg" style="color: var(--theme-text-secondary);">
-          By creating an AI-driven decision intelligence layer that sits above traditional ERP systems, we enable
-          factories to capture, standardize, and amplify the collective wisdom embedded in millions of daily
-          operational decisions—unlocking unprecedented efficiency, agility, and competitive advantage.
-        </p>
+    </div>
+  </section>
+
+  <!-- Problem & Solution Section -->
+  <section class="py-20" style="background-color: var(--theme-bg-primary);">
+    <div class="max-w-5xl mx-auto">
+      <div class="border-l-4 border-red-600 pl-8 mb-12">
+        <h2 class="text-3xl font-bold mb-6" style="color: var(--theme-text-primary);">The Problem & Our Solution</h2>
+      </div>
+
+      <div class="space-y-12">
+        <!-- The Problem -->
+        <div class="rounded-lg p-8" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+          <h3 class="text-2xl font-bold mb-4" style="color: var(--theme-text-primary);">The Problem</h3>
+          <div class="space-y-4">
+            <p class="text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
+              Manufacturing factories make thousands of critical decisions daily—which supplier to choose, how much inventory to maintain, when to adjust production schedules. Yet this invaluable operational knowledge is lost forever.
+            </p>
+            <p class="text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
+              Traditional ERP systems capture <span class="font-semibold" style="color: var(--theme-text-primary);">transactions</span>, not <span class="font-semibold" style="color: var(--theme-text-primary);">decisions</span>. Workers rely on experience and intuition, leading to decision fatigue, inconsistent outcomes, and lost institutional knowledge when employees leave.
+            </p>
+          </div>
+        </div>
+
+        <!-- Our Solution -->
+        <div class="rounded-lg p-8" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+          <h3 class="text-2xl font-bold mb-4" style="color: var(--theme-text-primary);">Our Solution</h3>
+          <div class="space-y-4">
+            <p class="text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
+              We are building the world's first <span class="font-semibold" style="color: var(--theme-text-primary);">Industrial Vertical Large Language Model</span> to fundamentally transform how manufacturing organizations make decisions, accumulate knowledge, and drive continuous improvement.
+            </p>
+            <p class="text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
+              By creating an AI-driven decision intelligence layer that sits above traditional ERP systems, we enable factories to capture, standardize, and amplify the collective wisdom embedded in millions of daily operational decisions—unlocking unprecedented efficiency, agility, and competitive advantage.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -57,7 +122,10 @@ const theme = getThemeFromURL(Astro.url);
               </div>
             </div>
             <div class="flex-1">
-              <h3 class="text-2xl font-bold mb-3" style="color: var(--theme-text-primary);">AI Agents</h3>
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-2xl font-bold" style="color: var(--theme-text-primary);">AI Agents</h3>
+                <span class="text-sm font-semibold px-3 py-1 rounded-full bg-red-600 text-white">2025-2026</span>
+              </div>
               <p class="text-lg leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
                 Deployed across factories to assist with critical decision-making in procurement, inventory management,
                 production planning, and quality control. These agents provide immediate operational value while
@@ -84,7 +152,10 @@ const theme = getThemeFromURL(Astro.url);
               </div>
             </div>
             <div class="flex-1">
-              <h3 class="text-2xl font-bold mb-3" style="color: var(--theme-text-primary);">CDO Data Platform</h3>
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-2xl font-bold" style="color: var(--theme-text-primary);">CDO Data Platform</h3>
+                <span class="text-sm font-semibold px-3 py-1 rounded-full bg-red-600 text-white">2026-2028</span>
+              </div>
               <p class="text-lg leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
                 Captures and standardizes Contextualized Decision Outcomes—transforming raw operational choices
                 into structured, machine-readable knowledge assets. This platform creates a unified language for
@@ -111,7 +182,10 @@ const theme = getThemeFromURL(Astro.url);
               </div>
             </div>
             <div class="flex-1">
-              <h3 class="text-2xl font-bold mb-3" style="color: var(--theme-text-primary);">Industrial Vertical LLM</h3>
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-2xl font-bold" style="color: var(--theme-text-primary);">Industrial Vertical LLM</h3>
+                <span class="text-sm font-semibold px-3 py-1 rounded-full bg-red-600 text-white">2028-2030</span>
+              </div>
               <p class="text-lg leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
                 Trained on millions of validated decision samples to become the "operating system" of Industry 4.0.
                 This foundation model understands manufacturing context at unprecedented depth, providing intelligent
@@ -141,50 +215,283 @@ const theme = getThemeFromURL(Astro.url);
     </div>
   </section>
 
-  <!-- Vision Section -->
+  <!-- Current Progress Section -->
   <section class="py-20" style="background-color: var(--theme-bg-secondary);">
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold mb-4" style="color: var(--theme-text-primary);">Our Vision: 2030 Roadmap</h2>
-        <p class="text-xl" style="color: var(--theme-text-secondary);">Building the industrial intelligence network of the future</p>
+        <h2 class="text-4xl font-bold mb-4" style="color: var(--theme-text-primary);">
+          Current Progress
+        </h2>
+        <p class="text-xl" style="color: var(--theme-text-secondary);">
+          From concept to deployed solutions
+        </p>
       </div>
 
-      <!-- Roadmap Stats -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-        <div class="rounded-lg p-10 text-center hover:border-blue-600 transition-all duration-300" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+      <!-- Progress Grid -->
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <!-- Factory Partnerships -->
+        <div class="rounded-lg p-8" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+          <div class="text-4xl font-bold text-blue-600 mb-4">Active</div>
+          <h3 class="text-xl font-bold mb-3" style="color: var(--theme-text-primary);">
+            Factory Partnerships
+          </h3>
+          <p style="color: var(--theme-text-secondary);">
+            Collaborating with garment manufacturing and alloy production facilities—validating our approach across diverse industrial contexts and operational challenges.
+          </p>
+        </div>
+
+        <!-- Deployed Agents -->
+        <div class="rounded-lg p-8" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+          <div class="text-4xl font-bold text-green-600 mb-4">2</div>
+          <h3 class="text-xl font-bold mb-3" style="color: var(--theme-text-primary);">
+            AI Agents in Production
+          </h3>
+          <p style="color: var(--theme-text-secondary);">
+            Inventory Management Assistant and Export Trade Assistant deployed and operating in real factory environments, generating decision data daily.
+          </p>
+        </div>
+      </div>
+
+      <!-- Proof of Concept Story -->
+      <div class="rounded-lg p-10 border-l-4 border-red-600" style="background-color: var(--theme-bg-primary);">
+        <h3 class="text-2xl font-bold mb-6" style="color: var(--theme-text-primary);">
+          Validated Concept: Procurement Optimization
+        </h3>
+
+        <div class="space-y-6">
+          <div>
+            <h4 class="font-bold text-lg mb-2" style="color: var(--theme-text-primary);">
+              The Discovery
+            </h4>
+            <p class="text-lg" style="color: var(--theme-text-secondary);">
+              Through field research at an auto parts manufacturing facility, we observed procurement managers manually comparing suppliers across multiple platforms—a time-intensive process prone to errors and missed opportunities. Workers relied purely on experience, leading to decision fatigue and inconsistent outcomes.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-lg mb-2" style="color: var(--theme-text-primary);">
+              Our Solution
+            </h4>
+            <p class="text-lg" style="color: var(--theme-text-secondary);">
+              We developed an AI procurement agent that automates price comparison, supplier inquiry, and material selection optimization—learning from each decision to improve recommendations.
+            </p>
+          </div>
+
+          <div class="rounded-lg p-6" style="background-color: var(--theme-bg-secondary); border: 2px solid var(--theme-border);">
+            <h4 class="font-bold text-lg mb-4" style="color: var(--theme-text-primary);">
+              Validated Impact
+            </h4>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+              <div>
+                <div class="text-3xl font-bold text-red-400 mb-2">$40K</div>
+                <div class="text-sm" style="color: var(--theme-text-muted);">Order Value</div>
+              </div>
+              <div>
+                <div class="text-3xl font-bold text-green-400 mb-2">$120K</div>
+                <div class="text-sm" style="color: var(--theme-text-muted);">Cost Savings</div>
+              </div>
+              <div>
+                <div class="text-3xl font-bold text-blue-400 mb-2">300%</div>
+                <div class="text-sm" style="color: var(--theme-text-muted);">ROI</div>
+              </div>
+            </div>
+            <p class="text-sm mt-4 text-center italic" style="color: var(--theme-text-muted);">
+              Single procurement decision, field-validated savings
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Funding & Development -->
+      <div class="mt-8 rounded-lg p-8" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+          <div class="flex-1">
+            <h3 class="text-xl font-bold mb-3" style="color: var(--theme-text-primary);">
+              Stage 1 Development Funded
+            </h3>
+            <p style="color: var(--theme-text-secondary);">
+              Secured initial funding to develop and deploy core AI agent infrastructure. Currently focused on expanding agent capabilities and scaling to additional factory partners.
+            </p>
+          </div>
+          <div class="flex-shrink-0 text-center md:text-right">
+            <div class="text-3xl font-bold text-green-600">$28K</div>
+            <div class="text-sm" style="color: var(--theme-text-muted);">Seed Funding</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Near-Term Roadmap (Next 12-18 Months) -->
+  <section class="py-20" style="background-color: var(--theme-bg-primary);">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4" style="color: var(--theme-text-primary);">Near-Term Roadmap</h2>
+        <p class="text-xl" style="color: var(--theme-text-secondary);">Next 12-18 months of execution</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Q1-Q2 2025 -->
+        <div class="rounded-lg p-6" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+          <div class="text-red-600 font-bold mb-3">Q1-Q2 2025</div>
+          <h3 class="font-bold text-lg mb-3" style="color: var(--theme-text-primary);">Scale Agent Deployment</h3>
+          <ul class="text-sm space-y-2" style="color: var(--theme-text-secondary);">
+            <li>• Expand to 10-15 factories</li>
+            <li>• Deploy 50+ agents</li>
+            <li>• Validate 10%+ ROI consistently</li>
+          </ul>
+        </div>
+
+        <!-- Q3-Q4 2025 -->
+        <div class="rounded-lg p-6" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+          <div class="text-red-600 font-bold mb-3">Q3-Q4 2025</div>
+          <h3 class="font-bold text-lg mb-3" style="color: var(--theme-text-primary);">Launch CDO Platform</h3>
+          <ul class="text-sm space-y-2" style="color: var(--theme-text-secondary);">
+            <li>• Standardize decision capture</li>
+            <li>• Begin cross-factory learning</li>
+            <li>• Accumulate 10K+ decisions</li>
+          </ul>
+        </div>
+
+        <!-- H1 2026 -->
+        <div class="rounded-lg p-6" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+          <div class="text-red-600 font-bold mb-3">H1 2026</div>
+          <h3 class="font-bold text-lg mb-3" style="color: var(--theme-text-primary);">Seed Round & Scale</h3>
+          <ul class="text-sm space-y-2" style="color: var(--theme-text-secondary);">
+            <li>• Raise seed funding</li>
+            <li>• Expand to 50+ factories</li>
+            <li>• Begin LLM prototyping</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Long-Term Vision: Staged Milestones -->
+  <section class="py-20" style="background-color: var(--theme-bg-secondary);">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4" style="color: var(--theme-text-primary);">Path to 2030</h2>
+        <p class="text-xl" style="color: var(--theme-text-secondary);">Staged milestones with systematic de-risking</p>
+      </div>
+
+      <div class="space-y-8">
+        <!-- Stage 1: 2025-2026 -->
+        <div class="rounded-lg p-8 border-l-4 border-blue-600" style="background-color: var(--theme-bg-card);">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">1</div>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-2xl font-bold" style="color: var(--theme-text-primary);">Validate Unit Economics</h3>
+                <span class="text-sm font-semibold px-3 py-1 rounded-full bg-blue-600 text-white">2025-2026</span>
+              </div>
+              <ul class="space-y-2 mb-4" style="color: var(--theme-text-secondary);">
+                <li>• 10-50 factories</li>
+                <li>• 500-2,000 agents deployed</li>
+                <li>• Prove 10%+ ROI consistently across sectors</li>
+              </ul>
+              <div class="rounded-lg p-3" style="background-color: var(--theme-bg-secondary);">
+                <p class="text-sm font-semibold" style="color: var(--theme-text-primary);">✓ De-risk: Will customers pay for agents?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 2: 2026-2027 -->
+        <div class="rounded-lg p-8 border-l-4 border-green-600" style="background-color: var(--theme-bg-card);">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center text-white font-bold">2</div>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-2xl font-bold" style="color: var(--theme-text-primary);">Build Data Moat</h3>
+                <span class="text-sm font-semibold px-3 py-1 rounded-full bg-green-600 text-white">2026-2027</span>
+              </div>
+              <ul class="space-y-2 mb-4" style="color: var(--theme-text-secondary);">
+                <li>• 200-1,000 factories</li>
+                <li>• 5,000-20,000 agents deployed</li>
+                <li>• Launch CDO platform for cross-factory learning</li>
+              </ul>
+              <div class="rounded-lg p-3" style="background-color: var(--theme-bg-secondary);">
+                <p class="text-sm font-semibold" style="color: var(--theme-text-primary);">✓ De-risk: Can we capture quality decision data at scale?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 3: 2027-2029 -->
+        <div class="rounded-lg p-8 border-l-4 border-purple-600" style="background-color: var(--theme-bg-card);">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white font-bold">3</div>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-2xl font-bold" style="color: var(--theme-text-primary);">Train Industrial LLM</h3>
+                <span class="text-sm font-semibold px-3 py-1 rounded-full bg-purple-600 text-white">2027-2029</span>
+              </div>
+              <ul class="space-y-2 mb-4" style="color: var(--theme-text-secondary);">
+                <li>• 2,000-5,000 factories</li>
+                <li>• 50,000-100,000 agents deployed</li>
+                <li>• Begin LLM training on millions of validated samples</li>
+              </ul>
+              <div class="rounded-lg p-3" style="background-color: var(--theme-bg-secondary);">
+                <p class="text-sm font-semibold" style="color: var(--theme-text-primary);">✓ De-risk: Does the data train a useful model?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 4: 2030 -->
+        <div class="rounded-lg p-8 border-l-4 border-red-600" style="background-color: var(--theme-bg-card);">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold">4</div>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-2xl font-bold" style="color: var(--theme-text-primary);">Operating System of Industry 4.0</h3>
+                <span class="text-sm font-semibold px-3 py-1 rounded-full bg-red-600 text-white">2030</span>
+              </div>
+              <ul class="space-y-2 mb-4" style="color: var(--theme-text-secondary);">
+                <li>• 10,000 factories connected</li>
+                <li>• 150,000+ agents deployed</li>
+                <li>• Full Industrial Vertical LLM deployment across global manufacturing</li>
+              </ul>
+              <div class="rounded-lg p-3" style="background-color: var(--theme-bg-secondary);">
+                <p class="text-sm font-semibold" style="color: var(--theme-text-primary);">✓ Result: World's first Industrial LLM serving as the decision OS for Industry 4.0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Target Stats with Context -->
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="rounded-lg p-10 text-center" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
           <div class="text-6xl font-bold text-blue-600 mb-4">10,000</div>
-          <div class="text-2xl font-semibold mb-3" style="color: var(--theme-text-primary);">Factories Connected</div>
-          <p style="color: var(--theme-text-secondary);">
-            Global manufacturing network with comprehensive decision intelligence coverage across industries and geographies.
+          <div class="text-2xl font-semibold mb-3" style="color: var(--theme-text-primary);">Factories by 2030</div>
+          <div class="text-sm mb-2" style="color: var(--theme-text-muted);">
+            <span class="font-semibold" style="color: var(--theme-text-secondary);">Current:</span> Active partnerships |
+            <span class="font-semibold" style="color: var(--theme-text-secondary);">Next:</span> 15 by Q2 2025
+          </div>
+          <p class="text-sm" style="color: var(--theme-text-secondary);">
+            Global manufacturing network with comprehensive decision intelligence coverage
           </p>
         </div>
 
-        <div class="rounded-lg p-10 text-center hover:border-green-600 transition-all duration-300" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+        <div class="rounded-lg p-10 text-center" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
           <div class="text-6xl font-bold text-green-600 mb-4">150K+</div>
-          <div class="text-2xl font-semibold mb-3" style="color: var(--theme-text-primary);">AI Agents Deployed</div>
-          <p style="color: var(--theme-text-secondary);">
-            Comprehensive decision capture points covering all critical industrial processes and operational scenarios.
-          </p>
-        </div>
-      </div>
-
-      <!-- Vision Statement -->
-      <div class="rounded-lg p-12" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
-        <div class="prose prose-lg max-w-none">
-          <p class="text-xl leading-relaxed mb-6" style="color: var(--theme-text-primary);">
-            Our vision is to build, within the next five years, a decision-data-driven industrial intelligence
-            network through continuous agent deployment and CDO data collection.
-          </p>
-          <p class="text-lg leading-relaxed mb-6" style="color: var(--theme-text-secondary);">
-            By 2030, Plantcore AI will reach 10,000 factories and 150,000 AI Agents, generating hundreds of
-            millions of validated decision samples. This massive scale will create the world's most comprehensive
-            understanding of industrial operations and decision-making patterns.
-          </p>
-          <p class="text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
-            On this foundation, we will train and deploy the world's first Industrial Vertical LLM—an engine
-            of decision-making grounded in authentic factory data. This LLM will serve as the operating system
-            of Industry 4.0, guiding real-time production choices, amplifying collective industrial knowledge,
-            and reshaping how humans and machines collaborate in production environments.
+          <div class="text-2xl font-semibold mb-3" style="color: var(--theme-text-primary);">Agents by 2030</div>
+          <div class="text-sm mb-2" style="color: var(--theme-text-muted);">
+            <span class="font-semibold" style="color: var(--theme-text-secondary);">Current:</span> 2 in production |
+            <span class="font-semibold" style="color: var(--theme-text-secondary);">Next:</span> 50+ by Q2 2025
+          </div>
+          <p class="text-sm" style="color: var(--theme-text-secondary);">
+            Comprehensive decision capture covering all critical industrial processes
           </p>
         </div>
       </div>
