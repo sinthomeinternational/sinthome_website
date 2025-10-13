@@ -141,8 +141,115 @@ const theme = getThemeFromURL(Astro.url);
     </div>
   </section>
 
-  <!-- Vision Section -->
+  <!-- Current Progress Section -->
   <section class="py-20" style="background-color: var(--theme-bg-secondary);">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4" style="color: var(--theme-text-primary);">
+          Current Progress
+        </h2>
+        <p class="text-xl" style="color: var(--theme-text-secondary);">
+          From concept to deployed solutions
+        </p>
+      </div>
+
+      <!-- Progress Grid -->
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <!-- Factory Partnerships -->
+        <div class="rounded-lg p-8" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+          <div class="text-4xl font-bold text-blue-600 mb-4">Active</div>
+          <h3 class="text-xl font-bold mb-3" style="color: var(--theme-text-primary);">
+            Factory Partnerships
+          </h3>
+          <p style="color: var(--theme-text-secondary);">
+            Collaborating with garment manufacturing and alloy production facilities—validating our approach across diverse industrial contexts and operational challenges.
+          </p>
+        </div>
+
+        <!-- Deployed Agents -->
+        <div class="rounded-lg p-8" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+          <div class="text-4xl font-bold text-green-600 mb-4">2</div>
+          <h3 class="text-xl font-bold mb-3" style="color: var(--theme-text-primary);">
+            AI Agents in Production
+          </h3>
+          <p style="color: var(--theme-text-secondary);">
+            Inventory Management Assistant and Export Trade Assistant deployed and operating in real factory environments, generating decision data daily.
+          </p>
+        </div>
+      </div>
+
+      <!-- Proof of Concept Story -->
+      <div class="rounded-lg p-10 border-l-4 border-red-600" style="background-color: var(--theme-bg-primary);">
+        <h3 class="text-2xl font-bold mb-6" style="color: var(--theme-text-primary);">
+          Validated Concept: Procurement Optimization
+        </h3>
+
+        <div class="space-y-6">
+          <div>
+            <h4 class="font-bold text-lg mb-2" style="color: var(--theme-text-primary);">
+              The Discovery
+            </h4>
+            <p class="text-lg" style="color: var(--theme-text-secondary);">
+              Through field research at an auto parts manufacturing facility, we observed procurement managers manually comparing suppliers across multiple platforms—a time-intensive process prone to errors and missed opportunities. Workers relied purely on experience, leading to decision fatigue and inconsistent outcomes.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-lg mb-2" style="color: var(--theme-text-primary);">
+              Our Solution
+            </h4>
+            <p class="text-lg" style="color: var(--theme-text-secondary);">
+              We developed an AI procurement agent that automates price comparison, supplier inquiry, and material selection optimization—learning from each decision to improve recommendations.
+            </p>
+          </div>
+
+          <div class="rounded-lg p-6" style="background-color: var(--theme-bg-secondary); border: 2px solid var(--theme-border);">
+            <h4 class="font-bold text-lg mb-4" style="color: var(--theme-text-primary);">
+              Validated Impact
+            </h4>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+              <div>
+                <div class="text-3xl font-bold text-red-400 mb-2">$40K</div>
+                <div class="text-sm" style="color: var(--theme-text-muted);">Order Value</div>
+              </div>
+              <div>
+                <div class="text-3xl font-bold text-green-400 mb-2">$120K</div>
+                <div class="text-sm" style="color: var(--theme-text-muted);">Cost Savings</div>
+              </div>
+              <div>
+                <div class="text-3xl font-bold text-blue-400 mb-2">300%</div>
+                <div class="text-sm" style="color: var(--theme-text-muted);">ROI</div>
+              </div>
+            </div>
+            <p class="text-sm mt-4 text-center italic" style="color: var(--theme-text-muted);">
+              Single procurement decision, field-validated savings
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Funding & Development -->
+      <div class="mt-8 rounded-lg p-8" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+          <div class="flex-1">
+            <h3 class="text-xl font-bold mb-3" style="color: var(--theme-text-primary);">
+              Stage 1 Development Funded
+            </h3>
+            <p style="color: var(--theme-text-secondary);">
+              Secured initial funding to develop and deploy core AI agent infrastructure. Currently focused on expanding agent capabilities and scaling to additional factory partners.
+            </p>
+          </div>
+          <div class="flex-shrink-0 text-center md:text-right">
+            <div class="text-3xl font-bold text-green-600">$28K</div>
+            <div class="text-sm" style="color: var(--theme-text-muted);">Seed Funding</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision Section -->
+  <section class="py-20" style="background-color: var(--theme-bg-primary);">
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-16">
         <h2 class="text-4xl font-bold mb-4" style="color: var(--theme-text-primary);">Our Vision: 2030 Roadmap</h2>
