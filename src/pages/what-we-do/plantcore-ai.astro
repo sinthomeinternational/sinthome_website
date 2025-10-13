@@ -1,245 +1,237 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
-import GoogleForm from "../../components/forms/GoogleForm";
-import { FORMS } from "../../config/forms";
-import { Image } from 'astro:assets';
-import { getThemeFromURL } from "../../lib/utils";
 
-// Import Plantcore components
-import HeroSection from "../../components/plantcore/HeroSection";
-import MissionSection from "../../components/plantcore/MissionSection";
-import MethodCards from "../../components/plantcore/MethodCards";
-import DataFlowDiagram from "../../components/plantcore/DataFlowDiagram";
-import ROIMetrics from "../../components/plantcore/ROIMetrics";
-import SideNavigation from "../../components/plantcore/SideNavigation";
-import IndustrialWarpBackground from "../../components/plantcore/IndustrialWarpBackground";
-import ProjectContext from "../../components/plantcore/ProjectContext";
-
-// Import factory image
-import factoryImage from "../../assets/plantcore-ai/factory.png";
-
-const pageTitle = "Plantcore.AI - Sinthome";
-const theme = getThemeFromURL(Astro.url);
+const pageTitle = "Plantcore AI - Sinthome";
 ---
 
-<PageLayout title={pageTitle} theme={theme}>
-  <div class="relative min-h-screen" style="background: var(--theme-bg-primary);">
-    <!-- Warp Background -->
-    <IndustrialWarpBackground client:load />
+<PageLayout title={pageTitle} useContentLayout={true}>
+  <!-- Hero Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto text-center">
+      <h1 class="text-5xl font-bold text-gray-900 mb-4">Plantcore AI</h1>
+      <p class="text-2xl text-gray-600 font-light">Building the first Industrial Vertical Large Language Model</p>
+    </div>
+  </section>
 
-    <!-- Side Navigation -->
-    <SideNavigation client:load />
+  <!-- Mission Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+      <div class="border-l-4 border-red-600 pl-8 mb-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Mission — Reshaping the Future of Industry</h2>
+      </div>
+      <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+        <p class="text-xl mb-6">
+          We are building the world's first Industrial Vertical Large Language Model to fundamentally transform
+          how manufacturing organizations make decisions, accumulate knowledge, and drive continuous improvement.
+        </p>
+        <p class="text-lg">
+          By creating an AI-driven decision intelligence layer that sits above traditional ERP systems, we enable
+          factories to capture, standardize, and amplify the collective wisdom embedded in millions of daily
+          operational decisions—unlocking unprecedented efficiency, agility, and competitive advantage.
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Hero Section -->
-    <HeroSection
-      client:load
-      onRequestDemo={() => {
-        const element = document.getElementById('contact');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }}
-      onJoinPilot={() => {
-        const element = document.getElementById('contact');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }}
-    />
+  <!-- Method Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="border-l-4 border-red-600 pl-8 mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Method — Starting from Decisions</h2>
+        <p class="text-lg text-gray-600">
+          AI Agents generate direct value and capture decision points where ERP systems cannot reach.
+          These agents deliver immediate ROI while creating a sustainable stream of decision assets.
+        </p>
+      </div>
 
-    <!-- Mission Section -->
-    <MissionSection client:load />
-
-    <!-- Method Section -->
-    <section id="method" class="relative py-20 z-10" style="background: var(--theme-bg-secondary);">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6" style="color: var(--theme-text-primary);">
-            Three-Layer Architecture
-          </h2>
-
-          <div class="max-w-4xl mx-auto mb-12">
-            <div class="border-l-4 border-red-500 pl-6 py-6 text-left rounded-r-lg" style="background: var(--theme-bg-card);">
-              <p class="text-lg leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
-                AI Agents generate direct value and cover decision points where ERP cannot reach.
-                These agents deliver immediate ROI (≥10% procurement savings, ~7% inventory shrinkage reduction)
-                while simultaneously creating a sustainable stream of decision assets.
-              </p>
-              <p class="text-sm text-red-400">
-                Building a three-layer architecture: AI Agents → CDO Data Platform → Industrial Vertical LLM
-              </p>
+      <!-- Three-Layer Architecture Cards -->
+      <div class="space-y-8">
+        <!-- Layer 1: AI Agents -->
+        <div class="bg-white border-2 border-gray-200 rounded-lg p-8 hover:border-red-600 hover:shadow-xl transition-all duration-300">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center text-white text-2xl font-bold">
+                1
+              </div>
             </div>
-          </div>
-
-          {/* Factory Image */}
-          <div class="relative my-16">
-            <div class="relative overflow-hidden max-w-6xl mx-auto border-2 border-zinc-800 rounded-2xl">
-              <Image
-                src={factoryImage}
-                alt="Factory floor showing industrial AI implementation"
-                width={1200}
-                height={700}
-                loading="lazy"
-                format="webp"
-                quality={90}
-                class="w-full h-auto object-cover opacity-80"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
-              <div class="absolute bottom-6 left-6 bg-black/80 border border-red-500/60 px-6 py-3 rounded-lg backdrop-blur-sm">
-                <span class="text-sm font-semibold text-red-400">凡事都有开端</span>
-                <div class="text-xs text-zinc-400">Everything has a beginning</div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-gray-900 mb-3">AI Agents</h3>
+              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                Deployed across factories to assist with critical decision-making in procurement, inventory management,
+                production planning, and quality control. These agents provide immediate operational value while
+                continuously learning from human expertise.
+              </p>
+              <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-red-600">
+                <p class="text-gray-800 font-semibold mb-2">Direct Business Impact:</p>
+                <ul class="text-gray-700 space-y-1">
+                  <li>• 10%+ procurement cost reduction</li>
+                  <li>• 7% inventory shrinkage reduction</li>
+                  <li>• Real-time decision support at scale</li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Method Cards */}
-        <MethodCards client:load />
+        <!-- Layer 2: CDO Data Platform -->
+        <div class="bg-white border-2 border-gray-200 rounded-lg p-8 hover:border-red-600 hover:shadow-xl transition-all duration-300">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center text-white text-2xl font-bold">
+                2
+              </div>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-gray-900 mb-3">CDO Data Platform</h3>
+              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                Captures and standardizes Contextualized Decision Outcomes—transforming raw operational choices
+                into structured, machine-readable knowledge assets. This platform creates a unified language for
+                industrial intelligence across diverse manufacturing contexts.
+              </p>
+              <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-red-600">
+                <p class="text-gray-800 font-semibold mb-2">Key Capabilities:</p>
+                <ul class="text-gray-700 space-y-1">
+                  <li>• Decision context capture and normalization</li>
+                  <li>• Cross-factory knowledge transfer</li>
+                  <li>• Real-time learning from outcomes</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        {/* Summary */}
-        <div class="mt-16 text-center">
-          <div class="max-w-4xl mx-auto rounded-xl p-8" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-            <p class="text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
-              This systematic approach creates a foundation for industrial knowledge accumulation,
-              transfer, and amplification across global manufacturing networks.
-            </p>
+        <!-- Layer 3: Industrial Vertical LLM -->
+        <div class="bg-white border-2 border-gray-200 rounded-lg p-8 hover:border-red-600 hover:shadow-xl transition-all duration-300">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center text-white text-2xl font-bold">
+                3
+              </div>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-gray-900 mb-3">Industrial Vertical LLM</h3>
+              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                Trained on millions of validated decision samples to become the "operating system" of Industry 4.0.
+                This foundation model understands manufacturing context at unprecedented depth, providing intelligent
+                guidance that adapts to each factory's unique environment and challenges.
+              </p>
+              <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-red-600">
+                <p class="text-gray-800 font-semibold mb-2">Transformative Potential:</p>
+                <ul class="text-gray-700 space-y-1">
+                  <li>• Predictive decision intelligence</li>
+                  <li>• Automated best-practice discovery</li>
+                  <li>• Continuous optimization at scale</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- Data Flow Architecture -->
-    <section id="data-flow" class="relative py-20 z-10" style="background: var(--theme-bg-primary);">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6" style="color: var(--theme-text-primary);">
-            Three-Layer Pipeline Architecture
-          </h2>
-          <p class="text-lg max-w-4xl mx-auto leading-relaxed" style="color: var(--theme-text-muted);">
-            Systematic transformation: Raw decisions → Structured intelligence → Predictive guidance
+      <!-- Architecture Summary -->
+      <div class="mt-12 bg-gray-50 rounded-lg p-8 border-2 border-gray-200">
+        <p class="text-lg text-gray-700 leading-relaxed text-center">
+          This three-layer architecture creates a systematic foundation for industrial knowledge accumulation,
+          transfer, and amplification across global manufacturing networks—transforming how factories learn,
+          adapt, and compete in the digital age.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Vision: 2030 Roadmap</h2>
+        <p class="text-xl text-gray-600">Building the industrial intelligence network of the future</p>
+      </div>
+
+      <!-- Roadmap Stats -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div class="bg-white border-2 border-blue-200 rounded-lg p-10 text-center hover:border-blue-600 transition-all duration-300">
+          <div class="text-6xl font-bold text-blue-600 mb-4">10,000</div>
+          <div class="text-2xl font-semibold text-gray-900 mb-3">Factories Connected</div>
+          <p class="text-gray-700">
+            Global manufacturing network with comprehensive decision intelligence coverage across industries and geographies.
           </p>
         </div>
 
-        <DataFlowDiagram client:load />
-      </div>
-    </section>
-
-    <!-- ROI Metrics -->
-    <section id="roi" class="relative py-20 z-10" style="background: var(--theme-bg-secondary);">
-      <ROIMetrics client:load />
-    </section>
-
-    <!-- Vision Section -->
-    <section id="vision" class="relative py-20 z-10" style="background: var(--theme-bg-primary);">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-6xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-12" style="color: var(--theme-text-primary);">
-            Our Vision: 2030 Roadmap
-          </h2>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <div class="border-2 border-blue-600/40 rounded-xl p-8" style="background: var(--theme-bg-card);">
-              <div class="text-5xl font-bold text-blue-400 mb-4">10,000</div>
-              <div class="text-lg font-semibold mb-3" style="color: var(--theme-text-primary);">Factories Connected</div>
-              <p class="text-sm leading-relaxed" style="color: var(--theme-text-muted);">
-                Global manufacturing network with comprehensive decision intelligence coverage
-              </p>
-            </div>
-
-            <div class="border-2 border-green-600/40 rounded-xl p-8" style="background: var(--theme-bg-card);">
-              <div class="text-5xl font-bold text-green-400 mb-4">150K+</div>
-              <div class="text-lg font-semibold mb-3" style="color: var(--theme-text-primary);">AI Agents (Target)</div>
-              <p class="text-sm leading-relaxed" style="color: var(--theme-text-muted);">
-                Comprehensive decision capture points across all industrial processes
-              </p>
-            </div>
-          </div>
-
-          <div class="max-w-4xl mx-auto rounded-xl p-12" style="background: var(--theme-bg-card); border: 1px solid var(--theme-border);">
-            <p class="text-xl leading-relaxed mb-8" style="color: var(--theme-text-secondary);">
-              Our vision is to build, within the next five years, a decision-data-driven industrial intelligence network
-              through continuous agent deployment and CDO data collection.
-            </p>
-            <p class="text-lg leading-relaxed mb-6" style="color: var(--theme-text-muted);">
-              By 2030, Plantcore.AI will reach 10,000 factories and 150,000 AI Agents, generating hundreds of millions of validated decision samples.
-            </p>
-            <p class="text-lg leading-relaxed" style="color: var(--theme-text-muted);">
-              On this foundation, we will train and deploy the world's first Industrial Vertical LLM—an engine of decision-making
-              grounded in authentic factory data. This LLM will serve as the operating system of Industry 4.0, guiding real-time
-              production choices, amplifying collective industrial knowledge, and reshaping how humans and machines collaborate in production.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Philosophy Section -->
-    <section class="relative py-20 z-10" style="background: var(--theme-bg-secondary);">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center">
-          <div class="border-2 border-red-600/30 rounded-2xl p-16" style="background: var(--theme-bg-card);">
-            <h2 class="text-3xl font-bold mb-8" style="color: var(--theme-text-primary);">Core Belief</h2>
-            <div class="max-w-4xl mx-auto">
-              <p class="text-xl leading-relaxed mb-6" style="color: var(--theme-text-secondary);">
-                The True Industrial Revolution
-              </p>
-              <p class="text-lg leading-relaxed" style="color: var(--theme-text-muted);">
-                At Plantcore.AI, we believe the true industrial revolution is not the replacement of workers by machines,
-                but the creation of an intelligent decision network—powered by an Industrial LLM—that redefines the
-                relationship between humans and production, opening new possibilities for the industries and societies of the future.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="relative py-20 z-10" style="background: var(--theme-bg-primary);">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center mb-16">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6" style="color: var(--theme-text-primary);">
-            Get in Touch
-          </h2>
-          <p class="text-lg leading-relaxed mb-12" style="color: var(--theme-text-muted);">
-            Interested in learning more about our vision? Contact Plantcore.AI
+        <div class="bg-white border-2 border-green-200 rounded-lg p-10 text-center hover:border-green-600 transition-all duration-300">
+          <div class="text-6xl font-bold text-green-600 mb-4">150K+</div>
+          <div class="text-2xl font-semibold text-gray-900 mb-3">AI Agents Deployed</div>
+          <p class="text-gray-700">
+            Comprehensive decision capture points covering all critical industrial processes and operational scenarios.
           </p>
-
-          {/* Action Buttons */}
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
-            <a href="#contact-form"
-               class="group bg-red-600 border-2 border-red-500 text-white px-8 py-6 font-semibold rounded-lg hover:bg-red-700 transition-all duration-300 flex items-center justify-center gap-3">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <div>
-                <div class="text-lg">Request Demo</div>
-                <div class="text-xs text-red-200">Schedule a demonstration</div>
-              </div>
-            </a>
-
-            <a href="#contact-form"
-               class="group bg-transparent border-2 px-8 py-6 font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-3" style="border-color: var(--theme-border); color: var(--theme-text-secondary);" onmouseover="this.style.borderColor='var(--theme-text-primary)'; this.style.color='var(--theme-text-primary)'" onmouseout="this.style.borderColor='var(--theme-border)'; this.style.color='var(--theme-text-secondary)'">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              <div>
-                <div class="text-lg">Join Pilot</div>
-                <div class="text-xs" style="color: var(--theme-text-muted);">Pilot program</div>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <div id="contact-form" class="border-2 rounded-2xl p-8" style="background: var(--theme-bg-card); border-color: var(--theme-border);">
-          {/* Contact form placeholder */}
-          <div class="text-center py-12">
-            <p class="text-lg" style="color: var(--theme-text-muted);">Contact Form</p>
-            <p class="text-sm mt-2" style="color: var(--theme-text-muted);">Contact Plantcore.AI for demo and pilot program inquiries</p>
-          </div>
         </div>
       </div>
-    </section>
-  </div>
+
+      <!-- Vision Statement -->
+      <div class="bg-white rounded-lg p-12 border-2 border-gray-200">
+        <div class="prose prose-lg max-w-none">
+          <p class="text-xl text-gray-800 leading-relaxed mb-6">
+            Our vision is to build, within the next five years, a decision-data-driven industrial intelligence
+            network through continuous agent deployment and CDO data collection.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            By 2030, Plantcore AI will reach 10,000 factories and 150,000 AI Agents, generating hundreds of
+            millions of validated decision samples. This massive scale will create the world's most comprehensive
+            understanding of industrial operations and decision-making patterns.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            On this foundation, we will train and deploy the world's first Industrial Vertical LLM—an engine
+            of decision-making grounded in authentic factory data. This LLM will serve as the operating system
+            of Industry 4.0, guiding real-time production choices, amplifying collective industrial knowledge,
+            and reshaping how humans and machines collaborate in production environments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-gray-50 border-l-4 border-red-600 rounded-r-lg p-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Core Belief</h2>
+        <div class="space-y-6">
+          <p class="text-2xl font-semibold text-gray-900 text-center">
+            The True Industrial Revolution
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            At Plantcore AI, we believe the true industrial revolution is not the replacement of workers by machines,
+            but the creation of an intelligent decision network—powered by an Industrial LLM—that redefines the
+            relationship between humans and production, opening new possibilities for the industries and societies
+            of the future.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            We are building technology that amplifies human expertise rather than replaces it, creating a symbiotic
+            relationship where AI systems learn from human judgment while providing unprecedented decision support
+            and insights. This is the foundation for a more productive, sustainable, and human-centric industrial future.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+      <p class="text-xl text-gray-600 mb-12">
+        Interested in learning more about Plantcore AI or exploring partnership opportunities?
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-6 justify-center">
+        <a href="/contact"
+           class="inline-flex items-center justify-center px-8 py-4 bg-red-600 text-white text-lg font-semibold rounded-lg hover:bg-red-700 transition-colors duration-300 shadow-lg hover:shadow-xl">
+          Request a Demo
+        </a>
+        <a href="/contact"
+           class="inline-flex items-center justify-center px-8 py-4 bg-white text-red-600 text-lg font-semibold rounded-lg border-2 border-red-600 hover:bg-red-50 transition-colors duration-300">
+          Join Pilot Program
+        </a>
+      </div>
+    </div>
+  </section>
 </PageLayout>
