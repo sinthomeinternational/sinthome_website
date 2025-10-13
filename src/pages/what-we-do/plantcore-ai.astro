@@ -1,30 +1,32 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
+import { getThemeFromURL } from "../../lib/utils";
 
 const pageTitle = "Plantcore AI - Sinthome";
+const theme = getThemeFromURL(Astro.url);
 ---
 
-<PageLayout title={pageTitle} useContentLayout={true}>
+<PageLayout title={pageTitle} useContentLayout={true} theme={theme}>
   <!-- Hero Section -->
-  <section class="py-16 bg-white">
+  <section class="py-16" style="background-color: var(--theme-bg-primary);">
     <div class="max-w-5xl mx-auto text-center">
-      <h1 class="text-5xl font-bold text-gray-900 mb-4">Plantcore AI</h1>
-      <p class="text-2xl text-gray-600 font-light">Building the first Industrial Vertical Large Language Model</p>
+      <h1 class="text-5xl font-bold mb-4" style="color: var(--theme-text-primary);">Plantcore AI</h1>
+      <p class="text-2xl font-light" style="color: var(--theme-text-secondary);">Building the first Industrial Vertical Large Language Model</p>
     </div>
   </section>
 
   <!-- Mission Section -->
-  <section class="py-20 bg-gray-50">
+  <section class="py-20" style="background-color: var(--theme-bg-secondary);">
     <div class="max-w-5xl mx-auto">
       <div class="border-l-4 border-red-600 pl-8 mb-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Mission — Reshaping the Future of Industry</h2>
+        <h2 class="text-3xl font-bold mb-6" style="color: var(--theme-text-primary);">Mission — Reshaping the Future of Industry</h2>
       </div>
-      <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-        <p class="text-xl mb-6">
+      <div class="prose prose-lg max-w-none leading-relaxed">
+        <p class="text-xl mb-6" style="color: var(--theme-text-secondary);">
           We are building the world's first Industrial Vertical Large Language Model to fundamentally transform
           how manufacturing organizations make decisions, accumulate knowledge, and drive continuous improvement.
         </p>
-        <p class="text-lg">
+        <p class="text-lg" style="color: var(--theme-text-secondary);">
           By creating an AI-driven decision intelligence layer that sits above traditional ERP systems, we enable
           factories to capture, standardize, and amplify the collective wisdom embedded in millions of daily
           operational decisions—unlocking unprecedented efficiency, agility, and competitive advantage.
@@ -34,11 +36,11 @@ const pageTitle = "Plantcore AI - Sinthome";
   </section>
 
   <!-- Method Section -->
-  <section class="py-20 bg-white">
+  <section class="py-20" style="background-color: var(--theme-bg-primary);">
     <div class="max-w-5xl mx-auto">
       <div class="border-l-4 border-red-600 pl-8 mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">Method — Starting from Decisions</h2>
-        <p class="text-lg text-gray-600">
+        <h2 class="text-3xl font-bold mb-4" style="color: var(--theme-text-primary);">Method — Starting from Decisions</h2>
+        <p class="text-lg" style="color: var(--theme-text-secondary);">
           AI Agents generate direct value and capture decision points where ERP systems cannot reach.
           These agents deliver immediate ROI while creating a sustainable stream of decision assets.
         </p>
@@ -47,7 +49,7 @@ const pageTitle = "Plantcore AI - Sinthome";
       <!-- Three-Layer Architecture Cards -->
       <div class="space-y-8">
         <!-- Layer 1: AI Agents -->
-        <div class="bg-white border-2 border-gray-200 rounded-lg p-8 hover:border-red-600 hover:shadow-xl transition-all duration-300">
+        <div class="rounded-lg p-8 hover:border-red-600 hover:shadow-xl transition-all duration-300" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
           <div class="flex items-start gap-6">
             <div class="flex-shrink-0">
               <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center text-white text-2xl font-bold">
@@ -55,15 +57,15 @@ const pageTitle = "Plantcore AI - Sinthome";
               </div>
             </div>
             <div class="flex-1">
-              <h3 class="text-2xl font-bold text-gray-900 mb-3">AI Agents</h3>
-              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+              <h3 class="text-2xl font-bold mb-3" style="color: var(--theme-text-primary);">AI Agents</h3>
+              <p class="text-lg leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
                 Deployed across factories to assist with critical decision-making in procurement, inventory management,
                 production planning, and quality control. These agents provide immediate operational value while
                 continuously learning from human expertise.
               </p>
-              <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-red-600">
-                <p class="text-gray-800 font-semibold mb-2">Direct Business Impact:</p>
-                <ul class="text-gray-700 space-y-1">
+              <div class="rounded-lg p-4 border-l-4 border-red-600" style="background-color: var(--theme-bg-secondary);">
+                <p class="font-semibold mb-2" style="color: var(--theme-text-primary);">Direct Business Impact:</p>
+                <ul class="space-y-1" style="color: var(--theme-text-secondary);">
                   <li>• 10%+ procurement cost reduction</li>
                   <li>• 7% inventory shrinkage reduction</li>
                   <li>• Real-time decision support at scale</li>
@@ -74,7 +76,7 @@ const pageTitle = "Plantcore AI - Sinthome";
         </div>
 
         <!-- Layer 2: CDO Data Platform -->
-        <div class="bg-white border-2 border-gray-200 rounded-lg p-8 hover:border-red-600 hover:shadow-xl transition-all duration-300">
+        <div class="rounded-lg p-8 hover:border-red-600 hover:shadow-xl transition-all duration-300" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
           <div class="flex items-start gap-6">
             <div class="flex-shrink-0">
               <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center text-white text-2xl font-bold">
@@ -82,15 +84,15 @@ const pageTitle = "Plantcore AI - Sinthome";
               </div>
             </div>
             <div class="flex-1">
-              <h3 class="text-2xl font-bold text-gray-900 mb-3">CDO Data Platform</h3>
-              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+              <h3 class="text-2xl font-bold mb-3" style="color: var(--theme-text-primary);">CDO Data Platform</h3>
+              <p class="text-lg leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
                 Captures and standardizes Contextualized Decision Outcomes—transforming raw operational choices
                 into structured, machine-readable knowledge assets. This platform creates a unified language for
                 industrial intelligence across diverse manufacturing contexts.
               </p>
-              <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-red-600">
-                <p class="text-gray-800 font-semibold mb-2">Key Capabilities:</p>
-                <ul class="text-gray-700 space-y-1">
+              <div class="rounded-lg p-4 border-l-4 border-red-600" style="background-color: var(--theme-bg-secondary);">
+                <p class="font-semibold mb-2" style="color: var(--theme-text-primary);">Key Capabilities:</p>
+                <ul class="space-y-1" style="color: var(--theme-text-secondary);">
                   <li>• Decision context capture and normalization</li>
                   <li>• Cross-factory knowledge transfer</li>
                   <li>• Real-time learning from outcomes</li>
@@ -101,7 +103,7 @@ const pageTitle = "Plantcore AI - Sinthome";
         </div>
 
         <!-- Layer 3: Industrial Vertical LLM -->
-        <div class="bg-white border-2 border-gray-200 rounded-lg p-8 hover:border-red-600 hover:shadow-xl transition-all duration-300">
+        <div class="rounded-lg p-8 hover:border-red-600 hover:shadow-xl transition-all duration-300" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
           <div class="flex items-start gap-6">
             <div class="flex-shrink-0">
               <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center text-white text-2xl font-bold">
@@ -109,15 +111,15 @@ const pageTitle = "Plantcore AI - Sinthome";
               </div>
             </div>
             <div class="flex-1">
-              <h3 class="text-2xl font-bold text-gray-900 mb-3">Industrial Vertical LLM</h3>
-              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+              <h3 class="text-2xl font-bold mb-3" style="color: var(--theme-text-primary);">Industrial Vertical LLM</h3>
+              <p class="text-lg leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
                 Trained on millions of validated decision samples to become the "operating system" of Industry 4.0.
                 This foundation model understands manufacturing context at unprecedented depth, providing intelligent
                 guidance that adapts to each factory's unique environment and challenges.
               </p>
-              <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-red-600">
-                <p class="text-gray-800 font-semibold mb-2">Transformative Potential:</p>
-                <ul class="text-gray-700 space-y-1">
+              <div class="rounded-lg p-4 border-l-4 border-red-600" style="background-color: var(--theme-bg-secondary);">
+                <p class="font-semibold mb-2" style="color: var(--theme-text-primary);">Transformative Potential:</p>
+                <ul class="space-y-1" style="color: var(--theme-text-secondary);">
                   <li>• Predictive decision intelligence</li>
                   <li>• Automated best-practice discovery</li>
                   <li>• Continuous optimization at scale</li>
@@ -129,8 +131,8 @@ const pageTitle = "Plantcore AI - Sinthome";
       </div>
 
       <!-- Architecture Summary -->
-      <div class="mt-12 bg-gray-50 rounded-lg p-8 border-2 border-gray-200">
-        <p class="text-lg text-gray-700 leading-relaxed text-center">
+      <div class="mt-12 rounded-lg p-8" style="background-color: var(--theme-bg-secondary); border: 2px solid var(--theme-border);">
+        <p class="text-lg leading-relaxed text-center" style="color: var(--theme-text-secondary);">
           This three-layer architecture creates a systematic foundation for industrial knowledge accumulation,
           transfer, and amplification across global manufacturing networks—transforming how factories learn,
           adapt, and compete in the digital age.
@@ -140,45 +142,45 @@ const pageTitle = "Plantcore AI - Sinthome";
   </section>
 
   <!-- Vision Section -->
-  <section class="py-20 bg-gray-50">
+  <section class="py-20" style="background-color: var(--theme-bg-secondary);">
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Vision: 2030 Roadmap</h2>
-        <p class="text-xl text-gray-600">Building the industrial intelligence network of the future</p>
+        <h2 class="text-4xl font-bold mb-4" style="color: var(--theme-text-primary);">Our Vision: 2030 Roadmap</h2>
+        <p class="text-xl" style="color: var(--theme-text-secondary);">Building the industrial intelligence network of the future</p>
       </div>
 
       <!-- Roadmap Stats -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-        <div class="bg-white border-2 border-blue-200 rounded-lg p-10 text-center hover:border-blue-600 transition-all duration-300">
+        <div class="rounded-lg p-10 text-center hover:border-blue-600 transition-all duration-300" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
           <div class="text-6xl font-bold text-blue-600 mb-4">10,000</div>
-          <div class="text-2xl font-semibold text-gray-900 mb-3">Factories Connected</div>
-          <p class="text-gray-700">
+          <div class="text-2xl font-semibold mb-3" style="color: var(--theme-text-primary);">Factories Connected</div>
+          <p style="color: var(--theme-text-secondary);">
             Global manufacturing network with comprehensive decision intelligence coverage across industries and geographies.
           </p>
         </div>
 
-        <div class="bg-white border-2 border-green-200 rounded-lg p-10 text-center hover:border-green-600 transition-all duration-300">
+        <div class="rounded-lg p-10 text-center hover:border-green-600 transition-all duration-300" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
           <div class="text-6xl font-bold text-green-600 mb-4">150K+</div>
-          <div class="text-2xl font-semibold text-gray-900 mb-3">AI Agents Deployed</div>
-          <p class="text-gray-700">
+          <div class="text-2xl font-semibold mb-3" style="color: var(--theme-text-primary);">AI Agents Deployed</div>
+          <p style="color: var(--theme-text-secondary);">
             Comprehensive decision capture points covering all critical industrial processes and operational scenarios.
           </p>
         </div>
       </div>
 
       <!-- Vision Statement -->
-      <div class="bg-white rounded-lg p-12 border-2 border-gray-200">
+      <div class="rounded-lg p-12" style="background-color: var(--theme-bg-card); border: 2px solid var(--theme-border);">
         <div class="prose prose-lg max-w-none">
-          <p class="text-xl text-gray-800 leading-relaxed mb-6">
+          <p class="text-xl leading-relaxed mb-6" style="color: var(--theme-text-primary);">
             Our vision is to build, within the next five years, a decision-data-driven industrial intelligence
             network through continuous agent deployment and CDO data collection.
           </p>
-          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          <p class="text-lg leading-relaxed mb-6" style="color: var(--theme-text-secondary);">
             By 2030, Plantcore AI will reach 10,000 factories and 150,000 AI Agents, generating hundreds of
             millions of validated decision samples. This massive scale will create the world's most comprehensive
             understanding of industrial operations and decision-making patterns.
           </p>
-          <p class="text-lg text-gray-700 leading-relaxed">
+          <p class="text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
             On this foundation, we will train and deploy the world's first Industrial Vertical LLM—an engine
             of decision-making grounded in authentic factory data. This LLM will serve as the operating system
             of Industry 4.0, guiding real-time production choices, amplifying collective industrial knowledge,
@@ -190,21 +192,21 @@ const pageTitle = "Plantcore AI - Sinthome";
   </section>
 
   <!-- Philosophy Section -->
-  <section class="py-20 bg-white">
+  <section class="py-20" style="background-color: var(--theme-bg-primary);">
     <div class="max-w-4xl mx-auto">
-      <div class="bg-gray-50 border-l-4 border-red-600 rounded-r-lg p-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Core Belief</h2>
+      <div class="border-l-4 border-red-600 rounded-r-lg p-12" style="background-color: var(--theme-bg-secondary);">
+        <h2 class="text-3xl font-bold mb-6 text-center" style="color: var(--theme-text-primary);">Core Belief</h2>
         <div class="space-y-6">
-          <p class="text-2xl font-semibold text-gray-900 text-center">
+          <p class="text-2xl font-semibold text-center" style="color: var(--theme-text-primary);">
             The True Industrial Revolution
           </p>
-          <p class="text-lg text-gray-700 leading-relaxed">
+          <p class="text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
             At Plantcore AI, we believe the true industrial revolution is not the replacement of workers by machines,
             but the creation of an intelligent decision network—powered by an Industrial LLM—that redefines the
             relationship between humans and production, opening new possibilities for the industries and societies
             of the future.
           </p>
-          <p class="text-lg text-gray-700 leading-relaxed">
+          <p class="text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
             We are building technology that amplifies human expertise rather than replaces it, creating a symbiotic
             relationship where AI systems learn from human judgment while providing unprecedented decision support
             and insights. This is the foundation for a more productive, sustainable, and human-centric industrial future.
@@ -215,10 +217,10 @@ const pageTitle = "Plantcore AI - Sinthome";
   </section>
 
   <!-- Contact CTA Section -->
-  <section class="py-20 bg-gray-50">
+  <section class="py-20" style="background-color: var(--theme-bg-secondary);">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl font-bold text-gray-900 mb-6">Get in Touch</h2>
-      <p class="text-xl text-gray-600 mb-12">
+      <h2 class="text-4xl font-bold mb-6" style="color: var(--theme-text-primary);">Get in Touch</h2>
+      <p class="text-xl mb-12" style="color: var(--theme-text-secondary);">
         Interested in learning more about Plantcore AI or exploring partnership opportunities?
       </p>
 
@@ -228,7 +230,8 @@ const pageTitle = "Plantcore AI - Sinthome";
           Request a Demo
         </a>
         <a href="/contact"
-           class="inline-flex items-center justify-center px-8 py-4 bg-white text-red-600 text-lg font-semibold rounded-lg border-2 border-red-600 hover:bg-red-50 transition-colors duration-300">
+           class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-lg border-2 border-red-600 hover:bg-red-50 transition-colors duration-300"
+           style="background-color: var(--theme-bg-card); color: var(--theme-accent, #dc2626);">
           Join Pilot Program
         </a>
       </div>
