@@ -178,6 +178,40 @@ export interface SiteContent {
   };
   projects: ProjectContent[];
   events: EventContent[];
+  contact?: {
+    title?: string;
+    description?: string;
+    sectionTitle?: string;
+    sectionSubtitle?: string;
+    methods?: {
+      wechat?: { title?: string; subtitle?: string };
+      rednote?: { title?: string; subtitle?: string };
+      bilibili?: { title?: string; subtitle?: string };
+      email?: { title?: string; subtitle?: string };
+    };
+    qrModal?: {
+      wechat?: { title?: string; subtitle?: string; footer?: string };
+      rednote?: { title?: string; subtitle?: string; footer?: string };
+      bilibili?: { title?: string; subtitle?: string; footer?: string };
+    };
+    connectCollaborate?: {
+      title?: string;
+      description?: string;
+      links?: {
+        projects?: string;
+        events?: string;
+        donate?: string;
+      };
+    };
+    footer?: {
+      title?: string;
+      subtitle?: string;
+    };
+    additionalInfo?: {
+      responseTime?: string;
+      urgentMatter?: string;
+    };
+  };
 }
 
 export type Language = 'en' | 'zh';
