@@ -1,27 +1,30 @@
 import { useState } from 'react';
 import ContactCard from './ContactCard';
 import QRCodeModal from './QRCodeModal';
+import { useTranslations } from '../../lib/translations';
 
 // Helper function to get public assets with correct base path
 function getPublicAsset(path: string): string {
-  return `${import.meta.env.BASE_URL}${path.startsWith('/') ? path.slice(1) : path}`;
+  const baseUrl = import.meta.env?.BASE_URL || '/';
+  return `${baseUrl}${path.startsWith('/') ? path.slice(1) : path}`;
 }
 
 // QR code URLs
 const QR_CODES = {
-  wechat: getPublicAsset('/qr-codes/wechat-qr-latest.png'),
+  wechat: getPublicAsset('/qr-codes/wechat-qr-latest.jpg'),
   rednote: getPublicAsset('/qr-codes/rednote-qr-latest.png'),
   bilibili: getPublicAsset('/qr-codes/bilibili-qr-latest.png')
 };
 
 export default function ContactMethods() {
   const [activeModal, setActiveModal] = useState<'wechat' | 'rednote' | 'bilibili' | null>(null);
+  const translations = useTranslations();
 
   const contactMethods = [
     {
       id: 'wechat',
-      title: 'WeChat',
-      subtitle: 'Scan QR code to add us on WeChat',
+      title: translations?.contact?.methods?.wechat?.title || 'WeChat',
+      subtitle: translations?.contact?.methods?.wechat?.subtitle || 'Scan QR code to add us on WeChat',
       color: 'rgb(7, 193, 96)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(7, 193, 96)' }} fill="currentColor" viewBox="0 0 24 24">
@@ -32,8 +35,8 @@ export default function ContactMethods() {
     },
     {
       id: 'rednote',
-      title: 'RedNote',
-      subtitle: 'Follow us on 小红书 for updates',
+      title: translations?.contact?.methods?.rednote?.title || 'RedNote',
+      subtitle: translations?.contact?.methods?.rednote?.subtitle || 'Follow us on 小红书 for updates',
       color: 'rgb(255, 45, 85)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(255, 45, 85)' }} fill="currentColor" viewBox="0 0 24 24">
@@ -46,8 +49,8 @@ export default function ContactMethods() {
     },
     {
       id: 'bilibili',
-      title: 'Bilibili',
-      subtitle: 'Watch our videos and follow us',
+      title: translations?.contact?.methods?.bilibili?.title || 'Bilibili',
+      subtitle: translations?.contact?.methods?.bilibili?.subtitle || 'Watch our videos and follow us',
       color: 'rgb(0, 161, 214)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(0, 161, 214)' }} fill="currentColor" viewBox="0 0 24 24">
@@ -58,8 +61,8 @@ export default function ContactMethods() {
     },
     {
       id: 'email',
-      title: 'Email',
-      subtitle: 'Send us an email directly',
+      title: translations?.contact?.methods?.email?.title || 'Email',
+      subtitle: translations?.contact?.methods?.email?.subtitle || 'Send us an email directly',
       color: 'rgb(168, 85, 247)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(168, 85, 247)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,10 +79,10 @@ export default function ContactMethods() {
       {/* Section Header */}
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--theme-text-primary)' }}>
-          Connect With Us
+          {translations?.contact?.sectionTitle || 'Connect With Us'}
         </h2>
         <p className="text-lg" style={{ color: 'var(--theme-text-muted)' }}>
-          Choose your preferred platform to get in touch
+          {translations?.contact?.sectionSubtitle || 'Choose your preferred platform to get in touch'}
         </p>
       </div>
 
@@ -122,10 +125,10 @@ export default function ContactMethods() {
       {/* Additional Information */}
       <div className="mt-16 text-center">
         <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>
-          Response time: Usually within 24-48 hours
+          {translations?.contact?.additionalInfo?.responseTime || 'Response time: Usually within 24-48 hours'}
         </p>
         <p className="text-xs mt-2" style={{ color: 'var(--theme-text-secondary)' }}>
-          For urgent matters, please contact us via WeChat
+          {translations?.contact?.additionalInfo?.urgentMatter || 'For urgent matters, please contact us via WeChat'}
         </p>
       </div>
     </div>
