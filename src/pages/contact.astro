@@ -4,10 +4,11 @@ import PageLayout from "../layouts/PageLayout.astro";
 import ContactMethods from "../components/contact/ContactMethods";
 import { SITE_CONFIG } from "../config/site";
 import { getThemeFromURL } from "../lib/utils";
-import { getTranslations } from "../lib/translations";
+import { getLanguageFromURL, getTranslations } from "../lib/translations";
 
 const theme = getThemeFromURL(Astro.url);
-const t = getTranslations(Astro.url);
+const lang = getLanguageFromURL(Astro.url);
+const t = getTranslations(lang);
 const contactContent = t.pages.contact;
 ---
 
@@ -22,7 +23,7 @@ const contactContent = t.pages.contact;
           </div>
 
           <!-- Contact Methods Component -->
-          <ContactMethods client:visible lang={Astro.url.searchParams.get('lang') || 'en'} />
+          <ContactMethods client:visible lang={lang} />
 
           <!-- Connect & Collaborate Section -->
           <div class="mt-20 pt-12 border-t" style="border-color: var(--theme-border);">
