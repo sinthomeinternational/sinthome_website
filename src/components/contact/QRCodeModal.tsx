@@ -1,38 +1,36 @@
 import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { getTranslations } from '../../lib/translations';
 
 interface QRCodeModalProps {
   isOpen: boolean;
   onClose: () => void;
   platform: 'wechat' | 'rednote' | 'bilibili';
   qrCodeUrl: string;
+  lang?: string;
 }
 
-const platformInfo = {
+const platformColors = {
   wechat: {
-    title: 'WeChat',
-    subtitle: 'Scan to add on WeChat',
     color: 'rgb(7, 193, 96)',
     bgGradient: 'from-green-500/20 to-green-600/10'
   },
   rednote: {
-    title: 'RedNote (小红书)',
-    subtitle: 'Scan to follow on RedNote',
     color: 'rgb(255, 45, 85)',
     bgGradient: 'from-red-500/20 to-pink-600/10'
   },
   bilibili: {
-    title: 'Bilibili',
-    subtitle: 'Scan to follow on Bilibili',
     color: 'rgb(0, 161, 214)',
     bgGradient: 'from-blue-500/20 to-cyan-600/10'
   }
 };
 
-export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QRCodeModalProps) {
+export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl, lang = 'en' }: QRCodeModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const previousOverflowRef = useRef<string>('');
-  const info = platformInfo[platform];
+  const t = getTranslations(lang);
+  const modalContent = t.pages.contact.modal[platform];
+  const colors = platformColors[platform];
 
   // Handle click outside
   useEffect(() => {
@@ -99,18 +97,18 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QR
             }}
             className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[101]"
           >
-            <div className={`bg-gradient-to-br ${info.bgGradient} backdrop-blur-md rounded-2xl p-1 shadow-2xl`}>
+            <div className={`bg-gradient-to-br ${colors.bgGradient} backdrop-blur-md rounded-2xl p-1 shadow-2xl`}>
               <div className="bg-black/90 rounded-2xl p-6 sm:p-8 max-w-sm">
                 {/* Header */}
                 <div className="flex justify-between items-start mb-6">
                   <div>
                     <h3
                       className="text-2xl font-bold text-white mb-1"
-                      style={{ textShadow: `0 0 20px ${info.color}` }}
+                      style={{ textShadow: `0 0 20px ${colors.color}` }}
                     >
-                      {info.title}
+                      {modalContent.title}
                     </h3>
-                    <p className="text-zinc-400 text-sm">{info.subtitle}</p>
+                    <p className="text-zinc-400 text-sm">{modalContent.subtitle}</p>
                   </div>
 
                   {/* Close button */}
@@ -129,12 +127,12 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QR
                 <div className="relative group">
                   <div
                     className="absolute inset-0 rounded-xl opacity-50 blur-xl transition-all duration-500 group-hover:opacity-70"
-                    style={{ background: `radial-gradient(circle, ${info.color}, transparent)` }}
+                    style={{ background: `radial-gradient(circle, ${colors.color}, transparent)` }}
                   />
                   <div className="relative bg-white p-4 rounded-xl flex items-center justify-center">
                     <img
                       src={qrCodeUrl}
-                      alt={`${info.title} QR Code`}
+                      alt={`${modalContent.title} QR Code`}
                       className="w-48 h-48 sm:w-56 sm:h-56 object-contain"
                     />
                   </div>
@@ -142,7 +140,7 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl }: QR
 
                 {/* Footer text */}
                 <p className="text-center text-zinc-500 text-xs mt-4">
-                  Scan with your phone camera or {info.title} app
+                  {t.pages.contact.modal.scanHint.replace('{platform}', modalContent.title)}
                 </p>
               </div>
             </div>

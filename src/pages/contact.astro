@@ -4,31 +4,33 @@ import PageLayout from "../layouts/PageLayout.astro";
 import ContactMethods from "../components/contact/ContactMethods";
 import { SITE_CONFIG } from "../config/site";
 import { getThemeFromURL } from "../lib/utils";
+import { getTranslations, getLanguageFromURL } from "../lib/translations";
 
 const theme = getThemeFromURL(Astro.url);
+const lang = getLanguageFromURL(Astro.url);
+const t = getTranslations(lang);
+const pageContent = t.pages.contact;
 ---
 
-<PageLayout title="Contact - Sinthome" useInfoLayout={true} theme={theme}>
+<PageLayout title={`${pageContent.title} - Sinthome`} useInfoLayout={true} theme={theme}>
      <div class="min-h-dvh py-12">
           <!-- Header Section -->
           <div class="text-center mb-16">
-               <H1 className="text-red-600 mb-6">Get in Touch</H1>
+               <H1 className="text-red-600 mb-6">{pageContent.hero.title}</H1>
                <p class="text-xl max-w-2xl mx-auto" style="color: var(--theme-text-secondary);">
-                    We're here to connect, collaborate, and create meaningful impact together.
-                    Reach out through your preferred platform.
+                    {pageContent.hero.subtitle}
                </p>
           </div>
 
           <!-- Contact Methods Component -->
-          <ContactMethods client:visible />
+          <ContactMethods client:visible lang={lang} />
 
           <!-- Connect & Collaborate Section -->
           <div class="mt-20 pt-12 border-t" style="border-color: var(--theme-border);">
                <div class="max-w-4xl mx-auto text-center">
-                    <h3 class="text-xl font-semibold mb-4" style="color: var(--theme-text-primary);">Connect & Collaborate</h3>
+                    <h3 class="text-xl font-semibold mb-4" style="color: var(--theme-text-primary);">{pageContent.collaborate.title}</h3>
                     <p class="mb-8" style="color: var(--theme-text-muted);">
-                         Interested in working together? We welcome new projects,
-                         collaboration opportunities, and partnerships that align with our mission.
+                         {pageContent.collaborate.description}
                     </p>
 
                     <!-- Quick Links -->
@@ -38,21 +40,21 @@ const theme = getThemeFromURL(Astro.url);
                               class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
                          >
                               <span class="mr-2">→</span>
-                              Learn about our projects
+                              {pageContent.collaborate.links.projects}
                          </a>
                          <a
                               href="/events"
                               class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
                          >
                               <span class="mr-2">→</span>
-                              View upcoming events
+                              {pageContent.collaborate.links.events}
                          </a>
                          <a
                               href="/donate"
                               class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
                          >
                               <span class="mr-2">→</span>
-                              Support our mission
+                              {pageContent.collaborate.links.support}
                          </a>
                     </div>
                </div>
@@ -62,10 +64,10 @@ const theme = getThemeFromURL(Astro.url);
           <div class="mt-20 text-center">
                <div class="inline-block p-6 bg-gradient-to-r from-red-600/10 to-red-700/10 rounded-2xl border border-red-600/20">
                     <p class="text-lg font-medium mb-2" style="color: var(--theme-text-secondary);">
-                         Let's build something meaningful together
+                         {pageContent.footer.title}
                     </p>
                     <p class="text-sm" style="color: var(--theme-text-muted);">
-                         Every connection starts with a conversation
+                         {pageContent.footer.subtitle}
                     </p>
                </div>
           </div>

@@ -200,6 +200,64 @@ export const enContent: SiteContent = {
         },
       ],
     },
+    contact: {
+      title: 'Contact Us',
+      description: 'We\'re here to connect, collaborate, and create meaningful impact together. Reach out through your preferred platform.',
+      hero: {
+        title: 'Get in Touch',
+        subtitle: 'We\'re here to connect, collaborate, and create meaningful impact together. Reach out through your preferred platform.',
+      },
+      methods: {
+        title: 'Connect With Us',
+        subtitle: 'Choose your preferred platform to get in touch',
+        wechat: {
+          title: 'WeChat',
+          subtitle: 'Scan QR code to add us on WeChat',
+        },
+        rednote: {
+          title: 'RedNote',
+          subtitle: 'Follow us on 小红书 for updates',
+        },
+        bilibili: {
+          title: 'Bilibili',
+          subtitle: 'Watch our videos and follow us',
+        },
+        email: {
+          title: 'Email',
+          subtitle: 'Send us an email directly',
+        },
+        responseTime: 'Response time: Usually within 24-48 hours',
+        urgentNote: 'For urgent matters, please contact us via WeChat',
+      },
+      modal: {
+        wechat: {
+          title: 'WeChat',
+          subtitle: 'Scan to add on WeChat',
+        },
+        rednote: {
+          title: 'RedNote (小红书)',
+          subtitle: 'Scan to follow on RedNote',
+        },
+        bilibili: {
+          title: 'Bilibili',
+          subtitle: 'Scan to follow on Bilibili',
+        },
+        scanHint: 'Scan with your phone camera or {platform} app',
+      },
+      collaborate: {
+        title: 'Connect & Collaborate',
+        description: 'Interested in working together? We welcome new projects, collaboration opportunities, and partnerships that align with our mission.',
+        links: {
+          projects: 'Learn about our projects',
+          events: 'View upcoming events',
+          support: 'Support our mission',
+        },
+      },
+      footer: {
+        title: 'Let\'s build something meaningful together',
+        subtitle: 'Every connection starts with a conversation',
+      },
+    },
     upcomingEvents: {
       title: 'Upcoming Events',
       description: 'Join us at our upcoming events and initiatives',

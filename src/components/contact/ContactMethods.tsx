@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ContactCard from './ContactCard';
 import QRCodeModal from './QRCodeModal';
+import { getTranslations } from '../../lib/translations';
 
 // Helper function to get public assets with correct base path
 function getPublicAsset(path: string): string {
@@ -14,14 +15,20 @@ const QR_CODES = {
   bilibili: getPublicAsset('/qr-codes/bilibili-qr-latest.png')
 };
 
-export default function ContactMethods() {
+interface ContactMethodsProps {
+  lang?: string;
+}
+
+export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
   const [activeModal, setActiveModal] = useState<'wechat' | 'rednote' | 'bilibili' | null>(null);
+  const t = getTranslations(lang);
+  const content = t.pages.contact.methods;
 
   const contactMethods = [
     {
       id: 'wechat',
-      title: 'WeChat',
-      subtitle: 'Scan QR code to add us on WeChat',
+      title: content.wechat.title,
+      subtitle: content.wechat.subtitle,
       color: 'rgb(7, 193, 96)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(7, 193, 96)' }} fill="currentColor" viewBox="0 0 24 24">
@@ -32,8 +39,8 @@ export default function ContactMethods() {
     },
     {
       id: 'rednote',
-      title: 'RedNote',
-      subtitle: 'Follow us on 小红书 for updates',
+      title: content.rednote.title,
+      subtitle: content.rednote.subtitle,
       color: 'rgb(255, 45, 85)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(255, 45, 85)' }} fill="currentColor" viewBox="0 0 24 24">
@@ -46,8 +53,8 @@ export default function ContactMethods() {
     },
     {
       id: 'bilibili',
-      title: 'Bilibili',
-      subtitle: 'Watch our videos and follow us',
+      title: content.bilibili.title,
+      subtitle: content.bilibili.subtitle,
       color: 'rgb(0, 161, 214)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(0, 161, 214)' }} fill="currentColor" viewBox="0 0 24 24">
@@ -58,8 +65,8 @@ export default function ContactMethods() {
     },
     {
       id: 'email',
-      title: 'Email',
-      subtitle: 'Send us an email directly',
+      title: content.email.title,
+      subtitle: content.email.subtitle,
       color: 'rgb(168, 85, 247)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(168, 85, 247)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,10 +83,10 @@ export default function ContactMethods() {
       {/* Section Header */}
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--theme-text-primary)' }}>
-          Connect With Us
+          {content.title}
         </h2>
         <p className="text-lg" style={{ color: 'var(--theme-text-muted)' }}>
-          Choose your preferred platform to get in touch
+          {content.subtitle}
         </p>
       </div>
 
@@ -105,27 +112,30 @@ export default function ContactMethods() {
         onClose={() => setActiveModal(null)}
         platform="wechat"
         qrCodeUrl={QR_CODES.wechat}
+        lang={lang}
       />
       <QRCodeModal
         isOpen={activeModal === 'rednote'}
         onClose={() => setActiveModal(null)}
         platform="rednote"
         qrCodeUrl={QR_CODES.rednote}
+        lang={lang}
       />
       <QRCodeModal
         isOpen={activeModal === 'bilibili'}
         onClose={() => setActiveModal(null)}
         platform="bilibili"
         qrCodeUrl={QR_CODES.bilibili}
+        lang={lang}
       />
 
       {/* Additional Information */}
       <div className="mt-16 text-center">
         <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>
-          Response time: Usually within 24-48 hours
+          {content.responseTime}
         </p>
         <p className="text-xs mt-2" style={{ color: 'var(--theme-text-secondary)' }}>
-          For urgent matters, please contact us via WeChat
+          {content.urgentNote}
         </p>
       </div>
     </div>
