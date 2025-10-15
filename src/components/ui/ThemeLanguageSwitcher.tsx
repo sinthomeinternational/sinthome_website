@@ -7,7 +7,7 @@
 import { useState, useEffect } from 'react';
 import type { Language } from '../../config/languages';
 import type { ThemeId } from '../../config/themes';
-import { getCurrentLanguageClient, useTranslations } from '../../lib/translations';
+import { getCurrentLanguageClient, getTranslations } from '../../lib/translations';
 import { applyTheme } from '../../config/themes';
 
 interface ThemeLanguageSwitcherProps {
@@ -22,8 +22,8 @@ export default function ThemeLanguageSwitcher({
   const [currentLang, setCurrentLang] = useState<Language>('en');
   const [mounted, setMounted] = useState(false);
 
-  // Get translations
-  const translations = useTranslations();
+  // Get translations based on current language state
+  const translations = getTranslations(currentLang);
 
   useEffect(() => {
     setMounted(true);
@@ -56,6 +56,17 @@ export default function ThemeLanguageSwitcher({
     // Get current language from URL
     const lang = getCurrentLanguageClient();
     setCurrentLang(lang);
+    
+    // 监听自定义语言变化事件
+    const handleLanguageChange = (event: CustomEvent) => {
+      setCurrentLang(event.detail.lang);
+    };
+    
+    window.addEventListener('languageChanged', handleLanguageChange as EventListener);
+    
+    return () => {
+      window.removeEventListener('languageChanged', handleLanguageChange as EventListener);
+    };
   }, []);
 
   const handleThemeToggle = () => {
@@ -63,9 +74,14 @@ export default function ThemeLanguageSwitcher({
     setCurrentTheme(newTheme);
     applyTheme(newTheme);
 
-    // Update URL with theme parameter
+    // Update URL with theme parameter and preserve language
     const url = new URL(window.location.href);
     url.searchParams.set('theme', newTheme);
+    
+    // Preserve language parameter
+    if (currentLang === 'zh') {
+      url.searchParams.set('lang', 'zh');
+    }
 
     // Update URL without page reload using History API
     window.history.replaceState({}, '', url.toString());
