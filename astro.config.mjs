@@ -17,10 +17,11 @@ const DEPLOYMENT_CONFIG = {
   }
 };
 
-// Determine deployment target from environment variable or default to GitHub Pages
-const deploymentTarget = process.env?.DEPLOYMENT_TARGET || 'github';
+// Determine deployment target from environment variable or default to custom for local dev
+// Use 'custom' (base: '/') for local development, 'github' for production builds
+const deploymentTarget = process.env?.DEPLOYMENT_TARGET || (process.env?.NODE_ENV === 'production' ? 'github' : 'custom');
 // @ts-ignore
-const config = DEPLOYMENT_CONFIG[deploymentTarget] || DEPLOYMENT_CONFIG.github;
+const config = DEPLOYMENT_CONFIG[deploymentTarget] || DEPLOYMENT_CONFIG.custom;
 
 console.log(`Building for ${deploymentTarget} deployment:`, config);
 
