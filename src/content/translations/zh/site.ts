@@ -2,7 +2,7 @@
  * Chinese translations for the Sinthome website
  */
 
-import type { SiteContent } from '../types';
+import type { SiteContent } from '../../types';
 
 export const zhContent: SiteContent = {
   navigation: {
@@ -198,61 +198,65 @@ export const zhContent: SiteContent = {
     },
     contact: {
       title: '联系我们',
-      description: '我们期待与您联系、合作，共同创造有意义的影响。通过您喜欢的平台与我们取得联系。',
-      hero: {
-        title: '联系我们',
-        subtitle: '我们期待与您联系、合作，共同创造有意义的影响。通过您喜欢的平台与我们取得联系。',
-      },
-      methods: {
-        title: '联系我们',
-        subtitle: '选择您喜欢的平台与我们取得联系',
+      description: '我们在这里与您联系、协作，共同创造有意义的影响。通过您喜欢的平台与我们联系。',
+      sections: [
+        {
+          id: 'methods',
+          title: '与我们联系',
+          subtitle: '选择您喜欢的平台与我们取得联系',
+        },
+        {
+          id: 'collaborate',
+          title: '连接与协作',
+          content: '有兴趣合作吗？我们欢迎与我们使命相符的新项目、合作机会和伙伴关系。',
+        },
+      ],
+      contactMethods: {
         wechat: {
           title: '微信',
           subtitle: '扫描二维码添加我们的微信',
         },
         rednote: {
           title: '小红书',
-          subtitle: '在小红书关注我们获取最新动态',
+          subtitle: '关注我们的小红书获取最新动态',
         },
         bilibili: {
-          title: 'Bilibili',
+          title: 'B站',
           subtitle: '观看我们的视频并关注我们',
         },
         email: {
-          title: '邮箱',
-          subtitle: '直接发送邮件给我们',
+          title: '电子邮件',
+          subtitle: '直接给我们发送电子邮件',
         },
-        responseTime: '回复时间：通常在 24-48 小时内',
-        urgentNote: '如有紧急事宜，请通过微信联系我们',
       },
       modal: {
         wechat: {
           title: '微信',
-          subtitle: '用微信扫一扫',
+          subtitle: '扫码添加微信',
+          footer: '使用手机相机或微信扫一扫',
         },
         rednote: {
           title: '小红书',
-          subtitle: '扫描关注小红书',
+          subtitle: '扫码关注小红书',
+          footer: '使用手机相机或小红书扫一扫',
         },
         bilibili: {
-          title: 'Bilibili',
-          subtitle: '扫描关注 Bilibili',
+          title: 'B站',
+          subtitle: '扫码关注B站',
+          footer: '使用手机相机或B站扫一扫',
         },
-        scanHint: '用手机相机或 {platform} App 扫描',
       },
-      collaborate: {
-        title: '合作共创',
-        description: '有兴趣一起合作吗？我们欢迎与我们使命相符的新项目、合作机会和伙伴关系。',
-        links: {
-          projects: '了解我们的项目',
-          events: '查看即将举行的活动',
-          support: '支持我们的使命',
-        },
+      quickLinks: {
+        projects: '了解我们的项目',
+        events: '查看即将举行的活动',
+        support: '支持我们的使命',
       },
       footer: {
         title: '让我们一起创造有意义的事物',
-        subtitle: '每一次联系都始于一次对话',
+        subtitle: '每一次连接都始于一次对话',
       },
+      responseTime: '回复时间：通常在24-48小时内',
+      urgentNote: '如有紧急事务，请通过微信联系我们',
     },
     upcomingEvents: {
       title: '即将举行的活动',

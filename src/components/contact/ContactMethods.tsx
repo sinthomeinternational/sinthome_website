@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import ContactCard from './ContactCard';
 import QRCodeModal from './QRCodeModal';
-import { getTranslations } from '../../lib/translations';
+import { enContent } from '../../content/translations/en/site';
+import { zhContent } from '../../content/translations/zh/site';
 
 // Helper function to get public assets with correct base path
 function getPublicAsset(path: string): string {
@@ -21,14 +22,14 @@ interface ContactMethodsProps {
 
 export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
   const [activeModal, setActiveModal] = useState<'wechat' | 'rednote' | 'bilibili' | null>(null);
-  const t = getTranslations(lang);
-  const content = t.pages.contact.methods;
+  const t = lang === 'zh' ? zhContent : enContent;
+  const contactContent = t.pages.contact;
 
   const contactMethods = [
     {
       id: 'wechat',
-      title: content.wechat.title,
-      subtitle: content.wechat.subtitle,
+      title: contactContent.contactMethods.wechat.title,
+      subtitle: contactContent.contactMethods.wechat.subtitle,
       color: 'rgb(7, 193, 96)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(7, 193, 96)' }} fill="currentColor" viewBox="0 0 24 24">
@@ -39,8 +40,8 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
     },
     {
       id: 'rednote',
-      title: content.rednote.title,
-      subtitle: content.rednote.subtitle,
+      title: contactContent.contactMethods.rednote.title,
+      subtitle: contactContent.contactMethods.rednote.subtitle,
       color: 'rgb(255, 45, 85)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(255, 45, 85)' }} fill="currentColor" viewBox="0 0 24 24">
@@ -53,8 +54,8 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
     },
     {
       id: 'bilibili',
-      title: content.bilibili.title,
-      subtitle: content.bilibili.subtitle,
+      title: contactContent.contactMethods.bilibili.title,
+      subtitle: contactContent.contactMethods.bilibili.subtitle,
       color: 'rgb(0, 161, 214)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(0, 161, 214)' }} fill="currentColor" viewBox="0 0 24 24">
@@ -65,8 +66,8 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
     },
     {
       id: 'email',
-      title: content.email.title,
-      subtitle: content.email.subtitle,
+      title: contactContent.contactMethods.email.title,
+      subtitle: contactContent.contactMethods.email.subtitle,
       color: 'rgb(168, 85, 247)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(168, 85, 247)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,10 +84,10 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
       {/* Section Header */}
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--theme-text-primary)' }}>
-          {content.title}
+          {contactContent.sections[0].title}
         </h2>
         <p className="text-lg" style={{ color: 'var(--theme-text-muted)' }}>
-          {content.subtitle}
+          {contactContent.sections[0].subtitle}
         </p>
       </div>
 
@@ -132,10 +133,10 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
       {/* Additional Information */}
       <div className="mt-16 text-center">
         <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>
-          {content.responseTime}
+          {contactContent.responseTime}
         </p>
         <p className="text-xs mt-2" style={{ color: 'var(--theme-text-secondary)' }}>
-          {content.urgentNote}
+          {contactContent.urgentNote}
         </p>
       </div>
     </div>

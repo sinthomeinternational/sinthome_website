@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { getTranslations } from '../../lib/translations';
+import { enContent } from '../../content/translations/en/site';
+import { zhContent } from '../../content/translations/zh/site';
 
 interface QRCodeModalProps {
   isOpen: boolean;
@@ -28,9 +29,9 @@ const platformColors = {
 export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl, lang = 'en' }: QRCodeModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const previousOverflowRef = useRef<string>('');
-  const t = getTranslations(lang);
+  const t = lang === 'zh' ? zhContent : enContent;
   const modalContent = t.pages.contact.modal[platform];
-  const colors = platformColors[platform];
+  const colorInfo = platformColors[platform];
 
   // Handle click outside
   useEffect(() => {
@@ -97,14 +98,14 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl, lang
             }}
             className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[101]"
           >
-            <div className={`bg-gradient-to-br ${colors.bgGradient} backdrop-blur-md rounded-2xl p-1 shadow-2xl`}>
+            <div className={`bg-gradient-to-br ${colorInfo.bgGradient} backdrop-blur-md rounded-2xl p-1 shadow-2xl`}>
               <div className="bg-black/90 rounded-2xl p-6 sm:p-8 max-w-sm">
                 {/* Header */}
                 <div className="flex justify-between items-start mb-6">
                   <div>
                     <h3
                       className="text-2xl font-bold text-white mb-1"
-                      style={{ textShadow: `0 0 20px ${colors.color}` }}
+                      style={{ textShadow: `0 0 20px ${colorInfo.color}` }}
                     >
                       {modalContent.title}
                     </h3>
@@ -127,7 +128,7 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl, lang
                 <div className="relative group">
                   <div
                     className="absolute inset-0 rounded-xl opacity-50 blur-xl transition-all duration-500 group-hover:opacity-70"
-                    style={{ background: `radial-gradient(circle, ${colors.color}, transparent)` }}
+                    style={{ background: `radial-gradient(circle, ${colorInfo.color}, transparent)` }}
                   />
                   <div className="relative bg-white p-4 rounded-xl flex items-center justify-center">
                     <img
@@ -140,7 +141,7 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl, lang
 
                 {/* Footer text */}
                 <p className="text-center text-zinc-500 text-xs mt-4">
-                  {t.pages.contact.modal.scanHint.replace('{platform}', modalContent.title)}
+                  {modalContent.footer}
                 </p>
               </div>
             </div>

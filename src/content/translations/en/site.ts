@@ -2,7 +2,7 @@
  * English translations for the Sinthome website
  */
 
-import type { SiteContent } from '../types';
+import type { SiteContent } from '../../types';
 
 export const enContent: SiteContent = {
   navigation: {
@@ -201,15 +201,21 @@ export const enContent: SiteContent = {
       ],
     },
     contact: {
-      title: 'Contact Us',
+      title: 'Get in Touch',
       description: 'We\'re here to connect, collaborate, and create meaningful impact together. Reach out through your preferred platform.',
-      hero: {
-        title: 'Get in Touch',
-        subtitle: 'We\'re here to connect, collaborate, and create meaningful impact together. Reach out through your preferred platform.',
-      },
-      methods: {
-        title: 'Connect With Us',
-        subtitle: 'Choose your preferred platform to get in touch',
+      sections: [
+        {
+          id: 'methods',
+          title: 'Connect With Us',
+          subtitle: 'Choose your preferred platform to get in touch',
+        },
+        {
+          id: 'collaborate',
+          title: 'Connect & Collaborate',
+          content: 'Interested in working together? We welcome new projects, collaboration opportunities, and partnerships that align with our mission.',
+        },
+      ],
+      contactMethods: {
         wechat: {
           title: 'WeChat',
           subtitle: 'Scan QR code to add us on WeChat',
@@ -226,37 +232,35 @@ export const enContent: SiteContent = {
           title: 'Email',
           subtitle: 'Send us an email directly',
         },
-        responseTime: 'Response time: Usually within 24-48 hours',
-        urgentNote: 'For urgent matters, please contact us via WeChat',
       },
       modal: {
         wechat: {
           title: 'WeChat',
           subtitle: 'Scan to add on WeChat',
+          footer: 'Scan with your phone camera or WeChat app',
         },
         rednote: {
           title: 'RedNote (小红书)',
           subtitle: 'Scan to follow on RedNote',
+          footer: 'Scan with your phone camera or RedNote app',
         },
         bilibili: {
           title: 'Bilibili',
           subtitle: 'Scan to follow on Bilibili',
+          footer: 'Scan with your phone camera or Bilibili app',
         },
-        scanHint: 'Scan with your phone camera or {platform} app',
       },
-      collaborate: {
-        title: 'Connect & Collaborate',
-        description: 'Interested in working together? We welcome new projects, collaboration opportunities, and partnerships that align with our mission.',
-        links: {
-          projects: 'Learn about our projects',
-          events: 'View upcoming events',
-          support: 'Support our mission',
-        },
+      quickLinks: {
+        projects: 'Learn about our projects',
+        events: 'View upcoming events',
+        support: 'Support our mission',
       },
       footer: {
         title: 'Let\'s build something meaningful together',
         subtitle: 'Every connection starts with a conversation',
       },
+      responseTime: 'Response time: Usually within 24-48 hours',
+      urgentNote: 'For urgent matters, please contact us via WeChat',
     },
     upcomingEvents: {
       title: 'Upcoming Events',

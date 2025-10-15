@@ -4,33 +4,32 @@ import PageLayout from "../layouts/PageLayout.astro";
 import ContactMethods from "../components/contact/ContactMethods";
 import { SITE_CONFIG } from "../config/site";
 import { getThemeFromURL } from "../lib/utils";
-import { getTranslations, getLanguageFromURL } from "../lib/translations";
+import { getTranslations } from "../lib/translations";
 
 const theme = getThemeFromURL(Astro.url);
-const lang = getLanguageFromURL(Astro.url);
-const t = getTranslations(lang);
-const pageContent = t.pages.contact;
+const t = getTranslations(Astro.url);
+const contactContent = t.pages.contact;
 ---
 
-<PageLayout title={`${pageContent.title} - Sinthome`} useInfoLayout={true} theme={theme}>
+<PageLayout title="Contact - Sinthome" useInfoLayout={true} theme={theme}>
      <div class="min-h-dvh py-12">
           <!-- Header Section -->
           <div class="text-center mb-16">
-               <H1 className="text-red-600 mb-6">{pageContent.hero.title}</H1>
+               <H1 className="text-red-600 mb-6">{contactContent.title}</H1>
                <p class="text-xl max-w-2xl mx-auto" style="color: var(--theme-text-secondary);">
-                    {pageContent.hero.subtitle}
+                    {contactContent.description}
                </p>
           </div>
 
           <!-- Contact Methods Component -->
-          <ContactMethods client:visible lang={lang} />
+          <ContactMethods client:visible lang={Astro.url.searchParams.get('lang') || 'en'} />
 
           <!-- Connect & Collaborate Section -->
           <div class="mt-20 pt-12 border-t" style="border-color: var(--theme-border);">
                <div class="max-w-4xl mx-auto text-center">
-                    <h3 class="text-xl font-semibold mb-4" style="color: var(--theme-text-primary);">{pageContent.collaborate.title}</h3>
+                    <h3 class="text-xl font-semibold mb-4" style="color: var(--theme-text-primary);">{contactContent.sections[1].title}</h3>
                     <p class="mb-8" style="color: var(--theme-text-muted);">
-                         {pageContent.collaborate.description}
+                         {contactContent.sections[1].content}
                     </p>
 
                     <!-- Quick Links -->
@@ -40,21 +39,21 @@ const pageContent = t.pages.contact;
                               class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
                          >
                               <span class="mr-2">→</span>
-                              {pageContent.collaborate.links.projects}
+                              {contactContent.quickLinks.projects}
                          </a>
                          <a
                               href="/events"
                               class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
                          >
                               <span class="mr-2">→</span>
-                              {pageContent.collaborate.links.events}
+                              {contactContent.quickLinks.events}
                          </a>
                          <a
                               href="/donate"
                               class="inline-flex items-center text-red-400 hover:text-red-300 transition-colors"
                          >
                               <span class="mr-2">→</span>
-                              {pageContent.collaborate.links.support}
+                              {contactContent.quickLinks.support}
                          </a>
                     </div>
                </div>
@@ -64,10 +63,10 @@ const pageContent = t.pages.contact;
           <div class="mt-20 text-center">
                <div class="inline-block p-6 bg-gradient-to-r from-red-600/10 to-red-700/10 rounded-2xl border border-red-600/20">
                     <p class="text-lg font-medium mb-2" style="color: var(--theme-text-secondary);">
-                         {pageContent.footer.title}
+                         {contactContent.footer.title}
                     </p>
                     <p class="text-sm" style="color: var(--theme-text-muted);">
-                         {pageContent.footer.subtitle}
+                         {contactContent.footer.subtitle}
                     </p>
                </div>
           </div>
