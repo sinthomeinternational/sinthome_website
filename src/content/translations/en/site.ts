@@ -2,7 +2,7 @@
  * English translations for the Sinthome website
  */
 
-import type { SiteContent } from '../../types';
+import type { SiteContent } from '../types';
 
 export const enContent: SiteContent = {
   navigation: {
