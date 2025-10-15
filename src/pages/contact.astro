@@ -233,7 +233,7 @@ const contactContent = t.pages.contact;
                const collaborateTitleEl = document.querySelector('.text-xl.font-semibold.mb-4');
                const collaborateContentEl = document.querySelector('.mb-8');
                if (collaborateTitleEl) collaborateTitleEl.textContent = content.sections?.[1]?.title || '';
-               if (collaborateContentEl) collaborateContentEl.textContent = content.sections?.[1]?.content || '';
+               if (collaborateContentEl) collaborateContentEl.textContent = content.sections?.[1]?.content ?? '';
                
                // 更新快速链接
                const quickLinks = document.querySelectorAll('.inline-flex.items-center.text-red-400');

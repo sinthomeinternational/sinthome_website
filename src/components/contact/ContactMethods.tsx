@@ -166,10 +166,10 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
       {/* Additional Information */}
       <div className="mt-16 text-center">
         <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>
-          {contactContent.responseTime || ''}
+          {contactContent.responseTime ?? ''}
         </p>
         <p className="text-xs mt-2" style={{ color: 'var(--theme-text-secondary)' }}>
-          {contactContent.urgentNote || ''}
+          {contactContent.urgentNote ?? ''}
         </p>
       </div>
     </div>
