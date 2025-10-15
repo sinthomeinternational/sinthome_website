@@ -61,8 +61,8 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
   const contactMethods = [
     {
       id: 'wechat',
-      title: contactContent.contactMethods.wechat.title,
-      subtitle: contactContent.contactMethods.wechat.subtitle,
+      title: contactContent.contactMethods?.wechat?.title || 'WeChat',
+      subtitle: contactContent.contactMethods?.wechat?.subtitle || 'Contact us on WeChat',
       color: 'rgb(7, 193, 96)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(7, 193, 96)' }} fill="currentColor" viewBox="0 0 24 24">
@@ -73,8 +73,8 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
     },
     {
       id: 'rednote',
-      title: contactContent.contactMethods.rednote.title,
-      subtitle: contactContent.contactMethods.rednote.subtitle,
+      title: contactContent.contactMethods?.rednote?.title || 'RedNote',
+      subtitle: contactContent.contactMethods?.rednote?.subtitle || 'Follow us on RedNote',
       color: 'rgb(255, 45, 85)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(255, 45, 85)' }} fill="currentColor" viewBox="0 0 24 24">
@@ -87,8 +87,8 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
     },
     {
       id: 'bilibili',
-      title: contactContent.contactMethods.bilibili.title,
-      subtitle: contactContent.contactMethods.bilibili.subtitle,
+      title: contactContent.contactMethods?.bilibili?.title || 'Bilibili',
+      subtitle: contactContent.contactMethods?.bilibili?.subtitle || 'Watch our videos',
       color: 'rgb(0, 161, 214)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(0, 161, 214)' }} fill="currentColor" viewBox="0 0 24 24">
@@ -99,8 +99,8 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
     },
     {
       id: 'email',
-      title: contactContent.contactMethods.email.title,
-      subtitle: contactContent.contactMethods.email.subtitle,
+      title: contactContent.contactMethods?.email?.title || 'Email',
+      subtitle: contactContent.contactMethods?.email?.subtitle || 'Send us an email',
       color: 'rgb(168, 85, 247)',
       icon: (
         <svg className="w-7 h-7" style={{ color: 'rgb(168, 85, 247)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,10 +117,10 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
       {/* Section Header */}
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--theme-text-primary)' }}>
-          {contactContent.sections[0].title}
+          {contactContent.sections?.[0]?.title || ''}
         </h2>
         <p className="text-lg" style={{ color: 'var(--theme-text-muted)' }}>
-          {contactContent.sections[0].subtitle}
+          {contactContent.sections?.[0]?.subtitle || ''}
         </p>
       </div>
 
@@ -166,10 +166,10 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
       {/* Additional Information */}
       <div className="mt-16 text-center">
         <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>
-          {contactContent.responseTime}
+          {contactContent.responseTime || ''}
         </p>
         <p className="text-xs mt-2" style={{ color: 'var(--theme-text-secondary)' }}>
-          {contactContent.urgentNote}
+          {contactContent.urgentNote || ''}
         </p>
       </div>
     </div>

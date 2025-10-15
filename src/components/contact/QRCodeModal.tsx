@@ -62,7 +62,11 @@ export default function QRCodeModal({ isOpen, onClose, platform, qrCodeUrl, lang
   }, []);
   const previousOverflowRef = useRef<string>('');
   const t = currentLang === 'zh' ? zhContent : enContent;
-  const modalContent = t.pages.contact.modal[platform];
+  const modalContent = t.pages.contact.modal?.[platform] || {
+    title: platform.charAt(0).toUpperCase() + platform.slice(1),
+    subtitle: `Scan to follow on ${platform}`,
+    footer: 'Use your phone camera to scan'
+  };
   const colorInfo = platformColors[platform];
 
   // Handle click outside
