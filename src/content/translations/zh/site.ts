@@ -198,17 +198,17 @@ export const zhContent: SiteContent = {
     },
     contact: {
       title: '联系我们',
-      description: '我们在这里与您联系、协作，共同创造有意义的影响。通过您喜欢的平台与我们联系。',
+      description: '勠力同心，砥砺共行',
       sections: [
         {
           id: 'methods',
-          title: '与我们联系',
-          subtitle: '选择您喜欢的平台与我们取得联系',
+          title: '',
+          subtitle: '选择您方便的平台与我们取得联系',
         },
         {
           id: 'collaborate',
-          title: '连接与协作',
-          content: '有兴趣合作吗？我们欢迎与我们使命相符的新项目、合作机会和伙伴关系。',
+          title: '联系与合作',
+          content: '您有兴趣合作吗？我们欢迎与我们理念相符的新项目、合作机会和伙伴关系。',
         },
       ],
       contactMethods: {
@@ -221,7 +221,7 @@ export const zhContent: SiteContent = {
           subtitle: '关注我们的小红书获取最新动态',
         },
         bilibili: {
-          title: 'B站',
+          title: 'Bilibili',
           subtitle: '观看我们的视频并关注我们',
         },
         email: {
@@ -241,21 +241,21 @@ export const zhContent: SiteContent = {
           footer: '使用手机相机或小红书扫一扫',
         },
         bilibili: {
-          title: 'B站',
-          subtitle: '扫码关注B站',
-          footer: '使用手机相机或B站扫一扫',
+          title: 'Bilibili',
+          subtitle: '扫码关注Bilibili',
+          footer: '使用手机相机或Bilibili扫一扫',
         },
       },
       quickLinks: {
         projects: '了解我们的项目',
-        events: '查看即将举行的活动',
-        support: '支持我们的使命',
+        events: '查看即将举办的活动',
+        support: '支持我们的项目',
       },
       footer: {
-        title: '让我们一起创造有意义的事物',
+        title: '让我们一起创造更有意义的世界',
         subtitle: '每一次连接都始于一次对话',
       },
-      responseTime: '回复时间：通常在24-48小时内',
+      responseTime: '回复时间通常在24-48小时内',
       urgentNote: '如有紧急事务，请通过微信联系我们',
     },
     upcomingEvents: {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ContactCard from './ContactCard';
 import QRCodeModal from './QRCodeModal';
 import { enContent } from '../../content/translations/en/site';
@@ -22,7 +22,40 @@ interface ContactMethodsProps {
 
 export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
   const [activeModal, setActiveModal] = useState<'wechat' | 'rednote' | 'bilibili' | null>(null);
-  const t = lang === 'zh' ? zhContent : enContent;
+  const [currentLang, setCurrentLang] = useState(lang);
+  
+  // 监听URL参数变化和自定义事件
+  useEffect(() => {
+    const checkLanguage = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang') || 'en';
+      setCurrentLang(urlLang);
+    };
+    
+    const handleLanguageChange = (event: CustomEvent) => {
+      setCurrentLang(event.detail.lang);
+    };
+    
+    // 初始检查
+    checkLanguage();
+    
+    // 监听URL变化
+    window.addEventListener('popstate', checkLanguage);
+    
+    // 监听自定义语言变化事件
+    window.addEventListener('languageChanged', handleLanguageChange as EventListener);
+    
+    // 定期检查（用于处理客户端导航）
+    const interval = setInterval(checkLanguage, 100);
+    
+    return () => {
+      window.removeEventListener('popstate', checkLanguage);
+      window.removeEventListener('languageChanged', handleLanguageChange as EventListener);
+      clearInterval(interval);
+    };
+  }, []);
+  
+  const t = currentLang === 'zh' ? zhContent : enContent;
   const contactContent = t.pages.contact;
 
   const contactMethods = [
@@ -113,21 +146,21 @@ export default function ContactMethods({ lang = 'en' }: ContactMethodsProps) {
         onClose={() => setActiveModal(null)}
         platform="wechat"
         qrCodeUrl={QR_CODES.wechat}
-        lang={lang}
+        lang={currentLang}
       />
       <QRCodeModal
         isOpen={activeModal === 'rednote'}
         onClose={() => setActiveModal(null)}
         platform="rednote"
         qrCodeUrl={QR_CODES.rednote}
-        lang={lang}
+        lang={currentLang}
       />
       <QRCodeModal
         isOpen={activeModal === 'bilibili'}
         onClose={() => setActiveModal(null)}
         platform="bilibili"
         qrCodeUrl={QR_CODES.bilibili}
-        lang={lang}
+        lang={currentLang}
       />
 
       {/* Additional Information */}

@@ -1,5 +1,4 @@
 ---
-import H1 from "../components/ui/H1.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import ContactMethods from "../components/contact/ContactMethods";
 import { SITE_CONFIG } from "../config/site";
@@ -7,23 +6,26 @@ import { getThemeFromURL } from "../lib/utils";
 import { getLanguageFromURL, getTranslations } from "../lib/translations";
 
 const theme = getThemeFromURL(Astro.url);
-const lang = getLanguageFromURL(Astro.url);
+// 由于Astro开发服务器清除URL参数，我们使用客户端检测
+const lang = 'en'; // 默认值，会被客户端JavaScript覆盖
 const t = getTranslations(lang);
 const contactContent = t.pages.contact;
+
 ---
 
 <PageLayout title="Contact - Sinthome" useInfoLayout={true} theme={theme}>
-     <div class="min-h-dvh py-12">
+            <div class="min-h-dvh py-12">
+          
           <!-- Header Section -->
           <div class="text-center mb-16">
-               <H1 className="text-red-600 mb-6">{contactContent.title}</H1>
-               <p class="text-xl max-w-2xl mx-auto" style="color: var(--theme-text-secondary);">
+               <h1 id="main-title" class="text-red-600 mb-6 text-4xl font-bold">{contactContent.title}</h1>
+               <p id="main-description" class="text-xl max-w-2xl mx-auto" style="color: var(--theme-text-secondary);">
                     {contactContent.description}
                </p>
           </div>
 
           <!-- Contact Methods Component -->
-          <ContactMethods client:visible lang={lang} />
+          <ContactMethods client:visible lang="en" />
 
           <!-- Connect & Collaborate Section -->
           <div class="mt-20 pt-12 border-t" style="border-color: var(--theme-border);">
@@ -63,13 +65,199 @@ const contactContent = t.pages.contact;
           <!-- Footer Message -->
           <div class="mt-20 text-center">
                <div class="inline-block p-6 bg-gradient-to-r from-red-600/10 to-red-700/10 rounded-2xl border border-red-600/20">
-                    <p class="text-lg font-medium mb-2" style="color: var(--theme-text-secondary);">
+                    <p id="footer-title" class="text-lg font-medium mb-2" style="color: var(--theme-text-secondary);">
                          {contactContent.footer.title}
                     </p>
-                    <p class="text-sm" style="color: var(--theme-text-muted);">
+                    <p id="footer-subtitle" class="text-sm" style="color: var(--theme-text-muted);">
                          {contactContent.footer.subtitle}
                     </p>
                </div>
           </div>
      </div>
+
+     <!-- 客户端语言检测和内容更新脚本 -->
+     <script>
+          // 中文翻译内容
+          const zhContent = {
+               title: '联系我们',
+               description: '勠力同心，砥砺共行',
+               sections: [
+                    {
+                         id: 'methods',
+                         title: '',
+                         subtitle: '选择您方便的平台与我们取得联系',
+                    },
+                    {
+                         id: 'collaborate',
+                         title: '联系与合作',
+                         content: '您有兴趣合作吗？我们欢迎与我们理念相符的新项目、合作机会和伙伴关系。',
+                    },
+               ],
+               contactMethods: {
+                    wechat: {
+                         title: '微信',
+                         subtitle: '扫描二维码添加我们的微信',
+                    },
+                    rednote: {
+                         title: '小红书',
+                         subtitle: '关注我们的小红书获取最新动态',
+                    },
+                    bilibili: {
+                         title: 'Bilibili',
+                         subtitle: '观看我们的视频并关注我们',
+                    },
+                    email: {
+                         title: '邮箱',
+                         subtitle: '发送邮件到我们的邮箱',
+                    },
+                    phone: {
+                         title: '电话',
+                         subtitle: '直接拨打我们的电话',
+                    },
+               },
+               modal: {
+                    wechat: {
+                         title: '微信',
+                         subtitle: '扫码添加微信',
+                         footer: '使用手机相机或微信扫一扫',
+                    },
+                    rednote: {
+                         title: '小红书',
+                         subtitle: '扫码关注小红书',
+                         footer: '使用手机相机或小红书扫一扫',
+                    },
+                    bilibili: {
+                         title: 'Bilibili',
+                         subtitle: '扫码关注Bilibili',
+                         footer: '使用手机相机或Bilibili扫一扫',
+                    },
+                    email: {
+                         title: '邮箱',
+                         subtitle: '复制邮箱地址',
+                         footer: '点击复制到剪贴板',
+                    },
+                    phone: {
+                         title: '电话',
+                         subtitle: '拨打电话',
+                         footer: '点击直接拨打',
+                    },
+               },
+               quickLinks: {
+                    projects: '了解我们的项目',
+                    events: '查看即将举办的活动',
+                    support: '支持我们的项目',
+               },
+               footer: {
+                    title: '让我们一起创造更有意义的世界',
+                    subtitle: '每一次连接都始于一次对话',
+               },
+               responseTime: '回复时间通常在24-48小时内',
+               urgentNote: '如有紧急事务，请通过微信联系我们',
+          };
+
+          // 英文翻译内容
+          const enContent = {
+               title: 'Get in Touch',
+               description: 'We\'re here to connect, collaborate, and create meaningful impact together. Reach out through your preferred platform.',
+               sections: [
+                    {
+                         id: 'methods',
+                         title: 'Get in Touch',
+                         subtitle: 'Choose your preferred platform to reach out',
+                    },
+                    {
+                         id: 'collaborate',
+                         title: 'Connect & Collaborate',
+                         content: 'Interested in collaborating? We welcome new projects, partnership opportunities, and alliances that align with our mission.',
+                    },
+               ],
+               contactMethods: {
+                    wechat: {
+                         title: 'WeChat',
+                         subtitle: 'Scan QR code to add our WeChat',
+                    },
+                    email: {
+                         title: 'Email',
+                         subtitle: 'Send us an email',
+                    },
+                    phone: {
+                         title: 'Phone',
+                         subtitle: 'Call us directly',
+                    },
+               },
+               modal: {
+                    wechat: {
+                         title: 'WeChat',
+                         subtitle: 'Scan to Add WeChat',
+                         footer: 'Use your phone camera or WeChat scan',
+                    },
+                    email: {
+                         title: 'Email',
+                         subtitle: 'Copy Email Address',
+                         footer: 'Click to copy to clipboard',
+                    },
+                    phone: {
+                         title: 'Phone',
+                         subtitle: 'Make a Call',
+                         footer: 'Click to call directly',
+                    },
+               },
+               quickLinks: {
+                    projects: 'Learn about our projects',
+                    events: 'View upcoming events',
+                    support: 'Support our mission',
+               },
+               footer: {
+                    title: 'Let\'s create something meaningful together',
+                    subtitle: 'Every connection starts with a conversation',
+               },
+               responseTime: 'Response time: Usually within 24-48 hours',
+               urgentNote: 'For urgent matters, please contact us via WeChat',
+          };
+
+          // 检测语言并更新内容
+          function updateLanguageContent() {
+               const urlParams = new URLSearchParams(window.location.search);
+               const lang = urlParams.get('lang') || 'en';
+               
+               const content = lang === 'zh' ? zhContent : enContent;
+               
+               
+               // 更新主要内容
+               const mainTitleEl = document.getElementById('main-title');
+               const mainDescEl = document.getElementById('main-description');
+               if (mainTitleEl) mainTitleEl.textContent = content.title;
+               if (mainDescEl) mainDescEl.textContent = content.description;
+               
+               // 更新其他部分
+               const collaborateTitleEl = document.querySelector('.text-xl.font-semibold.mb-4');
+               const collaborateContentEl = document.querySelector('.mb-8');
+               if (collaborateTitleEl) collaborateTitleEl.textContent = content.sections[1].title;
+               if (collaborateContentEl) collaborateContentEl.textContent = content.sections[1].content;
+               
+               // 更新快速链接
+               const quickLinks = document.querySelectorAll('.inline-flex.items-center.text-red-400');
+               if (quickLinks.length >= 3) {
+                    quickLinks[0].textContent = '→ ' + content.quickLinks.projects;
+                    quickLinks[1].textContent = '→ ' + content.quickLinks.events;
+                    quickLinks[2].textContent = '→ ' + content.quickLinks.support;
+               }
+               
+               // 更新页脚
+               const footerTitleEl = document.getElementById('footer-title');
+               const footerSubtitleEl = document.getElementById('footer-subtitle');
+               if (footerTitleEl) footerTitleEl.textContent = content.footer.title;
+               if (footerSubtitleEl) footerSubtitleEl.textContent = content.footer.subtitle;
+               
+               
+               // 通知React组件语言变化
+               window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
+          }
+
+          // 页面加载时执行
+          document.addEventListener('DOMContentLoaded', updateLanguageContent);
+          
+          // 监听URL变化（用于SPA导航）
+          window.addEventListener('popstate', updateLanguageContent);
+     </script>
 </PageLayout>
