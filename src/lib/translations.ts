@@ -32,8 +32,9 @@ export function getLanguageFromURL(url: URL): Language {
  * @param lang Language code
  * @returns Translation object for the specified language
  */
-export function getTranslations(lang: Language = 'en') {
-  return translations[lang] || translations.en;
+export function getTranslations(lang: Language | string = 'en'): typeof translations.en {
+  const validLang = (lang === 'zh' ? 'zh' : 'en') as Language;
+  return translations[validLang] || translations.en;
 }
 
 /**

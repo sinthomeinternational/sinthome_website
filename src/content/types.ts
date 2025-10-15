@@ -47,6 +47,38 @@ export interface PageContent {
       [key: string]: string;
     };
   };
+  // For contact page
+  contactMethods?: {
+    [key: string]: {
+      title: string;
+      subtitle: string;
+    };
+  };
+  modal?: {
+    [key: string]: {
+      title: string;
+      subtitle: string;
+      footer: string;
+    };
+  };
+  quickLinks?: {
+    [key: string]: string;
+  };
+  footer?: {
+    title: string;
+    subtitle: string;
+  };
+  responseTime?: string;
+  urgentNote?: string;
+  // Legacy contact page properties (for backward compatibility)
+  methods?: any;
+  collaborate?: {
+    title: string;
+    description: string;
+    links?: {
+      [key: string]: string;
+    };
+  };
 }
 
 export interface ContentSection {
