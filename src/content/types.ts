@@ -47,36 +47,6 @@ export interface PageContent {
       [key: string]: string;
     };
   };
-  // For contact page
-  methods?: {
-    title: string;
-    subtitle: string;
-    wechat: { title: string; subtitle: string };
-    rednote: { title: string; subtitle: string };
-    bilibili: { title: string; subtitle: string };
-    email: { title: string; subtitle: string };
-    responseTime: string;
-    urgentNote: string;
-  };
-  modal?: {
-    wechat: { title: string; subtitle: string };
-    rednote: { title: string; subtitle: string };
-    bilibili: { title: string; subtitle: string };
-    scanHint: string;
-  };
-  collaborate?: {
-    title: string;
-    description: string;
-    links: {
-      projects: string;
-      events: string;
-      support: string;
-    };
-  };
-  footer?: {
-    title: string;
-    subtitle: string;
-  };
 }
 
 export interface ContentSection {

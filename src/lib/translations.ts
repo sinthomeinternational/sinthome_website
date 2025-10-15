@@ -4,11 +4,11 @@
  * SSR-compatible implementation for Vercel deployment
  */
 
-import type { Language } from '../content/types';
+import type { Language } from '../config/languages';
 
 // Import all translation files
-import { enContent as enTranslations } from '../content/translations/en/site';
-import { zhContent as zhTranslations } from '../content/translations/zh/site';
+import enTranslations from '../content/translations/en/site';
+import zhTranslations from '../content/translations/zh/site';
 
 // Translation map
 const translations = {
